@@ -7,10 +7,11 @@
 //
 
 import Foundation
-//import SwiftyJSON
+import SwiftyJSON
 
 class Post{
     var message : String?
+    var timestamp : String?
     var laughingBadgeCount : Int?
     var notAmusedBadgeCount : Int?
     var heartBadgeCount : Int?
@@ -18,9 +19,10 @@ class Post{
     var dislikeBadgeCount : Int?
     var imageUrl : String?
     
-    init?(message : String?, laughingBadgeCount : Int?, notAmusedBadgeCount : Int?, heartBadgeCount : Int?, likeBadgeCount : Int?, dislikeBadgeCount : Int?, imageUrl: String?)
+    init?(message : String?, laughingBadgeCount : Int?, notAmusedBadgeCount : Int?, heartBadgeCount : Int?, likeBadgeCount : Int?, dislikeBadgeCount : Int?, timestamp: String?, imageUrl: String?)
     {
         self.message = message
+        self.timestamp = timestamp
         self.laughingBadgeCount = laughingBadgeCount
         self.notAmusedBadgeCount = notAmusedBadgeCount
         self.heartBadgeCount = heartBadgeCount
@@ -28,7 +30,7 @@ class Post{
         self.dislikeBadgeCount = dislikeBadgeCount
         self.imageUrl = imageUrl
         
-        print("Created Post:\n\tMessage: \"\(message!)\"\n\tImageURL: \(imageUrl!)")
+        print("Created Post:\n\tMessage: \"\(message)\"\n\tImageURL: \(imageUrl)")
     }
     /*
     convenience init?(json : JSON)

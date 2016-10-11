@@ -22,31 +22,14 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var timestampLabel: UILabel!
     @IBOutlet weak var postImageView: UIImageView!
     
-    init(style: UITableViewCellStyle, reuseIdentifier: String?, message: String?, timestamp: String, laughingBadgeCount: Int, notAmusedBadgeCount: Int, heartBadgeCount: Int, likeBadgeCount: Int, dislikeBadgeCount: Int) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        messageLabel.text = message
-        timestampLabel.text = timestamp
-        laughingBadgeButton.titleLabel!.text = String(laughingBadgeCount)
-        notAmusedBadgeButton.titleLabel!.text = String(notAmusedBadgeCount)
-        heartBadgeButton.titleLabel!.text = String(heartBadgeCount)
-        likeBadgeButton.titleLabel!.text = String(likeBadgeCount)
-        dislikeBadgeButton.titleLabel!.text = String(dislikeBadgeCount)
-    }
-    
-    //After composing post
-    init(style: UITableViewCellStyle, reuseIdentifier: String?, message: String?, timestamp: String) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        messageLabel.text = message
-        timestampLabel.text = timestamp
-        laughingBadgeButton.titleLabel!.text = "0"
-        notAmusedBadgeButton.titleLabel!.text = "0"
-        heartBadgeButton.titleLabel!.text = "0"
-        likeBadgeButton.titleLabel!.text = "0"
-        dislikeBadgeButton.titleLabel!.text = "0"
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    func configureCellWithPost(post: Post) {
+        messageLabel.text = post.message
+        timestampLabel.text = post.timestamp
+        laughingBadgeButton.titleLabel!.text = String(describing: post.laughingBadgeCount)
+        notAmusedBadgeButton.titleLabel!.text = String(describing: post.notAmusedBadgeCount)
+        heartBadgeButton.titleLabel!.text = String(describing: post.heartBadgeCount)
+        likeBadgeButton.titleLabel!.text = String(describing: post.likeBadgeCount)
+        dislikeBadgeButton.titleLabel!.text = String(describing: post.dislikeBadgeCount)
     }
 
     override func awakeFromNib() {

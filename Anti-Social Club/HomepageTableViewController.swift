@@ -8,16 +8,17 @@
 
 import UIKit
 
-class HomePageTableViewController: UITableViewController
+class HomepageTableViewController: UITableViewController
 {
     
-    var postsArray:NSArray = []
-    
+    var postsArray = [Post]()
+
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
-        
+        //Debuging
+        createTestPost()
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -31,6 +32,14 @@ class HomePageTableViewController: UITableViewController
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // MARKL - HomepageTableViewController
+    
+    func createTestPost(){
+        let testPost = Post(message: "Hey fam! It’s ya boi If anybody would like to come tonight at Davis Hall we are hosting an iOS workshop. We will be teaching swift! Invite your friends.", laughingBadgeCount: 2, notAmusedBadgeCount: 6, heartBadgeCount: 1, likeBadgeCount: 1, dislikeBadgeCount: 1, timestamp: "2h", imageUrl: nil)
+        postsArray+=[testPost!]
+        tableView.reloadData()
+    }
 
     // MARK: - Table view data source
 
@@ -43,15 +52,15 @@ class HomePageTableViewController: UITableViewController
         return postsArray.count
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! PostTableViewCell
+        
+        cell.configureCellWithPost(post: postsArray[indexPath.row])
 
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.

@@ -13,7 +13,7 @@
 		14DEF9B71DAC0F8300BF8B58 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14DEF9B51DAC0F8300BF8B58 /* LaunchScreen.storyboard */; };
 		B26D96381476127475E7C7A1 /* Pods_Anti_Social_Club.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5BF9903FBC092D198F19798 /* Pods_Anti_Social_Club.framework */; };
 		CA4143B81DAC7C5F0072B27C /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4143B71DAC7C5F0072B27C /* PostTableViewCell.swift */; };
-		CA4143BA1DAC7D220072B27C /* HomePageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4143B91DAC7D220072B27C /* HomePageTableViewController.swift */; };
+		CA4143BA1DAC7D220072B27C /* HomepageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4143B91DAC7D220072B27C /* HomepageTableViewController.swift */; };
 		CADEBDA81DAC9A17004D3282 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADEBDA71DAC9A17004D3282 /* Post.swift */; };
 		CADEBDAA1DAC9AB7004D3282 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADEBDA91DAC9AB7004D3282 /* Constants.swift */; };
 		CADEBDAC1DAC9D38004D3282 /* Anti-SocialClub+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADEBDAB1DAC9D38004D3282 /* Anti-SocialClub+UIColor.swift */; };
@@ -30,7 +30,7 @@
 		A5BF9903FBC092D198F19798 /* Pods_Anti_Social_Club.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Anti_Social_Club.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAAD275C5327CCFA9DA6CBAF /* Pods-Anti-Social Club.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Anti-Social Club.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Anti-Social Club/Pods-Anti-Social Club.debug.xcconfig"; sourceTree = "<group>"; };
 		CA4143B71DAC7C5F0072B27C /* PostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
-		CA4143B91DAC7D220072B27C /* HomePageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageTableViewController.swift; sourceTree = "<group>"; };
+		CA4143B91DAC7D220072B27C /* HomepageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomepageTableViewController.swift; sourceTree = "<group>"; };
 		CADEBDA71DAC9A17004D3282 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		CADEBDA91DAC9AB7004D3282 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CADEBDAB1DAC9D38004D3282 /* Anti-SocialClub+UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Anti-SocialClub+UIColor.swift"; sourceTree = "<group>"; };
@@ -101,7 +101,7 @@
 		CA4143B41DAC7BF60072B27C /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				CA4143B91DAC7D220072B27C /* HomePageTableViewController.swift */,
+				CA4143B91DAC7D220072B27C /* HomepageTableViewController.swift */,
 				CA4143B71DAC7C5F0072B27C /* PostTableViewCell.swift */,
 			);
 			name = "View Controllers";
@@ -259,7 +259,7 @@
 				CADEBDAA1DAC9AB7004D3282 /* Constants.swift in Sources */,
 				14DEF9AD1DAC0F8300BF8B58 /* AppDelegate.swift in Sources */,
 				CA4143B81DAC7C5F0072B27C /* PostTableViewCell.swift in Sources */,
-				CA4143BA1DAC7D220072B27C /* HomePageTableViewController.swift in Sources */,
+				CA4143BA1DAC7D220072B27C /* HomepageTableViewController.swift in Sources */,
 				CADEBDAC1DAC9D38004D3282 /* Anti-SocialClub+UIColor.swift in Sources */,
 				CADEBDA81DAC9A17004D3282 /* Post.swift in Sources */,
 			);
