@@ -8,21 +8,16 @@
 
 import UIKit
 
-//Put main colors in here
-extension UIColor{
-    class func getCustomBlueColor() -> UIColor{
-        return UIColor(red:0.043, green:0.576 ,blue:0.588 , alpha:1.00)
-    }
-}
-
 class HomePageTableViewController: UITableViewController
 {
     
-    var postsArray:NSArray?
+    var postsArray:NSArray = []
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -45,7 +40,7 @@ class HomePageTableViewController: UITableViewController
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return postsArray.count
     }
 
     /*

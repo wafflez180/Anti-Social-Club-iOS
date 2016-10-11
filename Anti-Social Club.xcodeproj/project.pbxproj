@@ -13,6 +13,9 @@
 		14DEF9B71DAC0F8300BF8B58 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14DEF9B51DAC0F8300BF8B58 /* LaunchScreen.storyboard */; };
 		CA4143B81DAC7C5F0072B27C /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4143B71DAC7C5F0072B27C /* PostTableViewCell.swift */; };
 		CA4143BA1DAC7D220072B27C /* HomePageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4143B91DAC7D220072B27C /* HomePageTableViewController.swift */; };
+		CADEBDA81DAC9A17004D3282 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADEBDA71DAC9A17004D3282 /* Post.swift */; };
+		CADEBDAA1DAC9AB7004D3282 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADEBDA91DAC9AB7004D3282 /* Constants.swift */; };
+		CADEBDAC1DAC9D38004D3282 /* Anti-SocialClub+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADEBDAB1DAC9D38004D3282 /* Anti-SocialClub+UIColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		14DEF9B81DAC0F8300BF8B58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA4143B71DAC7C5F0072B27C /* PostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		CA4143B91DAC7D220072B27C /* HomePageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageTableViewController.swift; sourceTree = "<group>"; };
+		CADEBDA71DAC9A17004D3282 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		CADEBDA91DAC9AB7004D3282 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		CADEBDAB1DAC9D38004D3282 /* Anti-SocialClub+UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Anti-SocialClub+UIColor.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,8 +66,10 @@
 				CA4143B41DAC7BF60072B27C /* View Controllers */,
 				CA4143B51DAC7C0C0072B27C /* Views */,
 				CA4143B61DAC7C2B0072B27C /* Models */,
+				CADEBDAD1DAC9D63004D3282 /* Extensions */,
 				14DEF9B31DAC0F8300BF8B58 /* Assets.xcassets */,
 				14DEF9B81DAC0F8300BF8B58 /* Info.plist */,
+				CADEBDA91DAC9AB7004D3282 /* Constants.swift */,
 			);
 			path = "Anti-Social Club";
 			sourceTree = "<group>";
@@ -87,8 +95,17 @@
 		CA4143B61DAC7C2B0072B27C /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				CADEBDA71DAC9A17004D3282 /* Post.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		CADEBDAD1DAC9D63004D3282 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CADEBDAB1DAC9D38004D3282 /* Anti-SocialClub+UIColor.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -164,9 +181,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CADEBDAA1DAC9AB7004D3282 /* Constants.swift in Sources */,
 				14DEF9AD1DAC0F8300BF8B58 /* AppDelegate.swift in Sources */,
 				CA4143B81DAC7C5F0072B27C /* PostTableViewCell.swift in Sources */,
 				CA4143BA1DAC7D220072B27C /* HomePageTableViewController.swift in Sources */,
+				CADEBDAC1DAC9D38004D3282 /* Anti-SocialClub+UIColor.swift in Sources */,
+				CADEBDA81DAC9A17004D3282 /* Post.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
