@@ -11,6 +11,7 @@
 		14DEF9B21DAC0F8300BF8B58 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14DEF9B01DAC0F8300BF8B58 /* Main.storyboard */; };
 		14DEF9B41DAC0F8300BF8B58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14DEF9B31DAC0F8300BF8B58 /* Assets.xcassets */; };
 		14DEF9B71DAC0F8300BF8B58 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14DEF9B51DAC0F8300BF8B58 /* LaunchScreen.storyboard */; };
+		B26D96381476127475E7C7A1 /* Pods_Anti_Social_Club.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5BF9903FBC092D198F19798 /* Pods_Anti_Social_Club.framework */; };
 		CA4143B81DAC7C5F0072B27C /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4143B71DAC7C5F0072B27C /* PostTableViewCell.swift */; };
 		CA4143BA1DAC7D220072B27C /* HomePageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4143B91DAC7D220072B27C /* HomePageTableViewController.swift */; };
 /* End PBXBuildFile section */
@@ -22,6 +23,9 @@
 		14DEF9B31DAC0F8300BF8B58 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		14DEF9B61DAC0F8300BF8B58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		14DEF9B81DAC0F8300BF8B58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3F86BD46629946975D286D89 /* Pods-Anti-Social Club.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Anti-Social Club.release.xcconfig"; path = "Pods/Target Support Files/Pods-Anti-Social Club/Pods-Anti-Social Club.release.xcconfig"; sourceTree = "<group>"; };
+		A5BF9903FBC092D198F19798 /* Pods_Anti_Social_Club.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Anti_Social_Club.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BAAD275C5327CCFA9DA6CBAF /* Pods-Anti-Social Club.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Anti-Social Club.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Anti-Social Club/Pods-Anti-Social Club.debug.xcconfig"; sourceTree = "<group>"; };
 		CA4143B71DAC7C5F0072B27C /* PostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		CA4143B91DAC7D220072B27C /* HomePageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -31,17 +35,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B26D96381476127475E7C7A1 /* Pods_Anti_Social_Club.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		00BA728768E9A3EDE28DB38B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A5BF9903FBC092D198F19798 /* Pods_Anti_Social_Club.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		14DEF9A01DAC0F8300BF8B58 = {
 			isa = PBXGroup;
 			children = (
 				14DEF9AB1DAC0F8300BF8B58 /* Anti-Social Club */,
 				14DEF9AA1DAC0F8300BF8B58 /* Products */,
+				17606896F10CD3068C0ED4B6 /* Pods */,
+				00BA728768E9A3EDE28DB38B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,6 +79,15 @@
 				14DEF9B81DAC0F8300BF8B58 /* Info.plist */,
 			);
 			path = "Anti-Social Club";
+			sourceTree = "<group>";
+		};
+		17606896F10CD3068C0ED4B6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BAAD275C5327CCFA9DA6CBAF /* Pods-Anti-Social Club.debug.xcconfig */,
+				3F86BD46629946975D286D89 /* Pods-Anti-Social Club.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		CA4143B41DAC7BF60072B27C /* View Controllers */ = {
@@ -98,9 +122,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 14DEF9BB1DAC0F8300BF8B58 /* Build configuration list for PBXNativeTarget "Anti-Social Club" */;
 			buildPhases = (
+				47E5011AE6A98BAE31557CE2 /* [CP] Check Pods Manifest.lock */,
 				14DEF9A51DAC0F8300BF8B58 /* Sources */,
 				14DEF9A61DAC0F8300BF8B58 /* Frameworks */,
 				14DEF9A71DAC0F8300BF8B58 /* Resources */,
+				813019B2D8BA252548E6A396 /* [CP] Embed Pods Frameworks */,
+				873B1359F0CC2EEF7CAD0204 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -158,6 +185,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		47E5011AE6A98BAE31557CE2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		813019B2D8BA252548E6A396 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Anti-Social Club/Pods-Anti-Social Club-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		873B1359F0CC2EEF7CAD0204 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Anti-Social Club/Pods-Anti-Social Club-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		14DEF9A51DAC0F8300BF8B58 /* Sources */ = {
@@ -287,6 +362,7 @@
 		};
 		14DEF9BC1DAC0F8300BF8B58 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BAAD275C5327CCFA9DA6CBAF /* Pods-Anti-Social Club.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 72H7NZKH7W;
@@ -300,6 +376,7 @@
 		};
 		14DEF9BD1DAC0F8300BF8B58 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3F86BD46629946975D286D89 /* Pods-Anti-Social Club.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 72H7NZKH7W;
