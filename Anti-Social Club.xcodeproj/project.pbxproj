@@ -146,7 +146,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
 				LastUpgradeCheck = 0800;
-				ORGANIZATIONNAME = "Cult of the Old Gods";
+				ORGANIZATIONNAME = "UB Anti-Social Club";
 				TargetAttributes = {
 					14DEF9A81DAC0F8300BF8B58 = {
 						CreatedOnToolsVersion = 8.0;
