@@ -1,0 +1,6 @@
+framework module Pods_Anti_Social_Club {
+  umbrella header "Pods-Anti-Social Club-umbrella.h"
+
+  export *
+  module * { export * }
+}
