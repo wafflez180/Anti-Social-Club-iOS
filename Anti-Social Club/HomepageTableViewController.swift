@@ -45,22 +45,22 @@ class HomepageTableViewController: UITableViewController
         let popupHeight = 160.0 as CGFloat
         let popupFrame = CGRect.init(x: 0, y: self.view.frame.height, width: self.view.frame.size.width, height: popupHeight)
         
-        let composePostPopup = Bundle.main.loadNibNamed("ComposePost", owner: self, options: nil)?[0] as! ComposePostView
-        composePostPopup.frame = popupFrame;
+        let composePostView = Bundle.main.loadNibNamed("ComposePost", owner: self, options: nil)?[0] as! ComposePostView
+        composePostView.frame = popupFrame;
         
-        composePostPopup.parentVC = self
-        composePostPopup.setupGaussianBlur()
-        self.view.addSubview(composePostPopup)
-        composePostPopup.viewDidLoad()
+        composePostView.parentVC = self
+        composePostView.setupGaussianBlur()
+        self.view.addSubview(composePostView)
+        composePostView.viewDidLoad()
         
-        return composePostPopup
+        return composePostView
     }
     
     // MARK: - ToolBar Actions
     
     @IBAction func pressedCreatePost(_ sender: UIBarButtonItem) {
-        let composePostPopup = setupComposePostPopupWithBlur()
-        composePostPopup.presentComposePostPopup()
+        let composePostView = setupComposePostPopupWithBlur()
+        composePostView.presentPopup()
     }
     
     // MARK: - Table view data source
