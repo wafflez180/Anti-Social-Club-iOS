@@ -23,9 +23,17 @@ class ComposePostView: UIView, UITextFieldDelegate {
         
         self.messageTextField.delegate = self;
         applyPlainShadow(view: self)
+        createGaussianBlur()
+        setupFrame()
     }
     
     //MARK: - ComposePostView
+    
+    func setupFrame() {
+        let frameHeight = 160.0 as CGFloat
+        self.frame = CGRect.init(x: 0, y: self.parentVC.view.frame.height, width: self.parentVC.view.frame.size.width, height: frameHeight)
+    }
+
     
     func applyPlainShadow(view: UIView) {
         let layer = view.layer
@@ -36,7 +44,7 @@ class ComposePostView: UIView, UITextFieldDelegate {
         layer.shadowRadius = 24
     }
     
-    func setupGaussianBlur(){
+    func createGaussianBlur(){
         let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
         blurView = UIVisualEffectView(effect: blurEffect)
         blurView.frame = self.parentVC.view.bounds
