@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A320" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" userLabel="Compose Post" customClass="ComposePostView" customModule="Anti_Social_Club" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="374" height="160"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x7w-ud-7DH">
+                    <subviews>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" borderStyle="roundedRect" placeholder="Enter your message" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="NZl-fs-zmw">
+                            <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        </textField>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="COP-kS-7ak" userLabel="RightButtonsView">
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g6n-GB-P8m" userLabel="SendButton">
+                                    <state key="normal" image="SendPostButton"/>
+                                    <connections>
+                                        <action selector="pressedSendPost:" destination="iN0-l3-epB" eventType="touchUpInside" id="rIc-4u-G6E"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uwt-nn-8sc" userLabel="AddPhotoButton">
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="57" id="9Dd-t2-gG6"/>
+                                        <constraint firstAttribute="height" constant="45" id="aQN-Af-7pA"/>
+                                    </constraints>
+                                    <state key="normal" image="AddPhotoButton"/>
+                                    <connections>
+                                        <action selector="pressedAddPhoto:" destination="iN0-l3-epB" eventType="touchUpInside" id="sut-Ao-uBx"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="Uwt-nn-8sc" firstAttribute="centerX" secondItem="COP-kS-7ak" secondAttribute="centerX" id="1zb-ZS-dAM"/>
+                                <constraint firstAttribute="width" constant="70" id="5ni-gG-QcQ"/>
+                                <constraint firstItem="g6n-GB-P8m" firstAttribute="centerX" secondItem="COP-kS-7ak" secondAttribute="centerX" id="UN0-Xl-aSQ"/>
+                                <constraint firstItem="Uwt-nn-8sc" firstAttribute="top" secondItem="COP-kS-7ak" secondAttribute="top" constant="5" id="mLx-Az-cKU"/>
+                                <constraint firstAttribute="bottom" secondItem="g6n-GB-P8m" secondAttribute="bottom" constant="5" id="xhE-AL-9fS"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="NZl-fs-zmw" firstAttribute="top" secondItem="x7w-ud-7DH" secondAttribute="top" constant="10" id="9mV-bZ-cN1"/>
+                        <constraint firstItem="COP-kS-7ak" firstAttribute="top" secondItem="x7w-ud-7DH" secondAttribute="top" constant="20" id="BhD-xN-CFl"/>
+                        <constraint firstAttribute="trailing" secondItem="COP-kS-7ak" secondAttribute="trailing" constant="10" id="ClD-F4-dZ0"/>
+                        <constraint firstItem="NZl-fs-zmw" firstAttribute="leading" secondItem="x7w-ud-7DH" secondAttribute="leading" constant="10" id="IJY-4j-Xlf"/>
+                        <constraint firstAttribute="bottom" secondItem="NZl-fs-zmw" secondAttribute="bottom" constant="10" id="QZk-kh-5RP"/>
+                        <constraint firstAttribute="bottom" secondItem="COP-kS-7ak" secondAttribute="bottom" constant="20" id="Uim-cp-uNR"/>
+                        <constraint firstItem="COP-kS-7ak" firstAttribute="leading" secondItem="NZl-fs-zmw" secondAttribute="trailing" constant="10" id="eX0-jW-1IF"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="15"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="x7w-ud-7DH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ABL-TL-oEp"/>
+                <constraint firstAttribute="trailing" secondItem="x7w-ud-7DH" secondAttribute="trailing" id="Bpp-bC-jHF"/>
+                <constraint firstItem="x7w-ud-7DH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="G2y-vk-4ef"/>
+                <constraint firstAttribute="bottom" secondItem="x7w-ud-7DH" secondAttribute="bottom" id="iJX-15-AV1"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                    <integer key="value" value="15"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="addPhotoButton" destination="Uwt-nn-8sc" id="qCn-cQ-ikz"/>
+                <outlet property="messageTextField" destination="NZl-fs-zmw" id="ZAl-HQ-jVu"/>
+                <outlet property="sendPostButton" destination="g6n-GB-P8m" id="PNO-oi-N1i"/>
+            </connections>
+            <point key="canvasLocation" x="35" y="-197"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="AddPhotoButton" width="57" height="45"/>
+        <image name="SendPostButton" width="45" height="45"/>
+    </resources>
+</document>

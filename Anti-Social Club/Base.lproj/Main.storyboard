@@ -11,20 +11,21 @@
         <scene sceneID="p7r-e7-53z">
             <objects>
                 <tableViewController title="UB Anti-Social Club" id="GTJ-cc-M7H" customClass="HomepageTableViewController" customModule="Anti_Social_Club" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="360" sectionHeaderHeight="28" sectionFooterHeight="28" id="iRW-JS-Yno">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="360" sectionHeaderHeight="50" sectionFooterHeight="28" id="iRW-JS-Yno">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="sectionIndexBackgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PostCell" rowHeight="360" id="scT-ac-05R" customClass="PostTableViewCell" customModule="Anti_Social_Club" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="92" width="375" height="360"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PostCell" rowHeight="360" id="scT-ac-05R" customClass="PostTableViewCell" customModule="Anti_Social_Club" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="114" width="375" height="360"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="scT-ac-05R" id="mdd-Sd-GIX">
                                     <frame key="frameInset" width="375" height="360"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bFk-TF-WJ4">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TestImage" translatesAutoresizingMaskIntoConstraints="NO" id="bFk-TF-WJ4">
+                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="200" id="Ipm-rl-GAV"/>
                                             </constraints>
@@ -138,7 +139,7 @@ bCBiZQ10ZWFjaGluZyBzd2lmdCEgSW52aXRlIHlvdXIgZnJpZW5kcy4
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2LE-vN-njD" userLabel="HeartButton">
                                             <color key="tintColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="-10" maxY="0.0"/>
-                                            <inset key="titleEdgeInsets" minX="-36" minY="43" maxX="0.0" maxY="0.0"/>
+                                            <inset key="titleEdgeInsets" minX="-36" minY="42" maxX="0.0" maxY="0.0"/>
                                             <state key="normal" image="HeartOutline">
                                                 <attributedString key="attributedTitle">
                                                     <fragment content="1">
@@ -158,7 +159,7 @@ bCBiZQ10ZWFjaGluZyBzd2lmdCEgSW52aXRlIHlvdXIgZnJpZW5kcy4
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ITW-94-Xwi" userLabel="LikeButton">
                                             <color key="tintColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="-10" maxY="0.0"/>
-                                            <inset key="titleEdgeInsets" minX="-36" minY="43" maxX="0.0" maxY="0.0"/>
+                                            <inset key="titleEdgeInsets" minX="-36" minY="42" maxX="0.0" maxY="0.0"/>
                                             <state key="normal" image="LikeOutline">
                                                 <attributedString key="attributedTitle">
                                                     <fragment content="1">
@@ -177,7 +178,7 @@ bCBiZQ10ZWFjaGluZyBzd2lmdCEgSW52aXRlIHlvdXIgZnJpZW5kcy4
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KWU-9X-Agd" userLabel="DislikeButton">
                                             <color key="tintColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="-10" maxY="0.0"/>
-                                            <inset key="titleEdgeInsets" minX="-36" minY="43" maxX="0.0" maxY="0.0"/>
+                                            <inset key="titleEdgeInsets" minX="-36" minY="42" maxX="0.0" maxY="0.0"/>
                                             <state key="normal" image="DislikeOutline">
                                                 <attributedString key="attributedTitle">
                                                     <fragment content="1">
@@ -257,10 +258,16 @@ bCBiZQ10ZWFjaGluZyBzd2lmdCEgSW52aXRlIHlvdXIgZnJpZW5kcy4
                     <toolbarItems>
                         <barButtonItem image="Gear" id="gwe-GZ-UJm">
                             <color key="tintColor" red="0.0" green="0.73725490196078436" blue="0.83137254901960778" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <segue destination="ZZd-Eg-ggk" kind="show" id="JUz-Nr-srv"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="fVP-Yq-Scx"/>
                         <barButtonItem systemItem="compose" id="22F-9a-Rcm">
                             <color key="tintColor" red="0.0" green="0.73725490196078436" blue="0.83137254901960778" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="pressedCreatePost:" destination="GTJ-cc-M7H" id="PlV-j8-2Ju"/>
+                            </connections>
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="UB Anti-Social Club" id="9UJ-yI-Y5p"/>
@@ -269,6 +276,24 @@ bCBiZQ10ZWFjaGluZyBzd2lmdCEgSW52aXRlIHlvdXIgZnJpZW5kcy4
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Ls-Fv-3cp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="333.60000000000002" y="-640.02998500749629"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="AEu-LY-osT">
+            <objects>
+                <viewController title="Settings" id="ZZd-Eg-ggk" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="B7t-u2-Ge6"/>
+                        <viewControllerLayoutGuide type="bottom" id="ebZ-mM-sch"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dq5-jg-v5U">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fOs-6T-xJ9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-162" y="121"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Aet-rV-jlG">
@@ -311,5 +336,6 @@ bCBiZQ10ZWFjaGluZyBzd2lmdCEgSW52aXRlIHlvdXIgZnJpZW5kcy4
         <image name="LikeOutline" width="27" height="24"/>
         <image name="StraightFaceOutline" width="27" height="27"/>
         <image name="StraightFaceSelected" width="25" height="25"/>
+        <image name="TestImage" width="720" height="540"/>
     </resources>
 </document>

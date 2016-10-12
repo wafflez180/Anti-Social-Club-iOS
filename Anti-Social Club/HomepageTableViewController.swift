@@ -33,14 +33,36 @@ class HomepageTableViewController: UITableViewController
         // Dispose of any resources that can be recreated.
     }
     
-    // MARKL - HomepageTableViewController
+    // MARK: - HomepageTableViewController
     
     func createTestPost(){
         let testPost = Post(message: "Hey fam! It’s ya boi If anybody would like to come tonight at Davis Hall we are hosting an iOS workshop. We will be teaching swift! Invite your friends.", laughingBadgeCount: 2, notAmusedBadgeCount: 6, heartBadgeCount: 1, likeBadgeCount: 1, dislikeBadgeCount: 1, timestamp: "2h", imageUrl: nil)
         postsArray+=[testPost!]
         tableView.reloadData()
     }
-
+    
+    func setupComposePostPopupWithBlur() -> ComposePostView{
+        let popupHeight = 160.0 as CGFloat
+        let popupFrame = CGRect.init(x: 0, y: self.view.frame.height, width: self.view.frame.size.width, height: popupHeight)
+        
+        let composePostPopup = Bundle.main.loadNibNamed("ComposePost", owner: self, options: nil)?[0] as! ComposePostView
+        composePostPopup.frame = popupFrame;
+        
+        composePostPopup.parentVC = self
+        composePostPopup.setupGaussianBlur()
+        self.view.addSubview(composePostPopup)
+        composePostPopup.viewDidLoad()
+        
+        return composePostPopup
+    }
+    
+    // MARK: - ToolBar Actions
+    
+    @IBAction func pressedCreatePost(_ sender: UIBarButtonItem) {
+        let composePostPopup = setupComposePostPopupWithBlur()
+        composePostPopup.animateInComposePostPopup()
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -61,7 +83,10 @@ class HomepageTableViewController: UITableViewController
         return cell
     }
     
-
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 10
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
