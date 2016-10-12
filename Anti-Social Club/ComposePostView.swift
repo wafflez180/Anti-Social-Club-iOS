@@ -43,13 +43,13 @@ class ComposePostView: UIView, UITextFieldDelegate {
         blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight] // for supporting device rotation
         blurView.alpha = 0.0
         
-        let tap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(animateBackInComposePostPopup))
+        let tap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissComposePostPopup))
         blurView.addGestureRecognizer(tap)
 
         self.parentVC.view.addSubview(blurView)
     }
     
-    func animateInComposePostPopup(){
+    func presentComposePostPopup(){
         //Animate post view to the middle of the screen
         let popupHeight = 160.0 as CGFloat
         UIView.animate(withDuration: 0.2, delay: 0.1, options: .transitionCurlUp, animations:
@@ -63,7 +63,7 @@ class ComposePostView: UIView, UITextFieldDelegate {
         })
     }
     
-    func animateBackInComposePostPopup(){
+    func dismissComposePostPopup(){
         UIView.animate(withDuration: 0.2, delay: 0.1, options: .transitionCurlUp, animations:
             {
                 self.blurView.alpha = 0.0

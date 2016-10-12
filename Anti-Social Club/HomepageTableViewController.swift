@@ -60,7 +60,7 @@ class HomepageTableViewController: UITableViewController
     
     @IBAction func pressedCreatePost(_ sender: UIBarButtonItem) {
         let composePostPopup = setupComposePostPopupWithBlur()
-        composePostPopup.animateInComposePostPopup()
+        composePostPopup.presentComposePostPopup()
     }
     
     // MARK: - Table view data source
