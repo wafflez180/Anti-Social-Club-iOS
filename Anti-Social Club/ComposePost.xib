@@ -9,12 +9,57 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" userLabel="Compose Post" customClass="ComposePostView" customModule="Anti_Social_Club" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="374" height="160"/>
+            <rect key="frame" x="0.0" y="0.0" width="377" height="380"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x7w-ud-7DH">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LMC-hz-TDz" userLabel="PhotoButtonsView">
                     <subviews>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" borderStyle="roundedRect" placeholder="Enter your message" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="NZl-fs-zmw">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Na3-9F-9BI" userLabel="PhotoGalleryButton">
+                            <color key="backgroundColor" red="0.0" green="0.59215686274509804" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" relation="lessThanOrEqual" constant="100" id="x7E-6t-Wb5"/>
+                            </constraints>
+                            <state key="normal" image="PhotoGalleryOutline"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="7"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="90Y-5z-fpF" userLabel="TakePhotoButton">
+                            <color key="backgroundColor" red="0.0" green="0.59215686274509804" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" relation="lessThanOrEqual" constant="100" id="6fk-XK-gkP"/>
+                            </constraints>
+                            <state key="normal" image="TakePhotoOutline"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="7"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="230" id="2ZV-uQ-uBD"/>
+                        <constraint firstAttribute="trailing" secondItem="Na3-9F-9BI" secondAttribute="trailing" constant="10" id="6Kl-PF-ugz"/>
+                        <constraint firstItem="90Y-5z-fpF" firstAttribute="leading" secondItem="LMC-hz-TDz" secondAttribute="leading" constant="10" id="Cy7-3M-LyI"/>
+                        <constraint firstItem="Na3-9F-9BI" firstAttribute="top" secondItem="90Y-5z-fpF" secondAttribute="bottom" constant="10" id="F40-o5-6yb"/>
+                        <constraint firstAttribute="bottom" secondItem="Na3-9F-9BI" secondAttribute="bottom" constant="10" id="VDh-33-mIq"/>
+                        <constraint firstItem="90Y-5z-fpF" firstAttribute="top" secondItem="LMC-hz-TDz" secondAttribute="top" constant="10" id="Zvb-Ys-3a5"/>
+                        <constraint firstItem="Na3-9F-9BI" firstAttribute="top" secondItem="90Y-5z-fpF" secondAttribute="bottom" constant="10" id="kcN-0y-TQM"/>
+                        <constraint firstItem="Na3-9F-9BI" firstAttribute="leading" secondItem="LMC-hz-TDz" secondAttribute="leading" constant="10" id="mfm-TP-Ld2"/>
+                        <constraint firstAttribute="trailing" secondItem="90Y-5z-fpF" secondAttribute="trailing" constant="10" id="vOX-0q-6yI"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="15"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x7w-ud-7DH" userLabel="MainMessageView">
+                    <subviews>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="top" borderStyle="roundedRect" placeholder="Enter your message" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="NZl-fs-zmw">
                             <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -22,12 +67,73 @@
                         </textField>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="COP-kS-7ak" userLabel="RightButtonsView">
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g6n-GB-P8m" userLabel="SendButton">
-                                    <state key="normal" image="SendPostButton"/>
-                                    <connections>
-                                        <action selector="pressedSendPost:" destination="iN0-l3-epB" eventType="touchUpInside" id="rIc-4u-G6E"/>
-                                    </connections>
-                                </button>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ndH-gC-Tpl" userLabel="SendButtonView">
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g6n-GB-P8m" userLabel="SendButton">
+                                            <color key="backgroundColor" red="0.0" green="0.59215686274509804" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="45" id="7DW-t9-QaW"/>
+                                                <constraint firstAttribute="height" constant="45" id="Etz-AR-e3o"/>
+                                            </constraints>
+                                            <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="22"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="pressedSendPost:" destination="iN0-l3-epB" eventType="touchUpInside" id="rIc-4u-G6E"/>
+                                            </connections>
+                                        </button>
+                                        <view userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Ke-wY-KLP" userLabel="LeftAPView">
+                                            <frame key="frameInset" minX="20" minY="8" width="6" height="17"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="3"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                        <view userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tyY-ww-7e5" userLabel="RightAPView">
+                                            <frame key="frameInset" minX="20" minY="8" width="6" height="17"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="3"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                        <view userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mva-3O-Oig" userLabel="Mid1APView">
+                                            <frame key="frameInset" minX="20" minY="10" width="6" height="17"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="3"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                        <view userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fx6-hx-THd" userLabel="Mid2APView">
+                                            <frame key="frameInset" minX="20" minY="17" width="6" height="17"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="3"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstItem="g6n-GB-P8m" firstAttribute="centerX" secondItem="ndH-gC-Tpl" secondAttribute="centerX" id="TXn-zD-0fc"/>
+                                        <constraint firstAttribute="height" constant="45" id="dBs-mx-yvT"/>
+                                        <constraint firstAttribute="width" constant="45" id="dpT-XW-9yh"/>
+                                        <constraint firstItem="g6n-GB-P8m" firstAttribute="centerY" secondItem="ndH-gC-Tpl" secondAttribute="centerY" id="hJU-KY-YwN"/>
+                                    </constraints>
+                                </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uwt-nn-8sc" userLabel="AddPhotoButton">
                                     <constraints>
                                         <constraint firstAttribute="width" constant="57" id="9Dd-t2-gG6"/>
@@ -43,20 +149,20 @@
                             <constraints>
                                 <constraint firstItem="Uwt-nn-8sc" firstAttribute="centerX" secondItem="COP-kS-7ak" secondAttribute="centerX" id="1zb-ZS-dAM"/>
                                 <constraint firstAttribute="width" constant="70" id="5ni-gG-QcQ"/>
-                                <constraint firstItem="g6n-GB-P8m" firstAttribute="centerX" secondItem="COP-kS-7ak" secondAttribute="centerX" id="UN0-Xl-aSQ"/>
-                                <constraint firstItem="Uwt-nn-8sc" firstAttribute="top" secondItem="COP-kS-7ak" secondAttribute="top" constant="5" id="mLx-Az-cKU"/>
-                                <constraint firstAttribute="bottom" secondItem="g6n-GB-P8m" secondAttribute="bottom" constant="5" id="xhE-AL-9fS"/>
+                                <constraint firstAttribute="bottom" secondItem="ndH-gC-Tpl" secondAttribute="bottom" constant="25" id="S78-Pr-zXO"/>
+                                <constraint firstItem="Uwt-nn-8sc" firstAttribute="top" secondItem="COP-kS-7ak" secondAttribute="top" constant="25" id="mLx-Az-cKU"/>
+                                <constraint firstItem="ndH-gC-Tpl" firstAttribute="centerX" secondItem="COP-kS-7ak" secondAttribute="centerX" id="wHt-IS-j1s"/>
                             </constraints>
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="NZl-fs-zmw" firstAttribute="top" secondItem="x7w-ud-7DH" secondAttribute="top" constant="10" id="9mV-bZ-cN1"/>
-                        <constraint firstItem="COP-kS-7ak" firstAttribute="top" secondItem="x7w-ud-7DH" secondAttribute="top" constant="20" id="BhD-xN-CFl"/>
+                        <constraint firstItem="NZl-fs-zmw" firstAttribute="top" secondItem="x7w-ud-7DH" secondAttribute="top" constant="10" id="AXl-L6-TpY"/>
+                        <constraint firstItem="COP-kS-7ak" firstAttribute="top" secondItem="x7w-ud-7DH" secondAttribute="top" id="CRi-gI-d0c"/>
                         <constraint firstAttribute="trailing" secondItem="COP-kS-7ak" secondAttribute="trailing" constant="10" id="ClD-F4-dZ0"/>
                         <constraint firstItem="NZl-fs-zmw" firstAttribute="leading" secondItem="x7w-ud-7DH" secondAttribute="leading" constant="10" id="IJY-4j-Xlf"/>
                         <constraint firstAttribute="bottom" secondItem="NZl-fs-zmw" secondAttribute="bottom" constant="10" id="QZk-kh-5RP"/>
-                        <constraint firstAttribute="bottom" secondItem="COP-kS-7ak" secondAttribute="bottom" constant="20" id="Uim-cp-uNR"/>
+                        <constraint firstAttribute="bottom" secondItem="COP-kS-7ak" secondAttribute="bottom" id="Uim-cp-uNR"/>
                         <constraint firstItem="COP-kS-7ak" firstAttribute="leading" secondItem="NZl-fs-zmw" secondAttribute="trailing" constant="10" id="eX0-jW-1IF"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
@@ -68,10 +174,13 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="LMC-hz-TDz" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="1i4-vm-4Mg"/>
+                <constraint firstAttribute="trailing" secondItem="LMC-hz-TDz" secondAttribute="trailing" id="55E-VX-kCS"/>
                 <constraint firstItem="x7w-ud-7DH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ABL-TL-oEp"/>
                 <constraint firstAttribute="trailing" secondItem="x7w-ud-7DH" secondAttribute="trailing" id="Bpp-bC-jHF"/>
-                <constraint firstItem="x7w-ud-7DH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="G2y-vk-4ef"/>
                 <constraint firstAttribute="bottom" secondItem="x7w-ud-7DH" secondAttribute="bottom" id="iJX-15-AV1"/>
+                <constraint firstItem="x7w-ud-7DH" firstAttribute="top" secondItem="LMC-hz-TDz" secondAttribute="bottom" constant="-10" id="qnl-sf-Jv4"/>
+                <constraint firstItem="LMC-hz-TDz" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="v8t-bj-YC9"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <userDefinedRuntimeAttributes>
@@ -81,14 +190,24 @@
             </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="addPhotoButton" destination="Uwt-nn-8sc" id="qCn-cQ-ikz"/>
+                <outlet property="leftAPView" destination="8Ke-wY-KLP" id="wwG-qC-17B"/>
                 <outlet property="messageTextField" destination="NZl-fs-zmw" id="ZAl-HQ-jVu"/>
+                <outlet property="mid1APView" destination="mva-3O-Oig" id="yKj-R3-bxA"/>
+                <outlet property="mid2APView" destination="Fx6-hx-THd" id="NwP-rj-0fT"/>
+                <outlet property="photoButContBotConstraint" destination="qnl-sf-Jv4" id="Ezk-7b-L6C"/>
+                <outlet property="photoButtonsContainer" destination="LMC-hz-TDz" id="Zvh-L7-m9C"/>
+                <outlet property="photoContainerHeightConstraint" destination="2ZV-uQ-uBD" id="Dkl-NH-fRk"/>
+                <outlet property="rightAPView" destination="tyY-ww-7e5" id="3RS-5F-bil"/>
+                <outlet property="rightButtonsContainer" destination="COP-kS-7ak" id="ocU-9J-rWG"/>
                 <outlet property="sendPostButton" destination="g6n-GB-P8m" id="PNO-oi-N1i"/>
+                <outlet property="sendPostButtonBotConstraint" destination="S78-Pr-zXO" id="VyE-NV-Vnq"/>
             </connections>
-            <point key="canvasLocation" x="35" y="-197"/>
+            <point key="canvasLocation" x="36.5" y="-218"/>
         </view>
     </objects>
     <resources>
         <image name="AddPhotoButton" width="57" height="45"/>
-        <image name="SendPostButton" width="45" height="45"/>
+        <image name="PhotoGalleryOutline" width="50" height="42"/>
+        <image name="TakePhotoOutline" width="51" height="40"/>
     </resources>
 </document>
