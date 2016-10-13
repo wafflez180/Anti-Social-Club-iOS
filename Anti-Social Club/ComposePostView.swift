@@ -23,13 +23,13 @@ class ComposePostView: UIView, UITextFieldDelegate {
     @IBOutlet weak var sendPostButton: UIButton!
     @IBOutlet weak var messageTextField: UITextField!
     
+    // MARK: Properties
     var parentVC : HomepageTableViewController!
     var blurView : UIView!
     var showingPhotoButtons : Bool = false
     
-    func viewDidLoad(){
-        // Do any additional setup after loading the view, typically from a nib.
-        
+    func viewDidLoad()
+    {
         self.messageTextField.delegate = self;
         applyPlainShadow(view: self)
         createGaussianBlur()
@@ -40,24 +40,27 @@ class ComposePostView: UIView, UITextFieldDelegate {
     
     //MARK: - ComposePostView
     
-    func setupFrame() {
+    func setupFrame()
+    {
         let frameHeight = 180.0 as CGFloat
         self.frame = CGRect.init(x: 0, y: self.parentVC.view.frame.height, width: self.parentVC.view.frame.size.width, height: frameHeight)
     }
     
-    func setupAnimateButton() {
+    func setupAnimateButton()
+    {
         var newFrame1 : CGRect = leftAPView.frame
         newFrame1.origin.x-=leftAPView.frame.size.height/4
         leftAPView.frame = newFrame1
         var newFrame2 : CGRect = rightAPView.frame
         newFrame2.origin.x+=rightAPView.frame.size.height/4
         rightAPView.frame = newFrame2
-
+        
         leftAPView.transform = CGAffineTransform(rotationAngle: (CGFloat.pi/4))//-45 Degrees
         rightAPView.transform = CGAffineTransform(rotationAngle: -(CGFloat.pi/4))//45 Degrees
     }
     
-    func animateButtonToX(){
+    func animateButtonToX()
+    {
         let animationSpeed : TimeInterval = 0.3
         
         //Set constant to half of the messageboxview
@@ -75,7 +78,7 @@ class ComposePostView: UIView, UITextFieldDelegate {
                 self.mid2APView.frame = newFrame2
             },completion:
             { finished in
-
+                
         })
         UIView.animate(withDuration: animationSpeed, delay: 0.0, options: .curveEaseInOut, animations:
             {
@@ -90,11 +93,12 @@ class ComposePostView: UIView, UITextFieldDelegate {
                 self.mid2APView.transform = CGAffineTransform(rotationAngle: -(CGFloat.pi/4))//-45
             },completion:
             { finished in
-
+                
         })
     }
     
-    func animateButtonToArrow(){
+    func animateButtonToArrow()
+    {
         let animationSpeed : TimeInterval = 0.3
         self.sendPostButtonBotConstraint.constant = 25
         
@@ -105,7 +109,7 @@ class ComposePostView: UIView, UITextFieldDelegate {
         self.mid2APView.frame = newFrame2
         self.mid1APView.bounds = newFrame1
         self.mid2APView.bounds = newFrame2
-
+        
         UIView.animate(withDuration: animationSpeed, delay: animationSpeed, options: .curveEaseInOut, animations:
             {
                 self.mid1APView.frame = newFrame1
@@ -114,7 +118,7 @@ class ComposePostView: UIView, UITextFieldDelegate {
                 self.mid2APView.bounds = newFrame2
             },completion:
             { finished in
-
+                
         })
         UIView.animate(withDuration: animationSpeed, delay: 0.0, options: .curveEaseInOut, animations:
             {
@@ -129,20 +133,22 @@ class ComposePostView: UIView, UITextFieldDelegate {
                 self.mid2APView.transform = CGAffineTransform.identity
             },completion:
             { finished in
-
+                
         })
     }
     
-    func dismissPhotoButtonContainer(animate: Bool){
+    func dismissPhotoButtonContainer(animate: Bool)
+    {
         let popupHeight = 180.0 as CGFloat
         //Use 30 to avoid constraint conflicts (10, 10, 10 seperators for the buttons)
         photoContainerHeightConstraint.constant = 30
         //Hides the 30 height view
         photoButContBotConstraint.constant = -30
-
+        
         showingPhotoButtons = false
         
-        if(animate){
+        if(animate)
+        {
             UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseInOut, animations:
                 {
                     //Reposition and decrease the height of the popup
@@ -153,21 +159,24 @@ class ComposePostView: UIView, UITextFieldDelegate {
                 },completion:
                 { finished in
             })
-        }else{
+        }else
+        {
             self.layoutIfNeeded()
             photoButtonsContainer.alpha = 0.0
         }
     }
     
-    func presentPhotoButtonContainer(animate: Bool){
+    func presentPhotoButtonContainer(animate: Bool)
+    {
         let popupHeight = 380.0 as CGFloat
         self.photoContainerHeightConstraint.constant = 230
         //Hide the bottom rounded corners
         self.photoButContBotConstraint.constant = -10
         
         showingPhotoButtons = true
-
-        if(animate){
+        
+        if(animate)
+        {
             UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseInOut, animations:
                 {
                     //Reposition and increase the height of the popup
@@ -178,11 +187,13 @@ class ComposePostView: UIView, UITextFieldDelegate {
                 },completion:
                 { finished in
             })
-        }else{
+        }else
+        {
         }
     }
-
-    func applyPlainShadow(view: UIView) {
+    
+    func applyPlainShadow(view: UIView)
+    {
         let layer = view.layer
         
         layer.shadowColor = UIColor.black.cgColor
@@ -191,7 +202,8 @@ class ComposePostView: UIView, UITextFieldDelegate {
         layer.shadowRadius = 24
     }
     
-    func createGaussianBlur(){
+    func createGaussianBlur()
+    {
         let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
         blurView = UIVisualEffectView(effect: blurEffect)
         blurView.frame = self.parentVC.view.bounds
@@ -200,11 +212,12 @@ class ComposePostView: UIView, UITextFieldDelegate {
         
         let tap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissPopup))
         blurView.addGestureRecognizer(tap)
-
+        
         self.parentVC.view.addSubview(blurView)
     }
     
-    func presentPopup(){
+    func presentPopup()
+    {
         //Animate post view to the middle of the screen
         let popupHeight = 180.0 as CGFloat
         UIView.animate(withDuration: 0.2, delay: 0.1, options: .transitionCurlUp, animations:
@@ -217,7 +230,8 @@ class ComposePostView: UIView, UITextFieldDelegate {
         })
     }
     
-    func dismissPopup(){
+    func dismissPopup()
+    {
         UIView.animate(withDuration: 0.2, delay: 0.1, options: .transitionCurlUp, animations:
             {
                 self.blurView.alpha = 0.0
@@ -232,35 +246,41 @@ class ComposePostView: UIView, UITextFieldDelegate {
     
     // MARK: - UITextField
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {
         textField.resignFirstResponder()
         return false
     }
     
     // MARK: - Actions
     
-    @IBAction func pressedSendPost(_ sender: UIButton) {
-        if showingPhotoButtons {
+    @IBAction func pressedSendPost(_ sender: UIButton)
+    {
+        if showingPhotoButtons
+        {
             dismissPhotoButtonContainer(animate: true)
             animateButtonToArrow()
-        }else{
+        }else
+        {
             
         }
     }
-
-    @IBAction func pressedAddPhoto(_ sender: UIButton) {
-        if !showingPhotoButtons {
+    
+    @IBAction func pressedAddPhoto(_ sender: UIButton)
+    {
+        if !showingPhotoButtons
+        {
             presentPhotoButtonContainer(animate: true)
             animateButtonToX()
         }
     }
     
     /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-
+     // Only override draw() if you perform custom drawing.
+     // An empty implementation adversely affects performance during animation.
+     override func draw(_ rect: CGRect) {
+     // Drawing code
+     }
+     */
+    
 }

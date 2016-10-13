@@ -10,7 +10,6 @@ import UIKit
 
 class HomepageTableViewController: UITableViewController
 {
-    
     var postsArray = [Post]()
 
     override func viewDidLoad()
@@ -69,7 +68,6 @@ class HomepageTableViewController: UITableViewController
         // #warning Incomplete implementation, return the number of rows
         return postsArray.count
     }
-
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! PostTableViewCell
@@ -80,6 +78,10 @@ class HomepageTableViewController: UITableViewController
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        // CODE REVIEW:
+        // This is a "magic number". You should change it to a const variable and then define that variable
+        // a the top of the class.
+    
         return 10
     }
     
