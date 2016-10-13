@@ -14,6 +14,7 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LMC-hz-TDz" userLabel="PhotoButtonsView">
                     <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oem-ID-ucc"/>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Na3-9F-9BI" userLabel="PhotoGalleryButton">
                             <color key="backgroundColor" red="0.0" green="0.59215686274509804" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
@@ -25,6 +26,9 @@
                                     <integer key="value" value="7"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="getPhotoFromGallery:" destination="iN0-l3-epB" eventType="touchUpInside" id="Ymm-tf-c3z"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="90Y-5z-fpF" userLabel="TakePhotoButton">
                             <color key="backgroundColor" red="0.0" green="0.59215686274509804" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
@@ -37,14 +41,21 @@
                                     <integer key="value" value="7"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="getPhotoFromCamera:" destination="iN0-l3-epB" eventType="touchUpInside" id="Qzn-pR-SfY"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstItem="oem-ID-ucc" firstAttribute="top" secondItem="LMC-hz-TDz" secondAttribute="top" id="0G8-mI-UeR"/>
                         <constraint firstAttribute="height" constant="230" id="2ZV-uQ-uBD"/>
                         <constraint firstAttribute="trailing" secondItem="Na3-9F-9BI" secondAttribute="trailing" constant="10" id="6Kl-PF-ugz"/>
                         <constraint firstItem="90Y-5z-fpF" firstAttribute="leading" secondItem="LMC-hz-TDz" secondAttribute="leading" constant="10" id="Cy7-3M-LyI"/>
                         <constraint firstItem="Na3-9F-9BI" firstAttribute="top" secondItem="90Y-5z-fpF" secondAttribute="bottom" constant="10" id="F40-o5-6yb"/>
+                        <constraint firstAttribute="trailing" secondItem="oem-ID-ucc" secondAttribute="trailing" id="GOh-oo-B8x"/>
+                        <constraint firstAttribute="bottom" secondItem="oem-ID-ucc" secondAttribute="bottom" constant="10" id="Nht-OM-99u"/>
+                        <constraint firstItem="oem-ID-ucc" firstAttribute="leading" secondItem="LMC-hz-TDz" secondAttribute="leading" id="URi-Zj-c1Z"/>
                         <constraint firstAttribute="bottom" secondItem="Na3-9F-9BI" secondAttribute="bottom" constant="10" id="VDh-33-mIq"/>
                         <constraint firstItem="90Y-5z-fpF" firstAttribute="top" secondItem="LMC-hz-TDz" secondAttribute="top" constant="10" id="Zvb-Ys-3a5"/>
                         <constraint firstItem="Na3-9F-9BI" firstAttribute="top" secondItem="90Y-5z-fpF" secondAttribute="bottom" constant="10" id="kcN-0y-TQM"/>
@@ -189,7 +200,10 @@
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
             <connections>
+                <outlet property="addCameraPhotoButton" destination="90Y-5z-fpF" id="M1T-PW-ieM"/>
+                <outlet property="addGalleryPhotoButton" destination="Na3-9F-9BI" id="ug2-x8-cG9"/>
                 <outlet property="addPhotoButton" destination="Uwt-nn-8sc" id="qCn-cQ-ikz"/>
+                <outlet property="addPhotoFromGalleryButton" destination="90Y-5z-fpF" id="CrG-js-DiO"/>
                 <outlet property="leftAPView" destination="8Ke-wY-KLP" id="wwG-qC-17B"/>
                 <outlet property="messageTextField" destination="NZl-fs-zmw" id="ZAl-HQ-jVu"/>
                 <outlet property="mid1APView" destination="mva-3O-Oig" id="yKj-R3-bxA"/>
@@ -197,6 +211,7 @@
                 <outlet property="photoButContBotConstraint" destination="qnl-sf-Jv4" id="Ezk-7b-L6C"/>
                 <outlet property="photoButtonsContainer" destination="LMC-hz-TDz" id="Zvh-L7-m9C"/>
                 <outlet property="photoContainerHeightConstraint" destination="2ZV-uQ-uBD" id="Dkl-NH-fRk"/>
+                <outlet property="postPhotoImageView" destination="oem-ID-ucc" id="pav-4R-uQn"/>
                 <outlet property="rightAPView" destination="tyY-ww-7e5" id="3RS-5F-bil"/>
                 <outlet property="rightButtonsContainer" destination="COP-kS-7ak" id="ocU-9J-rWG"/>
                 <outlet property="sendPostButton" destination="g6n-GB-P8m" id="PNO-oi-N1i"/>

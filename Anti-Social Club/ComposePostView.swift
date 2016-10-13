@@ -7,9 +7,13 @@
 //
 
 import UIKit
+import AVFoundation
 
-class ComposePostView: UIView, UITextFieldDelegate {
+class ComposePostView: UIView, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
+    @IBOutlet weak var addCameraPhotoButton: UIButton!
+    @IBOutlet weak var addGalleryPhotoButton: UIButton!
+    @IBOutlet weak var postPhotoImageView: UIImageView!
     @IBOutlet weak var mid2APView: UIView!
     @IBOutlet weak var mid1APView: UIView!
     @IBOutlet weak var rightAPView: UIView!
@@ -28,9 +32,12 @@ class ComposePostView: UIView, UITextFieldDelegate {
     var blurView : UIView!
     var showingPhotoButtons : Bool = false
     
+    let imagePicker = UIImagePickerController()
+    
     func viewDidLoad()
     {
-        self.messageTextField.delegate = self;
+        messageTextField.delegate = self
+        imagePicker.delegate = self
         applyPlainShadow(view: self)
         createGaussianBlur()
         setupFrame()
@@ -220,7 +227,7 @@ class ComposePostView: UIView, UITextFieldDelegate {
     {
         //Animate post view to the middle of the screen
         let popupHeight = 180.0 as CGFloat
-        UIView.animate(withDuration: 0.2, delay: 0.1, options: .transitionCurlUp, animations:
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: .transitionCurlUp, animations:
             {
                 self.blurView.alpha = 1.0
                 self.frame = CGRect.init(x: 0, y: (self.parentVC.view.frame.height/2)-popupHeight, width: self.parentVC.view.frame.size.width, height: popupHeight)
@@ -232,7 +239,7 @@ class ComposePostView: UIView, UITextFieldDelegate {
     
     func dismissPopup()
     {
-        UIView.animate(withDuration: 0.2, delay: 0.1, options: .transitionCurlUp, animations:
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: .transitionCurlUp, animations:
             {
                 self.blurView.alpha = 0.0
                 self.frame = CGRect.init(x: 0, y: self.parentVC.view.frame.height, width: self.parentVC.view.frame.size.width, height: self.frame.size.height)
@@ -273,6 +280,60 @@ class ComposePostView: UIView, UITextFieldDelegate {
             presentPhotoButtonContainer(animate: true)
             animateButtonToX()
         }
+    }
+    @IBAction func getPhotoFromCamera(_ sender: AnyObject)
+    {
+        
+    }
+    
+    @IBAction func getPhotoFromGallery(_ sender: AnyObject)
+    {
+        let authStatus : AVAuthorizationStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
+        if(authStatus == AVAuthorizationStatus.authorized)
+        {
+            // do your logic
+            self.imagePicker.allowsEditing = false
+            self.imagePicker.sourceType = .photoLibrary
+            self.parentVC.present(self.imagePicker, animated: true, completion: nil)
+        } else if(authStatus == AVAuthorizationStatus.denied)
+        {
+            // denied
+            pressedSendPost(sender as! UIButton)
+        } else if(authStatus == AVAuthorizationStatus.restricted)
+        {
+            // restricted, normally won't happen
+            pressedSendPost(sender as! UIButton)
+        } else if(authStatus == AVAuthorizationStatus.notDetermined)
+        {
+            // not determined?!
+            AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo) { granted in
+                if(granted)
+                {
+                    print("Granted access to " + AVMediaTypeVideo);
+                    self.imagePicker.allowsEditing = false
+                    self.imagePicker.sourceType = .photoLibrary
+                    self.parentVC.present(self.imagePicker, animated: true, completion: nil)
+                } else
+                {
+                    print("Not granted access to " + AVMediaTypeVideo);
+                    self.pressedSendPost(sender as! UIButton)
+                }
+            }
+        }
+    }
+    
+    // MARK: - UIImagePickerControllerDelegate
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any])
+    {
+        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage
+        {
+            postPhotoImageView.contentMode = .scaleAspectFit
+            postPhotoImageView.image = pickedImage
+            addCameraPhotoButton.isHidden = true
+            addGalleryPhotoButton.isHidden = true
+        }
+        parentVC.dismiss(animated: true, completion: nil)
     }
     
     /*
