@@ -21,6 +21,11 @@ class Post{
     
     init?(message : String?, laughingBadgeCount : Int?, notAmusedBadgeCount : Int?, heartBadgeCount : Int?, likeBadgeCount : Int?, dislikeBadgeCount : Int?, timestamp: String?, imageUrl: String?)
     {
+        // CODE REVIEW:
+        // What happens if I pass in a negative badge count? Could cause bad news down the line.
+        // Insert some checks here to make sure that the counts are >= 0, and return nil if they aren't.
+        // This will return nil if we get an invalidly deserialized post, and then we can handle it.
+    
         self.message = message
         self.timestamp = timestamp
         self.laughingBadgeCount = laughingBadgeCount
