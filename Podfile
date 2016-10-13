@@ -10,7 +10,6 @@ target 'Anti-Social Club' do
    :git => ‘https://github.com/SwiftyJSON/SwiftyJSON.git'
   pod 'Alamofire',
    :git => 'https://github.com/Alamofire/Alamofire.git'
-  pod 'AlamofireImage', '~> 3.1'
-
-
+  pod 'AlamofireImage', '~> 3.1’
+  pod ‘Fusuma’
 end
