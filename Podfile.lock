@@ -2,18 +2,20 @@ PODS:
   - Alamofire (4.0.1)
   - AlamofireImage (3.1.0):
     - Alamofire (~> 4.0)
-  - Fusuma (0.5.3)
+  - Fusuma (1.0.0)
   - SwiftyJSON (3.1.1)
 
 DEPENDENCIES:
   - Alamofire (from `https://github.com/Alamofire/Alamofire.git`)
   - AlamofireImage (~> 3.1)
-  - Fusuma
+  - Fusuma (from `https://github.com/ytakzk/Fusuma.git`)
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
 
 EXTERNAL SOURCES:
   Alamofire:
     :git: https://github.com/Alamofire/Alamofire.git
+  Fusuma:
+    :git: https://github.com/ytakzk/Fusuma.git
   SwiftyJSON:
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
 
@@ -21,6 +23,9 @@ CHECKOUT OPTIONS:
   Alamofire:
     :commit: b98fe26cb86c1c1227185d30b87bd57cb45fbe3c
     :git: https://github.com/Alamofire/Alamofire.git
+  Fusuma:
+    :commit: a5d1d45ba3de62c0904bcfedc0b241229c9908c8
+    :git: https://github.com/ytakzk/Fusuma.git
   SwiftyJSON:
     :commit: 707516458b618c48ad9365d23a0dad3c3b860fa0
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
@@ -28,9 +33,9 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
   AlamofireImage: bb8c8351c51cb1633bb6be69b6dbbaff37ce65b7
-  Fusuma: 02ffb3a9943792519f2c0972263b750acb550a49
+  Fusuma: 256315ea7daed298f246f1ba5e49700bc664dd93
   SwiftyJSON: f0be2e604f83e8405a624e9f891898bf6ed4e019
 
-PODFILE CHECKSUM: f51432a5e6ada5da6e729c9a99f68bb21772f60b
+PODFILE CHECKSUM: cef70385a72f20e7eda3fb11fef2528dbd838545
 
 COCOAPODS: 1.1.0.rc.2

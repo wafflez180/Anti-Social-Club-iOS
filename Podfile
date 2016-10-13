@@ -11,5 +11,6 @@ target 'Anti-Social Club' do
   pod 'Alamofire',
    :git => 'https://github.com/Alamofire/Alamofire.git'
   pod 'AlamofireImage', '~> 3.1’
-  pod ‘Fusuma’
+  pod ‘Fusuma’,
+   :git => 'https://github.com/ytakzk/Fusuma.git'
 end

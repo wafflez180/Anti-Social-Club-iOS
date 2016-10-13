@@ -8,11 +8,11 @@
 
 import UIKit
 import AVFoundation
+import Fusuma
 
-class ComposePostView: UIView, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var addCameraPhotoButton: UIButton!
-    @IBOutlet weak var addGalleryPhotoButton: UIButton!
     @IBOutlet weak var postPhotoImageView: UIImageView!
     @IBOutlet weak var mid2APView: UIView!
     @IBOutlet weak var mid1APView: UIView!
@@ -32,12 +32,16 @@ class ComposePostView: UIView, UIImagePickerControllerDelegate, UINavigationCont
     var blurView : UIView!
     var showingPhotoButtons : Bool = false
     
-    let imagePicker = UIImagePickerController()
+    let fusuma = FusumaViewController()
     
     func viewDidLoad()
     {
         messageTextField.delegate = self
-        imagePicker.delegate = self
+        fusuma.delegate = self
+        fusuma.hasVideo = false // If you want to let the users allow to use video.
+        fusumaTintColor = UIColor.getASCMediumColor()
+        fusumaCropImage = true
+        //fusumaBackgroundColor = UIColor.getASCMediumColor()
         applyPlainShadow(view: self)
         createGaussianBlur()
         setupFrame()
@@ -251,6 +255,64 @@ class ComposePostView: UIView, UIImagePickerControllerDelegate, UINavigationCont
         })
     }
     
+    func resetImageView(animate: Bool){
+        addCameraPhotoButton.isHidden = false
+        addCameraPhotoButton.alpha = 0.3
+        postPhotoImageView.alpha = 1.0
+        if animate
+        {
+            UIView.animate(withDuration: 0.2, delay: 0.0, options: .transitionCurlUp, animations:
+                {
+                    self.addCameraPhotoButton.alpha = 1.0
+                    self.postPhotoImageView.alpha = 0.0
+                },completion:
+                { finished in
+                    self.postPhotoImageView.image = nil
+                    self.postPhotoImageView.alpha = 1.0
+            })
+        }else{
+            addCameraPhotoButton.isHidden = false
+            postPhotoImageView.image = nil
+            self.addCameraPhotoButton.alpha = 1.0
+            self.postPhotoImageView.alpha = 1.0
+        }
+    }
+    
+    func flashMessageBox(){
+        self.messageTextField.layer.borderColor = UIColor.red.cgColor
+        
+        let flashSpeed = 0.2
+        
+        UIView.animate(withDuration: flashSpeed, delay: 0.0, options: .transitionCurlDown, animations:
+            {
+                self.messageTextField.layer.borderWidth = 2
+                //self.messageTextField.layer.borderColor = UIColor.clear.cgColor
+        })
+        UIView.animate(withDuration: flashSpeed, delay: flashSpeed, options: .transitionCurlDown, animations:
+            {
+                self.messageTextField.layer.borderWidth = 0
+                //self.messageTextField.layer.borderColor = UIColor.clear.cgColor
+        })
+    }
+    
+    func sendPost(){
+        //TODO: Make A spinner in the send button and then make a check mark or something then:
+        if (messageTextField.text?.isEmpty)!
+        {
+            flashMessageBox()
+        }else{
+            UIView.animate(withDuration: 0.2, delay: 0.0, options: .transitionCurlUp, animations:
+                {
+                    self.blurView.alpha = 0.0
+                    self.frame = CGRect.init(x: 0, y: -self.frame.size.height, width: self.parentVC.view.frame.size.width, height: self.frame.size.height)
+                },completion:
+                { finished in
+                    self.blurView.removeFromSuperview()
+                    self.removeFromSuperview()
+            })
+        }
+    }
+    
     // MARK: - UITextField
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool
@@ -263,13 +325,13 @@ class ComposePostView: UIView, UIImagePickerControllerDelegate, UINavigationCont
     
     @IBAction func pressedSendPost(_ sender: UIButton)
     {
-        if showingPhotoButtons
+        if showingPhotoButtons && postPhotoImageView.image == nil
         {
             dismissPhotoButtonContainer(animate: true)
             animateButtonToArrow()
         }else
         {
-            
+            sendPost()
         }
     }
     
@@ -279,22 +341,17 @@ class ComposePostView: UIView, UIImagePickerControllerDelegate, UINavigationCont
         {
             presentPhotoButtonContainer(animate: true)
             animateButtonToX()
+        }else{
+            resetImageView(animate: true)
+            animateButtonToX()
         }
     }
-    @IBAction func getPhotoFromCamera(_ sender: AnyObject)
-    {
-        
-    }
     
-    @IBAction func getPhotoFromGallery(_ sender: AnyObject)
-    {
+    @IBAction func getPhoto(_ sender: AnyObject) {
         let authStatus : AVAuthorizationStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
         if(authStatus == AVAuthorizationStatus.authorized)
         {
-            // do your logic
-            self.imagePicker.allowsEditing = false
-            self.imagePicker.sourceType = .photoLibrary
-            self.parentVC.present(self.imagePicker, animated: true, completion: nil)
+            self.parentVC.present(self.fusuma, animated: true, completion: nil)
         } else if(authStatus == AVAuthorizationStatus.denied)
         {
             // denied
@@ -306,13 +363,12 @@ class ComposePostView: UIView, UIImagePickerControllerDelegate, UINavigationCont
         } else if(authStatus == AVAuthorizationStatus.notDetermined)
         {
             // not determined?!
-            AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo) { granted in
+            AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo)
+            { granted in
                 if(granted)
                 {
                     print("Granted access to " + AVMediaTypeVideo);
-                    self.imagePicker.allowsEditing = false
-                    self.imagePicker.sourceType = .photoLibrary
-                    self.parentVC.present(self.imagePicker, animated: true, completion: nil)
+                    self.parentVC.present(self.fusuma, animated: true, completion: nil)
                 } else
                 {
                     print("Not granted access to " + AVMediaTypeVideo);
@@ -322,18 +378,36 @@ class ComposePostView: UIView, UIImagePickerControllerDelegate, UINavigationCont
         }
     }
     
-    // MARK: - UIImagePickerControllerDelegate
+    // MARK: - Fusuma
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any])
+    // Return the image which is selected from camera roll or is taken via the camera.
+    func fusumaImageSelected(_ image: UIImage)
     {
-        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage
-        {
-            postPhotoImageView.contentMode = .scaleAspectFit
-            postPhotoImageView.image = pickedImage
-            addCameraPhotoButton.isHidden = true
-            addGalleryPhotoButton.isHidden = true
-        }
-        parentVC.dismiss(animated: true, completion: nil)
+        print("Image selected")
+        postPhotoImageView.contentMode = .scaleAspectFit
+        postPhotoImageView.image = image
+        addCameraPhotoButton.isHidden = true
+        animateButtonToArrow()
+        //parentVC.dismiss(animated: true, completion: nil)
+    }
+
+    // Return the image but called after is dismissed.
+    func fusumaDismissedWithImage(_ image: UIImage)
+    {
+        
+        print("Called just after FusumaViewController is dismissed.")
+    }
+    
+    func fusumaVideoCompleted(withFileURL fileURL: URL)
+    {
+        print("Called just after a video has been selected.")
+    }
+    
+    // When camera roll is not authorized, this method is called.
+    func fusumaCameraRollUnauthorized()
+    {
+        print("Camera roll unauthorized")
+        
     }
     
     /*

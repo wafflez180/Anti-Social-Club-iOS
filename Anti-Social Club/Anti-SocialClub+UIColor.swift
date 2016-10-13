@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 extension UIColor{
-    class func getCustomBlueColor() -> UIColor{
+    class func getASCMediumColor() -> UIColor{
         // CODE REVIEW:
         // These are magic numbers.
         // They should be defined at the top of the class as constants.
@@ -18,7 +18,7 @@ extension UIColor{
         // For example:
         // let blueColorRed = 150 / 255
     
-        return UIColor(red:0.043, green:0.576 ,blue:0.588 , alpha:1.00)
+        return UIColor(red: 0, green: 151, blue: 167, alpha: 100)
     }
 }
 
