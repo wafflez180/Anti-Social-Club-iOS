@@ -21,33 +21,14 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="90Y-5z-fpF" userLabel="TakePhotoButton">
-                            <color key="backgroundColor" red="0.0" green="0.59215686274509804" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="height" relation="lessThanOrEqual" constant="300" id="6fk-XK-gkP"/>
-                            </constraints>
-                            <state key="normal" image="Add Photo Icon"/>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                    <integer key="value" value="7"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="getPhoto:" destination="iN0-l3-epB" eventType="touchUpInside" id="nAq-5O-Zep"/>
-                            </connections>
-                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="oem-ID-ucc" firstAttribute="top" secondItem="LMC-hz-TDz" secondAttribute="top" id="0G8-mI-UeR"/>
                         <constraint firstAttribute="height" constant="230" id="2ZV-uQ-uBD"/>
-                        <constraint firstItem="90Y-5z-fpF" firstAttribute="leading" secondItem="LMC-hz-TDz" secondAttribute="leading" constant="10" id="Cy7-3M-LyI"/>
                         <constraint firstAttribute="trailing" secondItem="oem-ID-ucc" secondAttribute="trailing" id="GOh-oo-B8x"/>
                         <constraint firstAttribute="bottom" secondItem="oem-ID-ucc" secondAttribute="bottom" constant="10" id="Nht-OM-99u"/>
-                        <constraint firstAttribute="bottom" secondItem="90Y-5z-fpF" secondAttribute="bottom" constant="10" id="Q2m-gO-cfC"/>
                         <constraint firstItem="oem-ID-ucc" firstAttribute="leading" secondItem="LMC-hz-TDz" secondAttribute="leading" id="URi-Zj-c1Z"/>
-                        <constraint firstItem="90Y-5z-fpF" firstAttribute="top" secondItem="LMC-hz-TDz" secondAttribute="top" constant="10" id="Zvb-Ys-3a5"/>
-                        <constraint firstAttribute="trailing" secondItem="90Y-5z-fpF" secondAttribute="trailing" constant="10" id="vOX-0q-6yI"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -57,89 +38,57 @@
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x7w-ud-7DH" userLabel="MainMessageView">
                     <subviews>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="top" borderStyle="roundedRect" placeholder="Enter your message" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="NZl-fs-zmw">
-                            <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="textColor"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                        </textField>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iqQ-Ii-qdW" userLabel="MessageFieldContainer">
+                            <subviews>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="top" borderStyle="roundedRect" placeholder="Enter your message" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="NZl-fs-zmw">
+                                    <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="textColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                </textField>
+                            </subviews>
+                            <color key="backgroundColor" red="0.0" green="0.59215686274509804" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstItem="NZl-fs-zmw" firstAttribute="top" secondItem="iqQ-Ii-qdW" secondAttribute="top" constant="3" id="HWu-R1-PHM"/>
+                                <constraint firstAttribute="trailing" secondItem="NZl-fs-zmw" secondAttribute="trailing" constant="3" id="RIG-bZ-0GS"/>
+                                <constraint firstItem="NZl-fs-zmw" firstAttribute="leading" secondItem="iqQ-Ii-qdW" secondAttribute="leading" constant="3" id="RsO-NT-VaN"/>
+                                <constraint firstAttribute="bottom" secondItem="NZl-fs-zmw" secondAttribute="bottom" constant="3" id="iI8-h2-E7A"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="6"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="COP-kS-7ak" userLabel="RightButtonsView">
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ndH-gC-Tpl" userLabel="SendButtonView">
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g6n-GB-P8m" userLabel="SendButton">
-                                            <color key="backgroundColor" red="0.0" green="0.59215686274509804" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="45" id="7DW-t9-QaW"/>
-                                                <constraint firstAttribute="height" constant="45" id="Etz-AR-e3o"/>
-                                            </constraints>
-                                            <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                    <integer key="value" value="22"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                            <connections>
-                                                <action selector="pressedSendPost:" destination="iN0-l3-epB" eventType="touchUpInside" id="rIc-4u-G6E"/>
-                                            </connections>
-                                        </button>
-                                        <view userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Ke-wY-KLP" userLabel="LeftAPView">
-                                            <frame key="frameInset" minX="20" minY="8" width="6" height="17"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                    <integer key="value" value="3"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                        </view>
-                                        <view userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tyY-ww-7e5" userLabel="RightAPView">
-                                            <frame key="frameInset" minX="20" minY="8" width="6" height="17"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                    <integer key="value" value="3"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                        </view>
-                                        <view userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mva-3O-Oig" userLabel="Mid1APView">
-                                            <frame key="frameInset" minX="20" minY="10" width="6" height="17"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                    <integer key="value" value="3"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                        </view>
-                                        <view userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fx6-hx-THd" userLabel="Mid2APView">
-                                            <frame key="frameInset" minX="20" minY="17" width="6" height="17"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                    <integer key="value" value="3"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                        </view>
-                                    </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <constraints>
-                                        <constraint firstItem="g6n-GB-P8m" firstAttribute="centerX" secondItem="ndH-gC-Tpl" secondAttribute="centerX" id="TXn-zD-0fc"/>
-                                        <constraint firstAttribute="height" constant="45" id="dBs-mx-yvT"/>
-                                        <constraint firstAttribute="width" constant="45" id="dpT-XW-9yh"/>
-                                        <constraint firstItem="g6n-GB-P8m" firstAttribute="centerY" secondItem="ndH-gC-Tpl" secondAttribute="centerY" id="hJU-KY-YwN"/>
-                                    </constraints>
-                                </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uwt-nn-8sc" userLabel="AddPhotoButton">
                                     <constraints>
                                         <constraint firstAttribute="width" constant="57" id="9Dd-t2-gG6"/>
                                         <constraint firstAttribute="height" constant="45" id="aQN-Af-7pA"/>
                                     </constraints>
                                     <state key="normal" image="AddPhotoButton"/>
+                                    <state key="selected" image="CancelButton"/>
                                     <connections>
                                         <action selector="pressedAddPhoto:" destination="iN0-l3-epB" eventType="touchUpInside" id="sut-Ao-uBx"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g6n-GB-P8m" userLabel="SendButton">
+                                    <constraints>
+                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="6zC-H3-8S7"/>
+                                        <constraint firstAttribute="width" constant="45" id="7DW-t9-QaW"/>
+                                        <constraint firstAttribute="height" constant="45" id="Etz-AR-e3o"/>
+                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="45" id="leI-6D-ul6"/>
+                                    </constraints>
+                                    <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <state key="normal" image="SendPostButton"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                            <integer key="value" value="22"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="pressedSendPost:" destination="iN0-l3-epB" eventType="touchUpInside" id="rIc-4u-G6E"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -147,21 +96,21 @@
                             <constraints>
                                 <constraint firstItem="Uwt-nn-8sc" firstAttribute="centerX" secondItem="COP-kS-7ak" secondAttribute="centerX" id="1zb-ZS-dAM"/>
                                 <constraint firstAttribute="width" constant="70" id="5ni-gG-QcQ"/>
-                                <constraint firstAttribute="bottom" secondItem="ndH-gC-Tpl" secondAttribute="bottom" constant="25" id="S78-Pr-zXO"/>
                                 <constraint firstItem="Uwt-nn-8sc" firstAttribute="top" secondItem="COP-kS-7ak" secondAttribute="top" constant="25" id="mLx-Az-cKU"/>
-                                <constraint firstItem="ndH-gC-Tpl" firstAttribute="centerX" secondItem="COP-kS-7ak" secondAttribute="centerX" id="wHt-IS-j1s"/>
+                                <constraint firstItem="g6n-GB-P8m" firstAttribute="centerX" secondItem="COP-kS-7ak" secondAttribute="centerX" id="svg-7a-zgv"/>
+                                <constraint firstAttribute="bottom" secondItem="g6n-GB-P8m" secondAttribute="bottom" constant="25" id="zCr-Qi-5tX"/>
                             </constraints>
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="NZl-fs-zmw" firstAttribute="top" secondItem="x7w-ud-7DH" secondAttribute="top" constant="10" id="AXl-L6-TpY"/>
                         <constraint firstItem="COP-kS-7ak" firstAttribute="top" secondItem="x7w-ud-7DH" secondAttribute="top" id="CRi-gI-d0c"/>
                         <constraint firstAttribute="trailing" secondItem="COP-kS-7ak" secondAttribute="trailing" constant="10" id="ClD-F4-dZ0"/>
-                        <constraint firstItem="NZl-fs-zmw" firstAttribute="leading" secondItem="x7w-ud-7DH" secondAttribute="leading" constant="10" id="IJY-4j-Xlf"/>
-                        <constraint firstAttribute="bottom" secondItem="NZl-fs-zmw" secondAttribute="bottom" constant="10" id="QZk-kh-5RP"/>
+                        <constraint firstItem="iqQ-Ii-qdW" firstAttribute="top" secondItem="x7w-ud-7DH" secondAttribute="top" constant="5" id="LGZ-t6-k7R"/>
+                        <constraint firstItem="iqQ-Ii-qdW" firstAttribute="leading" secondItem="x7w-ud-7DH" secondAttribute="leading" constant="5" id="TlN-6d-jyX"/>
                         <constraint firstAttribute="bottom" secondItem="COP-kS-7ak" secondAttribute="bottom" id="Uim-cp-uNR"/>
-                        <constraint firstItem="COP-kS-7ak" firstAttribute="leading" secondItem="NZl-fs-zmw" secondAttribute="trailing" constant="10" id="eX0-jW-1IF"/>
+                        <constraint firstItem="COP-kS-7ak" firstAttribute="leading" secondItem="iqQ-Ii-qdW" secondAttribute="trailing" constant="5" id="fqT-VN-znx"/>
+                        <constraint firstAttribute="bottom" secondItem="iqQ-Ii-qdW" secondAttribute="bottom" constant="5" id="vhI-g3-oZf"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -187,26 +136,22 @@
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
             <connections>
-                <outlet property="addCameraPhotoButton" destination="90Y-5z-fpF" id="M1T-PW-ieM"/>
                 <outlet property="addPhotoButton" destination="Uwt-nn-8sc" id="qCn-cQ-ikz"/>
-                <outlet property="leftAPView" destination="8Ke-wY-KLP" id="wwG-qC-17B"/>
+                <outlet property="messageFieldContainer" destination="iqQ-Ii-qdW" id="abU-wL-zyJ"/>
                 <outlet property="messageTextField" destination="NZl-fs-zmw" id="ZAl-HQ-jVu"/>
-                <outlet property="mid1APView" destination="mva-3O-Oig" id="yKj-R3-bxA"/>
-                <outlet property="mid2APView" destination="Fx6-hx-THd" id="NwP-rj-0fT"/>
                 <outlet property="photoButContBotConstraint" destination="qnl-sf-Jv4" id="Ezk-7b-L6C"/>
                 <outlet property="photoButtonsContainer" destination="LMC-hz-TDz" id="Zvh-L7-m9C"/>
                 <outlet property="photoContainerHeightConstraint" destination="2ZV-uQ-uBD" id="Dkl-NH-fRk"/>
                 <outlet property="postPhotoImageView" destination="oem-ID-ucc" id="pav-4R-uQn"/>
-                <outlet property="rightAPView" destination="tyY-ww-7e5" id="3RS-5F-bil"/>
                 <outlet property="rightButtonsContainer" destination="COP-kS-7ak" id="ocU-9J-rWG"/>
                 <outlet property="sendPostButton" destination="g6n-GB-P8m" id="PNO-oi-N1i"/>
-                <outlet property="sendPostButtonBotConstraint" destination="S78-Pr-zXO" id="VyE-NV-Vnq"/>
             </connections>
             <point key="canvasLocation" x="36.5" y="-218"/>
         </view>
     </objects>
     <resources>
-        <image name="Add Photo Icon" width="120" height="63"/>
         <image name="AddPhotoButton" width="57" height="45"/>
+        <image name="CancelButton" width="45" height="45"/>
+        <image name="SendPostButton" width="45" height="45"/>
     </resources>
 </document>

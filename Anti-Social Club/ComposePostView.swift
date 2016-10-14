@@ -12,12 +12,8 @@ import Fusuma
 
 class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
-    @IBOutlet weak var addCameraPhotoButton: UIButton!
+    @IBOutlet weak var messageFieldContainer: UIView!
     @IBOutlet weak var postPhotoImageView: UIImageView!
-    @IBOutlet weak var mid2APView: UIView!
-    @IBOutlet weak var mid1APView: UIView!
-    @IBOutlet weak var rightAPView: UIView!
-    @IBOutlet weak var leftAPView: UIView!
     @IBOutlet weak var photoButContBotConstraint: NSLayoutConstraint!
     @IBOutlet weak var photoContainerHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var rightButtonsContainer: UIView!
@@ -31,6 +27,7 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
     var parentVC : HomepageTableViewController!
     var blurView : UIView!
     var showingPhotoButtons : Bool = false
+    var imageToUpload : UIImage = UIImage()
     
     let fusuma = FusumaViewController()
     
@@ -45,7 +42,6 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
         applyPlainShadow(view: self)
         createGaussianBlur()
         setupFrame()
-        setupAnimateButton()
         dismissPhotoButtonContainer(animate: false)
     }
     
@@ -55,97 +51,6 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
     {
         let frameHeight = 180.0 as CGFloat
         self.frame = CGRect.init(x: 0, y: self.parentVC.view.frame.height, width: self.parentVC.view.frame.size.width, height: frameHeight)
-    }
-    
-    func setupAnimateButton()
-    {
-        var newFrame1 : CGRect = leftAPView.frame
-        newFrame1.origin.x-=leftAPView.frame.size.height/4
-        leftAPView.frame = newFrame1
-        var newFrame2 : CGRect = rightAPView.frame
-        newFrame2.origin.x+=rightAPView.frame.size.height/4
-        rightAPView.frame = newFrame2
-        
-        leftAPView.transform = CGAffineTransform(rotationAngle: (CGFloat.pi/4))//-45 Degrees
-        rightAPView.transform = CGAffineTransform(rotationAngle: -(CGFloat.pi/4))//45 Degrees
-    }
-    
-    func animateButtonToX()
-    {
-        let animationSpeed : TimeInterval = 0.3
-        
-        //Set constant to half of the messageboxview
-        self.sendPostButtonBotConstraint.constant = (self.rightButtonsContainer.frame.size.height/2)-(self.sendPostButton.frame.size.height/2)
-        
-        //Reposition the 2 middle views
-        UIView.animate(withDuration: animationSpeed, delay: animationSpeed, options: .curveEaseInOut, animations:
-            {
-                var newFrame1 : CGRect = self.mid1APView.frame
-                newFrame1.origin.x-=5
-                newFrame1.origin.y=self.mid2APView.frame.origin.y
-                self.mid1APView.frame = newFrame1
-                var newFrame2 : CGRect = self.mid2APView.frame
-                newFrame2.origin.x+=5
-                self.mid2APView.frame = newFrame2
-            },completion:
-            { finished in
-                
-        })
-        UIView.animate(withDuration: animationSpeed, delay: 0.0, options: .curveEaseInOut, animations:
-            {
-                //Change the constraints
-                self.layoutIfNeeded()
-                self.updateConstraints()
-                self.addPhotoButton.alpha = 0.0
-                //Rotate the views
-                self.leftAPView.transform = CGAffineTransform(rotationAngle: -(CGFloat.pi/4))//-45
-                self.rightAPView.transform = CGAffineTransform(rotationAngle: (CGFloat.pi/4))//45
-                self.mid1APView.transform = CGAffineTransform(rotationAngle: (CGFloat.pi/4))//45
-                self.mid2APView.transform = CGAffineTransform(rotationAngle: -(CGFloat.pi/4))//-45
-            },completion:
-            { finished in
-                
-        })
-    }
-    
-    func animateButtonToArrow()
-    {
-        let animationSpeed : TimeInterval = 0.3
-        self.sendPostButtonBotConstraint.constant = 25
-        
-        //Reset frames
-        let newFrame1 = CGRect(x: 20, y: 10, width: 6, height: 17)
-        let newFrame2 = CGRect(x: 20, y: 17, width: 6, height: 17)
-        self.mid1APView.frame = newFrame1
-        self.mid2APView.frame = newFrame2
-        self.mid1APView.bounds = newFrame1
-        self.mid2APView.bounds = newFrame2
-        
-        UIView.animate(withDuration: animationSpeed, delay: animationSpeed, options: .curveEaseInOut, animations:
-            {
-                self.mid1APView.frame = newFrame1
-                self.mid2APView.frame = newFrame2
-                self.mid1APView.bounds = newFrame1
-                self.mid2APView.bounds = newFrame2
-            },completion:
-            { finished in
-                
-        })
-        UIView.animate(withDuration: animationSpeed, delay: 0.0, options: .curveEaseInOut, animations:
-            {
-                //Change the constraints
-                self.layoutIfNeeded()
-                self.updateConstraints()
-                self.addPhotoButton.alpha = 1.0
-                //Rotate the views
-                self.leftAPView.transform = CGAffineTransform(rotationAngle: (CGFloat.pi/4))//-45
-                self.rightAPView.transform = CGAffineTransform(rotationAngle: -(CGFloat.pi/4))//45
-                self.mid1APView.transform = CGAffineTransform.identity
-                self.mid2APView.transform = CGAffineTransform.identity
-            },completion:
-            { finished in
-                
-        })
     }
     
     func dismissPhotoButtonContainer(animate: Bool)
@@ -256,14 +161,14 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
     }
     
     func resetImageView(animate: Bool){
-        addCameraPhotoButton.isHidden = false
-        addCameraPhotoButton.alpha = 0.3
+        //addCameraPhotoButton.isHidden = false
+        //addCameraPhotoButton.alpha = 0.3
         postPhotoImageView.alpha = 1.0
         if animate
         {
             UIView.animate(withDuration: 0.2, delay: 0.0, options: .transitionCurlUp, animations:
                 {
-                    self.addCameraPhotoButton.alpha = 1.0
+                    //self.addCameraPhotoButton.alpha = 1.0
                     self.postPhotoImageView.alpha = 0.0
                 },completion:
                 { finished in
@@ -271,27 +176,26 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
                     self.postPhotoImageView.alpha = 1.0
             })
         }else{
-            addCameraPhotoButton.isHidden = false
+            //addCameraPhotoButton.isHidden = false
             postPhotoImageView.image = nil
-            self.addCameraPhotoButton.alpha = 1.0
+            //self.addCameraPhotoButton.alpha = 1.0
             self.postPhotoImageView.alpha = 1.0
         }
     }
     
-    func flashMessageBox(){
-        self.messageTextField.layer.borderColor = UIColor.red.cgColor
+    func flashMessageBox()
+    {
+        let origColor = self.messageFieldContainer.backgroundColor
+        let flashSpeed = 0.5
         
-        let flashSpeed = 0.2
-        
-        UIView.animate(withDuration: flashSpeed, delay: 0.0, options: .transitionCurlDown, animations:
-            {
-                self.messageTextField.layer.borderWidth = 2
-                //self.messageTextField.layer.borderColor = UIColor.clear.cgColor
-        })
-        UIView.animate(withDuration: flashSpeed, delay: flashSpeed, options: .transitionCurlDown, animations:
-            {
-                self.messageTextField.layer.borderWidth = 0
-                //self.messageTextField.layer.borderColor = UIColor.clear.cgColor
+        UIView.animate(withDuration: flashSpeed, animations:
+        {
+            self.messageFieldContainer.backgroundColor = UIColor.red.withAlphaComponent(0.7)
+            }, completion: { Finished in
+                UIView.animate(withDuration: flashSpeed, animations:
+                    {
+                    self.messageFieldContainer.backgroundColor = origColor
+                })
         })
     }
     
@@ -313,6 +217,70 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
         }
     }
     
+    func getPhoto() {
+        let authStatus : AVAuthorizationStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
+        if(authStatus == AVAuthorizationStatus.authorized)
+        {
+            self.parentVC.present(self.fusuma, animated: true, completion: nil)
+        } else if(authStatus == AVAuthorizationStatus.denied)
+        {
+            // denied
+            //pressedSendPost(sender as! UIButton)
+        } else if(authStatus == AVAuthorizationStatus.restricted)
+        {
+            // restricted, normally won't happen
+            //pressedSendPost(sender as! UIButton)
+        } else if(authStatus == AVAuthorizationStatus.notDetermined)
+        {
+            // not determined?!
+            AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo)
+            { granted in
+                if(granted)
+                {
+                    print("Granted access to " + AVMediaTypeVideo);
+                    self.parentVC.present(self.fusuma, animated: true, completion: nil)
+                } else
+                {
+                    print("Not granted access to " + AVMediaTypeVideo);
+                    //self.pressedSendPost(sender as! UIButton)
+                }
+            }
+        }
+    }
+    
+    func cropToBounds(image: UIImage, width: Double, height: Double) -> UIImage {
+        print(width)
+        print(height)
+
+        let contextImage: UIImage = UIImage(cgImage: image.cgImage!)
+        let contextSize: CGSize = contextImage.size
+        
+        var posX: CGFloat = 0.0
+        var posY: CGFloat = 0.0
+        let cgwidth: CGFloat = CGFloat(width)
+        let cgheight: CGFloat = CGFloat(height)
+        
+        // See what size is longer and create the center off of that
+        if contextSize.width > contextSize.height {
+            posX = ((contextSize.width - contextSize.height) / 2)
+            posY = ((contextSize.width - contextSize.height) / 2)
+        } else {
+            posX = ((contextSize.height - contextSize.width) / 2)
+            posY = ((contextSize.height - contextSize.width) / 2)
+        }
+        
+        let rect: CGRect = CGRect(x: posX, y: posY, width: cgwidth, height: cgheight)
+        
+        // Create bitmap image from context using the rect
+        let imageRef: CGImage = contextImage.cgImage!.cropping(to: rect)!
+        
+        // Create a new image based on the imageRef and rotate back to the original orientation
+        let image: UIImage = UIImage(cgImage: imageRef, scale: image.scale, orientation: image.imageOrientation)
+        
+        return image
+    }
+
+    
     // MARK: - UITextField
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool
@@ -328,7 +296,7 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
         if showingPhotoButtons && postPhotoImageView.image == nil
         {
             dismissPhotoButtonContainer(animate: true)
-            animateButtonToArrow()
+            //animateButtonToArrow()
         }else
         {
             sendPost()
@@ -339,42 +307,14 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
     {
         if !showingPhotoButtons
         {
-            presentPhotoButtonContainer(animate: true)
-            animateButtonToX()
+            getPhoto()
+            //presentPhotoButtonContainer(animate: true)
+            //animateButtonToX()
         }else{
             resetImageView(animate: true)
-            animateButtonToX()
-        }
-    }
-    
-    @IBAction func getPhoto(_ sender: AnyObject) {
-        let authStatus : AVAuthorizationStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
-        if(authStatus == AVAuthorizationStatus.authorized)
-        {
-            self.parentVC.present(self.fusuma, animated: true, completion: nil)
-        } else if(authStatus == AVAuthorizationStatus.denied)
-        {
-            // denied
-            pressedSendPost(sender as! UIButton)
-        } else if(authStatus == AVAuthorizationStatus.restricted)
-        {
-            // restricted, normally won't happen
-            pressedSendPost(sender as! UIButton)
-        } else if(authStatus == AVAuthorizationStatus.notDetermined)
-        {
-            // not determined?!
-            AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo)
-            { granted in
-                if(granted)
-                {
-                    print("Granted access to " + AVMediaTypeVideo);
-                    self.parentVC.present(self.fusuma, animated: true, completion: nil)
-                } else
-                {
-                    print("Not granted access to " + AVMediaTypeVideo);
-                    self.pressedSendPost(sender as! UIButton)
-                }
-            }
+            dismissPhotoButtonContainer(animate: true)
+            addPhotoButton.isSelected = false
+            //animateButtonToX()
         }
     }
     
@@ -384,10 +324,13 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
     func fusumaImageSelected(_ image: UIImage)
     {
         print("Image selected")
-        postPhotoImageView.contentMode = .scaleAspectFit
-        postPhotoImageView.image = image
-        addCameraPhotoButton.isHidden = true
-        animateButtonToArrow()
+        postPhotoImageView.contentMode = .scaleAspectFill
+        postPhotoImageView.image = cropToBounds(image: image, width: Double(image.size.width), height: Double(image.size.width)/(16.0/9.0))
+        imageToUpload = image
+        presentPhotoButtonContainer(animate: true)
+        addPhotoButton.isSelected = true
+        //addCameraPhotoButton.isHidden = true
+        //animateButtonToArrow()
         //parentVC.dismiss(animated: true, completion: nil)
     }
 
