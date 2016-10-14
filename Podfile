@@ -13,4 +13,6 @@ target 'Anti-Social Club' do
   pod 'AlamofireImage', '~> 3.1’
   pod ‘Fusuma’,
    :git => 'https://github.com/ytakzk/Fusuma.git'
+  pod 'Fabric'
+  pod 'Crashlytics'
 end
