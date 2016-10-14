@@ -82,6 +82,7 @@ class HomepageTableViewController: UITableViewController
         // CODE REVIEW:
         // This is a "magic number". You should change it to a const variable and then define that variable
         // a the top of the class.
+        tableView.tableHeaderView?.backgroundColor = UIColor.clear
     
         return 10
     }

@@ -40,19 +40,18 @@
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iqQ-Ii-qdW" userLabel="MessageFieldContainer">
                             <subviews>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="top" borderStyle="roundedRect" placeholder="Enter your message" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="NZl-fs-zmw">
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" text="Lipdum diksum" translatesAutoresizingMaskIntoConstraints="NO" id="jCl-TD-HAT">
                                     <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                </textField>
+                                </textView>
                             </subviews>
                             <color key="backgroundColor" red="0.0" green="0.59215686274509804" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstItem="NZl-fs-zmw" firstAttribute="top" secondItem="iqQ-Ii-qdW" secondAttribute="top" constant="3" id="HWu-R1-PHM"/>
-                                <constraint firstAttribute="trailing" secondItem="NZl-fs-zmw" secondAttribute="trailing" constant="3" id="RIG-bZ-0GS"/>
-                                <constraint firstItem="NZl-fs-zmw" firstAttribute="leading" secondItem="iqQ-Ii-qdW" secondAttribute="leading" constant="3" id="RsO-NT-VaN"/>
-                                <constraint firstAttribute="bottom" secondItem="NZl-fs-zmw" secondAttribute="bottom" constant="3" id="iI8-h2-E7A"/>
+                                <constraint firstAttribute="trailing" secondItem="jCl-TD-HAT" secondAttribute="trailing" constant="3" id="Et1-bm-XHV"/>
+                                <constraint firstItem="jCl-TD-HAT" firstAttribute="top" secondItem="iqQ-Ii-qdW" secondAttribute="top" constant="3" id="F4b-bc-oXd"/>
+                                <constraint firstItem="jCl-TD-HAT" firstAttribute="leading" secondItem="iqQ-Ii-qdW" secondAttribute="leading" constant="3" id="IFE-sL-DGb"/>
+                                <constraint firstAttribute="bottom" secondItem="jCl-TD-HAT" secondAttribute="bottom" constant="3" id="OaL-6q-cff"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -138,7 +137,7 @@
             <connections>
                 <outlet property="addPhotoButton" destination="Uwt-nn-8sc" id="qCn-cQ-ikz"/>
                 <outlet property="messageFieldContainer" destination="iqQ-Ii-qdW" id="abU-wL-zyJ"/>
-                <outlet property="messageTextField" destination="NZl-fs-zmw" id="ZAl-HQ-jVu"/>
+                <outlet property="messageTextView" destination="jCl-TD-HAT" id="CVM-A0-T6L"/>
                 <outlet property="photoButContBotConstraint" destination="qnl-sf-Jv4" id="Ezk-7b-L6C"/>
                 <outlet property="photoButtonsContainer" destination="LMC-hz-TDz" id="Zvh-L7-m9C"/>
                 <outlet property="photoContainerHeightConstraint" destination="2ZV-uQ-uBD" id="Dkl-NH-fRk"/>

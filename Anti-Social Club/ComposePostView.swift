@@ -10,8 +10,9 @@ import UIKit
 import AVFoundation
 import Fusuma
 
-class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, UITextViewDelegate {
     
+    @IBOutlet weak var messageTextView: UITextView!
     @IBOutlet weak var messageFieldContainer: UIView!
     @IBOutlet weak var postPhotoImageView: UIImageView!
     @IBOutlet weak var photoButContBotConstraint: NSLayoutConstraint!
@@ -21,19 +22,19 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
     @IBOutlet weak var sendPostButtonBotConstraint: NSLayoutConstraint!
     @IBOutlet weak var addPhotoButton: UIButton!
     @IBOutlet weak var sendPostButton: UIButton!
-    @IBOutlet weak var messageTextField: UITextField!
     
     // MARK: Properties
     var parentVC : HomepageTableViewController!
     var blurView : UIView!
     var showingPhotoButtons : Bool = false
     var imageToUpload : UIImage = UIImage()
+    var keyboardIsHidden = true
     
     let fusuma = FusumaViewController()
     
     func viewDidLoad()
     {
-        messageTextField.delegate = self
+        messageTextView.delegate = self
         fusuma.delegate = self
         fusuma.hasVideo = false // If you want to let the users allow to use video.
         fusumaTintColor = UIColor.getASCMediumColor()
@@ -43,9 +44,32 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
         createGaussianBlur()
         setupFrame()
         dismissPhotoButtonContainer(animate: false)
+        
+        // Listen for keyboard appearances and disappearances
+        NotificationCenter.default.addObserver(
+        self,
+        selector: #selector(keyboardDidShow),
+        name: NSNotification.Name.UIKeyboardDidShow,
+        object: nil)
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardDidHide),
+            name: NSNotification.Name.UIKeyboardDidHide,
+            object: nil)
+    
+    
     }
     
     //MARK: - ComposePostView
+    
+    func keyboardDidShow(notification: NSNotification){
+        keyboardIsHidden = false
+    }
+    
+    func keyboardDidHide(notification: NSNotification){
+        keyboardIsHidden = true
+    }
     
     func setupFrame()
     {
@@ -148,16 +172,20 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
     
     func dismissPopup()
     {
-        UIView.animate(withDuration: 0.2, delay: 0.0, options: .transitionCurlUp, animations:
-            {
-                self.blurView.alpha = 0.0
-                self.frame = CGRect.init(x: 0, y: self.parentVC.view.frame.height, width: self.parentVC.view.frame.size.width, height: self.frame.size.height)
-                
-            },completion:
-            { finished in
-                self.blurView.removeFromSuperview()
-                self.removeFromSuperview()
-        })
+        if keyboardIsHidden{
+            UIView.animate(withDuration: 0.2, delay: 0.0, options: .transitionCurlUp, animations:
+                {
+                    self.blurView.alpha = 0.0
+                    self.frame = CGRect.init(x: 0, y: self.parentVC.view.frame.height, width: self.parentVC.view.frame.size.width, height: self.frame.size.height)
+                    
+                },completion:
+                { finished in
+                    self.blurView.removeFromSuperview()
+                    self.removeFromSuperview()
+            })
+        }else{
+            self.endEditing(true)
+        }
     }
     
     func resetImageView(animate: Bool){
@@ -201,7 +229,7 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
     
     func sendPost(){
         //TODO: Make A spinner in the send button and then make a check mark or something then:
-        if (messageTextField.text?.isEmpty)!
+        if (messageTextView.text?.isEmpty)!
         {
             flashMessageBox()
         }else{
@@ -281,13 +309,24 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
     }
 
     
-    // MARK: - UITextField
+    // MARK: - UITextView
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool
     {
         textField.resignFirstResponder()
         return false
     }
+    
+    //Set Character limit
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let currentCharacterCount = textView.text?.characters.count ?? 0
+        if (range.length + range.location > currentCharacterCount){
+            return false
+        }
+        let newLength = currentCharacterCount + text.characters.count - range.length
+        return newLength <= 200
+    }
+    
     
     // MARK: - Actions
     
