@@ -63,11 +63,13 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
     
     //MARK: - ComposePostView
     
-    func keyboardDidShow(notification: NSNotification){
+    func keyboardDidShow(notification: NSNotification)
+    {
         keyboardIsHidden = false
     }
     
-    func keyboardDidHide(notification: NSNotification){
+    func keyboardDidHide(notification: NSNotification)
+    {
         keyboardIsHidden = true
     }
     
@@ -172,7 +174,8 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
     
     func dismissPopup()
     {
-        if keyboardIsHidden{
+        if keyboardIsHidden
+        {
             UIView.animate(withDuration: 0.2, delay: 0.0, options: .transitionCurlUp, animations:
                 {
                     self.blurView.alpha = 0.0
@@ -183,12 +186,14 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
                     self.blurView.removeFromSuperview()
                     self.removeFromSuperview()
             })
-        }else{
+        }else
+        {
             self.endEditing(true)
         }
     }
     
-    func resetImageView(animate: Bool){
+    func resetImageView(animate: Bool)
+    {
         //addCameraPhotoButton.isHidden = false
         //addCameraPhotoButton.alpha = 0.3
         postPhotoImageView.alpha = 1.0
@@ -203,7 +208,8 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
                     self.postPhotoImageView.image = nil
                     self.postPhotoImageView.alpha = 1.0
             })
-        }else{
+        }else
+        {
             //addCameraPhotoButton.isHidden = false
             postPhotoImageView.image = nil
             //self.addCameraPhotoButton.alpha = 1.0
@@ -227,12 +233,14 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
         })
     }
     
-    func sendPost(){
+    func sendPost()
+    {
         //TODO: Make A spinner in the send button and then make a check mark or something then:
         if (messageTextView.text?.isEmpty)!
         {
             flashMessageBox()
-        }else{
+        }else
+        {
             UIView.animate(withDuration: 0.2, delay: 0.0, options: .transitionCurlUp, animations:
                 {
                     self.blurView.alpha = 0.0
@@ -245,7 +253,8 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
         }
     }
     
-    func getPhoto() {
+    func getPhoto()
+    {
         let authStatus : AVAuthorizationStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
         if(authStatus == AVAuthorizationStatus.authorized)
         {
@@ -276,7 +285,8 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
         }
     }
     
-    func cropToBounds(image: UIImage, width: Double, height: Double) -> UIImage {
+    func cropToBounds(image: UIImage, width: Double, height: Double) -> UIImage
+    {
         print(width)
         print(height)
 
@@ -289,10 +299,12 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
         let cgheight: CGFloat = CGFloat(height)
         
         // See what size is longer and create the center off of that
-        if contextSize.width > contextSize.height {
+        if contextSize.width > contextSize.height
+        {
             posX = ((contextSize.width - contextSize.height) / 2)
             posY = ((contextSize.width - contextSize.height) / 2)
-        } else {
+        } else
+        {
             posX = ((contextSize.height - contextSize.width) / 2)
             posY = ((contextSize.height - contextSize.width) / 2)
         }
@@ -318,7 +330,8 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
     }
     
     //Set Character limit
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool
+    {
         let currentCharacterCount = textView.text?.characters.count ?? 0
         if (range.length + range.location > currentCharacterCount){
             return false
