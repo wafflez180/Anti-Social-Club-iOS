@@ -2,10 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>Fabric</key>
-    <dict>
+  <key>Fabric</key>
+  <dict>
     <key>APIKey</key>
-    <string>d112bb616ec749e79e8de835b07a8bc5094db29e</string>
+    <string>c4d1b61b91b2c493a48a0997c1cc0fa82de936d9</string>
     <key>Kits</key>
     <array>
       <dict>
@@ -15,7 +15,7 @@
         <string>Crashlytics</string>
       </dict>
     </array>
-    </dict>
+  </dict>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>To be able to post with a picture.</string>
 	<key>NSAppleMusicUsageDescription</key>
