@@ -35,7 +35,7 @@ class Post{
         self.dislikeBadgeCount = dislikeBadgeCount
         self.imageUrl = imageUrl
         
-        print("Created Post:\n\tMessage: \"\(message)\"\n\tImageURL: \(imageUrl)")
+        print("Created Post:\n\tMessage: \"\(message!)\"\n\tImageURL: \(imageUrl)")
     }
     /*
     convenience init?(json : JSON)
