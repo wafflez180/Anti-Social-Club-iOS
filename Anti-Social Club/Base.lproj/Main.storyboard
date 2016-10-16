@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A320" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="KXz-gg-J0T">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="cR1-GB-Scr">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -18,7 +18,7 @@
                         <color key="sectionIndexBackgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PostCell" rowHeight="360" id="scT-ac-05R" customClass="PostTableViewCell" customModule="Anti_Social_Club" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="114" width="375" height="360"/>
+                                <rect key="frame" x="0.0" y="50" width="375" height="360"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="scT-ac-05R" id="mdd-Sd-GIX">
                                     <frame key="frameInset" width="375" height="360"/>
@@ -637,6 +637,160 @@ bCBiZQ10ZWFjaGluZyBzd2lmdCEgSW52aXRlIHlvdXIgZnJpZW5kcy4
             </objects>
             <point key="canvasLocation" x="-162.40000000000001" y="120.98950524737631"/>
         </scene>
+        <!--Entry View Controller-->
+        <scene sceneID="w9L-nL-kVK">
+            <objects>
+                <viewController id="cR1-GB-Scr" customClass="EntryViewController" customModule="Anti_Social_Club" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="C0f-ba-gOC"/>
+                        <viewControllerLayoutGuide type="bottom" id="P6G-SC-WXE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3lJ-c3-nl5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Entry, this view should be blank" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mhd-S4-JlP">
+                                <frame key="frameInset" minX="54" minY="323" width="276" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="jzd-1k-m03" kind="presentation" identifier="loginSegue" modalTransitionStyle="crossDissolve" id="TEf-BN-cVn"/>
+                        <segue destination="E64-iG-bKQ" kind="presentation" identifier="confirmNameSegue" modalTransitionStyle="crossDissolve" id="G0r-dT-B0T"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MWY-Lu-f42" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4303.1999999999998" y="-640.02998500749629"/>
+        </scene>
+        <!--Confirm Name View Controller-->
+        <scene sceneID="SDG-bo-Jms">
+            <objects>
+                <viewController id="E64-iG-bKQ" customClass="ConfirmNameViewController" customModule="Anti_Social_Club" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="laX-Mp-uIE"/>
+                        <viewControllerLayoutGuide type="bottom" id="qva-Q3-hNL"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="eFe-Ga-nHI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="UBIT Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R3Y-ue-JGI">
+                                <frame key="frameInset" minX="123" minY="323" width="191" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="QEa-Jz-qgv" kind="presentation" identifier="confirmKeySegue" modalTransitionStyle="crossDissolve" id="MIm-rZ-peW"/>
+                        <segue destination="Mlh-uL-p5L" kind="presentation" identifier="confirmEmailSegue" modalTransitionStyle="crossDissolve" id="gfM-be-KWJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MWY-KW-oFf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3583.1999999999998" y="-640.02998500749629"/>
+        </scene>
+        <!--Confirm Key View Controller-->
+        <scene sceneID="0Gf-W3-aLp">
+            <objects>
+                <viewController id="QEa-Jz-qgv" customClass="ConfirmKeyViewController" customModule="Anti_Social_Club" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rnP-cN-xZo"/>
+                        <viewControllerLayoutGuide type="bottom" id="sxg-B8-JSy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9dx-li-Rpu">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Access Key" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="87c-ju-UGw">
+                                <frame key="frameInset" minX="166" minY="323" width="149" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="Mlh-uL-p5L" kind="presentation" identifier="confirmEmailSegue" id="M7m-9T-xc7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OEL-qZ-UJc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2916" y="-640.02998500749629"/>
+        </scene>
+        <!--Confirm Email View Controller-->
+        <scene sceneID="zT8-xG-14R">
+            <objects>
+                <viewController id="Mlh-uL-p5L" customClass="ConfirmEmailViewController" customModule="Anti_Social_Club" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Jlx-ba-0fD"/>
+                        <viewControllerLayoutGuide type="bottom" id="gSJ-po-Deg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6Hw-iu-kgx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Email confirmation key" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mQH-6t-2Vg">
+                                <frame key="frameInset" minX="51" minY="323" width="272" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="jzd-1k-m03" kind="presentation" identifier="loginSegue" modalTransitionStyle="crossDissolve" id="q9w-i3-shG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X8B-l7-eZQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2255.1999999999998" y="-640.02998500749629"/>
+        </scene>
+        <!--Login View Controller-->
+        <scene sceneID="U0J-yJ-aQt">
+            <objects>
+                <viewController id="jzd-1k-m03" customClass="LoginViewController" customModule="Anti_Social_Club" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dsN-dq-Cdf"/>
+                        <viewControllerLayoutGuide type="bottom" id="QZn-jl-8fj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="VIP-ei-QP0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Login (loading spinner here)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jeP-nD-Dq8">
+                                <frame key="frameInset" minX="107" minY="323" width="229" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="KXz-gg-J0T" kind="presentation" identifier="loginSuccessSegue" modalTransitionStyle="crossDissolve" id="i0I-aV-SUe"/>
+                        <segue destination="Mlh-uL-p5L" kind="presentation" identifier="confirmEmailSegue" modalTransitionStyle="crossDissolve" id="Cql-j7-kwn"/>
+                        <segue destination="E64-iG-bKQ" kind="presentation" identifier="confirmNameSegue" modalTransitionStyle="crossDissolve" id="vcn-VJ-Z9f"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="thx-fD-bg8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1578.4000000000001" y="-640.02998500749629"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Aet-rV-jlG">
             <objects>
@@ -682,4 +836,9 @@ bCBiZQ10ZWFjaGluZyBzd2lmdCEgSW52aXRlIHlvdXIgZnJpZW5kcy4
         <image name="StraightFaceSelected" width="25" height="25"/>
         <image name="TestImage" width="720" height="540"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="q9w-i3-shG"/>
+        <segue reference="Cql-j7-kwn"/>
+        <segue reference="vcn-VJ-Z9f"/>
+    </inferredMetricsTieBreakers>
 </document>

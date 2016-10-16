@@ -12,15 +12,16 @@ class Constants
 {
     class API
     {
-        static let ADDRESS = "http://192.81.208.46/"
-        static let CALL_GET_PRODUCTS = "products"
-        static let CALL_GET_PRODUCT = "products/"
-        
-        static let CALL_GET_VOICE = "http://api.euphonyinc.com/api/v1/voices"
-        
-        static let FACE_ADDRESS = "apius.faceplusplus.com"
-        static let CALL_CHECK_FACE = "/detection/detect"
-        static let FACE_API_KEY = "8c5a0758ca6c6184d0da52bd602638af"
-        static let FACE_API_SECRET = "mwIjWjZPE04Oikl9r_xR_P8FLVvhkFuo"
+        static let ADDRESS = "http://ub-anti-social.club/"
+        static let CALL_CONFIRM_NAME = "ConfirmName.php"
+        static let CALL_CONFIRM_KEY = "ConfirmKey.php"
+        static let CALL_CONFIRM_EMAIL = "ConfirmEmail.php"
+        static let CALL_LOGIN = "Login.php"
+        static let CALL_RETRIEVE_POSTS = "RetrievePosts.php"
+        static let CALL_RETRIEVE_COMMENTS = "RetrieveComments.php"
+        static let CALL_RETRIEVE_USER_INFO = "RetrieveUserInfo.php"
+        static let CALL_POST = "Post.php"
+        static let CALL_VOTE = "Vote.php"
+        static let CALL_COMMENT = "Comment.php"
     }
 }
