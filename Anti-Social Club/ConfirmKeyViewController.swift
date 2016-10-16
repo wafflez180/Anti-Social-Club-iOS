@@ -10,13 +10,19 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class ConfirmKeyViewController: UIViewController
+class ConfirmKeyViewController: UIViewController, UITextFieldDelegate
 {
     var userName : String?
+    var errorText : String?
 
+    @IBOutlet weak var submitButton: UIButton!
+    @IBOutlet weak var accessKeyTextField: UITextField!
+    @IBOutlet weak var errorTextView: UITextView!
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
+        
+        accessKeyTextField.delegate = self
         
         if userName == nil
         {
@@ -25,8 +31,12 @@ class ConfirmKeyViewController: UIViewController
             return
         }
         
-        let key = "AAAA" // TODO: get key from user input
-        attemptConfirmKey(name: userName!, key: key)
+        if (errorText != nil) {
+            errorTextView.text = errorText
+        }
+        
+        //let key = "AAAA" // TODO: get key from user input
+        //attemptConfirmKey(name: userName!, key: key)
     }
 
     override func didReceiveMemoryWarning()
@@ -40,11 +50,22 @@ class ConfirmKeyViewController: UIViewController
         
         let parameters = ["name" : name, "key" : key]
 
+        let activityView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+        activityView.center=submitButton.center;
+        activityView.frame = submitButton.frame
+        activityView.startAnimating()
+        submitButton.superview?.addSubview(activityView)
+        submitButton.isHidden = true
+
         Alamofire.request(Constants.API.ADDRESS + Constants.API.CALL_CONFIRM_KEY, method: .post, parameters: parameters)
         .responseJSON()
         {
             response in
             
+            activityView.stopAnimating()
+            activityView.removeFromSuperview()
+            self.submitButton.isHidden = false
+
             switch response.result
             {
                 case .success(let responseData):
@@ -87,7 +108,7 @@ class ConfirmKeyViewController: UIViewController
     func onConfirmFailure()
     {
         print("Failed to confirm key!")
-        
+        errorTextView.text = "Network Error!\nPlease try again later!"
         // TODO:
         // Display some sort of error message here. This method is called when there is a serverside error
         // or if it can't connect. On the Android version, it just makes a "NETWORK ERROR" show up in red text,
@@ -97,9 +118,22 @@ class ConfirmKeyViewController: UIViewController
     func onKeyNotValid()
     {
         print("The key was not valid, either it was already used or it doesn't exist.")
-        
+        errorTextView.text = "Sorry!\nKey not exist\nOr\nKey has been used"
         // TODO:
         // Display some sort of error message here.
+    }
+    
+    // MARK: - TextField
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func submitAccessKey(_ sender: AnyObject) {
+        attemptConfirmKey(name: userName!, key: accessKeyTextField.text!)
     }
 
     // MARK: - Navigation

@@ -10,13 +10,20 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class ConfirmEmailViewController: UIViewController
+class ConfirmEmailViewController: UIViewController, UITextFieldDelegate
 {
     var userName : String?
+    var errorText : String?
 
+    @IBOutlet weak var submitButton: UIButton!
+    @IBOutlet weak var errorTextView: UITextView!
+    @IBOutlet weak var emailVerifiCodeTextField: UITextField!
+    
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
+        
+        emailVerifiCodeTextField.delegate = self
         
         if userName == nil
         {
@@ -25,9 +32,13 @@ class ConfirmEmailViewController: UIViewController
             return
         }
         
+        if (errorText != nil) {
+            errorTextView.text = errorText
+        }
+        
         // This step is when the user inputs the confirmation key that was sent to their email address.
-        let key = "F921" // TODO: Get this from user input
-        attemptConfirmEmail(name: userName!, key: key)
+        //let key = "F921" // TODO: Get this from user input
+        //attemptConfirmEmail(name: userName!, key: key)
     }
 
     override func didReceiveMemoryWarning()
@@ -41,10 +52,21 @@ class ConfirmEmailViewController: UIViewController
         
         let parameters = ["name" : name, "key" : key]
 
+        let activityView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+        activityView.center=submitButton.center;
+        activityView.frame = submitButton.frame
+        activityView.startAnimating()
+        submitButton.superview?.addSubview(activityView)
+        submitButton.isHidden = true
+        
         Alamofire.request(Constants.API.ADDRESS + Constants.API.CALL_CONFIRM_EMAIL, method: .post, parameters: parameters)
         .responseJSON()
         {
             response in
+            
+            activityView.stopAnimating()
+            activityView.removeFromSuperview()
+            self.submitButton.isHidden = false
             
             switch response.result
             {
@@ -98,7 +120,7 @@ class ConfirmEmailViewController: UIViewController
     func onConfirmFailure()
     {
         print("Failed to confirm key!")
-        
+        errorTextView.text = "Network Error!\nPlease try again later!"
         // TODO:
         // Display some sort of error message here. This method is called when there is a serverside error
         // or if it can't connect. On the Android version, it just makes a "NETWORK ERROR" show up in red text,
@@ -108,9 +130,22 @@ class ConfirmEmailViewController: UIViewController
     func onKeyNotValid()
     {
         print("The key was not correct, check your email again you dingus")
-        
+        errorTextView.text = "Incorrect Key!\nCheck your email again you dingus"
         // TODO:
         // Display some sort of error message here.
+    }
+    
+    // MARK: - TextField
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+
+    // MARK: - Actions
+    
+    @IBAction func submitEmailCode(_ sender: AnyObject) {
+        attemptConfirmEmail(name: userName!, key: emailVerifiCodeTextField.text!)
     }
     
     // MARK: - Navigation

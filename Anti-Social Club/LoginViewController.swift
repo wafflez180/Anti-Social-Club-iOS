@@ -136,6 +136,7 @@ class LoginViewController: UIViewController
         {
             let destination = segue.destination as! ConfirmEmailViewController
             destination.userName = userName
+            destination.errorText = "You Still Need To Verify Your Email!"
         }
     }
 

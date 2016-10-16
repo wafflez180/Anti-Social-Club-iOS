@@ -10,20 +10,25 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class ConfirmNameViewController: UIViewController
+class ConfirmNameViewController: UIViewController, UITextFieldDelegate
 {
     var userName : String?
 
+    @IBOutlet weak var ubitNameTextField: UITextField!
+    @IBOutlet weak var submitButton: UIButton!
+    @IBOutlet weak var errorTextView: UITextView!
+    
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
         
+        ubitNameTextField.delegate = self
         // This view controller's responsibility is to get the users UBIT name, and then send it to the server
         // to check if it is valid. Then, we can continue.
         
         // TESTING:
-        let name = "declanho" // TODO: Get this from user input
-        attemptConfirmName(name: name)
+        //let name = "declanho" // TODO: Get this from user input
+        //attemptConfirmName(name: name)
     }
     
     override func didReceiveMemoryWarning()
@@ -37,48 +42,61 @@ class ConfirmNameViewController: UIViewController
         userName = name
         
         let parameters = ["name" : name]
-
+        
+        let activityView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+        activityView.center=submitButton.center
+        activityView.frame = submitButton.frame
+        activityView.startAnimating()
+        submitButton.superview?.addSubview(activityView)
+        submitButton.isHidden = true
+        
         Alamofire.request(Constants.API.ADDRESS + Constants.API.CALL_CONFIRM_NAME, method: .post, parameters: parameters)
-        .responseJSON()
-        {
-            response in
-            
-            switch response.result
-            {
-                case .success(let responseData):
-                    let json = JSON(responseData)
-
-                    // Handle any errors
-                    if json["error"].bool == true
-                    {
-                        print("ERROR: \(json["error_message"].stringValue)")
-                        self.onConfirmFailure()
-
-                        return
-                    }
-                
-                    // User exists
-                    if json["exists"].bool == true
-                    {
-                        self.onUserExists()
-                        
-                        return
-                    }
-                
-                    // User is not allowed
-                    if json["allowed"].bool == false
-                    {
-                        self.onUserNotAllowed()
-                        
-                        return
-                    }
-
-                case .failure(let error):
-                    print("Request failed with error: \(error)")
-                    self.onConfirmFailure()
+            .responseJSON()
+                {
+                    response in
                     
-                    return
-            }
+                    activityView.stopAnimating()
+                    activityView.removeFromSuperview()
+                    self.submitButton.isHidden = false
+                    
+                    switch response.result
+                    {
+                    case .success(let responseData):
+                        let json = JSON(responseData)
+
+                        // Handle any errors
+                        if json["error"].bool == true
+                        {
+                            print("ERROR: \(json["error_message"].stringValue)")
+                            self.onConfirmFailure()
+                            
+                            return
+                        }
+                        
+                        // User exists
+                        if json["exists"].bool == true
+                        {
+                            self.onUserExists()
+                            
+                            return
+                        }
+                        
+                        // User is not allowed
+                        if json["allowed"].bool == false
+                        {
+                            self.onUserNotAllowed()
+                            
+                            return
+                        }
+                        
+                        self.onConfirmSuccess()
+                        
+                    case .failure(let error):
+                        print("Request failed with error: \(error)")
+                        self.onConfirmFailure()
+                        
+                        return
+                    }
         }
     }
     
@@ -91,7 +109,7 @@ class ConfirmNameViewController: UIViewController
     func onUserNotAllowed()
     {
         print("User is not allowed (Not a student or banned)! Sorry!")
-        
+        errorTextView.text = "Sorry!\nUser is not allowed."
         // TODO:
         // Display an error message of some sort.
     }
@@ -105,11 +123,24 @@ class ConfirmNameViewController: UIViewController
     func onConfirmFailure()
     {
         print("Failed to confirm name!")
-        
+        errorTextView.text = "Network Error!\nPlease try again later!"
         // TODO:
         // Display some sort of error message here. This method is called when there is a serverside error
         // or if it can't connect. On the Android version, it just makes a "NETWORK ERROR" show up in red text,
         // with a retry button.
+    }
+    
+    // MARK: - TextField
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+
+    // MARK: - Actions
+
+    @IBAction func submitUBITName(_ sender: AnyObject) {
+        attemptConfirmName(name: ubitNameTextField.text!)
     }
 
     // MARK: - Navigation
@@ -125,6 +156,7 @@ class ConfirmNameViewController: UIViewController
         {
             let destination = segue.destination as! ConfirmEmailViewController
             destination.userName = userName
+            destination.errorText = "User already exists!\nPlease enter the code in your verification email."
         }
     }
 

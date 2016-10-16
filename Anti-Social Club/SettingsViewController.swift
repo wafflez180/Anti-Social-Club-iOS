@@ -39,7 +39,7 @@ class SettingsViewController: UIViewController {
     }
 
     @IBAction func pressedOnDeactivateDevice(_ sender: AnyObject) {
-        let deactivateAlert = UIAlertController(title: "Deactivate Device", message: "Are you sure you want to deactivate your device? All data will be lost.", preferredStyle: UIAlertControllerStyle.alert)
+        let deactivateAlert = UIAlertController(title: "Deactivate Device", message: "Are you sure you want to deactivate your device? To activate another device you’ll need to confirm your email again", preferredStyle: UIAlertControllerStyle.alert)
         
         deactivateAlert.addAction(UIAlertAction(title: "Deactivate", style: .destructive, handler: { (action: UIAlertAction!) in
             print("Handle Ok logic here")
