@@ -14,6 +14,7 @@
 		B26D96381476127475E7C7A1 /* Pods_Anti_Social_Club.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5BF9903FBC092D198F19798 /* Pods_Anti_Social_Club.framework */; };
 		CA4143B81DAC7C5F0072B27C /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4143B71DAC7C5F0072B27C /* PostTableViewCell.swift */; };
 		CA4143BA1DAC7D220072B27C /* HomepageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4143B91DAC7D220072B27C /* HomepageTableViewController.swift */; };
+		CAACD6601DB3068D001F7C20 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAACD65F1DB3068D001F7C20 /* SettingsViewController.swift */; };
 		CAC8BF311DADD45A00B901FD /* ASC+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC8BF301DADD45A00B901FD /* ASC+UIView.swift */; };
 		CADEBDA81DAC9A17004D3282 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADEBDA71DAC9A17004D3282 /* Post.swift */; };
 		CADEBDAA1DAC9AB7004D3282 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADEBDA91DAC9AB7004D3282 /* Constants.swift */; };
@@ -34,6 +35,7 @@
 		BAAD275C5327CCFA9DA6CBAF /* Pods-Anti-Social Club.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Anti-Social Club.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Anti-Social Club/Pods-Anti-Social Club.debug.xcconfig"; sourceTree = "<group>"; };
 		CA4143B71DAC7C5F0072B27C /* PostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		CA4143B91DAC7D220072B27C /* HomepageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomepageTableViewController.swift; sourceTree = "<group>"; };
+		CAACD65F1DB3068D001F7C20 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		CAC8BF301DADD45A00B901FD /* ASC+UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ASC+UIView.swift"; sourceTree = "<group>"; };
 		CADEBDA71DAC9A17004D3282 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		CADEBDA91DAC9AB7004D3282 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				CA4143B91DAC7D220072B27C /* HomepageTableViewController.swift */,
 				CA4143B71DAC7C5F0072B27C /* PostTableViewCell.swift */,
 				CAEE040E1DAD93F500012F14 /* ComposePostView.swift */,
+				CAACD65F1DB3068D001F7C20 /* SettingsViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 				CADEBDAC1DAC9D38004D3282 /* Anti-SocialClub+UIColor.swift in Sources */,
 				CAC8BF311DADD45A00B901FD /* ASC+UIView.swift in Sources */,
 				CADEBDA81DAC9A17004D3282 /* Post.swift in Sources */,
+				CAACD6601DB3068D001F7C20 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

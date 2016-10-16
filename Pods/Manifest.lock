@@ -2,9 +2,9 @@ PODS:
   - Alamofire (4.0.1)
   - AlamofireImage (3.1.0):
     - Alamofire (~> 4.0)
-  - Crashlytics (3.8.2):
+  - Crashlytics (3.8.3):
     - Fabric (~> 1.6.3)
-  - Fabric (1.6.9)
+  - Fabric (1.6.10)
   - Fusuma (1.0.0)
   - SwiftyJSON (3.1.1)
 
@@ -38,8 +38,8 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
   AlamofireImage: bb8c8351c51cb1633bb6be69b6dbbaff37ce65b7
-  Crashlytics: 27acca95a01b042a8294291dd6dff27f8f6af6d7
-  Fabric: bc5bec42cef4bcf1ee3ce0e218fc518e4b44dfbb
+  Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
+  Fabric: c73f371ee543e3f0b80608f2674750e4910d1669
   Fusuma: 256315ea7daed298f246f1ba5e49700bc664dd93
   SwiftyJSON: f0be2e604f83e8405a624e9f891898bf6ed4e019
 
