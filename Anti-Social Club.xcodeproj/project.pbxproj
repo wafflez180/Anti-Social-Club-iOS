@@ -20,10 +20,10 @@
 		CA4143B81DAC7C5F0072B27C /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4143B71DAC7C5F0072B27C /* PostTableViewCell.swift */; };
 		CA4143BA1DAC7D220072B27C /* HomepageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4143B91DAC7D220072B27C /* HomepageTableViewController.swift */; };
 		CAACD6601DB3068D001F7C20 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAACD65F1DB3068D001F7C20 /* SettingsViewController.swift */; };
-		CAC8BF311DADD45A00B901FD /* ASC+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC8BF301DADD45A00B901FD /* ASC+UIView.swift */; };
+		CAC8BF311DADD45A00B901FD /* UIView+ASC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC8BF301DADD45A00B901FD /* UIView+ASC.swift */; };
 		CADEBDA81DAC9A17004D3282 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADEBDA71DAC9A17004D3282 /* Post.swift */; };
 		CADEBDAA1DAC9AB7004D3282 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADEBDA91DAC9AB7004D3282 /* Constants.swift */; };
-		CADEBDAC1DAC9D38004D3282 /* Anti-SocialClub+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADEBDAB1DAC9D38004D3282 /* Anti-SocialClub+UIColor.swift */; };
+		CADEBDAC1DAC9D38004D3282 /* UIColor+ASC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADEBDAB1DAC9D38004D3282 /* UIColor+ASC.swift */; };
 		CAEE040B1DAD938B00012F14 /* ComposePost.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAEE040A1DAD938B00012F14 /* ComposePost.xib */; };
 		CAEE040F1DAD93F500012F14 /* ComposePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEE040E1DAD93F500012F14 /* ComposePostView.swift */; };
 /* End PBXBuildFile section */
@@ -46,10 +46,10 @@
 		CA4143B71DAC7C5F0072B27C /* PostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		CA4143B91DAC7D220072B27C /* HomepageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomepageTableViewController.swift; sourceTree = "<group>"; };
 		CAACD65F1DB3068D001F7C20 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		CAC8BF301DADD45A00B901FD /* ASC+UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ASC+UIView.swift"; sourceTree = "<group>"; };
+		CAC8BF301DADD45A00B901FD /* UIView+ASC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+ASC.swift"; sourceTree = "<group>"; };
 		CADEBDA71DAC9A17004D3282 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		CADEBDA91DAC9AB7004D3282 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		CADEBDAB1DAC9D38004D3282 /* Anti-SocialClub+UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Anti-SocialClub+UIColor.swift"; sourceTree = "<group>"; };
+		CADEBDAB1DAC9D38004D3282 /* UIColor+ASC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+ASC.swift"; sourceTree = "<group>"; };
 		CAEE040A1DAD938B00012F14 /* ComposePost.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ComposePost.xib; sourceTree = "<group>"; };
 		CAEE040E1DAD93F500012F14 /* ComposePostView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposePostView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -153,8 +153,8 @@
 		CADEBDAD1DAC9D63004D3282 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				CADEBDAB1DAC9D38004D3282 /* Anti-SocialClub+UIColor.swift */,
-				CAC8BF301DADD45A00B901FD /* ASC+UIView.swift */,
+				CADEBDAB1DAC9D38004D3282 /* UIColor+ASC.swift */,
+				CAC8BF301DADD45A00B901FD /* UIView+ASC.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -305,8 +305,8 @@
 				CA4143B81DAC7C5F0072B27C /* PostTableViewCell.swift in Sources */,
 				CA4143BA1DAC7D220072B27C /* HomepageTableViewController.swift in Sources */,
 				CAEE040F1DAD93F500012F14 /* ComposePostView.swift in Sources */,
-				CADEBDAC1DAC9D38004D3282 /* Anti-SocialClub+UIColor.swift in Sources */,
-				CAC8BF311DADD45A00B901FD /* ASC+UIView.swift in Sources */,
+				CADEBDAC1DAC9D38004D3282 /* UIColor+ASC.swift in Sources */,
+				CAC8BF311DADD45A00B901FD /* UIView+ASC.swift in Sources */,
 				CADEBDA81DAC9A17004D3282 /* Post.swift in Sources */,
 				CAACD6601DB3068D001F7C20 /* SettingsViewController.swift in Sources */,
 				143F5C751DB32E0400605158 /* ConfirmNameViewController.swift in Sources */,
