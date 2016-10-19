@@ -139,20 +139,21 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "keyCell", for: indexPath) as! ShareKeyTableViewCell
+        let cell = tableView.cellForRow(at: indexPath) as! ShareKeyTableViewCell
         
         if !cell.isRedeemed! {
-            let alert = UIAlertController(title: "Share Key: \(cell.accessKey)", message: "Please enter in an email address", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Share Key: \(cell.accessKey!)", message: "Please enter in an email address", preferredStyle: .alert)
             
             alert.addTextField(configurationHandler: configurationTextField)
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:handleCancel))
             alert.addAction(UIAlertAction(title: "Share Key", style: .default, handler:{ (UIAlertAction) in
-                print("User shared key: \(cell.accessKey) to \(self.recipientTextField.text)")
+                print("User shared key: \(cell.accessKey!) to \(self.recipientTextField.text!)")
                 //TODO SUBMIT IT TO THE API
             }))
             self.present(alert, animated: true, completion: {
                 print("completion block")
             })
+            cell.setSelected(false, animated: true)
         }
     }
     
