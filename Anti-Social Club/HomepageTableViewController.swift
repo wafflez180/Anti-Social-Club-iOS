@@ -11,7 +11,8 @@ import UIKit
 class HomepageTableViewController: UITableViewController
 {
     var postsArray = [Post]()
-
+    var userName : String?
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
