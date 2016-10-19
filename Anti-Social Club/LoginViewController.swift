@@ -138,8 +138,8 @@ class LoginViewController: UIViewController
             destination.userName = userName
             destination.errorText = "You Still Need To Verify Your Email!"
         }else if (segue.identifier == "loginSuccessSegue"){
-            let destination = segue.destination as! HomepageTableViewController
-            destination.userName = userName!
+            let destination = segue.destination as! CustomNavigationController
+            destination.username = userName!
         }
 
     }

@@ -20,6 +20,9 @@ class HomepageTableViewController: UITableViewController
         //Debuging
         createTestPost()
         
+        let navController = self.navigationController as! CustomNavigationController
+        userName = navController.username
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -60,7 +63,7 @@ class HomepageTableViewController: UITableViewController
         composePostView.presentPopup()
     }
     
-    // MARK: - Table view data source
+    // MARK: - TableViewDataSource
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1

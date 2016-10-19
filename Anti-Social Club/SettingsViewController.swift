@@ -41,12 +41,94 @@ class SettingsViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func retrieveUserInfo()
+    {
+        let token = UserDefaults.standard.string(forKey: "token")!
+        let parameters = ["token" : token]
+        
+        Alamofire.request(Constants.API.ADDRESS + Constants.API.CALL_RETRIEVE_USER_INFO, method: .post, parameters: parameters)
+            .responseJSON()
+                {
+                    response in
+                    
+                    switch response.result
+                    {
+                    case .success(let responseData):
+                        let json = JSON(responseData)
+                        
+                        // Handle any errors
+                        if json["error"].bool == true
+                        {
+                            print("ERROR: \(json["error_message"].stringValue)")
+                            return
+                        }
+                        
+                        // Parse returned user info
+                        if (json["user_info"].dictionary != nil)
+                        {
+                            let userInfoJSON = json["user_info"].dictionary!
+                            
+                            let rankId : Int = userInfoJSON["rank"]!.intValue
+                            let creationTimeStamp   : String = userInfoJSON["creation_timestamp"]!.stringValue
+                            let badgeFunnyCount     : Int = userInfoJSON["badge_funny_count"]!.intValue
+                            let badgeDumbCount      : Int = userInfoJSON["badge_dumb_count"]!.intValue
+                            let badgeLoveCount      : Int = userInfoJSON["badge_love_count"]!.intValue
+                            let badgeAgreeCount     : Int = userInfoJSON["badge_agree_count"]!.intValue
+                            let badgeDisagreeCount  : Int = userInfoJSON["badge_disagree_count"]!.intValue
+                            
+                            self.funnyBadgeLabel.text = String(badgeFunnyCount)
+                            self.notamusedBadgeLabel.text = String(badgeDumbCount)
+                            self.heartBadgeLabel.text = String(badgeLoveCount)
+                            self.likeBadgeLabel.text = String(badgeAgreeCount)
+                            self.dislikeBadgeLabel.text = String(badgeDisagreeCount)
+                            
+                            if rankId == 0 {
+                                self.rankLabel.text = "Member"
+                            }else if rankId == 1 {
+                                self.rankLabel.text = "Pioneer"
+                            }else if rankId == 2 {
+                                self.rankLabel.text = "Moderator"
+                            }else if rankId == 3 {
+                                self.rankLabel.text = "Admin"
+                            }
+                            
+                            let tempDateFormatter = DateFormatter()
+                            tempDateFormatter.dateFormat = "yyyy-MM-dd HH:mm:SS"
+                            tempDateFormatter.locale = Locale(identifier: "en_US")
+                            
+                            let creationDate = tempDateFormatter.date(from: creationTimeStamp)
+                            
+                            let shortDateFormatter = DateFormatter()
+                            shortDateFormatter.dateStyle = DateFormatter.Style.short
+                            shortDateFormatter.locale = Locale(identifier: "en_US")
+                            self.dateJoinedLabel.text = shortDateFormatter.string(from: creationDate!)
+                            
+                            print("Got user info! Rank id is \(rankId)")
+                            
+                            return
+                        }
+                        
+                        print("Test")
+                        
+                    case .failure(let error):
+                        print("Request failed with error: \(error)")
+                        return
+                    }
+        }
+    }
+    
+    // MARK - Actions
 
     @IBAction func pressedOnDeactivateDevice(_ sender: AnyObject) {
         let deactivateAlert = UIAlertController(title: "Deactivate Device", message: "Are you sure you want to deactivate your device? To activate another device you’ll need to confirm your email again", preferredStyle: UIAlertControllerStyle.alert)
         
         deactivateAlert.addAction(UIAlertAction(title: "Deactivate", style: .destructive, handler: { (action: UIAlertAction!) in
-            print("Handle Ok logic here")
+            print("User Deactivated Account")
+            let defaults = UserDefaults.standard
+            defaults.removeObject(forKey: "token")
+            self.navigationController?.popViewController(animated: false)
+            self.performSegue(withIdentifier: "confirmNameDeactivateSegue", sender: nil)
         }))
         
         deactivateAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
@@ -54,55 +136,6 @@ class SettingsViewController: UIViewController {
         }))
         
         present(deactivateAlert, animated: true, completion: nil)
-    }
-    
-    func retrieveUserInfo()
-    {
-        let token = UserDefaults.standard.string(forKey: "token")!
-        let parameters = ["token" : token]
-
-        Alamofire.request(Constants.API.ADDRESS + Constants.API.CALL_RETRIEVE_USER_INFO, method: .post, parameters: parameters)
-        .responseJSON()
-        {
-            response in
-
-            switch response.result
-            {
-                case .success(let responseData):
-                    let json = JSON(responseData)
-
-                    // Handle any errors
-                    if json["error"].bool == true
-                    {
-                        print("ERROR: \(json["error_message"].stringValue)")
-                        return
-                    }
-
-                    // Parse returned user info
-                    if (json["user_info"].dictionary != nil)
-                    {
-                        let userInfoJSON = json["user_info"].dictionary!
-                        
-                        let rankId : Int = userInfoJSON["rank"]!.intValue
-                        let creationTimeStamp   : String = userInfoJSON["creation_timestamp"]!.stringValue
-                        let badgeFunnyCount     : Int = userInfoJSON["badge_funny_count"]!.intValue
-                        let badgeDumbCount      : Int = userInfoJSON["badge_dumb_count"]!.intValue
-                        let badgeLoveCount      : Int = userInfoJSON["badge_love_count"]!.intValue
-                        let badgeAgreeCount     : Int = userInfoJSON["badge_agree_count"]!.intValue
-                        let badgeDisagreeCount  : Int = userInfoJSON["badge_disagree_count"]!.intValue
-                        
-                        print("Got user info! Rank id is \(rankId)")
-                        
-                        return
-                    }
-                
-                    print("Test")
-
-                case .failure(let error):
-                    print("Request failed with error: \(error)")
-                    return
-            }
-        }
     }
     
     /*
