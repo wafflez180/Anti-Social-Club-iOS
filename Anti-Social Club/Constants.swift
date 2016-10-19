@@ -10,6 +10,14 @@ import Foundation
 
 class Constants
 {
+    class User
+    {
+        static let RANK_MEMBER = 0
+        static let RANK_PIONEER = 1
+        static let RANK_MODERATOR = 2
+        static let RANK_ADMINISTRATOR = 3
+    }
+
     class API
     {
         static let ADDRESS = "http://ub-anti-social.club/"

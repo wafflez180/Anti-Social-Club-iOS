@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class SettingsViewController: UIViewController {
 
@@ -23,6 +25,8 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        retrieveUserInfo()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,6 +55,56 @@ class SettingsViewController: UIViewController {
         
         present(deactivateAlert, animated: true, completion: nil)
     }
+    
+    func retrieveUserInfo()
+    {
+        let token = UserDefaults.standard.string(forKey: "token")!
+        let parameters = ["token" : token]
+
+        Alamofire.request(Constants.API.ADDRESS + Constants.API.CALL_RETRIEVE_USER_INFO, method: .post, parameters: parameters)
+        .responseJSON()
+        {
+            response in
+
+            switch response.result
+            {
+                case .success(let responseData):
+                    let json = JSON(responseData)
+
+                    // Handle any errors
+                    if json["error"].bool == true
+                    {
+                        print("ERROR: \(json["error_message"].stringValue)")
+                        return
+                    }
+
+                    // Parse returned user info
+                    if (json["user_info"].dictionary != nil)
+                    {
+                        let userInfoJSON = json["user_info"].dictionary!
+                        
+                        let rankId : Int = userInfoJSON["rank"]!.intValue
+                        let creationTimeStamp   : String = userInfoJSON["creation_timestamp"]!.stringValue
+                        let badgeFunnyCount     : Int = userInfoJSON["badge_funny_count"]!.intValue
+                        let badgeDumbCount      : Int = userInfoJSON["badge_dumb_count"]!.intValue
+                        let badgeLoveCount      : Int = userInfoJSON["badge_love_count"]!.intValue
+                        let badgeAgreeCount     : Int = userInfoJSON["badge_agree_count"]!.intValue
+                        let badgeDisagreeCount  : Int = userInfoJSON["badge_disagree_count"]!.intValue
+                        
+                        print("Got user info! Rank id is \(rankId)")
+                        
+                        return
+                    }
+                
+                    print("Test")
+
+                case .failure(let error):
+                    print("Request failed with error: \(error)")
+                    return
+            }
+        }
+    }
+    
     /*
     // MARK: - Navigation
 
