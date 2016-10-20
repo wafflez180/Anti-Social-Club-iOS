@@ -90,7 +90,7 @@ class SettingsViewController: UIViewController {
                             }else if rankId == 2 {
                                 self.rankLabel.text = "Moderator"
                             }else if rankId == 3 {
-                                self.rankLabel.text = "Admin"
+                                self.rankLabel.text = "Administrator"
                             }
                             
                             let tempDateFormatter = DateFormatter()
