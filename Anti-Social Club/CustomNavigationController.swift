@@ -11,6 +11,7 @@ import UIKit
 class CustomNavigationController: UINavigationController {
     
     var username : String?
+    var userToken : String?
 
     override func viewDidLoad() {
         super.viewDidLoad()

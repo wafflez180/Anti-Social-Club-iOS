@@ -25,11 +25,20 @@ class PostTableViewCell: UITableViewCell {
     func configureCellWithPost(post: Post) {
         messageLabel.text = post.message
         timestampLabel.text = post.timestamp
-        laughingBadgeButton.titleLabel!.text = String(describing: post.laughingBadgeCount)
-        notAmusedBadgeButton.titleLabel!.text = String(describing: post.notAmusedBadgeCount)
-        heartBadgeButton.titleLabel!.text = String(describing: post.heartBadgeCount)
-        likeBadgeButton.titleLabel!.text = String(describing: post.likeBadgeCount)
-        dislikeBadgeButton.titleLabel!.text = String(describing: post.dislikeBadgeCount)
+        laughingBadgeButton.titleLabel!.text = String(describing: post.badgeFunnyCount)
+        notAmusedBadgeButton.titleLabel!.text = String(describing: post.badgeDumbCount)
+        heartBadgeButton.titleLabel!.text = String(describing: post.badgeLoveCount)
+        likeBadgeButton.titleLabel!.text = String(describing: post.badgeAgreeCount)
+        dislikeBadgeButton.titleLabel!.text = String(describing: post.badgeDisagreeCount)
+        
+        if (post.imageSource!.isEmpty) {
+            postImageView.isHidden = true
+        }
+        else{
+            // TODO:
+            // Download the image. This should be done with AlamofireImage library, as it handles
+            // proper caching and is very performant.
+        }
     }
 
     override func awakeFromNib() {

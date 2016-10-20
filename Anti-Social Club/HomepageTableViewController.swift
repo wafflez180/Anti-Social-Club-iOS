@@ -7,21 +7,23 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
-class HomepageTableViewController: UITableViewController
-{
+class HomepageTableViewController: UITableViewController {
     var postsArray = [Post]()
     var userName : String?
+    var userToken : String?
     
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
         
         //Debuging
-        createTestPost()
+        //createTestPost()
         
         let navController = self.navigationController as! CustomNavigationController
         userName = navController.username
+        userToken = navController.userToken
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -29,18 +31,70 @@ class HomepageTableViewController: UITableViewController
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         //Crashlytics.sharedInstance().crash()
+        
+        retrievePosts(offset: 0)
     }
 
-    override func didReceiveMemoryWarning()
-    {
+    override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // MARK: - HomepageTableViewController
     
+    func retrievePosts(offset: Int) {
+        print("Attempting to retrieve posts for user \(userName!) with token \(userToken!)")
+        
+        let parameters : Parameters = ["token": userToken!, "offset": offset]
+        
+        Alamofire.request(Constants.API.ADDRESS + Constants.API.CALL_RETRIEVE_POSTS, method: .post, parameters: parameters)
+        .responseJSON()
+        {
+            response in
+            
+            //debugPrint(response)
+            
+            switch response.result
+            {
+                case .success(let responseData):
+                    let json = JSON(responseData)
+                    
+                    // Handle any errors
+                    if json["error"].bool == true
+                    {
+                        print("ERROR: \(json["error_message"].stringValue)")
+                        
+                        return
+                    }
+                    
+                    if let postsJSONArray = json["posts"].array
+                    {
+                        for postJSON in postsJSONArray
+                        {
+                            if let newPost : Post = Post(json: postJSON)
+                            {
+                                //print("Got post \(newPost.id!)")
+                                self.postsArray += [newPost]
+                            }
+                        }
+                    
+                    }
+                    
+                    self.tableView.reloadData()
+                    
+                    return
+                
+                case .failure(let error):
+                    print("Request failed with error: \(error)")
+                    return
+            }
+        }
+
+    }
+    
     func createTestPost(){
-        let testPost = Post(message: "Hey fam! It’s ya boi If anybody would like to come tonight at Davis Hall we are hosting an iOS workshop. We will be teaching swift! Invite your friends.", laughingBadgeCount: 2, notAmusedBadgeCount: 6, heartBadgeCount: 1, likeBadgeCount: 1, dislikeBadgeCount: 1, timestamp: "2h", imageUrl: nil)
+        //let testPost = Post(message: "Hey fam! It’s ya boi If anybody would like to come tonight at Davis Hall we are hosting an iOS workshop. We will be teaching swift! Invite your friends.", laughingBadgeCount: 2, notAmusedBadgeCount: 6, heartBadgeCount: 1, likeBadgeCount: 1, dislikeBadgeCount: 1, timestamp: "2h", imageUrl: nil)
+        let testMessage = "Hey fam! It’s ya boi If anybody would like to come tonight at Davis Hall we are hosting an iOS workshop. We will be teaching swift! Invite your friends."
+        let testPost = Post(id: 0, posterId: 0, message: testMessage, imageSource: "", timestamp: "", voted: false, votedBadge: nil, reported: false, reportCount: 5, commentCount: 3, badgeFunnyCount: 7, badgeDumbCount: 6, badgeLoveCount: 4, badgeAgreeCount: 2, badgeDisagreeCount: 1)
         postsArray+=[testPost!]
         tableView.reloadData()
     }

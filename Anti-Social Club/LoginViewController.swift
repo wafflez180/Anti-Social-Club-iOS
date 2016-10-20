@@ -13,15 +13,16 @@ import SwiftyJSON
 class LoginViewController: UIViewController
 {
     var userName : String?
+    var userToken : String?
 
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
-        let defaults = UserDefaults.standard
-        if let token = defaults.string(forKey: "token")
+
+        userToken = UserDefaults.standard.string(forKey: "token")
+        if userToken != nil
         {
-            attemptLogin(token: token)
+            attemptLogin(token: userToken!)
         }
     }
 
@@ -140,6 +141,7 @@ class LoginViewController: UIViewController
         }else if (segue.identifier == "loginSuccessSegue"){
             let destination = segue.destination as! CustomNavigationController
             destination.username = userName!
+            destination.userToken = userToken!
         }
 
     }
