@@ -142,11 +142,11 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
         let cell = tableView.cellForRow(at: indexPath) as! ShareKeyTableViewCell
         
         if !cell.isRedeemed! {
-            let alert = UIAlertController(title: "Share Key: \(cell.accessKey!)", message: "Please enter in an email address", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Share Key", message: "Please enter in an email address", preferredStyle: .alert)
             
             alert.addTextField(configurationHandler: configurationTextField)
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:handleCancel))
-            alert.addAction(UIAlertAction(title: "Share Key", style: .default, handler:{ (UIAlertAction) in
+            alert.addAction(UIAlertAction(title: "Share", style: .default, handler:{ (UIAlertAction) in
                 print("User shared key: \(cell.accessKey!) to \(self.recipientTextField.text!)")
                 //TODO SUBMIT IT TO THE API
             }))

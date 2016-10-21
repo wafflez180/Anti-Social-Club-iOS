@@ -21,10 +21,17 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var timestampLabel: UILabel!
     @IBOutlet weak var postImageView: UIImageView!
+    @IBOutlet weak var imageViewHeightContraint: UIImageView!
     
     func configureCellWithPost(post: Post) {
         messageLabel.text = post.message
-        timestampLabel.text = post.timestamp
+        let tempDateFormatter = DateFormatter()
+        tempDateFormatter.dateFormat = "yyyy-MM-dd HH:mm:SS"
+        tempDateFormatter.locale = Locale(identifier: "en_US")
+        
+        let creationDate = tempDateFormatter.date(from: post.timestamp!)
+        setTimestamp(withDateCreated: creationDate!)
+        
         laughingBadgeButton.titleLabel!.text = String(describing: post.badgeFunnyCount)
         notAmusedBadgeButton.titleLabel!.text = String(describing: post.badgeDumbCount)
         heartBadgeButton.titleLabel!.text = String(describing: post.badgeLoveCount)
@@ -38,6 +45,24 @@ class PostTableViewCell: UITableViewCell {
             // TODO:
             // Download the image. This should be done with AlamofireImage library, as it handles
             // proper caching and is very performant.
+        }
+    }
+    
+    func setTimestamp(withDateCreated : Date){
+        let currentDate = Date()
+        
+        if(currentDate.months(from: withDateCreated) > 0){
+            self.timestampLabel.text = "\(currentDate.months(from: withDateCreated))mts"
+        }else if(currentDate.weeks(from: withDateCreated) > 0){
+            self.timestampLabel.text = "\(currentDate.weeks(from: withDateCreated))w"
+        }else if(currentDate.days(from: withDateCreated) > 0){
+            self.timestampLabel.text = "\(currentDate.days(from: withDateCreated))d"
+        }else if(currentDate.hours(from: withDateCreated) > 0){
+            self.timestampLabel.text = "\(currentDate.hours(from: withDateCreated))h"
+        }else if(currentDate.minutes(from: withDateCreated) > 0){
+            self.timestampLabel.text = "\(currentDate.minutes(from: withDateCreated))m"
+        }else if(currentDate.seconds(from: withDateCreated) > 0){
+            self.timestampLabel.text = "\(currentDate.seconds(from: withDateCreated))s"
         }
     }
 

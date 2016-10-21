@@ -118,31 +118,31 @@ class HomepageTableViewController: UITableViewController {
     }
     
     // MARK: - TableViewDataSource
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return postsArray.count
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 8
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor.clear
+        return headerView;
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! PostTableViewCell
         
-        cell.configureCellWithPost(post: postsArray[indexPath.row])
+        cell.configureCellWithPost(post: postsArray[indexPath.section])
 
         return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        // CODE REVIEW:
-        // This is a "magic number". You should change it to a const variable and then define that variable
-        // a the top of the class.
-        tableView.tableHeaderView?.backgroundColor = UIColor.clear
-    
-        return 10
     }
     
     /*
