@@ -21,10 +21,11 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var timestampLabel: UILabel!
     @IBOutlet weak var postImageView: UIImageView!
-    @IBOutlet weak var imageViewHeightContraint: UIImageView!
+    @IBOutlet weak var imageViewHeightContraint: NSLayoutConstraint!
     
     func configureCellWithPost(post: Post) {
         messageLabel.text = post.message
+        
         let tempDateFormatter = DateFormatter()
         tempDateFormatter.dateFormat = "yyyy-MM-dd HH:mm:SS"
         tempDateFormatter.locale = Locale(identifier: "en_US")
@@ -32,14 +33,16 @@ class PostTableViewCell: UITableViewCell {
         let creationDate = tempDateFormatter.date(from: post.timestamp!)
         setTimestamp(withDateCreated: creationDate!)
         
-        laughingBadgeButton.titleLabel!.text = String(describing: post.badgeFunnyCount)
-        notAmusedBadgeButton.titleLabel!.text = String(describing: post.badgeDumbCount)
-        heartBadgeButton.titleLabel!.text = String(describing: post.badgeLoveCount)
-        likeBadgeButton.titleLabel!.text = String(describing: post.badgeAgreeCount)
-        dislikeBadgeButton.titleLabel!.text = String(describing: post.badgeDisagreeCount)
+        laughingBadgeButton.titleLabel!.text = String(describing: post.badgeFunnyCount!)
+        notAmusedBadgeButton.titleLabel!.text = String(describing: post.badgeDumbCount!)
+        heartBadgeButton.titleLabel!.text = String(describing: post.badgeLoveCount!)
+        likeBadgeButton.titleLabel!.text = String(describing: post.badgeAgreeCount!)
+        dislikeBadgeButton.titleLabel!.text = String(describing: post.badgeDisagreeCount!)
         
         if (post.imageSource!.isEmpty) {
             postImageView.isHidden = true
+            imageViewHeightContraint.constant = 0
+            self.layoutIfNeeded()
         }
         else{
             // TODO:
@@ -51,6 +54,7 @@ class PostTableViewCell: UITableViewCell {
     func setTimestamp(withDateCreated : Date){
         let currentDate = Date()
         
+        self.timestampLabel.numberOfLines=0
         if(currentDate.months(from: withDateCreated) > 0){
             self.timestampLabel.text = "\(currentDate.months(from: withDateCreated))mts"
         }else if(currentDate.weeks(from: withDateCreated) > 0){

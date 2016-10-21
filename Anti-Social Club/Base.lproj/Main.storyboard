@@ -12,33 +12,36 @@
         <scene sceneID="p7r-e7-53z">
             <objects>
                 <tableViewController title="UB Anti-Social Club" id="GTJ-cc-M7H" customClass="HomepageTableViewController" customModule="Anti_Social_Club" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="360" sectionHeaderHeight="50" sectionFooterHeight="28" id="iRW-JS-Yno">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="375" sectionHeaderHeight="50" sectionFooterHeight="28" id="iRW-JS-Yno">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="sectionIndexBackgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PostCell" rowHeight="380" id="scT-ac-05R" customClass="PostTableViewCell" customModule="Anti_Social_Club" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="114" width="375" height="380"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PostCell" id="scT-ac-05R" customClass="PostTableViewCell" customModule="Anti_Social_Club" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="114" width="375" height="375"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="scT-ac-05R" id="mdd-Sd-GIX">
-                                    <frame key="frameInset" width="375" height="380"/>
+                                    <frame key="frameInset" width="375" height="375"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="TestImage" translatesAutoresizingMaskIntoConstraints="NO" id="bFk-TF-WJ4">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TestImage" translatesAutoresizingMaskIntoConstraints="NO" id="bFk-TF-WJ4">
                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" relation="lessThanOrEqual" constant="225" id="Ipm-rl-GAV"/>
+                                                <constraint firstAttribute="height" constant="200" id="Ipm-rl-GAV"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lpe-iq-e1s">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lpe-iq-e1s">
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="zCs-hk-Oze"/>
+                                            </constraints>
                                             <string key="text" base64-UTF8="YES">
 SGV5IGZhbSEgSXTigJlzIHlhIGJvaSBJZiBhbnlib2R5IHdvdWxkEREgbGlrZSB0byBjb21lIHRvbmln
 aHQgYXQgRGF2aXMgSGFsbCB3ZSBhcmURIGhvc3RpbmcgYW4gaU9TIHdvcmtzaG9wLiBXZSB3aWxsIGJl
 IHRlYWNoaW5nIHN3aWZ0ISBJbnZpdGUgeW91ciBmcmllbmRzLiBCbGFoIGJsYWggYmxhaCBibGFoIGJs
 YWggYmxhaCBibGFoIGJsYWggYmxhaA
 </string>
-                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="18"/>
                                             <color key="textColor" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -62,7 +65,7 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                                             </constraints>
                                             <color key="tintColor" red="0.0" green="0.59215686274509804" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
                                             <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="-10" maxY="0.0"/>
-                                            <inset key="titleEdgeInsets" minX="-36" minY="46" maxX="0.0" maxY="0.0"/>
+                                            <inset key="titleEdgeInsets" minX="-36" minY="50" maxX="0.0" maxY="0.0"/>
                                             <state key="normal" image="FlagOutline">
                                                 <attributedString key="attributedTitle">
                                                     <fragment content="2">
@@ -84,7 +87,7 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y9m-HO-yAN" userLabel="CommentButton">
                                             <color key="tintColor" red="0.0" green="0.59215686274509804" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
                                             <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="-10" maxY="0.0"/>
-                                            <inset key="titleEdgeInsets" minX="-36" minY="46" maxX="0.0" maxY="0.0"/>
+                                            <inset key="titleEdgeInsets" minX="-36" minY="50" maxX="0.0" maxY="0.0"/>
                                             <state key="normal" image="CommentOutline">
                                                 <attributedString key="attributedTitle">
                                                     <fragment content="5">
@@ -104,10 +107,10 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="moi-tp-vo4" userLabel="LaughingButton">
                                             <color key="tintColor" red="0.45882352941176469" green="0.45882352941176469" blue="0.45882352941176469" alpha="1" colorSpace="calibratedRGB"/>
                                             <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="-10" maxY="0.0"/>
-                                            <inset key="titleEdgeInsets" minX="-36" minY="46" maxX="0.0" maxY="0.0"/>
+                                            <inset key="titleEdgeInsets" minX="-36" minY="45" maxX="0.0" maxY="0.0"/>
                                             <state key="normal" image="LaughingFaceOutline">
                                                 <attributedString key="attributedTitle">
-                                                    <fragment content="2">
+                                                    <fragment content="0">
                                                         <attributes>
                                                             <color key="NSColor" red="0.45882352941176469" green="0.45882352941176469" blue="0.45882352941176469" alpha="1" colorSpace="calibratedRGB"/>
                                                             <font key="NSFont" metaFont="system" size="14"/>
@@ -124,10 +127,10 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bRs-GE-rY2" userLabel="NotAmusedButton">
                                             <color key="tintColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="-10" maxY="0.0"/>
-                                            <inset key="titleEdgeInsets" minX="-36" minY="46" maxX="0.0" maxY="0.0"/>
+                                            <inset key="titleEdgeInsets" minX="-36" minY="45" maxX="0.0" maxY="0.0"/>
                                             <state key="normal" image="StraightFaceOutline">
                                                 <attributedString key="attributedTitle">
-                                                    <fragment content="6">
+                                                    <fragment content="0">
                                                         <attributes>
                                                             <color key="NSColor" red="0.45882352941176469" green="0.45882352941176469" blue="0.45882352941176469" alpha="1" colorSpace="calibratedRGB"/>
                                                             <font key="NSFont" metaFont="system" size="14"/>
@@ -147,7 +150,7 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                                             <inset key="titleEdgeInsets" minX="-36" minY="42" maxX="0.0" maxY="0.0"/>
                                             <state key="normal" image="HeartOutline">
                                                 <attributedString key="attributedTitle">
-                                                    <fragment content="1">
+                                                    <fragment content="0">
                                                         <attributes>
                                                             <color key="NSColor" red="0.45882352941176469" green="0.45882352941176469" blue="0.45882352941176469" alpha="1" colorSpace="calibratedRGB"/>
                                                             <font key="NSFont" metaFont="system" size="14"/>
@@ -167,7 +170,7 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                                             <inset key="titleEdgeInsets" minX="-36" minY="42" maxX="0.0" maxY="0.0"/>
                                             <state key="normal" image="LikeOutline">
                                                 <attributedString key="attributedTitle">
-                                                    <fragment content="1">
+                                                    <fragment content="0">
                                                         <attributes>
                                                             <color key="NSColor" red="0.45882352941176469" green="0.45882352941176469" blue="0.45882352941176469" alpha="1" colorSpace="calibratedRGB"/>
                                                             <font key="NSFont" metaFont="system" size="14"/>
@@ -181,15 +184,19 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KWU-9X-Agd" userLabel="DislikeButton">
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="24" id="rNW-lp-UKa"/>
+                                                <constraint firstAttribute="width" constant="26" id="yAZ-49-ll7"/>
+                                            </constraints>
                                             <color key="tintColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="-10" maxY="0.0"/>
                                             <inset key="titleEdgeInsets" minX="-36" minY="42" maxX="0.0" maxY="0.0"/>
                                             <state key="normal" image="DislikeOutline">
                                                 <attributedString key="attributedTitle">
-                                                    <fragment content="1">
+                                                    <fragment content="0">
                                                         <attributes>
                                                             <color key="NSColor" red="0.45882352941176469" green="0.45882352941176469" blue="0.45882352941176469" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <font key="NSFont" metaFont="system" size="14"/>
+                                                            <font key="NSFont" size="14" name=".AppleSystemUIFont"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
                                                     </fragment>
@@ -202,11 +209,10 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                                         </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="UcQ-Yb-rG4" firstAttribute="top" secondItem="lpe-iq-e1s" secondAttribute="bottom" constant="5" id="0du-3M-NFV"/>
-                                        <constraint firstItem="AFk-Bz-h0w" firstAttribute="top" secondItem="bFk-TF-WJ4" secondAttribute="bottom" constant="5" id="1Nq-05-jFA"/>
+                                        <constraint firstItem="AFk-Bz-h0w" firstAttribute="top" secondItem="bFk-TF-WJ4" secondAttribute="bottom" constant="6" id="1Nq-05-jFA"/>
                                         <constraint firstItem="KWU-9X-Agd" firstAttribute="leading" secondItem="ITW-94-Xwi" secondAttribute="trailing" constant="15" id="1mJ-tR-Pah"/>
                                         <constraint firstItem="y9m-HO-yAN" firstAttribute="bottom" secondItem="IEc-52-veA" secondAttribute="bottom" id="4Bc-bV-gls"/>
-                                        <constraint firstItem="UcQ-Yb-rG4" firstAttribute="leading" secondItem="mdd-Sd-GIX" secondAttribute="leadingMargin" constant="10" id="5Qk-MA-O1Y"/>
+                                        <constraint firstItem="UcQ-Yb-rG4" firstAttribute="leading" secondItem="mdd-Sd-GIX" secondAttribute="leadingMargin" id="5Qk-MA-O1Y"/>
                                         <constraint firstItem="bFk-TF-WJ4" firstAttribute="leading" secondItem="mdd-Sd-GIX" secondAttribute="leading" id="67P-hC-uOL"/>
                                         <constraint firstAttribute="trailing" secondItem="AFk-Bz-h0w" secondAttribute="trailing" constant="5" id="88K-q1-PVq"/>
                                         <constraint firstAttribute="trailing" secondItem="bFk-TF-WJ4" secondAttribute="trailing" id="AJJ-1y-p20"/>
@@ -214,38 +220,39 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                                         <constraint firstItem="IEc-52-veA" firstAttribute="top" secondItem="UcQ-Yb-rG4" secondAttribute="bottom" constant="5" id="ESR-Ny-tcA"/>
                                         <constraint firstItem="ITW-94-Xwi" firstAttribute="top" secondItem="UcQ-Yb-rG4" secondAttribute="bottom" constant="9" id="Gw1-UT-iLX"/>
                                         <constraint firstItem="bRs-GE-rY2" firstAttribute="top" secondItem="UcQ-Yb-rG4" secondAttribute="bottom" constant="6" id="Khz-tS-vCe"/>
+                                        <constraint firstItem="UcQ-Yb-rG4" firstAttribute="top" secondItem="lpe-iq-e1s" secondAttribute="bottom" constant="5" id="XGM-CB-bbn"/>
                                         <constraint firstItem="bRs-GE-rY2" firstAttribute="leading" secondItem="moi-tp-vo4" secondAttribute="trailing" constant="15" id="dcS-gD-Mj8"/>
                                         <constraint firstItem="2LE-vN-njD" firstAttribute="leading" secondItem="bRs-GE-rY2" secondAttribute="trailing" constant="15" id="fZr-tB-s4d"/>
                                         <constraint firstItem="lpe-iq-e1s" firstAttribute="leading" secondItem="mdd-Sd-GIX" secondAttribute="leading" constant="10" id="m2E-dO-jSx"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="y9m-HO-yAN" secondAttribute="bottom" constant="15" id="nxt-8P-F1d"/>
                                         <constraint firstItem="y9m-HO-yAN" firstAttribute="leading" secondItem="IEc-52-veA" secondAttribute="trailing" constant="18" id="psR-tg-SOV"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="UcQ-Yb-rG4" secondAttribute="trailing" constant="10" id="sf5-MC-Niz"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="UcQ-Yb-rG4" secondAttribute="trailing" id="sf5-MC-Niz"/>
                                         <constraint firstItem="ITW-94-Xwi" firstAttribute="leading" secondItem="2LE-vN-njD" secondAttribute="trailing" constant="15" id="t8h-CO-9wO"/>
-                                        <constraint firstAttribute="bottom" secondItem="IEc-52-veA" secondAttribute="bottom" constant="22" id="tQH-bx-4N2"/>
                                         <constraint firstItem="bFk-TF-WJ4" firstAttribute="top" secondItem="mdd-Sd-GIX" secondAttribute="top" id="vtM-E7-Wtq"/>
                                         <constraint firstItem="KWU-9X-Agd" firstAttribute="top" secondItem="UcQ-Yb-rG4" secondAttribute="bottom" constant="9" id="wCF-Dq-HrZ"/>
                                         <constraint firstItem="2LE-vN-njD" firstAttribute="top" secondItem="UcQ-Yb-rG4" secondAttribute="bottom" constant="10" id="wdM-KP-Yo1"/>
                                         <constraint firstItem="AFk-Bz-h0w" firstAttribute="leading" secondItem="lpe-iq-e1s" secondAttribute="trailing" id="wrn-z8-Nuf"/>
                                         <constraint firstItem="moi-tp-vo4" firstAttribute="leading" secondItem="mdd-Sd-GIX" secondAttribute="leading" constant="10" id="xPk-95-Ymk"/>
-                                        <constraint firstItem="lpe-iq-e1s" firstAttribute="top" secondItem="bFk-TF-WJ4" secondAttribute="bottom" constant="5" id="yKh-1a-QyN"/>
+                                        <constraint firstItem="lpe-iq-e1s" firstAttribute="top" secondItem="bFk-TF-WJ4" secondAttribute="bottom" constant="6" id="yKh-1a-QyN"/>
                                         <constraint firstAttribute="trailing" secondItem="y9m-HO-yAN" secondAttribute="trailing" constant="10" id="ywx-ie-4GQ"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="20"/>
+                                        <integer key="value" value="12"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
                                         <color key="value" red="0.74117647058823533" green="0.74117647058823533" blue="0.74117647058823533" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                        <integer key="value" value="5"/>
+                                        <integer key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="commentButton" destination="y9m-HO-yAN" id="pUD-2I-gdG"/>
                                     <outlet property="dislikeBadgeButton" destination="KWU-9X-Agd" id="9WX-hk-xU0"/>
                                     <outlet property="heartBadgeButton" destination="2LE-vN-njD" id="q8B-XH-Ts7"/>
-                                    <outlet property="imageViewHeightContraint" destination="bFk-TF-WJ4" id="Boe-PB-iFu"/>
+                                    <outlet property="imageViewHeightContraint" destination="Ipm-rl-GAV" id="9pI-J7-LxH"/>
                                     <outlet property="laughingBadgeButton" destination="moi-tp-vo4" id="aZx-uX-Snf"/>
                                     <outlet property="likeBadgeButton" destination="ITW-94-Xwi" id="1F8-KN-w3x"/>
                                     <outlet property="messageLabel" destination="lpe-iq-e1s" id="eXi-nq-lxy"/>
