@@ -23,8 +23,26 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var postImageView: UIImageView!
     @IBOutlet weak var imageViewHeightContraint: NSLayoutConstraint!
     
+    var id : Int?
+    var posterId : Int?
+    var message : String?
+    var imageSource : String?
+    var userVoted : Bool?
+    var userVotedBadge : Int?
+    var userReported : Bool?
+    var reportCount : Int?
+    var commentCount : Int?
+    var loadedContent : Bool = false
+
     func configureCellWithPost(post: Post) {
+        loadedContent = true
         messageLabel.text = post.message
+        userReported = post.reported
+        userVoted = post.voted
+        userVotedBadge = post.votedBadge
+        imageSource = post.imageSource
+        id = post.id
+        posterId = post.posterId
         
         let tempDateFormatter = DateFormatter()
         tempDateFormatter.dateFormat = "yyyy-MM-dd HH:mm:SS"
@@ -38,13 +56,29 @@ class PostTableViewCell: UITableViewCell {
         heartBadgeButton.titleLabel!.text = String(describing: post.badgeLoveCount!)
         likeBadgeButton.titleLabel!.text = String(describing: post.badgeAgreeCount!)
         dislikeBadgeButton.titleLabel!.text = String(describing: post.badgeDisagreeCount!)
+        commentButton.titleLabel!.text = String(describing: post.commentCount!)
+        reportButton.titleLabel!.text = String(describing: post.reportCount!)
         
-        if (post.imageSource!.isEmpty) {
-            postImageView.isHidden = true
-            imageViewHeightContraint.constant = 0
+        if userReported!{
+            reportButton.isSelected = true
+        }
+        
+        if userVoted! {
+            // TODO get the votedBagde ID and perfrom the animation
+        }
+        //print(post.imageSource)
+        //print(post.message)
+        if ((post.imageSource == nil) || (post.imageSource?.characters.count)! == 0) {
+            self.postImageView.isHidden = true
+            self.imageViewHeightContraint.constant = 0
             self.layoutIfNeeded()
+            self.setNeedsLayout()
         }
         else{
+            self.postImageView.isHidden = false
+            self.imageViewHeightContraint.constant = 200
+            self.layoutIfNeeded()
+            self.setNeedsLayout()
             // TODO:
             // Download the image. This should be done with AlamofireImage library, as it handles
             // proper caching and is very performant.

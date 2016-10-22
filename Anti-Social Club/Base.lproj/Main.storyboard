@@ -59,148 +59,100 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                                                 <constraint firstAttribute="height" constant="1" id="6K8-Bh-rTx"/>
                                             </constraints>
                                         </view>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IEc-52-veA" userLabel="ReportButton">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IEc-52-veA" userLabel="ReportButton">
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="25" id="kJp-F5-4GL"/>
                                             </constraints>
+                                            <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
                                             <color key="tintColor" red="0.0" green="0.59215686274509804" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
                                             <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="-10" maxY="0.0"/>
                                             <inset key="titleEdgeInsets" minX="-36" minY="50" maxX="0.0" maxY="0.0"/>
-                                            <state key="normal" image="FlagOutline">
-                                                <attributedString key="attributedTitle">
-                                                    <fragment content="2">
-                                                        <attributes>
-                                                            <color key="NSColor" red="0.0" green="0.59215686274509804" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <font key="NSFont" metaFont="system" size="14"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
+                                            <state key="normal" title="0" image="FlagOutline">
+                                                <color key="titleColor" red="0.0" green="0.59215686274509804" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
-                                            <state key="highlighted" image="FlagSelected">
-                                                <attributedString key="attributedTitle"/>
-                                            </state>
+                                            <state key="selected" image="FlagSelected"/>
+                                            <state key="highlighted" image="FlagSelected"/>
                                             <connections>
                                                 <action selector="report:" destination="scT-ac-05R" eventType="touchUpInside" id="svR-gO-hi1"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y9m-HO-yAN" userLabel="CommentButton">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y9m-HO-yAN" userLabel="CommentButton">
+                                            <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
                                             <color key="tintColor" red="0.0" green="0.59215686274509804" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
                                             <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="-10" maxY="0.0"/>
                                             <inset key="titleEdgeInsets" minX="-36" minY="50" maxX="0.0" maxY="0.0"/>
-                                            <state key="normal" image="CommentOutline">
-                                                <attributedString key="attributedTitle">
-                                                    <fragment content="5">
-                                                        <attributes>
-                                                            <color key="NSColor" red="0.0" green="0.59215686274509804" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <font key="NSFont" metaFont="system" size="14"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
+                                            <state key="normal" title="0" image="CommentOutline">
+                                                <color key="titleColor" red="0.0" green="0.59215686274509804" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
+                                            <state key="selected" image="CommentSelected"/>
                                             <state key="highlighted" image="CommentSelected"/>
                                             <connections>
                                                 <action selector="viewComments:" destination="scT-ac-05R" eventType="touchUpInside" id="wwt-fL-Yu1"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="moi-tp-vo4" userLabel="LaughingButton">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="moi-tp-vo4" userLabel="LaughingButton">
+                                            <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
                                             <color key="tintColor" red="0.45882352941176469" green="0.45882352941176469" blue="0.45882352941176469" alpha="1" colorSpace="calibratedRGB"/>
                                             <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="-10" maxY="0.0"/>
                                             <inset key="titleEdgeInsets" minX="-36" minY="45" maxX="0.0" maxY="0.0"/>
-                                            <state key="normal" image="LaughingFaceOutline">
-                                                <attributedString key="attributedTitle">
-                                                    <fragment content="0">
-                                                        <attributes>
-                                                            <color key="NSColor" red="0.45882352941176469" green="0.45882352941176469" blue="0.45882352941176469" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <font key="NSFont" metaFont="system" size="14"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
+                                            <state key="normal" title="0" image="LaughingFaceOutline">
+                                                <color key="titleColor" red="0.45882352941176469" green="0.45882352941176469" blue="0.45882352941176469" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
                                             <state key="selected" image="LaughingFaceSelected"/>
                                             <connections>
                                                 <action selector="selectedLaughingBadge:" destination="scT-ac-05R" eventType="touchUpInside" id="Czk-zh-xa0"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bRs-GE-rY2" userLabel="NotAmusedButton">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bRs-GE-rY2" userLabel="NotAmusedButton">
+                                            <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
                                             <color key="tintColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="-10" maxY="0.0"/>
                                             <inset key="titleEdgeInsets" minX="-36" minY="45" maxX="0.0" maxY="0.0"/>
-                                            <state key="normal" image="StraightFaceOutline">
-                                                <attributedString key="attributedTitle">
-                                                    <fragment content="0">
-                                                        <attributes>
-                                                            <color key="NSColor" red="0.45882352941176469" green="0.45882352941176469" blue="0.45882352941176469" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <font key="NSFont" metaFont="system" size="14"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
+                                            <state key="normal" title="0" image="StraightFaceOutline">
+                                                <color key="titleColor" red="0.45882352941176469" green="0.45882352941176469" blue="0.45882352941176469" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
                                             <state key="selected" image="StraightFaceSelected"/>
                                             <connections>
                                                 <action selector="selectedNotAmusedBadge:" destination="scT-ac-05R" eventType="touchUpInside" id="2Sd-Uh-AkG"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2LE-vN-njD" userLabel="HeartButton">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2LE-vN-njD" userLabel="HeartButton">
+                                            <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
                                             <color key="tintColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="-10" maxY="0.0"/>
                                             <inset key="titleEdgeInsets" minX="-36" minY="42" maxX="0.0" maxY="0.0"/>
-                                            <state key="normal" image="HeartOutline">
-                                                <attributedString key="attributedTitle">
-                                                    <fragment content="0">
-                                                        <attributes>
-                                                            <color key="NSColor" red="0.45882352941176469" green="0.45882352941176469" blue="0.45882352941176469" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <font key="NSFont" metaFont="system" size="14"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
+                                            <state key="normal" title="0" image="HeartOutline">
+                                                <color key="titleColor" red="0.45882352941176469" green="0.45882352941176469" blue="0.45882352941176469" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
                                             <state key="selected" image="HeartSelected"/>
                                             <connections>
                                                 <action selector="selectedHeartBadge:" destination="scT-ac-05R" eventType="touchUpInside" id="TUX-hC-R7Y"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ITW-94-Xwi" userLabel="LikeButton">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ITW-94-Xwi" userLabel="LikeButton">
+                                            <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
                                             <color key="tintColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="-10" maxY="0.0"/>
                                             <inset key="titleEdgeInsets" minX="-36" minY="42" maxX="0.0" maxY="0.0"/>
-                                            <state key="normal" image="LikeOutline">
-                                                <attributedString key="attributedTitle">
-                                                    <fragment content="0">
-                                                        <attributes>
-                                                            <color key="NSColor" red="0.45882352941176469" green="0.45882352941176469" blue="0.45882352941176469" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <font key="NSFont" metaFont="system" size="14"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
+                                            <state key="normal" title="0" image="LikeOutline">
+                                                <color key="titleColor" red="0.45882352941176469" green="0.45882352941176469" blue="0.45882352941176469" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
+                                            <state key="selected" image="LikeSelected"/>
                                             <connections>
                                                 <action selector="selectedLikeBadge:" destination="scT-ac-05R" eventType="touchUpInside" id="ArJ-jx-zhi"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KWU-9X-Agd" userLabel="DislikeButton">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KWU-9X-Agd" userLabel="DislikeButton">
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="24" id="rNW-lp-UKa"/>
                                                 <constraint firstAttribute="width" constant="26" id="yAZ-49-ll7"/>
                                             </constraints>
+                                            <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
                                             <color key="tintColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="-10" maxY="0.0"/>
                                             <inset key="titleEdgeInsets" minX="-36" minY="42" maxX="0.0" maxY="0.0"/>
-                                            <state key="normal" image="DislikeOutline">
-                                                <attributedString key="attributedTitle">
-                                                    <fragment content="0">
-                                                        <attributes>
-                                                            <color key="NSColor" red="0.45882352941176469" green="0.45882352941176469" blue="0.45882352941176469" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <font key="NSFont" size="14" name=".AppleSystemUIFont"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
+                                            <state key="normal" title="0" image="DislikeOutline">
+                                                <color key="titleColor" red="0.45882352941176469" green="0.45882352941176469" blue="0.45882352941176469" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
                                             <state key="selected" image="DislikeSelected"/>
                                             <connections>

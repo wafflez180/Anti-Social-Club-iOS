@@ -14,13 +14,14 @@ class HomepageTableViewController: UITableViewController {
     var postsArray = [Post]()
     var userName : String?
     var userToken : String?
+    var isRetreivingPosts : Bool!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //Debuging
         //createTestPost()
-        
+        isRetreivingPosts = true
         let navController = self.navigationController as! CustomNavigationController
         userName = navController.username
         userToken = navController.userToken
@@ -66,6 +67,8 @@ class HomepageTableViewController: UITableViewController {
                         return
                     }
                     
+                    var reachedLoadedPostsLimit = false
+                    
                     if let postsJSONArray = json["posts"].array
                     {
                         for postJSON in postsJSONArray
@@ -76,10 +79,14 @@ class HomepageTableViewController: UITableViewController {
                                 self.postsArray += [newPost]
                             }
                         }
-                    
+                        reachedLoadedPostsLimit = postsJSONArray.count == 0
                     }
                     
-                    self.tableView.reloadData()
+                    if !reachedLoadedPostsLimit {
+                        DispatchQueue.main.async{
+                            self.tableView.reloadData()
+                        }
+                    }
                     
                     return
                 
@@ -147,9 +154,14 @@ class HomepageTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! PostTableViewCell
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell") as! PostTableViewCell
+        print(indexPath.section)
         cell.configureCellWithPost(post: postsArray[indexPath.section])
+        cell.timestampLabel.text = String(indexPath.section)
+        
+        if indexPath.section > postsArray.count-3{
+            retrievePosts(offset: self.postsArray.count)
+        }
 
         return cell
     }
