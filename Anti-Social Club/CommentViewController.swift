@@ -138,11 +138,11 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! PostTableViewCell
-            cell.configureCellWithPost(post: (postCell?.post!)!, section: indexPath.section)
+            cell.configureCellWithPost(post: (postCell?.post!)!, section: indexPath.row)
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell", for: indexPath) as! CommentTableViewCell
-            cell.configureWithComment(comment: commentArray[indexPath.section])
+            cell.configureWithComment(comment: commentArray[indexPath.row-1])
             return cell
         }
     }
