@@ -38,14 +38,6 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.setToolbarHidden(true, animated: true)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        self.navigationController?.setToolbarHidden(false, animated: true)
-    }
-    
     func attemptRetrieveUserKeys(token : String)
     {
         print("Attempting to retrieve keys from token: \(token)")
@@ -142,7 +134,7 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
         let cell = tableView.cellForRow(at: indexPath) as! ShareKeyTableViewCell
         
         if !cell.isRedeemed! {
-            let alert = UIAlertController(title: "Share Key", message: "Please enter in an email address", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Share Key", message: "Please enter your friend's email address.", preferredStyle: .alert)
             
             alert.addTextField(configurationHandler: configurationTextField)
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:handleCancel))

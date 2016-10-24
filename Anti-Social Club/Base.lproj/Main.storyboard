@@ -11,7 +11,6 @@
         <!--UB Anti-Social Club-->
         <scene sceneID="p7r-e7-53z">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7Ls-Fv-3cp" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController title="UB Anti-Social Club" id="GTJ-cc-M7H" customClass="HomepageTableViewController" customModule="Anti_Social_Club" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="375" sectionHeaderHeight="50" sectionFooterHeight="28" id="iRW-JS-Yno">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -244,6 +243,7 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                         <segue destination="ncg-38-1rU" kind="show" identifier="commentSegue" id="jbv-Rh-nZU"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Ls-Fv-3cp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="333.60000000000002" y="-640.02998500749629"/>
         </scene>
@@ -860,7 +860,7 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="eBM-Sr-u7n" kind="show" id="9dk-gV-Wce"/>
+                                            <segue destination="eBM-Sr-u7n" kind="show" identifier="shareKeySegue" id="9dk-gV-Wce"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="77O-t9-dqB">
@@ -1012,7 +1012,7 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QO5-P3-EYy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="692" y="121"/>
+            <point key="canvasLocation" x="684" y="136"/>
         </scene>
         <!--Entry View Controller-->
         <scene sceneID="w9L-nL-kVK">

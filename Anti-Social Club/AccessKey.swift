@@ -26,7 +26,7 @@ class AccessKey{
         self.ownerId = owner_id
         self.isRedeemed = redeemed
         
-        print("Created AccessKey:\n\tKey: \(access_key!)\n\tRedeemed: \(redeemed!)")
+        print("Retrieved AccessKey:\n\tKey: \(access_key!)\n\tRedeemed: \(redeemed!)")
     }
     
     convenience init?(json : JSON)

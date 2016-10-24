@@ -21,6 +21,8 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var rankLabel: UILabel!
     @IBOutlet weak var dateJoinedLabel: UILabel!
     
+    var segueingToShareKeyVC : Bool = false
+    
     // MARK - SettingsViewController
     
     override func viewDidLoad() {
@@ -30,11 +32,16 @@ class SettingsViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.setToolbarHidden(true, animated: true)
+        segueingToShareKeyVC = false
+        if !(self.navigationController?.toolbar.isHidden)! {
+            self.navigationController?.setToolbarHidden(true, animated: true)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        self.navigationController?.setToolbarHidden(false, animated: true)
+        if (self.navigationController?.toolbar.isHidden)! && !segueingToShareKeyVC {
+            self.navigationController?.setToolbarHidden(false, animated: true)
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -138,14 +145,19 @@ class SettingsViewController: UIViewController {
         present(deactivateAlert, animated: true, completion: nil)
     }
     
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if (segue.identifier == "shareKeySegue")
+        {
+            let destination = segue.destination as! ShareKeysViewController
+            segueingToShareKeyVC = true
+        }
     }
-    */
+    
 
 }
