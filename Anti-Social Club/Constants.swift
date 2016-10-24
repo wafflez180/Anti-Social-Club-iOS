@@ -20,7 +20,7 @@ class Constants
 
     class API
     {
-        static let ADDRESS = "http://ub-anti-social.club/"
+        static let ADDRESS = "https://api.ub-anti-social.club/"
         static let CALL_CONFIRM_NAME = "ConfirmName.php"
         static let CALL_CONFIRM_KEY = "ConfirmKey.php"
         static let CALL_CONFIRM_EMAIL = "ConfirmEmail.php"
