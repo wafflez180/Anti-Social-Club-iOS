@@ -23,26 +23,22 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var postImageView: UIImageView!
     @IBOutlet weak var imageViewHeightContraint: NSLayoutConstraint!
     
-    var id : Int?
-    var posterId : Int?
-    var message : String?
-    var imageSource : String?
     var userVoted : Bool?
     var userVotedBadge : Int?
     var userReported : Bool?
-    var reportCount : Int?
-    var commentCount : Int?
     var loadedContent : Bool = false
+    var post : Post?
+    var parentVC : HomepageTableViewController!
+    var section : Int?
 
-    func configureCellWithPost(post: Post) {
+    func configureCellWithPost(post: Post, section: Int) {
         loadedContent = true
         messageLabel.text = post.message
         userReported = post.reported
         userVoted = post.voted
         userVotedBadge = post.votedBadge
-        imageSource = post.imageSource
-        id = post.id
-        posterId = post.posterId
+        self.post = post
+        self.section = section
         
         let tempDateFormatter = DateFormatter()
         tempDateFormatter.dateFormat = "yyyy-MM-dd HH:mm:SS"
@@ -51,13 +47,13 @@ class PostTableViewCell: UITableViewCell {
         let creationDate = tempDateFormatter.date(from: post.timestamp!)
         setTimestamp(withDateCreated: creationDate!)
         
-        laughingBadgeButton.titleLabel!.text = String(describing: post.badgeFunnyCount!)
-        notAmusedBadgeButton.titleLabel!.text = String(describing: post.badgeDumbCount!)
-        heartBadgeButton.titleLabel!.text = String(describing: post.badgeLoveCount!)
-        likeBadgeButton.titleLabel!.text = String(describing: post.badgeAgreeCount!)
-        dislikeBadgeButton.titleLabel!.text = String(describing: post.badgeDisagreeCount!)
-        commentButton.titleLabel!.text = String(describing: post.commentCount!)
-        reportButton.titleLabel!.text = String(describing: post.reportCount!)
+        laughingBadgeButton.setTitle(String(describing: post.badgeFunnyCount!), for: UIControlState.normal)
+        notAmusedBadgeButton.setTitle(String(describing: post.badgeDumbCount!), for: UIControlState.normal)
+        heartBadgeButton.setTitle(String(describing: post.badgeLoveCount!), for: UIControlState.normal)
+        likeBadgeButton.setTitle(String(describing: post.badgeAgreeCount!), for: UIControlState.normal)
+        dislikeBadgeButton.setTitle(String(describing: post.badgeDisagreeCount!), for: UIControlState.normal)
+        commentButton.setTitle(String(describing: post.commentCount!), for: UIControlState.normal)
+        reportButton.setTitle(String(describing: post.reportCount!), for: UIControlState.normal)
         
         if userReported!{
             reportButton.isSelected = true
@@ -118,6 +114,8 @@ class PostTableViewCell: UITableViewCell {
     // MARK: - IBActions
 
     @IBAction func viewComments(_ sender: UIButton) {
+        parentVC.selectedPostCell = self
+        parentVC.performSegue(withIdentifier: "commentSegue", sender: nil)
     }
     @IBAction func report(_ sender: UIButton)
     {

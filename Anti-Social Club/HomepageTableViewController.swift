@@ -14,14 +14,13 @@ class HomepageTableViewController: UITableViewController {
     var postsArray = [Post]()
     var userName : String?
     var userToken : String?
-    var isRetreivingPosts : Bool!
-    
+    var selectedPostCell : PostTableViewCell?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //Debuging
         //createTestPost()
-        isRetreivingPosts = true
         let navController = self.navigationController as! CustomNavigationController
         userName = navController.username
         userToken = navController.userToken
@@ -156,8 +155,9 @@ class HomepageTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell") as! PostTableViewCell
         print(indexPath.section)
-        cell.configureCellWithPost(post: postsArray[indexPath.section])
-        cell.timestampLabel.text = String(indexPath.section)
+        cell.configureCellWithPost(post: postsArray[indexPath.section], section: indexPath.section)
+        cell.parentVC = self
+        //cell.timestampLabel.text = String(indexPath.section)
         
         if indexPath.section > postsArray.count-3{
             retrievePosts(offset: self.postsArray.count)
@@ -201,14 +201,16 @@ class HomepageTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if (segue.identifier == "commentSegue")
+        {
+            let destination = segue.destination as! CommentViewController
+            destination.postCell = selectedPostCell
+        }
+        
     }
-    */
-
 }
