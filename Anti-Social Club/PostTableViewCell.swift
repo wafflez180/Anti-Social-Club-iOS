@@ -30,6 +30,7 @@ class PostTableViewCell: UITableViewCell {
     var post : Post?
     var parentVC : HomepageTableViewController!
     var section : Int?
+    var commentViewCont : CommentViewController?
 
     func configureCellWithPost(post: Post, section: Int) {
         loadedContent = true
@@ -41,7 +42,8 @@ class PostTableViewCell: UITableViewCell {
         self.section = section
         
         let tempDateFormatter = DateFormatter()
-        tempDateFormatter.dateFormat = "yyyy-MM-dd HH:mm:SS"
+        tempDateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        tempDateFormatter.timeZone = TimeZone(identifier: "GMT")
         tempDateFormatter.locale = Locale(identifier: "en_US")
         
         let creationDate = tempDateFormatter.date(from: post.timestamp!)
@@ -114,9 +116,15 @@ class PostTableViewCell: UITableViewCell {
     // MARK: - IBActions
 
     @IBAction func viewComments(_ sender: UIButton) {
-        parentVC.selectedPostCell = self
-        parentVC.performSegue(withIdentifier: "commentSegue", sender: nil)
+        //If the comment button was pressed inside the comment view
+        if self.commentViewCont != nil {
+            self.commentViewCont?.composeCommentTextField.becomeFirstResponder()
+        }else{
+            parentVC.selectedPostCell = self
+            parentVC.performSegue(withIdentifier: "commentSegue", sender: nil)
+        }
     }
+    
     @IBAction func report(_ sender: UIButton)
     {
         

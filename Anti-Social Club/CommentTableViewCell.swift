@@ -14,6 +14,8 @@ class CommentTableViewCell: UITableViewCell {
     @IBOutlet weak var commentLabel: UILabel!
     @IBOutlet weak var timestamp: UILabel!
     
+    var postCell : PostTableViewCell?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -26,21 +28,30 @@ class CommentTableViewCell: UITableViewCell {
     }
     
     func configureWithComment(comment: Comment){
-        colorView.backgroundColor = UIColor.hexStringToUIColor(hex: comment.color!)
+        //If the user who made the post, made this comment
+        if comment.posterId == self.postCell?.post?.posterId {
+            colorView.backgroundColor = UIColor.hexStringToUIColor(hex: "00BCD4")
+            commentLabel.textColor = UIColor.hexStringToUIColor(hex: "00BCD4")
+            commentLabel.font =  UIFont.systemFont(ofSize: commentLabel.font.pointSize, weight: UIFontWeightSemibold)
+        }else{
+            colorView.backgroundColor = UIColor.hexStringToUIColor(hex: comment.color!)
+            commentLabel.textColor = UIColor.hexStringToUIColor(hex: "4E4E4E")
+            commentLabel.font =  UIFont.systemFont(ofSize: commentLabel.font.pointSize, weight: UIFontWeightRegular)
+        }
         commentLabel.text = comment.message
         timestamp.text = comment.timestamp
         
         let tempDateFormatter = DateFormatter()
-        tempDateFormatter.dateFormat = "yyyy-MM-dd HH:mm:SS"
-        tempDateFormatter.locale = Locale(identifier: "en_US")
+        tempDateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        tempDateFormatter.timeZone = TimeZone(identifier: "GMT")
         
         let creationDate = tempDateFormatter.date(from: comment.timestamp!)
         setTimestamp(withDateCreated: creationDate!)
-    }
+            }
     
     func setTimestamp(withDateCreated : Date){
         let currentDate = Date()
-        
+                
         self.timestamp.numberOfLines=0
         if(currentDate.months(from: withDateCreated) > 0){
             self.timestamp.text = "\(currentDate.months(from: withDateCreated))mts"
@@ -54,6 +65,8 @@ class CommentTableViewCell: UITableViewCell {
             self.timestamp.text = "\(currentDate.minutes(from: withDateCreated))m"
         }else if(currentDate.seconds(from: withDateCreated) > 0){
             self.timestamp.text = "\(currentDate.seconds(from: withDateCreated))s"
+        }else{
+            self.timestamp.text = "0s"
         }
     }
 }

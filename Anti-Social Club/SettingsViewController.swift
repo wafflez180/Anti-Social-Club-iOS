@@ -101,13 +101,15 @@ class SettingsViewController: UIViewController {
                             }
                             
                             let tempDateFormatter = DateFormatter()
-                            tempDateFormatter.dateFormat = "yyyy-MM-dd HH:mm:SS"
+                            tempDateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                            tempDateFormatter.timeZone = TimeZone(identifier: "GMT")
                             tempDateFormatter.locale = Locale(identifier: "en_US")
                             
                             let creationDate = tempDateFormatter.date(from: creationTimeStamp)
                             
                             let shortDateFormatter = DateFormatter()
                             shortDateFormatter.dateStyle = DateFormatter.Style.short
+                            tempDateFormatter.timeZone = TimeZone(identifier: "GMT")
                             shortDateFormatter.locale = Locale(identifier: "en_US")
                             self.dateJoinedLabel.text = shortDateFormatter.string(from: creationDate!)
                             

@@ -519,6 +519,9 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                                             <constraint firstAttribute="height" constant="30" id="wFJ-mX-ZIy"/>
                                         </constraints>
                                         <state key="normal" image="SendPostButton"/>
+                                        <connections>
+                                            <action selector="pressedSendComment:" destination="ncg-38-1rU" eventType="touchUpInside" id="F5s-tV-GsL"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -549,6 +552,7 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                         <outlet property="composeCommentTextField" destination="uqB-dv-E52" id="a7d-uu-IB6"/>
                         <outlet property="composeCommentView" destination="JAR-tY-FO4" id="RZa-Js-Gm5"/>
                         <outlet property="composeCommentViewBotConstraint" destination="HbK-yR-8oM" id="Vku-HQ-7qC"/>
+                        <outlet property="sendCommentButton" destination="VJW-Jk-3Ma" id="uII-BF-dWE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Nx-lf-GUS" userLabel="First Responder" sceneMemberID="firstResponder"/>

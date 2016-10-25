@@ -15,11 +15,16 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
     var postCell : PostTableViewCell?
     var commentArray : [Comment] = []
     var tapGestureRec : UITapGestureRecognizer?
+    var offset : Int?
+    var postId : Int?
 
     @IBOutlet weak var commentTableview: UITableView!
     @IBOutlet weak var composeCommentViewBotConstraint: NSLayoutConstraint!
     @IBOutlet weak var composeCommentView: UIView!
     @IBOutlet weak var composeCommentTextField: UITextField!
+    @IBOutlet weak var sendCommentButton: UIButton!
+    
+    var postedNewComment : Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,14 +40,18 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         let defaults = UserDefaults.standard
         let offsetBullshitIncrement = 20
-        attemptRetrieveComments(offset: (postCell?.parentVC.postsArray.count)!-offsetBullshitIncrement, token: defaults.string(forKey: "token")!, postId: (postCell?.post?.id)!)
+        offset = (postCell?.parentVC.postsArray.count)!-offsetBullshitIncrement
+        postId = (postCell?.post?.id)!
+        attemptRetrieveComments(offset: offset!, token: defaults.string(forKey: "token")!, postId: postId!)
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        postCell?.commentViewCont = self
         self.navigationController?.setToolbarHidden(true, animated: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        postCell?.commentViewCont = nil
         self.navigationController?.setToolbarHidden(false, animated: true)
     }
 
@@ -87,6 +96,7 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
                             return
                         }
                         
+                        self.commentArray.removeAll()
                         let jsonArray = json["comments"].array
                         for subJSON in jsonArray!
                         {
@@ -97,6 +107,12 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
                         }
                         
                         self.commentTableview.reloadData()
+                        if self.postedNewComment {
+                            self.commentTableview.layoutIfNeeded()
+                            let lastRowIndexPath = IndexPath(row: self.commentTableview.numberOfRows(inSection: 0)-1, section: 0)
+                            self.commentTableview.scrollToRow(at: lastRowIndexPath, at: UITableViewScrollPosition.bottom, animated: true)
+                            self.postedNewComment = false
+                        }
                         
                     case .failure(let error):
                         print("Request failed with error: \(error)")
@@ -108,6 +124,63 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
                     }
         }
     }
+    
+    func attemptPostComment(token: String, message: String, postId: Int)
+    {
+        print("Attempting to post comment with\n\tMessage: \(message)\n\tToken: \(token)\n\tPost_ID: \(postId)")
+        
+        let parameters = ["token" : token, "message" : message, "post_id" : postId] as [String : Any]
+        
+        let activityView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+        activityView.center=self.sendCommentButton.center;
+        activityView.frame = self.sendCommentButton.frame
+        activityView.startAnimating()
+        self.composeCommentView.addSubview(activityView)
+        dismissKeyboard()
+        composeCommentTextField.isEnabled = false
+        sendCommentButton.isHidden = true
+        
+        Alamofire.request(Constants.API.ADDRESS + Constants.API.CALL_COMMENT, method: .post, parameters: parameters)
+            .responseJSON()
+                {
+                    response in
+                    
+                    activityView.stopAnimating()
+                    activityView.removeFromSuperview()
+                    self.sendCommentButton.isHidden = false
+                    self.composeCommentTextField.isEnabled = true
+                    self.composeCommentTextField.text = ""
+                    self.postedNewComment = true
+                    
+                    switch response.result
+                    {
+                    case .success(let responseData):
+                        let json = JSON(responseData)
+                        
+                        // Handle any errors
+                        if json["error"].bool == true
+                        {
+                            print("ERROR: \(json["error_message"].stringValue)")
+                            let alert = UIAlertController(title: "Error", message: "Network Error! Please try again later", preferredStyle: UIAlertControllerStyle.alert)
+                            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                            self.present(alert, animated: true, completion: nil)
+                            
+                            return
+                        }
+                        
+                        self.attemptRetrieveComments(offset: self.offset!, token: token, postId: postId)
+                        
+                    case .failure(let error):
+                        print("Request failed with error: \(error)")
+                        let alert = UIAlertController(title: "Error", message: "Network Error! Please try again later", preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                        
+                        return
+                    }
+        }
+    }
+
 
     // MARK: - Table view data source
     
@@ -147,7 +220,9 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell", for: indexPath) as! CommentTableViewCell
+            cell.postCell = postCell
             cell.configureWithComment(comment: commentArray[indexPath.row-1])
+            
             return cell
         }
     }
@@ -210,6 +285,15 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
         return false
     }
     
+    // MARk: - Actions
+    
+    @IBAction func pressedSendComment(_ sender: AnyObject) {
+        let defaults = UserDefaults.standard
+        self.attemptRetrieveComments(offset: self.offset!, token: defaults.string(forKey: "token")!, postId: (self.postCell?.post?.id)!)
+
+        attemptPostComment(token: defaults.string(forKey: "token")!, message: composeCommentTextField.text!, postId: postId!)
+        
+    }
 
     /*    CGSize keyboardSize = [sender.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
 
