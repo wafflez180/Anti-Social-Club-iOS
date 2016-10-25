@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class PostTableViewCell: UITableViewCell {
 
@@ -41,11 +43,15 @@ class PostTableViewCell: UITableViewCell {
         self.post = post
         self.section = section
         
+        self.layer.borderWidth = 0.5
+        self.layer.borderColor = UIColor.hexStringToUIColor(hex: "BDBDBD").cgColor
+        
         let tempDateFormatter = DateFormatter()
         tempDateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         tempDateFormatter.timeZone = TimeZone(identifier: "GMT")
         tempDateFormatter.locale = Locale(identifier: "en_US")
         
+        //Set Labels
         let creationDate = tempDateFormatter.date(from: post.timestamp!)
         setTimestamp(withDateCreated: creationDate!)
         
@@ -113,6 +119,30 @@ class PostTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func attemptReportPost(token: String, postId: Int)
+    {
+        let parameters = ["token" : token, "post_id" : postId] as [String : Any]
+        
+        Alamofire.request(Constants.API.ADDRESS + Constants.API.CALL_REPORT, method: .post, parameters: parameters)
+            .responseJSON()
+                {
+                    response in
+                    
+                    switch response.result
+                    {
+                    case .success(let responseData):
+                        //let json = JSON(responseData)
+                        self.reportButton.isSelected = true
+                        self.reportButton.setTitle(String(describing: (self.post?.reportCount!)!+1), for: UIControlState.selected)
+                        
+                    case .failure(let error):
+                        print("Request failed with error: \(error)")
+                        
+                        return
+                    }
+        }
+    }
+    
     // MARK: - IBActions
 
     @IBAction func viewComments(_ sender: UIButton) {
@@ -127,7 +157,21 @@ class PostTableViewCell: UITableViewCell {
     
     @IBAction func report(_ sender: UIButton)
     {
-        
+        if self.post?.reported == false && self.reportButton.isSelected == false {
+            let deactivateAlert = UIAlertController(title: "Report Post", message: "Are you sure you want to report this post?", preferredStyle: UIAlertControllerStyle.alert)
+            
+            deactivateAlert.addAction(UIAlertAction(title: "Report", style: .destructive, handler: { (action: UIAlertAction!) in
+                print("User Reported Post")
+                let defaults = UserDefaults.standard
+                let token = defaults.string(forKey: "token")
+                self.attemptReportPost(token: token!, postId: (self.post?.id)!)
+            }))
+            deactivateAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+                
+            }))
+            
+            self.parentVC.present(deactivateAlert, animated: true, completion: nil)
+        }
     }
     @IBAction func selectedLaughingBadge(_ sender: UIButton)
     {

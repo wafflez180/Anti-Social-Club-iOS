@@ -241,16 +241,21 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
             flashMessageBox()
         }else
         {
-            UIView.animate(withDuration: 0.2, delay: 0.0, options: .transitionCurlUp, animations:
-                {
-                    self.blurView.alpha = 0.0
-                    self.frame = CGRect.init(x: 0, y: -self.frame.size.height, width: self.parentVC.view.frame.size.width, height: self.frame.size.height)
-                },completion:
-                { finished in
-                    self.blurView.removeFromSuperview()
-                    self.removeFromSuperview()
-            })
+            //TODO: Add API Method to post and when successful, do the animation
+            sendPopupAnimation()
         }
+    }
+    
+    func sendPopupAnimation(){
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: .transitionCurlUp, animations:
+            {
+                self.blurView.alpha = 0.0
+                self.frame = CGRect.init(x: 0, y: -self.frame.size.height, width: self.parentVC.view.frame.size.width, height: self.frame.size.height)
+            },completion:
+            { finished in
+                self.blurView.removeFromSuperview()
+                self.removeFromSuperview()
+        })
     }
     
     func getPhoto()
