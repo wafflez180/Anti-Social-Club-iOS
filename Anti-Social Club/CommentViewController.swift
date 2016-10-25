@@ -10,24 +10,29 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class CommentViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class CommentViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
     var postCell : PostTableViewCell?
     var commentArray : [Comment] = []
+    var tapGestureRec : UITapGestureRecognizer?
 
     @IBOutlet weak var commentTableview: UITableView!
+    @IBOutlet weak var composeCommentViewBotConstraint: NSLayoutConstraint!
+    @IBOutlet weak var composeCommentView: UIView!
+    @IBOutlet weak var composeCommentTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         commentTableview.delegate = self
         commentTableview.dataSource = self
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.=
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        composeCommentTextField.delegate = self
         
+        composeCommentView.layer.borderWidth = 1
+        composeCommentView.layer.borderColor = UIColor.hexStringToUIColor(hex: "C7C7CD").cgColor
+        
+        addNotifications()
+
         let defaults = UserDefaults.standard
         let offsetBullshitIncrement = 20
         attemptRetrieveComments(offset: (postCell?.parentVC.postsArray.count)!-offsetBullshitIncrement, token: defaults.string(forKey: "token")!, postId: (postCell?.post?.id)!)
@@ -146,8 +151,68 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
             return cell
         }
     }
+    
+    
+    // MARK: - Keyboard
+    
+    func addNotifications(){
+        // Listen for keyboard appearances and disappearances
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleKeyboardWillShow),
+            name: NSNotification.Name.UIKeyboardWillShow,
+            object: nil)
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleKeyboardWillHide),
+            name: NSNotification.Name.UIKeyboardWillHide,
+            object: nil)
+    }
+    
+    
+    func handleKeyboardWillHide(sender: NSNotification){
+        UIView.animate(withDuration: 0.2) {
+            self.composeCommentViewBotConstraint.constant = 0
+            self.view.layoutIfNeeded()
+        }
+        
+        self.commentTableview.removeGestureRecognizer(tapGestureRec!)
+    }
+    
+    func handleKeyboardWillShow(sender: NSNotification){
+        let userInfo:NSDictionary = sender.userInfo! as NSDictionary
+        let keyboardFrame:NSValue = userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
+        let keyboardRectangle = keyboardFrame.cgRectValue
+        let keyboardHeight = keyboardRectangle.height
+        
+        UIView.animate(withDuration: 0.2) {
+            self.composeCommentViewBotConstraint.constant = keyboardHeight
+            self.view.layoutIfNeeded()
+        }
+        
+        tapGestureRec = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        self.commentTableview.addGestureRecognizer(tapGestureRec!)
+    }
+    
+    func dismissKeyboard(){
+        self.view.endEditing(true)
+    }
+    
+    // MARK: - TextField
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        dismissKeyboard()
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        dismissKeyboard()
+        return false
+    }
+    
 
-    /*
+    /*    CGSize keyboardSize = [sender.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.

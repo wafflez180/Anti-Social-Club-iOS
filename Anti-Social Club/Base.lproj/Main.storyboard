@@ -511,7 +511,7 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Write a comment..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uqB-dv-E52">
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VJW-Jk-3Ma">
                                         <constraints>
@@ -546,6 +546,9 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                     </view>
                     <connections>
                         <outlet property="commentTableview" destination="W83-e6-0Ws" id="ZYz-5N-gL0"/>
+                        <outlet property="composeCommentTextField" destination="uqB-dv-E52" id="a7d-uu-IB6"/>
+                        <outlet property="composeCommentView" destination="JAR-tY-FO4" id="RZa-Js-Gm5"/>
+                        <outlet property="composeCommentViewBotConstraint" destination="HbK-yR-8oM" id="Vku-HQ-7qC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Nx-lf-GUS" userLabel="First Responder" sceneMemberID="firstResponder"/>

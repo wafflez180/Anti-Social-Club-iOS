@@ -161,6 +161,12 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
         print("Cancelled")
     }
     
+   /* -(void)handleKeyboardWillShow:(NSNotification *)sender{
+    CGSize keyboardSize = [sender.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    
+    self.bottomBar.transform = CGAffineTransformMakeTranslation(0, -keyboardSize.height);
+*/
+    
     /*
     // MARK: - Navigation
 
