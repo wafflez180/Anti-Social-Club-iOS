@@ -94,7 +94,7 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
             UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseInOut, animations:
                 {
                     //Reposition and decrease the height of the popup
-                    self.frame = CGRect.init(x: 0, y: (self.parentVC.view.frame.height/2.5)-popupHeight/2, width: self.parentVC.view.frame.size.width, height: popupHeight)
+                    self.frame = CGRect.init(x: 0, y: self.parentVC.tableView.contentOffset.y + (self.parentVC.tableView.frame.height/2)-(popupHeight/2), width: self.parentVC.view.frame.size.width, height: popupHeight)
                     self.photoButtonsContainer.alpha = 0.0
                     self.layoutIfNeeded()
                     self.updateConstraints()
@@ -122,7 +122,7 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
             UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseInOut, animations:
                 {
                     //Reposition and increase the height of the popup
-                    self.frame = CGRect.init(x: 0, y: (self.parentVC.view.frame.height/2.5)-popupHeight/2, width: self.parentVC.view.frame.size.width, height: popupHeight)
+                    self.frame = CGRect.init(x: 0, y: self.parentVC.tableView.contentOffset.y + (self.parentVC.tableView.frame.height/2)-(popupHeight/2), width: self.parentVC.view.frame.size.width, height: popupHeight)
                     self.photoButtonsContainer.alpha = 1.0
                     self.layoutIfNeeded()
                     self.updateConstraints()
