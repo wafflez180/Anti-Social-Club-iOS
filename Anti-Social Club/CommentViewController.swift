@@ -46,7 +46,6 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        postCell?.commentViewCont = self
         self.navigationController?.setToolbarHidden(true, animated: true)
     }
     
@@ -216,7 +215,9 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! PostTableViewCell
+            cell.commentViewCont = self
             cell.configureCellWithPost(post: (postCell?.post!)!, section: indexPath.row)
+            postCell = cell
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell", for: indexPath) as! CommentTableViewCell
