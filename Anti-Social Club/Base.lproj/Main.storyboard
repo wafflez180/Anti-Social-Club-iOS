@@ -234,18 +234,23 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="commentButton" destination="y9m-HO-yAN" id="pUD-2I-gdG"/>
+                                    <outlet property="disklikeTopConstraint" destination="wCF-Dq-HrZ" id="MHj-S5-fHl"/>
                                     <outlet property="dislikeBadgeButton" destination="KWU-9X-Agd" id="9WX-hk-xU0"/>
                                     <outlet property="dislikeLeftConstraint" destination="shu-vw-emW" id="9JI-DB-Sbd"/>
                                     <outlet property="heartBadgeButton" destination="2LE-vN-njD" id="q8B-XH-Ts7"/>
                                     <outlet property="heartLeftConstraint" destination="88z-QR-0SK" id="aEo-Wa-E2E"/>
+                                    <outlet property="heartTopConstraint" destination="wdM-KP-Yo1" id="zZk-wP-27G"/>
                                     <outlet property="imageViewHeightContraint" destination="Ipm-rl-GAV" id="9pI-J7-LxH"/>
                                     <outlet property="laughingBadgeButton" destination="moi-tp-vo4" id="aZx-uX-Snf"/>
                                     <outlet property="laughingLeftConstraint" destination="jmt-Lh-OUh" id="hcX-se-B41"/>
+                                    <outlet property="laughingTopConstraint" destination="DIf-AR-Mbn" id="m73-Xh-mPX"/>
                                     <outlet property="likeBadgeButton" destination="ITW-94-Xwi" id="1F8-KN-w3x"/>
                                     <outlet property="likeLeftConstraint" destination="4N1-P8-eaV" id="U5S-7P-c7R"/>
+                                    <outlet property="likeTopConstraint" destination="Gw1-UT-iLX" id="40u-5f-1iC"/>
                                     <outlet property="messageLabel" destination="lpe-iq-e1s" id="eXi-nq-lxy"/>
                                     <outlet property="notAmusedBadgeButton" destination="bRs-GE-rY2" id="rQM-xm-eMP"/>
                                     <outlet property="notAmusedLeftConstraint" destination="czF-3F-Q14" id="izn-zh-OD3"/>
+                                    <outlet property="notAmusedTopConstraint" destination="Khz-tS-vCe" id="1lp-3S-F7b"/>
                                     <outlet property="postImageView" destination="bFk-TF-WJ4" id="SD0-PQ-2bs"/>
                                     <outlet property="reportButton" destination="IEc-52-veA" id="QyA-H2-RYW"/>
                                     <outlet property="timestampLabel" destination="AFk-Bz-h0w" id="M5j-7j-yWa"/>
@@ -1118,10 +1123,10 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                                 <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="keyCell" rowHeight="85" id="8tr-tc-vZm" customClass="ShareKeyTableViewCell" customModule="Anti_Social_Club" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1" width="1000" height="85"/>
+                                        <rect key="frame" x="0.0" y="1" width="375" height="85"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8tr-tc-vZm" id="ivv-tQ-NMq">
-                                            <rect key="frame" x="0.0" y="0.0" width="1000" height="85"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vXp-08-f0q">

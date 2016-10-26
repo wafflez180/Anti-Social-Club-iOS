@@ -21,12 +21,19 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var timestampLabel: UILabel!
     @IBOutlet weak var postImageView: UIImageView!
+    
     @IBOutlet weak var laughingLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var notAmusedLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var heartLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var likeLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var dislikeLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var imageViewHeightContraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var laughingTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var notAmusedTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var heartTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var likeTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var disklikeTopConstraint: NSLayoutConstraint!
     
     var userVoted : Bool?
     var userVotedBadge : Int?
@@ -37,6 +44,8 @@ class PostTableViewCell: UITableViewCell {
     var section : Int?
     var commentViewCont : CommentViewController?
     var voteButtonArray : [UIButton] = []
+    var voteButtonLeftConstraintArray : [NSLayoutConstraint] = []
+    var voteButtonTopConstraintArray : [NSLayoutConstraint] = []
 
     func configureCellWithPost(post: Post, section: Int) {
         loadedContent = true
@@ -48,6 +57,8 @@ class PostTableViewCell: UITableViewCell {
         self.section = section
         
         voteButtonArray = [laughingBadgeButton,notAmusedBadgeButton,heartBadgeButton,likeBadgeButton,dislikeBadgeButton]
+        voteButtonLeftConstraintArray = [laughingLeftConstraint,notAmusedLeftConstraint,heartLeftConstraint,likeLeftConstraint,dislikeLeftConstraint]
+        voteButtonTopConstraintArray = [laughingTopConstraint,notAmusedTopConstraint,heartTopConstraint,likeTopConstraint,disklikeTopConstraint]
         
         self.layer.borderWidth = 0.5
         self.layer.borderColor = UIColor.hexStringToUIColor(hex: "BDBDBD").cgColor
@@ -177,15 +188,20 @@ class PostTableViewCell: UITableViewCell {
                         //Increment the button title
                         switch badgeId {
                         case 0 :
-                            self.laughingBadgeButton.setTitle(String(describing: (self.post?.badgeFunnyCount!)!+1), for: UIControlState.normal)
+                            self.post?.badgeFunnyCount = (self.post?.badgeFunnyCount)! + 1
+                            self.laughingBadgeButton.setTitle(String(describing: (self.post?.badgeFunnyCount!)!), for: UIControlState.normal)
                         case 1:
-                            self.notAmusedBadgeButton.setTitle(String(describing: (self.post?.badgeDumbCount!)!+1), for: UIControlState.normal)
+                            self.post?.badgeDumbCount = (self.post?.badgeDumbCount)! + 1
+                            self.notAmusedBadgeButton.setTitle(String(describing: (self.post?.badgeDumbCount!)!), for: UIControlState.normal)
                         case 2:
-                            self.heartBadgeButton.setTitle(String(describing: (self.post?.badgeLoveCount!)!+1), for: UIControlState.normal)
+                            self.post?.badgeLoveCount = (self.post?.badgeLoveCount)! + 1
+                            self.heartBadgeButton.setTitle(String(describing: (self.post?.badgeLoveCount!)!), for: UIControlState.normal)
                         case 3:
-                            self.likeBadgeButton.setTitle(String(describing: (self.post?.badgeAgreeCount!)!+1), for: UIControlState.normal)
+                            self.post?.badgeAgreeCount = (self.post?.badgeAgreeCount)! + 1
+                            self.likeBadgeButton.setTitle(String(describing: (self.post?.badgeAgreeCount!)!), for: UIControlState.normal)
                         case 4:
-                            self.dislikeBadgeButton.setTitle(String(describing: (self.post?.badgeDisagreeCount!)!+1), for: UIControlState.normal)
+                            self.post?.badgeDisagreeCount = (self.post?.badgeDisagreeCount)! + 1
+                            self.dislikeBadgeButton.setTitle(String(describing: (self.post?.badgeDisagreeCount!)!), for: UIControlState.normal)
                         default :
                             print("Error")
                         }
@@ -205,23 +221,31 @@ class PostTableViewCell: UITableViewCell {
         }
     }
     
-    func selectBadge(badgeId: Int, animate: Bool){
-        if badgeId == 0 {
-            self.laughingBadgeButton.isSelected = true
-            self.laughingBadgeButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFontWeightMedium)
-        }else if badgeId == 1 {
-            self.notAmusedBadgeButton.isSelected = true
-            self.notAmusedBadgeButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFontWeightMedium)
-        }else if badgeId == 2 {
-            self.heartBadgeButton.isSelected = true
-            self.heartBadgeButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFontWeightMedium)
-        }else if badgeId == 3 {
-            self.likeBadgeButton.isSelected = true
-            self.likeBadgeButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFontWeightMedium)
-        }else if badgeId == 4 {
-            self.dislikeBadgeButton.isSelected = true
-            self.dislikeBadgeButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFontWeightMedium)
+    func badgeExplodeAnimation(button : UIButton){
+        var explodeDuplicatesArray : [UIImageView] = []
+        for _ in 0...14 {
+            let tempImageView : UIImageView = UIImageView(image: button.image(for: UIControlState.selected))
+            tempImageView.frame = button.frame
+            self.addSubview(tempImageView)
+            explodeDuplicatesArray+=[tempImageView]
         }
+        UIView.animate(withDuration: 0.5, animations: {
+            for duplicate in explodeDuplicatesArray {
+                var randomX = arc4random_uniform(80)
+                let randomY = arc4random_uniform(180)
+                duplicate.frame.origin.y = CGFloat(duplicate.frame.origin.y + CGFloat(randomY))
+                if randomX < 80/2 {
+                    randomX = UInt32(Int(randomX) * -1)
+                }
+                duplicate.frame.origin.y = CGFloat(duplicate.frame.origin.x + CGFloat(randomX))
+            }
+        })
+    }
+    
+    func selectBadge(badgeId: Int, animate: Bool){
+        voteButtonArray[badgeId].isSelected = true
+        voteButtonArray[badgeId].titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFontWeightMedium)
+        
         let leftPadding = 5
         let horizontalPadding = 40
         
@@ -235,56 +259,51 @@ class PostTableViewCell: UITableViewCell {
                 buttonsToMove+=[button]
             }
         }
-        var animationTime = 0.5
+        var animationTime = 0.0
         if animate == false{
             animationTime = 0.0
+        }else{
+            animationTime = 0.5
+            //badgeExplodeAnimation(button: voteButtonArray[badgeId])
         }
+        
         UIView.animate(withDuration: animationTime, animations: {
             for button in buttonsToDisappear{
                 button.alpha = 0.0
             }
-            for (index, button) in buttonsToMove.enumerated(){
-                //Get the corresponding left constraint
-                if button == self.laughingBadgeButton {
-                    self.laughingLeftConstraint.constant = CGFloat((index * horizontalPadding) + leftPadding)
-                }else if button == self.notAmusedBadgeButton{
-                    self.notAmusedLeftConstraint.constant = CGFloat((index * horizontalPadding) + leftPadding)
-                }else if button == self.heartBadgeButton{
-                    self.heartLeftConstraint.constant = CGFloat((index * horizontalPadding) + leftPadding)
-                }else if button == self.likeBadgeButton{
-                    self.likeLeftConstraint.constant = CGFloat((index * horizontalPadding) + leftPadding)
-                }else if button == self.dislikeBadgeButton{
-                    self.dislikeLeftConstraint.constant = CGFloat((index * horizontalPadding) + leftPadding)
+            let topPadding : CGFloat = 6.0
+            
+            for (index, buttonToMove) in buttonsToMove.enumerated(){
+                //Bring buttons up and to the left
+                self.voteButtonTopConstraintArray[index].constant = self.voteButtonTopConstraintArray[index].constant - topPadding
+                self.voteButtonLeftConstraintArray[index].constant = CGFloat((index * horizontalPadding) + leftPadding)
+    
+                if buttonToMove.isSelected == false{
+                    buttonToMove.alpha = 0.5
                 }
-                if button.isSelected == false{
-                    button.alpha = 0.5
-                }
+                
+                buttonToMove.titleLabel?.alpha = 1.0
             }
             self.layoutIfNeeded()
         })
     }
     
     func resetBadges(){
-        self.laughingBadgeButton.isSelected = false
-        self.notAmusedBadgeButton.isSelected = false
-        self.heartBadgeButton.isSelected = false
-        self.dislikeBadgeButton.isSelected = false
-        self.likeBadgeButton.isSelected = false
-        
-        self.laughingBadgeButton.alpha = 1.0
-        self.notAmusedBadgeButton.alpha = 1.0
-        self.heartBadgeButton.alpha = 1.0
-        self.dislikeBadgeButton.alpha = 1.0
-        self.likeBadgeButton.alpha = 1.0
-        
         let leftPadding = 5
         let horizontalPadding = 40
-        
-        self.laughingLeftConstraint.constant = CGFloat((0 * horizontalPadding) + leftPadding)
-        self.notAmusedLeftConstraint.constant = CGFloat((1 * horizontalPadding) + leftPadding)
-        self.heartLeftConstraint.constant = CGFloat((2 * horizontalPadding) + leftPadding)
-        self.likeLeftConstraint.constant = CGFloat((3 * horizontalPadding) + leftPadding)
-        self.dislikeLeftConstraint.constant = CGFloat((4 * horizontalPadding) + leftPadding)
+
+        for (index, button) in voteButtonArray.enumerated() {
+            button.isSelected = false
+            button.alpha = 1.0
+            button.titleLabel?.alpha = 0.0
+            voteButtonLeftConstraintArray[index].constant = CGFloat((index * horizontalPadding) + leftPadding)
+        }
+        let topPadding : CGFloat = 6.0
+        voteButtonTopConstraintArray[0].constant = 6.0 + topPadding
+        voteButtonTopConstraintArray[1].constant = 6.0 + topPadding
+        voteButtonTopConstraintArray[2].constant = 10.0 + topPadding
+        voteButtonTopConstraintArray[3].constant = 9.0 + topPadding
+        voteButtonTopConstraintArray[4].constant = 9.0 + topPadding
         self.layoutIfNeeded()
     }
     
