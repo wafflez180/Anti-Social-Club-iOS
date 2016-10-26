@@ -15,6 +15,7 @@ class HomepageTableViewController: UITableViewController {
     var userName : String?
     var userToken : String?
     var selectedPostCell : PostTableViewCell?
+    var composePostPopup : ComposePostView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -106,9 +107,8 @@ class HomepageTableViewController: UITableViewController {
     }
     
     func setupComposePostPopupWithBlur() -> ComposePostView{
-        
         let composePostView = Bundle.main.loadNibNamed("ComposePost", owner: self, options: nil)?[0] as! ComposePostView
-        
+        composePostPopup = composePostView
         composePostView.parentVC = self
         composePostView.viewDidLoad()
         self.view.addSubview(composePostView)
@@ -119,8 +119,10 @@ class HomepageTableViewController: UITableViewController {
     // MARK: - ToolBar Actions
     
     @IBAction func pressedCreatePost(_ sender: UIBarButtonItem) {
-        let composePostView = setupComposePostPopupWithBlur()
-        composePostView.presentPopup()
+        if (composePostPopup == nil) {
+            let composePostView = setupComposePostPopupWithBlur()
+            composePostView.presentPopup()
+        }
     }
     
     // MARK: - TableViewDataSource

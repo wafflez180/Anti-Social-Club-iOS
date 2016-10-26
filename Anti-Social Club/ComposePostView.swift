@@ -57,8 +57,6 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
             selector: #selector(keyboardDidHide),
             name: NSNotification.Name.UIKeyboardDidHide,
             object: nil)
-    
-    
     }
     
     //MARK: - ComposePostView
@@ -76,7 +74,7 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
     func setupFrame()
     {
         let frameHeight = 180.0 as CGFloat
-        self.frame = CGRect.init(x: 0, y: self.parentVC.view.frame.height, width: self.parentVC.view.frame.size.width, height: frameHeight)
+        self.frame = CGRect.init(x: 0, y: self.parentVC.tableView.contentOffset.y + (self.parentVC.tableView.frame.height), width: self.parentVC.view.frame.size.width, height: frameHeight)
     }
     
     func dismissPhotoButtonContainer(animate: Bool)
@@ -160,15 +158,19 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
     
     func presentPopup()
     {
+        //Stop scrolling
+        self.parentVC.tableView.isScrollEnabled = false
+        self.parentVC.tableView.setContentOffset(self.parentVC.tableView.contentOffset, animated: false)
+        
         //Animate post view to the middle of the screen
         let popupHeight = 180.0 as CGFloat
         UIView.animate(withDuration: 0.2, delay: 0.0, options: .transitionCurlUp, animations:
             {
                 self.blurView.alpha = 1.0
-                self.frame = CGRect.init(x: 0, y: (self.parentVC.view.frame.height/2)-popupHeight, width: self.parentVC.view.frame.size.width, height: popupHeight)
+                self.frame = CGRect.init(x: 0, y: self.parentVC.tableView.contentOffset.y + (self.parentVC.tableView.frame.height/2)-(popupHeight/2), width: self.parentVC.view.frame.size.width, height: popupHeight)
             },completion:
             { finished in
-                print("Finished animation")
+                print("Dismissed Compose Message Popup")
         })
     }
     
@@ -176,11 +178,12 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
     {
         if keyboardIsHidden
         {
+            self.parentVC.composePostPopup = nil
+            self.parentVC.tableView.isScrollEnabled = true
             UIView.animate(withDuration: 0.2, delay: 0.0, options: .transitionCurlUp, animations:
                 {
                     self.blurView.alpha = 0.0
-                    self.frame = CGRect.init(x: 0, y: self.parentVC.view.frame.height, width: self.parentVC.view.frame.size.width, height: self.frame.size.height)
-                    
+                    self.frame = CGRect.init(x: 0, y: self.parentVC.tableView.contentOffset.y + (self.parentVC.tableView.frame.height), width: self.parentVC.view.frame.size.width, height: self.frame.size.height)
                 },completion:
                 { finished in
                     self.blurView.removeFromSuperview()
@@ -247,10 +250,13 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
     }
     
     func sendPopupAnimation(){
+        self.parentVC.tableView.isScrollEnabled = true
+        self.parentVC.composePostPopup = nil
         UIView.animate(withDuration: 0.2, delay: 0.0, options: .transitionCurlUp, animations:
             {
                 self.blurView.alpha = 0.0
-                self.frame = CGRect.init(x: 0, y: -self.frame.size.height, width: self.parentVC.view.frame.size.width, height: self.frame.size.height)
+                self.frame = CGRect.init(x: 0, y: self.parentVC.tableView.contentOffset.y - (self.parentVC.tableView.frame.height), width: self.parentVC.view.frame.size.width, height: self.frame.size.height)
+                
             },completion:
             { finished in
                 self.blurView.removeFromSuperview()
