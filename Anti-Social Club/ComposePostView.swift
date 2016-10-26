@@ -9,6 +9,8 @@
 import UIKit
 import AVFoundation
 import Fusuma
+import Alamofire
+import SwiftyJSON
 
 class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, UITextViewDelegate {
     
@@ -244,8 +246,61 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
             flashMessageBox()
         }else
         {
-            //TODO: Add API Method to post and when successful, do the animation
-            sendPopupAnimation()
+            var imageData = Data()
+        
+            if (postPhotoImageView!.image != nil) {
+                imageData = UIImageJPEGRepresentation((postPhotoImageView?.image)!, 1.0)!
+            }
+            
+            let message = messageTextView.text!;
+            let token = UserDefaults.standard.string(forKey: "token")!
+        
+            Alamofire.upload(
+            multipartFormData:
+            {
+                multipartFormData in
+                
+                multipartFormData.append(imageData, withName: "image", mimeType: "image/jpeg")
+                multipartFormData.append(message.data(using: String.Encoding.utf8)!, withName: "message")
+                multipartFormData.append(token.data(using: String.Encoding.utf8)!, withName: "token")
+            },
+            to: Constants.API.ADDRESS + Constants.API.CALL_POST,
+            encodingCompletion:
+            {
+                encodingResult in
+                
+                switch encodingResult
+                {
+                    case .success(let upload, _, _):
+                        upload.responseJSON()
+                        {
+                            response in
+
+                            switch response.result
+                            {
+                                case .success(let responseData):
+                                    let json = JSON(responseData)
+
+                                    // Handle any errors
+                                    if json["error"].bool == true
+                                    {
+                                        print("ERROR: \(json["error_message"].stringValue)")
+                                        return
+                                    }
+                                    
+                                    self.sendPopupAnimation()
+                                    break
+                                
+                                case .failure(let error):
+                                    print("Request failed with error: \(error)")
+                            }
+                        }
+
+                    case .failure(let encodingError):
+                        print("Image encoding failed: \(encodingError)");
+                }
+            }
+            );
         }
     }
     
