@@ -95,6 +95,44 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
+    func attemptSendKey(token : String, key : String, recipientEmail : String)
+    {
+        print("Attempting to send key\n\tKey: \(key)\n\tTo: \(recipientEmail)")
+        
+        let parameters = ["token" : token, "key" : key, "recipient_email" : recipientEmail]
+        
+        let activityView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+        activityView.center=self.view.center;
+        activityView.frame = self.view.frame
+        activityView.startAnimating()
+        self.view.addSubview(activityView)
+        
+        Alamofire.request(Constants.API.ADDRESS + Constants.API.CALL_SEND_INVITE, method: .post, parameters: parameters)
+            .responseJSON()
+                {
+                    response in
+                    
+                    activityView.stopAnimating()
+                    activityView.removeFromSuperview()
+                    
+                    switch response.result
+                    {
+                    case .success(let responseData):
+                        let json = JSON(responseData)
+                        //Don't do anything if it succesfully went through
+                        
+                    case .failure(let error):
+                        print("Request failed with error: \(error)")
+                        let alert = UIAlertController(title: "Error", message: "Network Error! Please try again later", preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                        
+                        return
+                    }
+        }
+    }
+
+    
     // MARK: - Actions
     
     @IBAction func pressedPurchaseMoreKeys(_ sender: AnyObject) {
@@ -140,7 +178,8 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:handleCancel))
             alert.addAction(UIAlertAction(title: "Share", style: .default, handler:{ (UIAlertAction) in
                 print("User shared key: \(cell.accessKey!) to \(self.recipientTextField.text!)")
-                //TODO SUBMIT IT TO THE API
+                let defaults = UserDefaults.standard
+                self.attemptSendKey(token: defaults.string(forKey: "token")!, key: cell.accessKey!, recipientEmail: self.recipientTextField.text!)
             }))
             self.present(alert, animated: true, completion: {
                 print("completion block")

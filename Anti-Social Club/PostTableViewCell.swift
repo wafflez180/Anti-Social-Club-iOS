@@ -71,6 +71,8 @@ class PostTableViewCell: UITableViewCell {
         
         if userReported!{
             reportButton.isSelected = true
+        }else{
+            reportButton.isSelected = false
         }
                 //print(post.imageSource)
         //print(post.message)

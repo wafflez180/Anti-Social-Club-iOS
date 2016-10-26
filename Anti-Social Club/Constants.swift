@@ -30,6 +30,7 @@ class Constants
         static let CALL_RETRIEVE_USER_INFO = "RetrieveUserInfo.php"
         static let CALL_RETRIEVE_USER_KEYS = "RetrieveUserKeys.php"
         static let CALL_POST = "Post.php"
+        static let CALL_SEND_INVITE = "SendInvite.php"
         static let CALL_VOTE = "Vote.php"
         static let CALL_REPORT = "ReportPost.php"
         static let CALL_COMMENT = "Comment.php"
