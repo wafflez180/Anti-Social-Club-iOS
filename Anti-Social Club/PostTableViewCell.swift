@@ -225,21 +225,39 @@ class PostTableViewCell: UITableViewCell {
         var explodeDuplicatesArray : [UIImageView] = []
         for _ in 0...14 {
             let tempImageView : UIImageView = UIImageView(image: button.image(for: UIControlState.selected))
-            tempImageView.frame = button.frame
-            self.addSubview(tempImageView)
+            var tempImageFrame : CGRect = CGRect()
+            tempImageFrame.origin.y = self.parentVC.tableView.contentOffset.y + button.frame.origin.y + self.parentVC.tableView.frame.size.height
+            tempImageFrame.origin.x = button.frame.origin.x
+            tempImageFrame.size = button.frame.size
+            print(self.parentVC.tableView.contentOffset.y)
+            print(tempImageFrame.origin.y)
+            self.parentVC.tableView.addSubview(tempImageView)
             explodeDuplicatesArray+=[tempImageView]
         }
-        UIView.animate(withDuration: 0.5, animations: {
+        UIView.animate(withDuration: 0.2, animations: {
             for duplicate in explodeDuplicatesArray {
-                var randomX = arc4random_uniform(80)
-                let randomY = arc4random_uniform(180)
+                var randomX = Int(arc4random_uniform(80))
+                let randomY = Int(arc4random_uniform(180))
                 duplicate.frame.origin.y = CGFloat(duplicate.frame.origin.y + CGFloat(randomY))
                 if randomX < 80/2 {
-                    randomX = UInt32(Int(randomX) * -1)
+                    randomX = randomX * -1
                 }
-                duplicate.frame.origin.y = CGFloat(duplicate.frame.origin.x + CGFloat(randomX))
+                duplicate.frame.origin.x = CGFloat(duplicate.frame.origin.x + CGFloat(randomX))
             }
-        })
+        },completion: { finished in
+            //Make duplicates disappear
+            UIView.animate(withDuration: 0.1, animations: {
+                for duplicate in explodeDuplicatesArray {
+                    duplicate.alpha = 0.0
+                }
+            },completion: { finished in
+                for duplicate in explodeDuplicatesArray {
+                    duplicate.removeFromSuperview()
+                }
+            }
+            )
+        }
+        )
     }
     
     func selectBadge(badgeId: Int, animate: Bool){
@@ -264,7 +282,7 @@ class PostTableViewCell: UITableViewCell {
             animationTime = 0.0
         }else{
             animationTime = 0.5
-            //badgeExplodeAnimation(button: voteButtonArray[badgeId])
+            badgeExplodeAnimation(button: voteButtonArray[badgeId])
         }
         
         UIView.animate(withDuration: animationTime, animations: {
