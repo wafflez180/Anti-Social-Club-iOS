@@ -154,7 +154,6 @@ class HomepageTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell") as! PostTableViewCell
-        print(indexPath.section)
         cell.configureCellWithPost(post: postsArray[indexPath.section], section: indexPath.section)
         cell.parentVC = self
         //cell.timestampLabel.text = String(indexPath.section)
