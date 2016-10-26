@@ -110,6 +110,8 @@ class PostTableViewCell: UITableViewCell {
         }else{
             resetBadges()
         }
+        
+        retrieveImage();
     }
     
     func setTimestamp(withDateCreated : Date){
@@ -128,6 +130,31 @@ class PostTableViewCell: UITableViewCell {
             self.timestampLabel.text = "\(currentDate.minutes(from: withDateCreated))m"
         }else if(currentDate.seconds(from: withDateCreated) > 0){
             self.timestampLabel.text = "\(currentDate.seconds(from: withDateCreated))s"
+        }
+    }
+    
+    func retrieveImage() {
+        Alamofire.request(Constants.API.ADDRESS + Constants.API.IMAGE_DIRECTORY + post!.imageSource!).responseImage
+        {
+            response in
+            
+            if let image = response.result.value
+            {
+                print("image downloaded: \(image)")
+                self.postImageView!.image = response.result.value
+                
+                self.postImageView!.contentMode = UIViewContentMode.center
+                
+                /*
+                var newFrame = cell.productImageView.frame as CGRect
+                newFrame.size.width = cell.frame.size.width * 0.15
+                cell.productImageView.frame = newFrame
+                cell.layoutSubviews()
+                */
+
+                self.layoutSubviews()
+                self.setNeedsLayout()
+            }
         }
     }
 
