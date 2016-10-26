@@ -111,7 +111,7 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                                                 <constraint firstAttribute="height" constant="27" id="2dh-6Y-BdR"/>
                                                 <constraint firstAttribute="width" constant="26" id="MUK-W8-m6h"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="tintColor" red="0.45882352941176469" green="0.45882352941176469" blue="0.45882352941176469" alpha="1" colorSpace="calibratedRGB"/>
                                             <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="-10" maxY="0.0"/>
                                             <inset key="titleEdgeInsets" minX="-36" minY="45" maxX="0.0" maxY="0.0"/>
@@ -129,7 +129,7 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                                                 <constraint firstAttribute="height" constant="27" id="4RZ-9N-N54"/>
                                                 <constraint firstAttribute="width" constant="26" id="e4U-rF-9fq"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="tintColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="-10" maxY="0.0"/>
                                             <inset key="titleEdgeInsets" minX="-36" minY="45" maxX="0.0" maxY="0.0"/>
@@ -147,7 +147,7 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                                                 <constraint firstAttribute="width" constant="26" id="DNt-yn-Tif"/>
                                                 <constraint firstAttribute="height" constant="23" id="RIQ-QT-Tdz"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="tintColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="-10" maxY="0.0"/>
                                             <inset key="titleEdgeInsets" minX="-36" minY="42" maxX="0.0" maxY="0.0"/>

@@ -199,14 +199,19 @@ class PostTableViewCell: UITableViewCell {
     func selectBadge(badgeId: Int, animate: Bool){
         if badgeId == 0 {
             self.laughingBadgeButton.isSelected = true
+            self.laughingBadgeButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFontWeightMedium)
         }else if badgeId == 1 {
             self.notAmusedBadgeButton.isSelected = true
+            self.notAmusedBadgeButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFontWeightMedium)
         }else if badgeId == 2 {
             self.heartBadgeButton.isSelected = true
+            self.heartBadgeButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFontWeightMedium)
         }else if badgeId == 3 {
             self.likeBadgeButton.isSelected = true
+            self.likeBadgeButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFontWeightMedium)
         }else if badgeId == 4 {
             self.dislikeBadgeButton.isSelected = true
+            self.dislikeBadgeButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFontWeightMedium)
         }
         let leftPadding = 5
         let horizontalPadding = 40
