@@ -85,6 +85,8 @@ class PostTableViewCell: UITableViewCell {
         else{
             self.postImageView.isHidden = false
             self.imageViewHeightContraint.constant = 200
+            let tap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(presentFullImageView))
+            self.postImageView.addGestureRecognizer(tap)
             self.layoutIfNeeded()
             self.setNeedsLayout()
             // TODO:
@@ -127,6 +129,11 @@ class PostTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func presentFullImageView(){
+        parentVC.selectedImageView = self.postImageView
+        parentVC.performSegue(withIdentifier: "viewFullImageSegue", sender: nil)
     }
     
     func attemptReportPost(token: String, postId: Int)

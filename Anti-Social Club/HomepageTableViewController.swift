@@ -15,6 +15,7 @@ class HomepageTableViewController: UITableViewController {
     var userName : String?
     var userToken : String?
     var selectedPostCell : PostTableViewCell?
+    var selectedImageView : UIImageView?
     var composePostPopup : ComposePostView?
 
     override func viewDidLoad() {
@@ -211,6 +212,10 @@ class HomepageTableViewController: UITableViewController {
         {
             let destination = segue.destination as! CommentViewController
             destination.postCell = selectedPostCell
+        } else if (segue.identifier == "viewFullImageSegue")
+        {
+            let destination = segue.destination as! ViewImageViewController
+            destination.fullSizeImage = (selectedImageView?.image)!
         }
         
     }
