@@ -27,12 +27,7 @@ class HomepageTableViewController: UITableViewController {
         let navController = self.navigationController as! CustomNavigationController
         userName = navController.username
         userToken = navController.userToken
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         //Crashlytics.sharedInstance().crash()
         
         retrievePosts(offset: 0)
@@ -43,6 +38,11 @@ class HomepageTableViewController: UITableViewController {
     }
     
     // MARK: - HomepageTableViewController
+    
+    @IBAction func refresh(_ sender: Any) {
+        self.postsArray.removeAll()
+        retrievePosts(offset: 0)
+    }
     
     func retrievePosts(offset: Int) {
         print("Attempting to retrieve posts for user \(userName!) with token \(userToken!)")
@@ -84,9 +84,11 @@ class HomepageTableViewController: UITableViewController {
                         reachedLoadedPostsLimit = postsJSONArray.count == 0
                     }
                     
+                    
                     if !reachedLoadedPostsLimit {
                         DispatchQueue.main.async{
                             self.tableView.reloadData()
+                            self.refreshControl?.endRefreshing()
                         }
                     }
                     
@@ -213,6 +215,7 @@ class HomepageTableViewController: UITableViewController {
         {
             let destination = segue.destination as! CommentViewController
             destination.postCell = selectedPostCell
+            destination.parentVC = self
         } else if (segue.identifier == "viewFullImageSegue")
         {
             let destination = segue.destination as! ViewImageViewController

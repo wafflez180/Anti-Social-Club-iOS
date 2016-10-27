@@ -220,7 +220,14 @@ class PostTableViewCell: UITableViewCell {
                         //let json = JSON(responseData)
                         self.reportButton.isSelected = true
                         self.reportButton.setTitle(String(describing: (self.post?.reportCount!)!+1), for: UIControlState.selected)
+                        self.post?.reported = true
+                        self.post?.reportCount = (self.post?.reportCount)!+1
                         
+                        //Update cell in the main page
+                        if self.commentViewCont != nil {
+                            self.commentViewCont?.parentVC?.selectedPostCell?.configureCellWithPost(post: (self.post)!, section: (self.commentViewCont?.parentVC?.selectedPostCell?.section)!)
+                        }
+
                     case .failure(let error):
                         print("Request failed with error: \(error)")
                         
@@ -271,6 +278,11 @@ class PostTableViewCell: UITableViewCell {
                         self.post?.votedBadge = badgeId
                         self.userVotedBadge = badgeId
                         
+                        //Update cell in the main page
+                        if self.commentViewCont != nil {
+                            self.commentViewCont?.parentVC?.selectedPostCell?.configureCellWithPost(post: (self.post)!, section: (self.commentViewCont?.parentVC?.selectedPostCell?.section)!)
+                        }
+                        
                     case .failure(let error):
                         print("Request failed with error: \(error)")
                         
@@ -284,12 +296,19 @@ class PostTableViewCell: UITableViewCell {
         for _ in 0...14 {
             let tempImageView : UIImageView = UIImageView(image: button.image(for: UIControlState.selected))
             var tempImageFrame : CGRect = CGRect()
-            let pointInTableView = self.convert(button.frame.origin, to: self.parentVC.tableView)
+            var pointInTableView = CGPoint()
+            
+            if parentVC == nil {
+                pointInTableView = self.convert(button.frame.origin, to: self.commentViewCont?.commentTableview)
+                self.commentViewCont?.commentTableview.addSubview(tempImageView)
+            }else{
+                pointInTableView = self.convert(button.frame.origin, to: self.parentVC.tableView)
+                self.parentVC.tableView.addSubview(tempImageView)
+            }
             //Set initial frame
             
-            print(self.parentVC.tableView.contentOffset.y)
-            print(tempImageFrame.origin.y)
-            self.parentVC.tableView.addSubview(tempImageView)
+            //print(self.parentVC.tableView.contentOffset.y)
+            //print(tempImageFrame.origin.y)
             tempImageFrame.origin.y = pointInTableView.y
             tempImageFrame.origin.x = button.frame.origin.x
             tempImageFrame.size = button.frame.size
@@ -355,7 +374,6 @@ class PostTableViewCell: UITableViewCell {
             }
             for (index, buttonToMove) in buttonsToMove.enumerated(){
                 //Bring buttons up and to the left
-                print("MovingBadge \(index)")
                 for (indexToMove, button) in self.voteButtonArray.enumerated(){
                     if button == buttonToMove{
                         self.voteButtonTopConstraintArray[indexToMove].constant = self.voteButtonTopConstraintArray[indexToMove].constant - topPadding
@@ -422,7 +440,11 @@ class PostTableViewCell: UITableViewCell {
             deactivateAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
                 
             }))
-            self.parentVC.present(deactivateAlert, animated: true, completion: nil)
+            if self.parentVC == nil {
+                self.commentViewCont?.present(deactivateAlert, animated: true, completion: nil)
+            }else{
+                self.parentVC.present(deactivateAlert, animated: true, completion: nil)
+            }
         }
     }
     @IBAction func selectedLaughingBadge(_ sender: UIButton)

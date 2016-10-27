@@ -12,6 +12,7 @@ import SwiftyJSON
 
 class CommentViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
+    var parentVC : HomepageTableViewController?
     var postCell : PostTableViewCell?
     var commentArray : [Comment] = []
     var tapGestureRec : UITapGestureRecognizer?
@@ -43,6 +44,10 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
         offset = (postCell?.parentVC.postsArray.count)!-offsetBullshitIncrement
         postId = (postCell?.post?.id)!
         attemptRetrieveComments(offset: offset!, token: defaults.string(forKey: "token")!, postId: postId!)
+        
+        self.commentTableview.refreshControl = UIRefreshControl()
+        self.commentTableview.refreshControl?.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,6 +62,13 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func refresh(sender:AnyObject)
+    {
+        let defaults = UserDefaults.standard
+        self.commentArray.removeAll()
+        attemptRetrieveComments(offset: offset!, token: defaults.string(forKey: "token")!, postId: postId!)
     }
     
     func attemptRetrieveComments(offset: Int, token: String, postId: Int)
@@ -105,7 +117,13 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
                             }
                         }
                         
+                        self.postCell?.post?.commentCount = self.commentArray.count
+                        self.postCell?.commentButton.setTitle(String(describing: (self.postCell?.post?.commentCount!)), for: UIControlState.normal)
+                        self.parentVC?.selectedPostCell?.commentButton.setTitle(String(describing: (self.postCell?.post?.commentCount!)!), for: UIControlState.normal)
+                        
                         self.commentTableview.reloadData()
+                        self.commentTableview.refreshControl?.endRefreshing()
+
                         if self.postedNewComment {
                             self.commentTableview.layoutIfNeeded()
                             let lastRowIndexPath = IndexPath(row: self.commentTableview.numberOfRows(inSection: 0)-1, section: 0)
