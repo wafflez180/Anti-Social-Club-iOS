@@ -144,22 +144,15 @@ class PostTableViewCell: UITableViewCell {
             
             if let image : UIImage = response.result.value
             {
-                print("image downloaded: \(image)")
-                self.post?.downloadedImage = image
                 self.postImageView.alpha = 0.0
                 self.postImageView.image = self.cropTo16by9Center(image: image)
                 UIView.animate(withDuration: 0.2, animations: {
                     self.postImageView.alpha = 1.0
                 })
-                /*
-                var newFrame = cell.productImageView.frame as CGRect
-                newFrame.size.width = cell.frame.size.width * 0.15
-                cell.productImageView.frame = newFrame
-                cell.layoutSubviews()
-                */
+
                 self.layoutSubviews()
-                self.layoutIfNeeded()
                 self.setNeedsLayout()
+                self.layoutIfNeeded()
             }
         }
     }
