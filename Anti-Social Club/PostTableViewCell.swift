@@ -284,27 +284,33 @@ class PostTableViewCell: UITableViewCell {
         for _ in 0...14 {
             let tempImageView : UIImageView = UIImageView(image: button.image(for: UIControlState.selected))
             var tempImageFrame : CGRect = CGRect()
-            tempImageFrame.origin.y = self.parentVC.tableView.contentOffset.y + button.frame.origin.y + self.parentVC.tableView.frame.size.height
-            tempImageFrame.origin.x = button.frame.origin.x
-            tempImageFrame.size = button.frame.size
+            let pointInTableView = self.convert(button.frame.origin, to: self.parentVC.tableView)
+            //Set initial frame
+            
             print(self.parentVC.tableView.contentOffset.y)
             print(tempImageFrame.origin.y)
             self.parentVC.tableView.addSubview(tempImageView)
+            tempImageFrame.origin.y = pointInTableView.y
+            tempImageFrame.origin.x = button.frame.origin.x
+            tempImageFrame.size = button.frame.size
+            tempImageView.frame = tempImageFrame
+
             explodeDuplicatesArray+=[tempImageView]
         }
-        UIView.animate(withDuration: 0.2, animations: {
+        UIView.animate(withDuration: 0.3, delay: 0.0, options: .transitionCurlDown, animations: {
             for duplicate in explodeDuplicatesArray {
-                var randomX = Int(arc4random_uniform(80))
-                let randomY = Int(arc4random_uniform(180))
+                var randomX = Int(arc4random_uniform(75))
+                let randomY = Int(arc4random_uniform(75))
+                let randomSpin = Int(arc4random_uniform(8)+1)
                 duplicate.frame.origin.y = CGFloat(duplicate.frame.origin.y + CGFloat(randomY))
                 if randomX < 80/2 {
                     randomX = randomX * -1
                 }
                 duplicate.frame.origin.x = CGFloat(duplicate.frame.origin.x + CGFloat(randomX))
+                duplicate.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_4)*CGFloat(randomSpin))
             }
         },completion: { finished in
-            //Make duplicates disappear
-            UIView.animate(withDuration: 0.1, animations: {
+            UIView.animate(withDuration: 0.2, delay: 0.0, options: .transitionCurlDown, animations: {
                 for duplicate in explodeDuplicatesArray {
                     duplicate.alpha = 0.0
                 }
@@ -312,8 +318,7 @@ class PostTableViewCell: UITableViewCell {
                 for duplicate in explodeDuplicatesArray {
                     duplicate.removeFromSuperview()
                 }
-            }
-            )
+            })
         }
         )
     }
@@ -340,19 +345,23 @@ class PostTableViewCell: UITableViewCell {
             animationTime = 0.0
         }else{
             animationTime = 0.5
-            badgeExplodeAnimation(button: voteButtonArray[badgeId])
+            self.badgeExplodeAnimation(button: self.voteButtonArray[badgeId])
         }
         
+        let topPadding : CGFloat = 6.0
         UIView.animate(withDuration: animationTime, animations: {
             for button in buttonsToDisappear{
                 button.alpha = 0.0
             }
-            let topPadding : CGFloat = 6.0
-            
             for (index, buttonToMove) in buttonsToMove.enumerated(){
                 //Bring buttons up and to the left
-                self.voteButtonTopConstraintArray[index].constant = self.voteButtonTopConstraintArray[index].constant - topPadding
-                self.voteButtonLeftConstraintArray[index].constant = CGFloat((index * horizontalPadding) + leftPadding)
+                print("MovingBadge \(index)")
+                for (indexToMove, button) in self.voteButtonArray.enumerated(){
+                    if button == buttonToMove{
+                        self.voteButtonTopConstraintArray[indexToMove].constant = self.voteButtonTopConstraintArray[indexToMove].constant - topPadding
+                        self.voteButtonLeftConstraintArray[indexToMove].constant = CGFloat((index * horizontalPadding) + leftPadding)
+                    }
+                }
     
                 if buttonToMove.isSelected == false{
                     buttonToMove.alpha = 0.5
@@ -361,6 +370,9 @@ class PostTableViewCell: UITableViewCell {
                 buttonToMove.titleLabel?.alpha = 1.0
             }
             self.layoutIfNeeded()
+            
+        },completion: { finished in
+
         })
     }
     
@@ -431,6 +443,8 @@ class PostTableViewCell: UITableViewCell {
     }
     @IBAction func selectedHeartBadge(_ sender: UIButton)
     {
+        //print("Heart LocY: \(self.convert(heartBadgeButton.frame.origin, to: self.parentVC.tableView))")
+        //badgeExplodeAnimation(button: heartBadgeButton)
         if !userVoted! {
             let defaults = UserDefaults.standard
             let token = defaults.string(forKey: "token")
