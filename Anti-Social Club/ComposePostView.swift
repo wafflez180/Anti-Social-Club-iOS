@@ -248,13 +248,6 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
             flashMessageBox()
         }else
         {
-            var imageData = Data()
-        
-            if self.imageToUpload != nil {
-                imageData = UIImageJPEGRepresentation((self.imageToUpload)!, 1.0)!
-                print("Sent with image")
-            }
-            
             let message = messageTextView.text!;
             let token = UserDefaults.standard.string(forKey: "token")!
         
@@ -263,11 +256,21 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
             {
                 multipartFormData in
                 
-                multipartFormData.append(imageData, withName: "image", mimeType: "image/jpeg")
+                // Test to upload logo
+                self.imageToUpload = UIImage(named: "Buffalo")
+                
+                if let image = self.imageToUpload {
+                    if let imageData = UIImageJPEGRepresentation(image, 1.0) {
+                        print("Got imageData, appending to multipartFormData...")
+                        multipartFormData.append(imageData, withName: "image", fileName: "image.jpeg", mimeType: "image/jpeg")
+                    }
+                }
+                
                 multipartFormData.append(message.data(using: String.Encoding.utf8)!, withName: "message")
                 multipartFormData.append(token.data(using: String.Encoding.utf8)!, withName: "token")
             },
             to: Constants.API.ADDRESS + Constants.API.CALL_POST,
+            method: .post,
             encodingCompletion:
             {
                 encodingResult in
