@@ -95,9 +95,15 @@ class PostTableViewCell: UITableViewCell {
         }
         else{
             self.postImageView.isHidden = false
-            self.imageViewHeightContraint.constant = 200
+            self.imageViewHeightContraint.constant = 211
             let tap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(presentFullImageView))
             self.postImageView.addGestureRecognizer(tap)
+            if post.downloadedImage == nil {
+                self.postImageView.image = nil
+                retrieveImage();
+            }else{
+                self.postImageView.image = cropTo16by9Center(image: post.downloadedImage!)
+            }
             self.layoutIfNeeded()
             self.setNeedsLayout()
             // TODO:
@@ -110,8 +116,6 @@ class PostTableViewCell: UITableViewCell {
         }else{
             resetBadges()
         }
-        
-        retrieveImage();
     }
     
     func setTimestamp(withDateCreated : Date){
@@ -138,24 +142,49 @@ class PostTableViewCell: UITableViewCell {
         {
             response in
             
-            if let image = response.result.value
+            if let image : UIImage = response.result.value
             {
                 print("image downloaded: \(image)")
-                self.postImageView!.image = response.result.value
-                
-                self.postImageView!.contentMode = UIViewContentMode.center
-                
+                self.post?.downloadedImage = image
+                self.postImageView.alpha = 0.0
+                self.postImageView.image = self.cropTo16by9Center(image: image)
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.postImageView.alpha = 1.0
+                })
                 /*
                 var newFrame = cell.productImageView.frame as CGRect
                 newFrame.size.width = cell.frame.size.width * 0.15
                 cell.productImageView.frame = newFrame
                 cell.layoutSubviews()
                 */
-
                 self.layoutSubviews()
+                self.layoutIfNeeded()
                 self.setNeedsLayout()
             }
         }
+    }
+    
+    func cropTo16by9Center(image: UIImage) -> UIImage {
+        let contextImage: UIImage = UIImage(cgImage: image.cgImage!)
+        
+        let cgwidth: CGFloat = CGFloat(contextImage.size.width)
+        let cgheight: CGFloat = CGFloat(Float(contextImage.size.width)/(16.0/9.0))
+        let posX: CGFloat = 0.0
+        let posY: CGFloat = CGFloat(contextImage.size.height/2.0) - (cgheight/2)
+        /*
+        print("Image Size\n\tWidth: \(image.size.width)\n\tHeight: \(image.size.height)")
+        print("Context Image Size\n\tWidth: \(contextImage.size.width)\n\tHeight: \(contextImage.size.height)")
+        print("16:9 Image Size\n\tWidth: \(cgwidth)\n\tHeight: \(cgheight)")
+        */
+        let rect: CGRect = CGRect(x: posX, y: posY, width: cgwidth, height: cgheight)
+        
+        // Create bitmap image from context using the rect
+        let imageRef: CGImage = contextImage.cgImage!.cropping(to: rect)!
+        
+        // Create a new image based on the imageRef and rotate back to the original orientation
+        let image: UIImage = UIImage(cgImage: imageRef, scale: image.scale, orientation: image.imageOrientation)
+        
+        return image
     }
 
     override func awakeFromNib() {
@@ -170,8 +199,10 @@ class PostTableViewCell: UITableViewCell {
     }
     
     func presentFullImageView(){
-        parentVC.selectedImageView = self.postImageView
-        parentVC.performSegue(withIdentifier: "viewFullImageSegue", sender: nil)
+        if self.post?.downloadedImage != nil {
+            parentVC.selectedImage = self.post?.downloadedImage
+            parentVC.performSegue(withIdentifier: "viewFullImageSegue", sender: nil)
+        }
     }
     
     func attemptReportPost(token: String, postId: Int)

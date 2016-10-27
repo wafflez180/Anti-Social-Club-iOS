@@ -25,6 +25,7 @@ class Post{
     var badgeLoveCount : Int?
     var badgeAgreeCount : Int?
     var badgeDisagreeCount : Int?
+    var downloadedImage : UIImage?
     
     init?(id : Int?,
           posterId : Int?,

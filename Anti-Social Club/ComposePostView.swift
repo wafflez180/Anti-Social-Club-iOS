@@ -29,7 +29,7 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
     var parentVC : HomepageTableViewController!
     var blurView : UIView!
     var showingPhotoButtons : Bool = false
-    var imageToUpload : UIImage = UIImage()
+    var imageToUpload : UIImage?
     var keyboardIsHidden = true
     
     let fusuma = FusumaViewController()
@@ -154,7 +154,9 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
         
         let tap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissPopup))
         blurView.addGestureRecognizer(tap)
-        
+        let tapPost : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissPopup))
+        self.addGestureRecognizer(tapPost)
+
         self.parentVC.view.addSubview(blurView)
     }
     
@@ -248,8 +250,9 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
         {
             var imageData = Data()
         
-            if (postPhotoImageView!.image != nil) {
-                imageData = UIImageJPEGRepresentation((postPhotoImageView?.image)!, 1.0)!
+            if self.imageToUpload != nil {
+                imageData = UIImageJPEGRepresentation((self.imageToUpload)!, 1.0)!
+                print("Sent with image")
             }
             
             let message = messageTextView.text!;
@@ -351,30 +354,18 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
         }
     }
     
-    func cropToBounds(image: UIImage, width: Double, height: Double) -> UIImage
-    {
-        print(width)
-        print(height)
-
+    func cropTo16by9Center(image: UIImage) -> UIImage {
         let contextImage: UIImage = UIImage(cgImage: image.cgImage!)
-        let contextSize: CGSize = contextImage.size
         
-        var posX: CGFloat = 0.0
-        var posY: CGFloat = 0.0
-        let cgwidth: CGFloat = CGFloat(width)
-        let cgheight: CGFloat = CGFloat(height)
-        
-        // See what size is longer and create the center off of that
-        if contextSize.width > contextSize.height
-        {
-            posX = ((contextSize.width - contextSize.height) / 2)
-            posY = ((contextSize.width - contextSize.height) / 2)
-        } else
-        {
-            posX = ((contextSize.height - contextSize.width) / 2)
-            posY = ((contextSize.height - contextSize.width) / 2)
-        }
-        
+        let cgwidth: CGFloat = CGFloat(contextImage.size.width)
+        let cgheight: CGFloat = CGFloat(Float(contextImage.size.width)/(16.0/9.0))
+        let posX: CGFloat = 0.0
+        let posY: CGFloat = CGFloat(contextImage.size.height/2.0) - (cgheight/2)
+        /*
+         print("Image Size\n\tWidth: \(image.size.width)\n\tHeight: \(image.size.height)")
+         print("Context Image Size\n\tWidth: \(contextImage.size.width)\n\tHeight: \(contextImage.size.height)")
+         print("16:9 Image Size\n\tWidth: \(cgwidth)\n\tHeight: \(cgheight)")
+         */
         let rect: CGRect = CGRect(x: posX, y: posY, width: cgwidth, height: cgheight)
         
         // Create bitmap image from context using the rect
@@ -385,7 +376,6 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
         
         return image
     }
-
     
     // MARK: - UITextView
     
@@ -432,6 +422,7 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
             resetImageView(animate: true)
             dismissPhotoButtonContainer(animate: true)
             addPhotoButton.isSelected = false
+            imageToUpload = nil
             //animateButtonToX()
         }
     }
@@ -443,7 +434,7 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
     {
         print("Image selected")
         postPhotoImageView.contentMode = .scaleAspectFill
-        postPhotoImageView.image = cropToBounds(image: image, width: Double(image.size.width), height: Double(image.size.width)/(16.0/9.0))
+        postPhotoImageView.image = cropTo16by9Center(image: image)
         imageToUpload = image
         presentPhotoButtonContainer(animate: true)
         addPhotoButton.isSelected = true
