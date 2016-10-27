@@ -35,6 +35,8 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var likeTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var disklikeTopConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var censorCoverView: UIView!
+    
     var userVoted : Bool?
     var userVotedBadge : Int?
     var userReported : Bool?
@@ -85,8 +87,18 @@ class PostTableViewCell: UITableViewCell {
         }else{
             reportButton.isSelected = false
         }
-                //print(post.imageSource)
+        //print(post.imageSource)
         //print(post.message)
+        
+        let reportLimit = 1
+        if censorCoverView != nil && post.reportCount == reportLimit && !post.revealedPost {
+            let tap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(removeCensorCover))
+            censorCoverView.addGestureRecognizer(tap)
+            censorCoverView.isHidden = false
+        }else if censorCoverView != nil{
+            censorCoverView.isHidden = true
+        }
+        
         if ((post.imageSource == nil) || (post.imageSource?.characters.count)! == 0) {
             self.postImageView.isHidden = true
             self.imageViewHeightContraint.constant = 0
@@ -116,6 +128,16 @@ class PostTableViewCell: UITableViewCell {
         }else{
             resetBadges()
         }
+    }
+    
+    func removeCensorCover(){
+        self.post?.revealedPost = true
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: .transitionCurlDown, animations: {
+            self.censorCoverView.alpha = 0.0
+        },completion: { finished in
+            self.censorCoverView.alpha = 1.0
+            self.censorCoverView.isHidden = true
+        })
     }
     
     func setTimestamp(withDateCreated : Date){

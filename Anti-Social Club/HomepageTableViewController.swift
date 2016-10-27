@@ -18,7 +18,7 @@ class HomepageTableViewController: UITableViewController {
     var selectedPostCell : PostTableViewCell?
     var selectedImage : UIImage?
     var composePostPopup : ComposePostView?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -158,17 +158,20 @@ class HomepageTableViewController: UITableViewController {
         return 375
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell") as! PostTableViewCell
-        cell.configureCellWithPost(post: postsArray[indexPath.section], section: indexPath.section)
-        cell.parentVC = self
-        //cell.timestampLabel.text = String(indexPath.section)
-        
-        if indexPath.section > postsArray.count-3{
-            retrievePosts(offset: self.postsArray.count)
-        }
-
-        return cell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) ->
+        UITableViewCell {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell") as! PostTableViewCell
+            if postsArray.count > 0 {
+                cell.configureCellWithPost(post: postsArray[indexPath.section], section: indexPath.section)
+                cell.parentVC = self
+                //cell.timestampLabel.text = String(indexPath.section)
+                
+                if indexPath.section > postsArray.count-3{
+                    retrievePosts(offset: self.postsArray.count)
+                }
+            }
+            
+            return cell
     }
     
     /*

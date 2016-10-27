@@ -26,6 +26,7 @@ class Post{
     var badgeAgreeCount : Int?
     var badgeDisagreeCount : Int?
     var downloadedImage : UIImage?
+    var revealedPost : Bool = false
     
     init?(id : Int?,
           posterId : Int?,
