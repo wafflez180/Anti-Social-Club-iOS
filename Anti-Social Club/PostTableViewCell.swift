@@ -90,8 +90,8 @@ class PostTableViewCell: UITableViewCell {
         //print(post.imageSource)
         //print(post.message)
         
-        let reportLimit = 1
-        if censorCoverView != nil && post.reportCount == reportLimit && !post.revealedPost {
+        let reportLimit = 4
+        if censorCoverView != nil && post.reportCount! >= reportLimit && !post.revealedPost {
             let tap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(removeCensorCover))
             censorCoverView.addGestureRecognizer(tap)
             censorCoverView.isHidden = false
