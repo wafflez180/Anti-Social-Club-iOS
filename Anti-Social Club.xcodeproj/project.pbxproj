@@ -217,13 +217,17 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "UB Anti-Social Club";
 				TargetAttributes = {
 					14DEF9A81DAC0F8300BF8B58 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = P46Z87GYN3;
+<<<<<<< HEAD
 						ProvisioningStyle = Manual;
+=======
+						ProvisioningStyle = Automatic;
+>>>>>>> origin/master
 					};
 				};
 			};
