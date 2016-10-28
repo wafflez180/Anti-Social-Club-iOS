@@ -217,12 +217,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "UB Anti-Social Club";
 				TargetAttributes = {
 					14DEF9A81DAC0F8300BF8B58 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 72H7NZKH7W;
+						DevelopmentTeam = P46Z87GYN3;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -474,10 +474,10 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 72H7NZKH7W;
+				DEVELOPMENT_TEAM = P46Z87GYN3;
 				INFOPLIST_FILE = "Anti-Social Club/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "club.anti-social";
+				PRODUCT_BUNDLE_IDENTIFIER = "club.ub-anti-social";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -489,10 +489,10 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 72H7NZKH7W;
+				DEVELOPMENT_TEAM = P46Z87GYN3;
 				INFOPLIST_FILE = "Anti-Social Club/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "club.anti-social";
+				PRODUCT_BUNDLE_IDENTIFIER = "club.ub-anti-social";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
