@@ -325,7 +325,7 @@ class PostTableViewCell: UITableViewCell {
             var tempImageFrame : CGRect = CGRect()
             var pointInTableView = CGPoint()
             
-            if parentVC == nil {
+            if parentVC == nil && commentViewCont != nil {
                 pointInTableView = self.convert(button.frame.origin, to: self.commentViewCont?.commentTableview)
                 self.commentViewCont?.commentTableview.addSubview(tempImageView)
             }else{

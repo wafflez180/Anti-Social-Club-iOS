@@ -795,13 +795,13 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lXK-qg-ore">
-                                                <rect key="frame" x="10" y="45" width="355" height="150"/>
+                                                <rect key="frame" x="5" y="45" width="365" height="150"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <string key="text">1. Do not post or discuss material that violates local or US law
 
-2. Do not post personal information
+2. Do not post personal information (including names)
 
-3. Do not spam
+3. Do post OVERLY offensive material
 
 4. Do not abuse the report feature</string>
                                                 <color key="textColor" red="0.30588235294117649" green="0.30588235294117649" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
@@ -829,9 +829,9 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                                             <constraint firstAttribute="trailing" secondItem="vdp-Mo-rDt" secondAttribute="trailing" id="NKk-hO-FeD"/>
                                             <constraint firstItem="lXK-qg-ore" firstAttribute="top" secondItem="vdp-Mo-rDt" secondAttribute="bottom" constant="5" id="SrH-z4-nqd"/>
                                             <constraint firstItem="hf1-bq-Wj3" firstAttribute="top" secondItem="lXK-qg-ore" secondAttribute="bottom" id="VFg-fa-eZF"/>
-                                            <constraint firstItem="lXK-qg-ore" firstAttribute="leading" secondItem="gUu-J0-kg9" secondAttribute="leading" constant="10" id="Y9u-eJ-acl"/>
+                                            <constraint firstItem="lXK-qg-ore" firstAttribute="leading" secondItem="gUu-J0-kg9" secondAttribute="leading" constant="5" id="Y9u-eJ-acl"/>
                                             <constraint firstItem="hf1-bq-Wj3" firstAttribute="leading" secondItem="gUu-J0-kg9" secondAttribute="leading" constant="10" id="bU0-zC-63p"/>
-                                            <constraint firstAttribute="trailing" secondItem="lXK-qg-ore" secondAttribute="trailing" constant="10" id="fpP-xo-jUk"/>
+                                            <constraint firstAttribute="trailing" secondItem="lXK-qg-ore" secondAttribute="trailing" constant="5" id="fpP-xo-jUk"/>
                                             <constraint firstAttribute="bottom" secondItem="hf1-bq-Wj3" secondAttribute="bottom" constant="5" id="isX-My-Xfw"/>
                                             <constraint firstItem="vdp-Mo-rDt" firstAttribute="leading" secondItem="gUu-J0-kg9" secondAttribute="leading" id="ucG-KD-3bL"/>
                                         </constraints>

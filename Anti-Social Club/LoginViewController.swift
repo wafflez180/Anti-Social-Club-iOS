@@ -125,18 +125,15 @@ class LoginViewController: UIViewController
         //performSegue(withIdentifier: "loginSuccessSegue", sender: nil)
         // Image
         
-        firstPage = OnboardingContentViewController(title: "Post", body: "Post images and/or text with\nfull anonymity", image: UIImage(named: "firstTutorialImage"), buttonText: "Next") { () -> Void in
+        firstPage = OnboardingContentViewController(title: "Post", body: "Post images and/or text with\nfull anonymity", image: UIImage(named: "firstTutorialImage"), buttonText: "") { () -> Void in
             // do something here when users press the button, like ask for location services permissions, register for push notifications, connect to social media, or finish the onboarding process
-            self.transitionToNextVC(index: 0)
         }
         
-        secondPage = OnboardingContentViewController(title: "Comment", body: "When you comment you are given a\nrandom color for that post", image: UIImage(named: "secondTutorialImage"), buttonText: "Next") { () -> Void in
+        secondPage = OnboardingContentViewController(title: "Comment", body: "When you comment you are given a\nrandom color for that post", image: UIImage(named: "secondTutorialImage"), buttonText: "") { () -> Void in
             // do something here when users press the button, like ask for location services permissions, register for push notifications, connect to social media, or finish the onboarding process
-            self.transitionToNextVC(index: 1)
         }
-        thirdPage = OnboardingContentViewController(title: "Vote", body: "Vote your opinion on posts to\nreveal how many voted", image: UIImage(named: "thirdTutorialImage"), buttonText: "Next") { () -> Void in
+        thirdPage = OnboardingContentViewController(title: "Vote", body: "Vote your opinion on posts to\nreveal how many voted", image: UIImage(named: "thirdTutorialImage"), buttonText: "") { () -> Void in
             // do something here when users press the button, like ask for location services permissions, register for push notifications, connect to social media, or finish the onboarding process
-            self.transitionToNextVC(index: 2)
         }
         fourthPage = OnboardingContentViewController(title: "Share Keys", body: "Go to the settings page to share\nthe few keys you have", image: UIImage(named: "fourthTutorialImage"), buttonText: "Enter") { () -> Void in
             self.dismiss(animated: true, completion: {
@@ -159,12 +156,10 @@ class LoginViewController: UIViewController
             onboardVC.titleLabel.textColor = UIColor.hexStringToUIColor(hex: "B2EBF2")
             onboardVC.titleLabel.font = UIFont.systemFont(ofSize: 40, weight: UIFontWeightRegular)
             onboardVC.bodyLabel.font = UIFont.systemFont(ofSize: 20, weight: UIFontWeightMedium)
-            onboardVC.actionButton.setTitleColor(UIColor.blue, for: UIControlState.normal)
+            onboardVC.actionButton.setTitleColor(UIColor.black, for: UIControlState.normal)
         }
-        firstPage?.actionButton.setTitleColor(UIColor.white, for: UIControlState.normal)
         
-        onboardingVC?.pageControl.isHidden = true
-        onboardingVC?.swipingEnabled = false
+        onboardingVC?.pageControl.isHidden = false
         
         onboardingVC?.shouldMaskBackground = false
         
