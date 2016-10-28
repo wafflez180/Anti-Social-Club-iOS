@@ -226,7 +226,7 @@ class PostTableViewCell: UITableViewCell {
     }
     
     func presentFullImageView(){
-        if self.post?.downloadedImage != nil {
+        if self.post?.downloadedImage != nil && parentVC != nil {
             parentVC.selectedImage = self.post?.downloadedImage
             parentVC.performSegue(withIdentifier: "viewFullImageSegue", sender: nil)
         }
