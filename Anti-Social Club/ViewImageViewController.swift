@@ -30,6 +30,12 @@ class ViewImageViewController: UIViewController {
         dismiss(animated: true)
     }
 
+    @IBAction func swipedUp(_ sender: Any) {
+        dismiss(animated: true)
+    }
+    @IBAction func swipedDown(_ sender: Any) {
+        dismiss(animated: true)
+    }
     /*
     // MARK: - Navigation
 

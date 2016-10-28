@@ -140,6 +140,8 @@
 				CA4143B91DAC7D220072B27C /* HomepageTableViewController.swift */,
 				CA4143B71DAC7C5F0072B27C /* PostTableViewCell.swift */,
 				CAEE040E1DAD93F500012F14 /* ComposePostView.swift */,
+				CA7A8E7E1DBD788D00BD3DAA /* CommentTableViewCell.swift */,
+				CA7A8E821DBD7F4C00BD3DAA /* CommentViewController.swift */,
 				CAACD65F1DB3068D001F7C20 /* SettingsViewController.swift */,
 				143F5C721DB32CD500605158 /* EntryViewController.swift */,
 				143F5C741DB32E0400605158 /* ConfirmNameViewController.swift */,
@@ -149,8 +151,6 @@
 				CAB7BA9B1DB6F84000D984A5 /* CustomNavigationController.swift */,
 				CAF104E71DB70279005B7F6F /* ShareKeysViewController.swift */,
 				CAF104E91DB70451005B7F6F /* ShareKeyTableViewCell.swift */,
-				CA7A8E7E1DBD788D00BD3DAA /* CommentTableViewCell.swift */,
-				CA7A8E821DBD7F4C00BD3DAA /* CommentViewController.swift */,
 				CAA3A3DE1DC05E08003BAFCA /* ViewImageViewController.swift */,
 			);
 			name = "View Controllers";

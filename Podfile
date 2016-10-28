@@ -15,4 +15,5 @@ target 'Anti-Social Club' do
    :git => 'https://github.com/ytakzk/Fusuma.git'
   pod 'Fabric'
   pod 'Crashlytics'
+  pod 'Onboard'
 end

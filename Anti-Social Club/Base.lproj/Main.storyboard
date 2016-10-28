@@ -328,14 +328,7 @@ for breaching the rules.</string>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="5pM-lZ-0bk">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <attributedString key="attributedTitle">
-                            <fragment content="Pull To Refresh">
-                                <attributes>
-                                    <font key="NSFont" metaFont="smallSystem"/>
-                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                </attributes>
-                            </fragment>
-                        </attributedString>
+                        <attributedString key="attributedTitle"/>
                         <connections>
                             <action selector="refresh:" destination="GTJ-cc-M7H" eventType="valueChanged" id="run-aO-31B"/>
                         </connections>
@@ -728,6 +721,11 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="wKZ-2p-0mV">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <gestureRecognizers/>
+                                    <connections>
+                                        <outletCollection property="gestureRecognizers" destination="zQY-82-Jsf" appends="YES" id="6Aj-1h-1uR"/>
+                                        <outletCollection property="gestureRecognizers" destination="TQd-bA-mLk" appends="YES" id="Drb-3z-r0n"/>
+                                    </connections>
                                 </view>
                                 <gestureRecognizers/>
                                 <vibrancyEffect>
@@ -756,6 +754,16 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                         <action selector="tappedView:" destination="Kko-MZ-OqA" id="gSI-xp-JMb"/>
                     </connections>
                 </tapGestureRecognizer>
+                <swipeGestureRecognizer direction="up" id="zQY-82-Jsf">
+                    <connections>
+                        <action selector="swipedUp:" destination="Kko-MZ-OqA" id="w5R-hc-fni"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="down" id="TQd-bA-mLk">
+                    <connections>
+                        <action selector="swipedDown:" destination="Kko-MZ-OqA" id="GWx-Su-Y6O"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="745" y="-1372"/>
         </scene>
@@ -1414,7 +1422,7 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                                         </constraints>
                                         <color key="textColor" red="0.12941176469999999" green="0.12941176469999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no" spellCheckingType="no"/>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

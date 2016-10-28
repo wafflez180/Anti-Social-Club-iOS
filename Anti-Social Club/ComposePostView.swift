@@ -256,11 +256,8 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
             {
                 multipartFormData in
                 
-                // Test to upload logo
-                self.imageToUpload = UIImage(named: "Buffalo")
-                
                 if let image = self.imageToUpload {
-                    if let imageData = UIImageJPEGRepresentation(image, 1.0) {
+                    if let imageData = UIImageJPEGRepresentation(image, 0.1) {
                         print("Got imageData, appending to multipartFormData...")
                         multipartFormData.append(imageData, withName: "image", fileName: "image.jpeg", mimeType: "image/jpeg")
                     }

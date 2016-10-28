@@ -93,6 +93,8 @@ class PostTableViewCell: UITableViewCell {
         let reportLimit = 4
         if censorCoverView != nil && post.reportCount! >= reportLimit && !post.revealedPost {
             let tap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(removeCensorCover))
+            tap.delaysTouchesEnded = false
+            tap.delaysTouchesBegan = false
             censorCoverView.addGestureRecognizer(tap)
             censorCoverView.isHidden = false
         }else if censorCoverView != nil{
@@ -166,6 +168,8 @@ class PostTableViewCell: UITableViewCell {
         activityView.startAnimating()
         self.addSubview(activityView)
         
+        print("Retrieving image")
+        
         Alamofire.request(Constants.API.ADDRESS + Constants.API.IMAGE_DIRECTORY + post!.imageSource!).responseImage
         {
             response in
@@ -173,10 +177,13 @@ class PostTableViewCell: UITableViewCell {
             activityView.stopAnimating()
             activityView.removeFromSuperview()
             
+            print("Retrieved image successfully")
+
             if let image : UIImage = response.result.value
             {
                 self.postImageView.alpha = 0.0
                 self.postImageView.image = self.cropTo16by9Center(image: image)
+                self.post?.downloadedImage = image
                 UIView.animate(withDuration: 0.2, animations: {
                     self.postImageView.alpha = 1.0
                 })
@@ -336,6 +343,15 @@ class PostTableViewCell: UITableViewCell {
 
             explodeDuplicatesArray+=[tempImageView]
         }
+        UIView.animate(withDuration: 0.2, delay: 0.15, options: .transitionCurlDown, animations: {
+            for duplicate in explodeDuplicatesArray {
+                duplicate.alpha = 0.0
+            }
+        },completion: { finished in
+            for duplicate in explodeDuplicatesArray {
+                duplicate.removeFromSuperview()
+            }
+        })
         UIView.animate(withDuration: 0.3, delay: 0.0, options: .transitionCurlDown, animations: {
             for duplicate in explodeDuplicatesArray {
                 var randomX = Int(arc4random_uniform(75))
@@ -349,15 +365,7 @@ class PostTableViewCell: UITableViewCell {
                 duplicate.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_4)*CGFloat(randomSpin))
             }
         },completion: { finished in
-            UIView.animate(withDuration: 0.2, delay: 0.0, options: .transitionCurlDown, animations: {
-                for duplicate in explodeDuplicatesArray {
-                    duplicate.alpha = 0.0
-                }
-            },completion: { finished in
-                for duplicate in explodeDuplicatesArray {
-                    duplicate.removeFromSuperview()
-                }
-            })
+
         }
         )
     }

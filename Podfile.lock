@@ -6,6 +6,7 @@ PODS:
     - Fabric (~> 1.6.3)
   - Fabric (1.6.10)
   - Fusuma (1.0.0)
+  - Onboard (2.3.1)
   - SwiftyJSON (3.1.1)
 
 DEPENDENCIES:
@@ -14,6 +15,7 @@ DEPENDENCIES:
   - Crashlytics
   - Fabric
   - Fusuma (from `https://github.com/ytakzk/Fusuma.git`)
+  - Onboard
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
 
 EXTERNAL SOURCES:
@@ -26,13 +28,13 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   Alamofire:
-    :commit: b98fe26cb86c1c1227185d30b87bd57cb45fbe3c
+    :commit: c71f503898cb24d56857e4e6f0ec7899a9b6fc7b
     :git: https://github.com/Alamofire/Alamofire.git
   Fusuma:
     :commit: a5d1d45ba3de62c0904bcfedc0b241229c9908c8
     :git: https://github.com/ytakzk/Fusuma.git
   SwiftyJSON:
-    :commit: 707516458b618c48ad9365d23a0dad3c3b860fa0
+    :commit: 6a0c3a82e2b4a07723b4958146315c7928220189
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
 
 SPEC CHECKSUMS:
@@ -41,8 +43,9 @@ SPEC CHECKSUMS:
   Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
   Fabric: c73f371ee543e3f0b80608f2674750e4910d1669
   Fusuma: 256315ea7daed298f246f1ba5e49700bc664dd93
+  Onboard: b6871f25ac753175b2ab9a362fb2feb26a81a311
   SwiftyJSON: f0be2e604f83e8405a624e9f891898bf6ed4e019
 
-PODFILE CHECKSUM: c4713c2f28868bd4284a01ec6e838e00fb08af18
+PODFILE CHECKSUM: f1f474f5a83afc174c27b9d7c1faaf37084b1f9f
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.1.0.rc.2
