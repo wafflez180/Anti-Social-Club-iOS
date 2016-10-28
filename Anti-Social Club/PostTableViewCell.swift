@@ -116,8 +116,8 @@ class PostTableViewCell: UITableViewCell {
             }else{
                 self.postImageView.image = cropTo16by9Center(image: post.downloadedImage!)
             }
-            self.layoutIfNeeded()
-            self.setNeedsLayout()
+            //self.layoutIfNeeded()
+            //self.setNeedsLayout()
             // TODO:
             // Download the image. This should be done with AlamofireImage library, as it handles
             // proper caching and is very performant.
@@ -160,9 +160,18 @@ class PostTableViewCell: UITableViewCell {
     }
     
     func retrieveImage() {
+        let activityView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+        activityView.center=self.center
+        activityView.frame = self.frame
+        activityView.startAnimating()
+        self.addSubview(activityView)
+        
         Alamofire.request(Constants.API.ADDRESS + Constants.API.IMAGE_DIRECTORY + post!.imageSource!).responseImage
         {
             response in
+            
+            activityView.stopAnimating()
+            activityView.removeFromSuperview()
             
             if let image : UIImage = response.result.value
             {
@@ -173,15 +182,6 @@ class PostTableViewCell: UITableViewCell {
                 UIView.animate(withDuration: 0.2, animations: {
                     self.postImageView.alpha = 1.0
                 })
-                /*
-                var newFrame = cell.productImageView.frame as CGRect
-                newFrame.size.width = cell.frame.size.width * 0.15
-                cell.productImageView.frame = newFrame
-                cell.layoutSubviews()
-                */
-                self.layoutSubviews()
-                self.layoutIfNeeded()
-                self.setNeedsLayout()
             }
         }
     }
