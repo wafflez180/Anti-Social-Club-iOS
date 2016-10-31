@@ -122,7 +122,7 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
             UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseInOut, animations:
                 {
                     //Reposition and increase the height of the popup
-                    self.frame = CGRect.init(x: 0, y: self.parentVC.tableView.contentOffset.y + (self.parentVC.tableView.frame.height/2)-(popupHeight/2), width: self.parentVC.view.frame.size.width, height: popupHeight)
+                    self.frame = CGRect.init(x: 0, y: self.parentVC.tableView.contentOffset.y + (self.parentVC.tableView.frame.height/2)-(popupHeight/1.5), width: self.parentVC.view.frame.size.width, height: popupHeight)
                     self.photoButtonsContainer.alpha = 1.0
                     self.layoutIfNeeded()
                     self.updateConstraints()
@@ -327,7 +327,9 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
         let authStatus : AVAuthorizationStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
         if(authStatus == AVAuthorizationStatus.authorized)
         {
-            self.parentVC.present(self.fusuma, animated: true, completion: nil)
+            DispatchQueue.main.async {
+                self.parentVC.present(self.fusuma, animated: true, completion: nil)
+            }
         } else if(authStatus == AVAuthorizationStatus.denied)
         {
             // denied
@@ -344,7 +346,10 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
                 if(granted)
                 {
                     print("Granted access to " + AVMediaTypeVideo);
-                    self.parentVC.present(self.fusuma, animated: true, completion: nil)
+                    
+                    DispatchQueue.main.async {
+                        self.parentVC.present(self.fusuma, animated: true, completion: nil)
+                    }
                 } else
                 {
                     print("Not granted access to " + AVMediaTypeVideo);
@@ -379,13 +384,7 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
     
     // MARK: - UITextView
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool
-    {
-        textField.resignFirstResponder()
-        return false
-    }
-    
-    //Set Character limit
+    // Set Character limit
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool
     {
         let currentCharacterCount = textView.text?.characters.count ?? 0
@@ -393,6 +392,13 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
             return false
         }
         let newLength = currentCharacterCount + text.characters.count - range.length
+        
+        if(text == "\n"){
+            textView.resignFirstResponder()
+            textView.endEditing(true)
+            return false
+        }
+
         return newLength <= 200
     }
     

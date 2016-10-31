@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16A320" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -45,17 +45,22 @@
                     <rect key="frame" x="0.0" y="220" width="377" height="160"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iqQ-Ii-qdW" userLabel="MessageFieldContainer">
-                            <rect key="frame" x="5" y="5" width="287" height="150"/>
+                            <rect key="frame" x="10" y="15" width="277" height="135"/>
                             <subviews>
                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jCl-TD-HAT">
-                                    <rect key="frame" x="3" y="3" width="281" height="144"/>
+                                    <rect key="frame" x="3" y="3" width="271" height="129"/>
                                     <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="textColor" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardAppearance="alert" returnKeyType="done"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                            <integer key="value" value="5"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
                                 </textView>
                             </subviews>
-                            <color key="backgroundColor" red="0.0" green="0.59215686274509804" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.69803921568627447" green="0.92156862745098034" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="jCl-TD-HAT" secondAttribute="trailing" constant="3" id="Et1-bm-XHV"/>
                                 <constraint firstItem="jCl-TD-HAT" firstAttribute="top" secondItem="iqQ-Ii-qdW" secondAttribute="top" constant="3" id="F4b-bc-oXd"/>
@@ -64,7 +69,7 @@
                             </constraints>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                    <integer key="value" value="6"/>
+                                    <integer key="value" value="10"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </view>
@@ -117,11 +122,11 @@
                     <constraints>
                         <constraint firstItem="COP-kS-7ak" firstAttribute="top" secondItem="x7w-ud-7DH" secondAttribute="top" id="CRi-gI-d0c"/>
                         <constraint firstAttribute="trailing" secondItem="COP-kS-7ak" secondAttribute="trailing" constant="10" id="ClD-F4-dZ0"/>
-                        <constraint firstItem="iqQ-Ii-qdW" firstAttribute="top" secondItem="x7w-ud-7DH" secondAttribute="top" constant="5" id="LGZ-t6-k7R"/>
-                        <constraint firstItem="iqQ-Ii-qdW" firstAttribute="leading" secondItem="x7w-ud-7DH" secondAttribute="leading" constant="5" id="TlN-6d-jyX"/>
+                        <constraint firstItem="iqQ-Ii-qdW" firstAttribute="top" secondItem="x7w-ud-7DH" secondAttribute="top" constant="15" id="LGZ-t6-k7R"/>
+                        <constraint firstItem="iqQ-Ii-qdW" firstAttribute="leading" secondItem="x7w-ud-7DH" secondAttribute="leading" constant="10" id="TlN-6d-jyX"/>
                         <constraint firstAttribute="bottom" secondItem="COP-kS-7ak" secondAttribute="bottom" id="Uim-cp-uNR"/>
-                        <constraint firstItem="COP-kS-7ak" firstAttribute="leading" secondItem="iqQ-Ii-qdW" secondAttribute="trailing" constant="5" id="fqT-VN-znx"/>
-                        <constraint firstAttribute="bottom" secondItem="iqQ-Ii-qdW" secondAttribute="bottom" constant="5" id="vhI-g3-oZf"/>
+                        <constraint firstItem="COP-kS-7ak" firstAttribute="leading" secondItem="iqQ-Ii-qdW" secondAttribute="trailing" constant="10" id="fqT-VN-znx"/>
+                        <constraint firstAttribute="bottom" secondItem="iqQ-Ii-qdW" secondAttribute="bottom" constant="10" id="vhI-g3-oZf"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
