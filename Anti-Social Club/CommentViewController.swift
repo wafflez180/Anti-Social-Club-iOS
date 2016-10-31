@@ -26,6 +26,7 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var sendCommentButton: UIButton!
     
     var postedNewComment : Bool = false
+    var showingFullScreenImage : Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,11 +52,14 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        showingFullScreenImage = false
         self.navigationController?.setToolbarHidden(true, animated: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        postCell?.commentViewCont = nil
+        if showingFullScreenImage == false {
+            postCell?.commentViewCont = nil
+        }
         self.navigationController?.setToolbarHidden(false, animated: true)
     }
 
@@ -362,6 +366,7 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "viewFullImageSegue")
         {
+            showingFullScreenImage = true
             let destination = segue.destination as! ViewImageViewController
             destination.fullSizeImage = self.postCell?.post?.downloadedImage
         }
