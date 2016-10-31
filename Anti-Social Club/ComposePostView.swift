@@ -184,6 +184,7 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
         {
             self.parentVC.composePostPopup = nil
             self.parentVC.tableView.isScrollEnabled = true
+            self.parentVC.navigationController?.setToolbarHidden(false, animated: true)
             UIView.animate(withDuration: 0.2, delay: 0.0, options: .transitionCurlUp, animations:
                 {
                     self.blurView.alpha = 0.0

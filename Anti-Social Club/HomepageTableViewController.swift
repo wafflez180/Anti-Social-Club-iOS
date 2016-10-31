@@ -115,6 +115,7 @@ class HomepageTableViewController: UITableViewController {
         composePostPopup = composePostView
         composePostView.parentVC = self
         composePostView.viewDidLoad()
+        self.navigationController?.setToolbarHidden(true, animated: true)
         self.view.addSubview(composePostView)
         
         return composePostView
