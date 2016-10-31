@@ -289,9 +289,13 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
                                     {
                                         print("ERROR: \(json["error_message"].stringValue)")
                                         return
+                                    }else if json["silenced"].bool == true{
+                                        let alert = UIAlertController(title: "Silenced", message: "You are silenced, and are not allowed to post or comment.", preferredStyle: UIAlertControllerStyle.alert)
+                                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                                        self.parentVC.present(alert, animated: true, completion: nil)
+                                    }else{
+                                        self.sendPopupAnimation()
                                     }
-                                    
-                                    self.sendPopupAnimation()
                                     break
                                 
                                 case .failure(let error):

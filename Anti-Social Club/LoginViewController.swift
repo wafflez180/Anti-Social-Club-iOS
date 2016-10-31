@@ -21,6 +21,8 @@ class LoginViewController: UIViewController
     var fourthPage : OnboardingContentViewController?
     var onboardingVC : OnboardingViewController?
 
+    @IBOutlet weak var errorLabel: UILabel!
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -93,9 +95,22 @@ class LoginViewController: UIViewController
                         self.onLoginFailure()
                         
                         return
+                    }else if json["ban_type"].string == "HARD"
+                    {
+                        print("User has a hard ban")
+                        
+                        self.onUserHardBan()
+                        
+                        return
+                    }else if json["ban_type"].string == "SOFT"
+                    {
+                        print("User has a soft ban")
+                        
+                        self.onLoginSuccess()
+                        return
+                    }else{
+                        self.onLoginSuccess()
                     }
-                
-                    self.onLoginSuccess()
 
                 case .failure(let error):
                     print("Request failed with error: \(error)")
@@ -197,6 +212,10 @@ class LoginViewController: UIViewController
                 self.fourthPage?.view.alpha = 1.0
             })
         }
+    }
+    
+    func onUserHardBan(){
+        self.errorLabel.text = "YOU ARE BANNED."
     }
     
     func onLoginFailure()

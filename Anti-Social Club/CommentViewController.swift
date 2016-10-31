@@ -164,10 +164,9 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
                     
                     activityView.stopAnimating()
                     activityView.removeFromSuperview()
+                    
                     self.sendCommentButton.isHidden = false
                     self.composeCommentTextField.isEnabled = true
-                    self.composeCommentTextField.text = ""
-                    self.postedNewComment = true
                     
                     switch response.result
                     {
@@ -183,9 +182,15 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
                             self.present(alert, animated: true, completion: nil)
                             
                             return
+                        }else if json["silenced"].bool == true{
+                            let alert = UIAlertController(title: "Silenced", message: "You are silenced, and are not allowed to post or comment.", preferredStyle: UIAlertControllerStyle.alert)
+                            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                            self.present(alert, animated: true, completion: nil)
+                        }else{
+                            self.composeCommentTextField.text = ""
+                            self.postedNewComment = true
+                            self.attemptRetrieveComments(offset: self.offset!, token: token, postId: postId)
                         }
-                        
-                        self.attemptRetrieveComments(offset: self.offset!, token: token, postId: postId)
                         
                     case .failure(let error):
                         print("Request failed with error: \(error)")

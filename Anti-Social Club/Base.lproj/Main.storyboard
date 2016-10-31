@@ -1584,15 +1584,26 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                                     <constraint firstAttribute="width" constant="175" id="WFz-b0-vLR"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RCj-Sa-eEY">
+                                <rect key="frame" x="31" y="422" width="313" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.73725490196078436" blue="0.83137254901960778" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="I0j-xy-RBG" firstAttribute="centerY" secondItem="VIP-ei-QP0" secondAttribute="centerY" id="1Y7-ZJ-CaC"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="RCj-Sa-eEY" secondAttribute="trailing" constant="15" id="8si-r5-vXI"/>
+                            <constraint firstItem="RCj-Sa-eEY" firstAttribute="centerX" secondItem="VIP-ei-QP0" secondAttribute="centerX" id="UFR-aU-H3n"/>
+                            <constraint firstItem="RCj-Sa-eEY" firstAttribute="leading" secondItem="VIP-ei-QP0" secondAttribute="leadingMargin" constant="15" id="ZaF-hp-PK3"/>
                             <constraint firstItem="I0j-xy-RBG" firstAttribute="centerX" secondItem="VIP-ei-QP0" secondAttribute="centerX" id="hzz-3p-Rg5"/>
                             <constraint firstItem="I0j-xy-RBG" firstAttribute="width" secondItem="I0j-xy-RBG" secondAttribute="height" multiplier="150:116.6" id="nUa-LV-4Bf"/>
+                            <constraint firstItem="RCj-Sa-eEY" firstAttribute="top" secondItem="I0j-xy-RBG" secondAttribute="bottom" constant="20" id="zaC-iy-DDI"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="errorLabel" destination="RCj-Sa-eEY" id="RKj-vI-e9U"/>
                         <segue destination="KXz-gg-J0T" kind="presentation" identifier="loginSuccessSegue" modalTransitionStyle="crossDissolve" id="i0I-aV-SUe"/>
                         <segue destination="Mlh-uL-p5L" kind="show" identifier="confirmEmailSegue" action="showDetailViewController:sender:" id="Cql-j7-kwn"/>
                         <segue destination="E64-iG-bKQ" kind="show" identifier="confirmNameSegue" action="showDetailViewController:sender:" id="vcn-VJ-Z9f"/>
@@ -1651,7 +1662,7 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="q9w-i3-shG"/>
-        <segue reference="M7m-9T-xc7"/>
-        <segue reference="M22-xo-Fcy"/>
+        <segue reference="Cql-j7-kwn"/>
+        <segue reference="vcn-VJ-Z9f"/>
     </inferredMetricsTieBreakers>
 </document>
