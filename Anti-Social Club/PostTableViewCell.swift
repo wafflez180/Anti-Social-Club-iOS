@@ -244,15 +244,26 @@ class PostTableViewCell: UITableViewCell {
                     switch response.result
                     {
                     case .success(let responseData):
-                        //let json = JSON(responseData)
-                        self.reportButton.isSelected = true
-                        self.reportButton.setTitle(String(describing: (self.post?.reportCount!)!+1), for: UIControlState.selected)
-                        self.post?.reported = true
-                        self.post?.reportCount = (self.post?.reportCount)!+1
+                        let json = JSON(responseData)
                         
-                        //Update cell in the main page
-                        if self.commentViewCont != nil {
-                            self.commentViewCont?.parentVC?.selectedPostCell?.configureCellWithPost(post: (self.post)!, section: (self.commentViewCont?.parentVC?.selectedPostCell?.section)!)
+                        if json["silenced"].bool == true{
+                            let alert = UIAlertController(title: "Silenced", message: "You are silenced, and are not allowed to post, comment or report.", preferredStyle: UIAlertControllerStyle.alert)
+                            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                            if self.parentVC != nil {
+                                self.parentVC.present(alert, animated: true, completion: nil)
+                            }else if self.commentViewCont != nil {
+                                self.commentViewCont?.present(alert, animated: true, completion: nil)
+                            }
+                        }else{
+                            self.reportButton.isSelected = true
+                            self.reportButton.setTitle(String(describing: (self.post?.reportCount!)!+1), for: UIControlState.selected)
+                            self.post?.reported = true
+                            self.post?.reportCount = (self.post?.reportCount)!+1
+
+                            //Update cell in the main page
+                            if self.commentViewCont != nil {
+                                self.commentViewCont?.parentVC?.selectedPostCell?.configureCellWithPost(post: (self.post)!, section: (self.commentViewCont?.parentVC?.selectedPostCell?.section)!)
+                            }
                         }
 
                     case .failure(let error):

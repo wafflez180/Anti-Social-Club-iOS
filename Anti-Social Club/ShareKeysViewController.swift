@@ -120,7 +120,9 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
                     case .success(let responseData):
                         let json = JSON(responseData)
                         //Don't do anything if it succesfully went through
-                        
+                        let alert = UIAlertController(title: "Success!", message: "You're key was sent to \(recipientEmail)", preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
                     case .failure(let error):
                         print("Request failed with error: \(error)")
                         let alert = UIAlertController(title: "Error", message: "Network Error! Please try again later", preferredStyle: UIAlertControllerStyle.alert)

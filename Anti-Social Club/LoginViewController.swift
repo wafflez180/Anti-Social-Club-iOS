@@ -87,29 +87,29 @@ class LoginViewController: UIViewController
                     // This would happen if you were banned or something
                     if json["authenticated"].bool == false
                     {
-                        print("authentication failed, deleting token")
-                        
-                        // Now, we need to delete the local user token because it is obviously not valid.
-                        UserDefaults.standard.removeObject(forKey: "token")
+                        if json["ban_type"].string == "HARD"
+                        {
+                            print("User has a hard ban")
+                            
+                            self.onUserHardBan()
+                        }else if json["ban_type"].string == "SOFT"
+                        {
+                            print("User has a soft ban")
+                            
+                            self.onLoginSuccess()
+                        }else{
+                            print("authentication failed, deleting token")
+                            
+                            // Now, we need to delete the local user token because it is obviously not valid.
+                            UserDefaults.standard.removeObject(forKey: "token")
+                        }
                         
                         self.onLoginFailure()
                         
                         return
-                    }else if json["ban_type"].string == "HARD"
-                    {
-                        print("User has a hard ban")
-                        
-                        self.onUserHardBan()
-                        
-                        return
-                    }else if json["ban_type"].string == "SOFT"
-                    {
-                        print("User has a soft ban")
-                        
-                        self.onLoginSuccess()
-                        return
                     }else{
                         self.onLoginSuccess()
+                        return
                     }
 
                 case .failure(let error):
