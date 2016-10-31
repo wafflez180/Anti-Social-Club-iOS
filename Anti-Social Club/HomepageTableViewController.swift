@@ -30,6 +30,9 @@ class HomepageTableViewController: UITableViewController {
 
         //Crashlytics.sharedInstance().crash()
         
+        self.tableView.refreshControl = UIRefreshControl()
+        self.tableView.refreshControl?.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
+
         retrievePosts(offset: 0)
     }
 
@@ -39,7 +42,7 @@ class HomepageTableViewController: UITableViewController {
     
     // MARK: - HomepageTableViewController
     
-    @IBAction func refresh(_ sender: Any) {
+    func refresh(){
         self.postsArray.removeAll()
         retrievePosts(offset: 0)
     }

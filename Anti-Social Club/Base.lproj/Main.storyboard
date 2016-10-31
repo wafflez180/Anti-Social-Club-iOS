@@ -325,14 +325,6 @@ for breaching the rules.</string>
                         <barButtonItem key="backBarButtonItem" title="Back" id="N4b-Pp-XE7"/>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="5pM-lZ-0bk">
-                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <attributedString key="attributedTitle"/>
-                        <connections>
-                            <action selector="refresh:" destination="GTJ-cc-M7H" eventType="valueChanged" id="run-aO-31B"/>
-                        </connections>
-                    </refreshControl>
                     <connections>
                         <segue destination="ncg-38-1rU" kind="show" identifier="commentSegue" id="jbv-Rh-nZU"/>
                         <segue destination="Kko-MZ-OqA" kind="presentation" identifier="viewFullImageSegue" modalTransitionStyle="crossDissolve" id="zIT-1V-UjM"/>
@@ -1283,7 +1275,7 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Buffalo" translatesAutoresizingMaskIntoConstraints="NO" id="6Wj-0x-lVR">
-                                <rect key="frame" x="100" y="265.5" width="175" height="136"/>
+                                <rect key="frame" x="100" y="266" width="175" height="136"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="175" id="0q4-8o-TwU"/>
                                     <constraint firstAttribute="width" secondItem="6Wj-0x-lVR" secondAttribute="height" multiplier="150:116.6" id="2FF-2l-dno"/>
@@ -1318,7 +1310,7 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nfv-QB-HnK" userLabel="InputBox">
-                                <rect key="frame" x="0.0" y="308.5" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="309" width="375" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WIG-fP-r4S">
                                         <rect key="frame" x="332" y="9" width="33" height="33"/>
@@ -1353,14 +1345,14 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Buffalo" translatesAutoresizingMaskIntoConstraints="NO" id="cUM-3M-YTx">
-                                <rect key="frame" x="100" y="98.5" width="175" height="135"/>
+                                <rect key="frame" x="100" y="99" width="175" height="135"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="175" id="iNd-H6-tyB"/>
                                     <constraint firstAttribute="width" secondItem="cUM-3M-YTx" secondAttribute="height" multiplier="200:155" id="mwH-Sa-Kqm"/>
                                 </constraints>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z3s-rp-iTb">
-                                <rect key="frame" x="66" y="408.5" width="243" height="208.5"/>
+                                <rect key="frame" x="66" y="409" width="243" height="208"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="textColor" red="0.99607843139999996" green="0.21960784310000001" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
@@ -1405,7 +1397,7 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tge-MS-Lu0" userLabel="InputBox">
-                                <rect key="frame" x="0.0" y="308.5" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="309" width="375" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wXa-l7-iBA">
                                         <rect key="frame" x="332" y="9" width="33" height="33"/>
@@ -1440,14 +1432,14 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Buffalo" translatesAutoresizingMaskIntoConstraints="NO" id="gD1-Ze-QnO">
-                                <rect key="frame" x="100" y="98.5" width="175" height="135"/>
+                                <rect key="frame" x="100" y="99" width="175" height="135"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="175" id="kin-v4-X8l"/>
                                     <constraint firstAttribute="width" secondItem="gD1-Ze-QnO" secondAttribute="height" multiplier="200:155" id="pgo-Qh-1mV"/>
                                 </constraints>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yC6-cx-WW3">
-                                <rect key="frame" x="66" y="408.5" width="243" height="208.5"/>
+                                <rect key="frame" x="66" y="409" width="243" height="208"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="textColor" red="0.99607843139999996" green="0.21960784310000001" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
@@ -1492,7 +1484,7 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yhI-Hf-URd" userLabel="InputBox">
-                                <rect key="frame" x="0.0" y="308.5" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="309" width="375" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rsX-zV-av0">
                                         <rect key="frame" x="332" y="9" width="33" height="33"/>
@@ -1527,14 +1519,14 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Buffalo" translatesAutoresizingMaskIntoConstraints="NO" id="NsB-g6-12k">
-                                <rect key="frame" x="100" y="98.5" width="175" height="135"/>
+                                <rect key="frame" x="100" y="99" width="175" height="135"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="175" id="1G1-x5-wO7"/>
                                     <constraint firstAttribute="width" secondItem="NsB-g6-12k" secondAttribute="height" multiplier="200:155" id="Gjd-EV-wfF"/>
                                 </constraints>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="syZ-Is-zsC">
-                                <rect key="frame" x="66" y="408.5" width="243" height="208.5"/>
+                                <rect key="frame" x="66" y="409" width="243" height="208"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="textColor" red="0.99607843137254903" green="0.2196078431372549" blue="0.14117647058823529" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
@@ -1580,14 +1572,14 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Buffalo" translatesAutoresizingMaskIntoConstraints="NO" id="I0j-xy-RBG">
-                                <rect key="frame" x="100" y="265.5" width="175" height="136"/>
+                                <rect key="frame" x="100" y="266" width="175" height="136"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="I0j-xy-RBG" secondAttribute="height" multiplier="150:116.6" id="Dbe-6M-pqb"/>
                                     <constraint firstAttribute="width" constant="175" id="WFz-b0-vLR"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RCj-Sa-eEY">
-                                <rect key="frame" x="31" y="421.5" width="313" height="0.0"/>
+                                <rect key="frame" x="31" y="422" width="313" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
