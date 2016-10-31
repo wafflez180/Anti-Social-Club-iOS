@@ -696,6 +696,7 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                         <outlet property="composeCommentView" destination="JAR-tY-FO4" id="RZa-Js-Gm5"/>
                         <outlet property="composeCommentViewBotConstraint" destination="HbK-yR-8oM" id="Vku-HQ-7qC"/>
                         <outlet property="sendCommentButton" destination="VJW-Jk-3Ma" id="uII-BF-dWE"/>
+                        <segue destination="Kko-MZ-OqA" kind="presentation" identifier="viewFullImageSegue" modalTransitionStyle="crossDissolve" id="MSP-Xk-RU4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Nx-lf-GUS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1664,5 +1665,6 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
         <segue reference="q9w-i3-shG"/>
         <segue reference="gfM-be-KWJ"/>
         <segue reference="vcn-VJ-Z9f"/>
+        <segue reference="MSP-Xk-RU4"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -229,6 +229,8 @@ class PostTableViewCell: UITableViewCell {
         if self.post?.downloadedImage != nil && parentVC != nil {
             parentVC.selectedImage = self.post?.downloadedImage
             parentVC.performSegue(withIdentifier: "viewFullImageSegue", sender: nil)
+        }else if self.post?.downloadedImage != nil && commentViewCont != nil{
+            commentViewCont?.performSegue(withIdentifier: "viewFullImageSegue", sender: nil)
         }
     }
     
