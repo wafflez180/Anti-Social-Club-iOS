@@ -47,6 +47,10 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
         setupFrame()
         dismissPhotoButtonContainer(animate: false)
         
+        self.photoButtonsContainer.isUserInteractionEnabled = true
+        let tap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(presentFullImageView))
+        self.photoButtonsContainer.addGestureRecognizer(tap)
+        
         // Listen for keyboard appearances and disappearances
         NotificationCenter.default.addObserver(
         self,
@@ -62,6 +66,13 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
     }
     
     //MARK: - ComposePostView
+    
+    func presentFullImageView(){
+        if self.imageToUpload != nil && parentVC != nil {
+            parentVC.selectedImage = imageToUpload
+            parentVC.performSegue(withIdentifier: "viewFullImageSegue", sender: nil)
+        }
+    }
     
     func keyboardDidShow(notification: NSNotification)
     {
@@ -154,8 +165,6 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
         
         let tap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissPopup))
         blurView.addGestureRecognizer(tap)
-        let tapPost : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissPopup))
-        self.addGestureRecognizer(tapPost)
 
         self.parentVC.view.addSubview(blurView)
     }
