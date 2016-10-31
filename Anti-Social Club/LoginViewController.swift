@@ -121,10 +121,18 @@ class LoginViewController: UIViewController
     
     func onLoginSuccess()
     {
-        print("login successful, going into message board now")
-        //performSegue(withIdentifier: "loginSuccessSegue", sender: nil)
-        // Image
-        
+        let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
+        if launchedBefore  {
+            print("Not first launch.")
+            self.performSegue(withIdentifier: "loginSuccessSegue", sender: nil)
+        } else {
+            print("First launch, setting UserDefault.")
+            UserDefaults.standard.set(true, forKey: "launchedBefore")
+            launchTutorial()
+        }
+    }
+    
+    func launchTutorial(){
         firstPage = OnboardingContentViewController(title: "Post", body: "Post images and/or text with\nfull anonymity", image: UIImage(named: "firstTutorialImage"), buttonText: "") { () -> Void in
             // do something here when users press the button, like ask for location services permissions, register for push notifications, connect to social media, or finish the onboarding process
         }
@@ -141,9 +149,9 @@ class LoginViewController: UIViewController
             })
             self.performSegue(withIdentifier: "loginSuccessSegue", sender: nil)
         }
-
+        
         onboardingVC = OnboardingViewController(backgroundImage: UIImage(named: "backgroundTutorialImage"), contents: [firstPage!,secondPage!,thirdPage!,fourthPage!])
-
+        
         let contentControllers = (onboardingVC?.viewControllers as! [OnboardingContentViewController])
         
         let titleTopPadding : CGFloat = 40
@@ -152,19 +160,18 @@ class LoginViewController: UIViewController
             onboardVC.underIconPadding = -firstPage!.topPadding + -firstPage!.iconHeight + titleTopPadding;
             onboardVC.underTitlePadding = 10;
             onboardVC.bottomPadding = 0
-
+            
             onboardVC.titleLabel.textColor = UIColor.hexStringToUIColor(hex: "B2EBF2")
             onboardVC.titleLabel.font = UIFont.systemFont(ofSize: 40, weight: UIFontWeightRegular)
             onboardVC.bodyLabel.font = UIFont.systemFont(ofSize: 20, weight: UIFontWeightMedium)
-            onboardVC.actionButton.setTitleColor(UIColor.black, for: UIControlState.normal)
+            onboardVC.actionButton.setTitleColor(UIColor.white, for: UIControlState.normal)
         }
         
         onboardingVC?.pageControl.isHidden = false
         
         onboardingVC?.shouldMaskBackground = false
         
-        present(onboardingVC!, animated: true)
-    }
+        present(onboardingVC!, animated: true)    }
     
     func transitionToNextVC(index : Int){
         onboardingVC?.moveNextPage()

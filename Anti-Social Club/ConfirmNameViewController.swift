@@ -140,7 +140,13 @@ class ConfirmNameViewController: UIViewController, UITextFieldDelegate
     // MARK: - Actions
 
     @IBAction func submitUBITName(_ sender: AnyObject) {
-        attemptConfirmName(name: ubitNameTextField.text!)
+        attemptConfirmName(name: removeUnWantedCharsFromString(text: ubitNameTextField.text!))
+    }
+    
+    func removeUnWantedCharsFromString(text: String) -> String {
+        let okayChars : Set<Character> =
+            Set("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ1234567890".characters)
+        return String(text.characters.filter {okayChars.contains($0) })
     }
 
     // MARK: - Navigation

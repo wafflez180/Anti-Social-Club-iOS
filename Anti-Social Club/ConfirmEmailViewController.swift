@@ -137,6 +137,14 @@ class ConfirmEmailViewController: UIViewController, UITextFieldDelegate
     
     // MARK: - TextField
     
+    //Set Character limit
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let text = textField.text else { return true }
+        
+        let newLength = text.characters.count + string.characters.count - range.length
+        return newLength <= 4 // Bool
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
