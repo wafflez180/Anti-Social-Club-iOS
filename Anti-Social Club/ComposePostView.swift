@@ -261,6 +261,13 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
         {
             let message = messageTextView.text!;
             let token = UserDefaults.standard.string(forKey: "token")!
+            
+            let activityView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+            activityView.center=sendPostButton.center;
+            activityView.frame = sendPostButton.frame
+            activityView.startAnimating()
+            sendPostButton.superview?.addSubview(activityView)
+            sendPostButton.isHidden = true
         
             Alamofire.upload(
             multipartFormData:
@@ -282,6 +289,10 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
             encodingCompletion:
             {
                 encodingResult in
+                
+                activityView.stopAnimating()
+                activityView.removeFromSuperview()
+                self.sendPostButton.isHidden = false
                 
                 switch encodingResult
                 {

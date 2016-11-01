@@ -134,8 +134,9 @@ class ConfirmKeyViewController: UIViewController, UITextFieldDelegate
         guard let text = textField.text else { return true }
         
         let newLength = text.characters.count + string.characters.count - range.length
-        return newLength <= 4 // Bool
+        return newLength <= 8 // Bool
     }
+
     
     // MARK: - Actions
     

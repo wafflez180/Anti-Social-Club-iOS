@@ -145,8 +145,8 @@
 				CAACD65F1DB3068D001F7C20 /* SettingsViewController.swift */,
 				143F5C721DB32CD500605158 /* EntryViewController.swift */,
 				143F5C741DB32E0400605158 /* ConfirmNameViewController.swift */,
-				143F5C761DB32E6600605158 /* ConfirmEmailViewController.swift */,
 				143F5C781DB32E8300605158 /* ConfirmKeyViewController.swift */,
+				143F5C761DB32E6600605158 /* ConfirmEmailViewController.swift */,
 				143F5C7A1DB32ECF00605158 /* LoginViewController.swift */,
 				CAB7BA9B1DB6F84000D984A5 /* CustomNavigationController.swift */,
 				CAF104E71DB70279005B7F6F /* ShareKeysViewController.swift */,
@@ -477,6 +477,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 72H7NZKH7W;
 				INFOPLIST_FILE = "Anti-Social Club/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "club.ub-anti-social";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -495,6 +496,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 72H7NZKH7W;
 				INFOPLIST_FILE = "Anti-Social Club/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "club.ub-anti-social";
 				PRODUCT_NAME = "$(TARGET_NAME)";
