@@ -163,7 +163,7 @@ class LoginViewController: UIViewController
         thirdPage = OnboardingContentViewController(title: "Vote", body: "Vote your opinion on posts to\nreveal how many voted", image: UIImage(named: "thirdTutorialImage"), buttonText: "") { () -> Void in
             // do something here when users press the button, like ask for location services permissions, register for push notifications, connect to social media, or finish the onboarding process
         }
-        fourthPage = OnboardingContentViewController(title: "Share Keys", body: "Go to the settings page to share\nthe few keys you have", image: UIImage(named: "fourthTutorialImage"), buttonText: "Enter") { () -> Void in
+        fourthPage = OnboardingContentViewController(title: "Invite", body: "Go to the settings page to share\nthe few keys you have", image: UIImage(named: "fourthTutorialImage"), buttonText: "Enter") { () -> Void in
             self.dismiss(animated: true, completion: {
                 
             })
