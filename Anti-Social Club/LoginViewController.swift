@@ -153,17 +153,17 @@ class LoginViewController: UIViewController
     }
     
     func launchTutorial(){
-        firstPage = OnboardingContentViewController(title: "Post", body: "Post images and/or text with\nfull anonymity", image: UIImage(named: "firstTutorialImage"), buttonText: "") { () -> Void in
+        firstPage = OnboardingContentViewController(title: "POST", body: "Post images and/or text with\nfull anonymity", image: UIImage(named: "firstTutorialImage"), buttonText: "") { () -> Void in
             // do something here when users press the button, like ask for location services permissions, register for push notifications, connect to social media, or finish the onboarding process
         }
         
-        secondPage = OnboardingContentViewController(title: "Comment", body: "When you comment you are given a\nrandom color for that post", image: UIImage(named: "secondTutorialImage"), buttonText: "") { () -> Void in
+        secondPage = OnboardingContentViewController(title: "COMMENT", body: "When you comment you are given a\nrandom color for that post", image: UIImage(named: "secondTutorialImage"), buttonText: "") { () -> Void in
             // do something here when users press the button, like ask for location services permissions, register for push notifications, connect to social media, or finish the onboarding process
         }
-        thirdPage = OnboardingContentViewController(title: "Vote", body: "Vote your opinion on posts to\nreveal how many voted", image: UIImage(named: "thirdTutorialImage"), buttonText: "") { () -> Void in
+        thirdPage = OnboardingContentViewController(title: "VOTE", body: "Vote your opinion on posts to\nreveal how many voted", image: UIImage(named: "thirdTutorialImage"), buttonText: "") { () -> Void in
             // do something here when users press the button, like ask for location services permissions, register for push notifications, connect to social media, or finish the onboarding process
         }
-        fourthPage = OnboardingContentViewController(title: "Invite", body: "Go to the settings page to share\nthe few keys you have", image: UIImage(named: "fourthTutorialImage"), buttonText: "Enter") { () -> Void in
+        fourthPage = OnboardingContentViewController(title: "INVITE", body: "Go to the settings page to share\nthe few keys you have", image: UIImage(named: "fourthTutorialImage"), buttonText: "Enter") { () -> Void in
             self.dismiss(animated: true, completion: {
                 
             })
