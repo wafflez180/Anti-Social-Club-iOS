@@ -10,6 +10,8 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import Onboard
+import Fabric
+import Crashlytics
 
 class LoginViewController: UIViewController
 {
@@ -145,6 +147,9 @@ class LoginViewController: UIViewController
             UserDefaults.standard.set(true, forKey: "launchedBefore")
             launchTutorial()
         }
+        Answers.logLogin(withMethod: "Token", success: true, customAttributes: [:])
+        
+        //Just leave the first parameter as "Token". This is the login method.
     }
     
     func launchTutorial(){

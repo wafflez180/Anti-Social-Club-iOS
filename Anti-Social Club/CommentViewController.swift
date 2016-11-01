@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import Crashlytics
 
 class CommentViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
@@ -48,7 +49,6 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         self.commentTableview.refreshControl = UIRefreshControl()
         self.commentTableview.refreshControl?.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -194,6 +194,7 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
                             self.composeCommentTextField.text = ""
                             self.postedNewComment = true
                             self.attemptRetrieveComments(offset: self.offset!, token: token, postId: postId)
+                            Answers.logCustomEvent(withName: "Comment", customAttributes: [:])
                         }
                         
                     case .failure(let error):
@@ -369,6 +370,12 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
             showingFullScreenImage = true
             let destination = segue.destination as! ViewImageViewController
             destination.fullSizeImage = self.postCell?.post?.downloadedImage
+            
+            Answers.logContentView(
+                withName: "Image View",
+                contentType: "Image",
+                contentId: String(describing: self.postCell?.post?.id),
+                customAttributes: [:])
         }
     }
 }

@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import AlamofireImage
 import SwiftyJSON
+import Crashlytics
 
 class HomepageTableViewController: UITableViewController {
     var postsArray = [Post]()
@@ -227,6 +228,11 @@ class HomepageTableViewController: UITableViewController {
         {
             let destination = segue.destination as! ViewImageViewController
             destination.fullSizeImage = selectedImage!
+            Answers.logContentView(
+                withName: "Image View",
+                contentType: "Image",
+                contentId: String(describing: selectedPostCell?.post?.id),
+                customAttributes: [:])
         }
         
     }

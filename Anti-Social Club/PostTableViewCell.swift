@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import Crashlytics
 
 class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var laughingBadgeButton: UIButton!
@@ -261,6 +262,8 @@ class PostTableViewCell: UITableViewCell {
                             self.reportButton.setTitle(String(describing: (self.post?.reportCount!)!+1), for: UIControlState.selected)
                             self.post?.reported = true
                             self.post?.reportCount = (self.post?.reportCount)!+1
+                            
+                            Answers.logCustomEvent(withName: "Report", customAttributes: [:])
 
                             //Update cell in the main page
                             if self.commentViewCont != nil {
@@ -311,6 +314,8 @@ class PostTableViewCell: UITableViewCell {
                             print("Error")
                         }
                         
+                        self.logAnswerVoteEvent(badgeId: badgeId)
+                        
                         self.selectBadge(badgeId: badgeId, animate: true)
                         
                         self.post?.voted = true
@@ -328,6 +333,30 @@ class PostTableViewCell: UITableViewCell {
                         
                         return
                     }
+        }
+    }
+    
+    func logAnswerVoteEvent(badgeId: Int){
+        //The "badge" attribute in customAttributes should be "funny", "dumb", "love", "agree", or "disagree".
+        
+        switch badgeId {
+        case 0 :
+            Answers.logCustomEvent(withName: "Vote",
+                                   customAttributes: ["badge":"funny"])
+        case 1:
+            Answers.logCustomEvent(withName: "Vote",
+                                   customAttributes: ["badge":"dumb"])
+        case 2:
+            Answers.logCustomEvent(withName: "Vote",
+                                   customAttributes: ["badge":"love"])
+        case 3:
+            Answers.logCustomEvent(withName: "Vote",
+                                   customAttributes: ["badge":"agree"])
+        case 4:
+            Answers.logCustomEvent(withName: "Vote",
+                                   customAttributes: ["badge":"disagree"])
+        default :
+            print("Error on logging answer vote even")
         }
     }
     

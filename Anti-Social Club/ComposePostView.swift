@@ -11,6 +11,7 @@ import AVFoundation
 import Fusuma
 import Alamofire
 import SwiftyJSON
+import Crashlytics
 
 class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, UITextViewDelegate {
     
@@ -305,6 +306,7 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
                                         self.parentVC.present(alert, animated: true, completion: nil)
                                     }else{
                                         self.sendPopupAnimation()
+                                        Answers.logCustomEvent(withName: "Post", customAttributes: [:])
                                     }
                                     break
                                 

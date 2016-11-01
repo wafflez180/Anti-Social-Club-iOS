@@ -307,7 +307,7 @@ for breaching the rules.</string>
                         </connections>
                     </tableView>
                     <toolbarItems>
-                        <barButtonItem image="Gear" id="gwe-GZ-UJm">
+                        <barButtonItem image="SettingsKeyIcon" id="gwe-GZ-UJm">
                             <color key="tintColor" red="0.0" green="0.73725490196078436" blue="0.83137254901960778" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="ZZd-Eg-ggk" kind="show" id="JUz-Nr-srv"/>
@@ -1642,7 +1642,6 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
         <image name="DislikeSelected" width="27" height="24"/>
         <image name="FlagOutline" width="26" height="25"/>
         <image name="FlagSelected" width="24" height="23"/>
-        <image name="Gear" width="24" height="24"/>
         <image name="HeartOutline" width="27" height="23"/>
         <image name="HeartSelected" width="25" height="21"/>
         <image name="LaughingFaceOutline" width="27" height="27"/>
@@ -1650,6 +1649,7 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
         <image name="LikeOutline" width="27" height="24"/>
         <image name="LikeSelected" width="27" height="24"/>
         <image name="SendPostButton" width="45" height="45"/>
+        <image name="SettingsKeyIcon" width="38" height="29"/>
         <image name="ShareIcon" width="26" height="21"/>
         <image name="StraightFaceOutline" width="27" height="27"/>
         <image name="StraightFaceSelected" width="25" height="25"/>

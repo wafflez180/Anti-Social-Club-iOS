@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import Crashlytics
 
 class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -81,6 +82,7 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
                             {
                                 self.keyArray+=[key]
                             }
+                            
                         }
                         self.keysTableView.reloadData()
                         
@@ -123,6 +125,9 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
                         let alert = UIAlertController(title: "Success!", message: "You're key was sent to \(recipientEmail)", preferredStyle: UIAlertControllerStyle.alert)
                         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
                         self.present(alert, animated: true, completion: nil)
+                        
+                        Answers.logInvite(withMethod: "Email Key", customAttributes: [:])
+                        
                     case .failure(let error):
                         print("Request failed with error: \(error)")
                         let alert = UIAlertController(title: "Error", message: "Network Error! Please try again later", preferredStyle: UIAlertControllerStyle.alert)
