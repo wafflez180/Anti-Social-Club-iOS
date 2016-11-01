@@ -228,10 +228,11 @@ class HomepageTableViewController: UITableViewController {
         {
             let destination = segue.destination as! ViewImageViewController
             destination.fullSizeImage = selectedImage!
+        }else if (segue.identifier == "settingsSegue"){
             Answers.logContentView(
-                withName: "Image View",
-                contentType: "Image",
-                contentId: String(describing: selectedPostCell?.post?.id!),
+                withName: "Info View",
+                contentType: "View",
+                contentId: "Info",
                 customAttributes: [:])
         }
         

@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import Crashlytics
 
 class SettingsViewController: UIViewController {
 
@@ -22,6 +23,7 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var dateJoinedLabel: UILabel!
     
     var segueingToShareKeyVC : Bool = false
+    var segueingToDeactivate : Bool = false
     
     // MARK - SettingsViewController
     
@@ -39,7 +41,7 @@ class SettingsViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        if (self.navigationController?.toolbar.isHidden)! && !segueingToShareKeyVC {
+        if  !segueingToDeactivate && (self.navigationController?.toolbar.isHidden)! && !segueingToShareKeyVC {
             self.navigationController?.setToolbarHidden(false, animated: true)
         }
     }
@@ -134,6 +136,8 @@ class SettingsViewController: UIViewController {
         
         deactivateAlert.addAction(UIAlertAction(title: "Deactivate", style: .destructive, handler: { (action: UIAlertAction!) in
             print("User Deactivated Account")
+            self.segueingToDeactivate = true
+            Answers.logCustomEvent(withName: "Deactivate", customAttributes: [:])
             let defaults = UserDefaults.standard
             defaults.removeObject(forKey: "token")
             self.navigationController?.popViewController(animated: false)

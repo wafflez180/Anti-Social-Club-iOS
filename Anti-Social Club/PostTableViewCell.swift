@@ -228,9 +228,19 @@ class PostTableViewCell: UITableViewCell {
     
     func presentFullImageView(){
         if self.post?.downloadedImage != nil && parentVC != nil {
+            Answers.logContentView(
+                withName: "Image View",
+                contentType: "Image",
+                contentId: String(describing: post?.id!),
+                customAttributes: [:])
             parentVC.selectedImage = self.post?.downloadedImage
             parentVC.performSegue(withIdentifier: "viewFullImageSegue", sender: nil)
         }else if self.post?.downloadedImage != nil && commentViewCont != nil{
+            Answers.logContentView(
+                withName: "Image View",
+                contentType: "Image",
+                contentId: String(describing: post?.id!),
+                customAttributes: [:])
             commentViewCont?.performSegue(withIdentifier: "viewFullImageSegue", sender: nil)
         }
     }

@@ -32,6 +32,11 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
         buyMoreKeysButton.alpha = 0.3
 
         // Do any additional setup after loading the view.
+        Answers.logContentView(
+            withName: "Key View",
+            contentType: "View",
+            contentId: "Key",
+            customAttributes: [:])
     }
 
     override func didReceiveMemoryWarning() {

@@ -310,7 +310,7 @@ for breaching the rules.</string>
                         <barButtonItem image="SettingsKeyIcon" id="gwe-GZ-UJm">
                             <color key="tintColor" red="0.0" green="0.73725490196078436" blue="0.83137254901960778" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <segue destination="ZZd-Eg-ggk" kind="show" id="JUz-Nr-srv"/>
+                                <segue destination="ZZd-Eg-ggk" kind="show" identifier="settingsSegue" id="JUz-Nr-srv"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="fVP-Yq-Scx"/>
@@ -1166,7 +1166,7 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                         <outlet property="likeBadgeLabel" destination="vFw-CC-AzX" id="DIo-6X-im0"/>
                         <outlet property="notamusedBadgeLabel" destination="Ht8-qB-f15" id="uZ6-QH-W67"/>
                         <outlet property="rankLabel" destination="YP8-73-VLN" id="Miv-t1-q54"/>
-                        <segue destination="E64-iG-bKQ" kind="show" identifier="confirmNameDeactivateSegue" id="M22-xo-Fcy"/>
+                        <segue destination="E64-iG-bKQ" kind="presentation" identifier="confirmNameDeactivateSegue" modalTransitionStyle="crossDissolve" id="M22-xo-Fcy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fOs-6T-xJ9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1657,7 +1657,7 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
     <inferredMetricsTieBreakers>
         <segue reference="q9w-i3-shG"/>
         <segue reference="gfM-be-KWJ"/>
-        <segue reference="vcn-VJ-Z9f"/>
+        <segue reference="M22-xo-Fcy"/>
         <segue reference="zIT-1V-UjM"/>
     </inferredMetricsTieBreakers>
 </document>

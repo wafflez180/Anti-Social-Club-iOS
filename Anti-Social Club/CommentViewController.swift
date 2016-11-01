@@ -386,12 +386,6 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
             showingFullScreenImage = true
             let destination = segue.destination as! ViewImageViewController
             destination.fullSizeImage = self.postCell?.post?.downloadedImage
-            
-            Answers.logContentView(
-                withName: "Image View",
-                contentType: "Image",
-                contentId: String(describing: self.postCell?.post?.id!),
-                customAttributes: [:])
         }
     }
 }
