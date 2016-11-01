@@ -231,7 +231,7 @@ class HomepageTableViewController: UITableViewController {
             Answers.logContentView(
                 withName: "Image View",
                 contentType: "Image",
-                contentId: String(describing: selectedPostCell?.post?.id),
+                contentId: String(describing: selectedPostCell?.post?.id!),
                 customAttributes: [:])
         }
         

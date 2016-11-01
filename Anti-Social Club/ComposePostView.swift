@@ -192,9 +192,9 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
     {
         if keyboardIsHidden
         {
+            self.parentVC.navigationController?.setToolbarHidden(false, animated: true)
             self.parentVC.composePostPopup = nil
             self.parentVC.tableView.isScrollEnabled = true
-            self.parentVC.navigationController?.setToolbarHidden(false, animated: true)
             UIView.animate(withDuration: 0.2, delay: 0.0, options: .transitionCurlUp, animations:
                 {
                     self.blurView.alpha = 0.0
@@ -253,7 +253,7 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
     
     func sendPost()
     {
-        //TODO: Make A spinner in the send button and then make a check mark or something then:
+        // Make A spinner in the send button and then make a check mark or something then:
         if (messageTextView.text?.isEmpty)!
         {
             flashMessageBox()
@@ -326,6 +326,7 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
     func sendPopupAnimation(){
         self.parentVC.tableView.isScrollEnabled = true
         self.parentVC.composePostPopup = nil
+        self.parentVC.navigationController?.setToolbarHidden(false, animated: true)
         UIView.animate(withDuration: 0.2, delay: 0.0, options: .transitionCurlUp, animations:
             {
                 self.blurView.alpha = 0.0

@@ -342,19 +342,19 @@ class PostTableViewCell: UITableViewCell {
         switch badgeId {
         case 0 :
             Answers.logCustomEvent(withName: "Vote",
-                                   customAttributes: ["badge":"funny"])
+                                   customAttributes: ["badge":"Funny"])
         case 1:
             Answers.logCustomEvent(withName: "Vote",
-                                   customAttributes: ["badge":"dumb"])
+                                   customAttributes: ["badge":"Dumb"])
         case 2:
             Answers.logCustomEvent(withName: "Vote",
-                                   customAttributes: ["badge":"love"])
+                                   customAttributes: ["badge":"Love"])
         case 3:
             Answers.logCustomEvent(withName: "Vote",
-                                   customAttributes: ["badge":"agree"])
+                                   customAttributes: ["badge":"Agree"])
         case 4:
             Answers.logCustomEvent(withName: "Vote",
-                                   customAttributes: ["badge":"disagree"])
+                                   customAttributes: ["badge":"Disagree"])
         default :
             print("Error on logging answer vote even")
         }

@@ -17,8 +17,8 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
     var postCell : PostTableViewCell?
     var commentArray : [Comment] = []
     var tapGestureRec : UITapGestureRecognizer?
-    var offset : Int?
     var postId : Int?
+    var retrievingComments: Bool = false
 
     @IBOutlet weak var commentTableview: UITableView!
     @IBOutlet weak var composeCommentViewBotConstraint: NSLayoutConstraint!
@@ -42,10 +42,8 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
         addNotifications()
 
         let defaults = UserDefaults.standard
-        let offsetBullshitIncrement = 20
-        offset = (postCell?.parentVC.postsArray.count)!-offsetBullshitIncrement
         postId = (postCell?.post?.id)!
-        attemptRetrieveComments(offset: offset!, token: defaults.string(forKey: "token")!, postId: postId!)
+        attemptRetrieveComments(offset: 0, token: defaults.string(forKey: "token")!, postId: postId!)
         
         self.commentTableview.refreshControl = UIRefreshControl()
         self.commentTableview.refreshControl?.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
@@ -72,11 +70,12 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
     {
         let defaults = UserDefaults.standard
         self.commentArray.removeAll()
-        attemptRetrieveComments(offset: offset!, token: defaults.string(forKey: "token")!, postId: postId!)
+        attemptRetrieveComments(offset: 0, token: defaults.string(forKey: "token")!, postId: postId!)
     }
     
     func attemptRetrieveComments(offset: Int, token: String, postId: Int)
     {
+        retrievingComments = true
         print("Attempting to retrieve comments with\n\tOffset: \(offset)\n\tToken: \(token)\n\tPost_ID: \(postId)")
         
         let parameters = ["offset" : offset, "token" : token, "post_id" : postId] as [String : Any]
@@ -111,7 +110,8 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
                             return
                         }
                         
-                        self.commentArray.removeAll()
+                        var reachedLoadedPostsLimit = false
+
                         let jsonArray = json["comments"].array
                         for subJSON in jsonArray!
                         {
@@ -120,20 +120,29 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
                                 self.commentArray+=[comment]
                             }
                         }
+                        reachedLoadedPostsLimit = jsonArray?.count == 0
                         
-                        self.postCell?.post?.commentCount = self.commentArray.count
-                        self.postCell?.commentButton.setTitle(String(describing: (self.postCell?.post?.commentCount!)), for: UIControlState.normal)
-                        self.parentVC?.selectedPostCell?.commentButton.setTitle(String(describing: (self.postCell?.post?.commentCount!)!), for: UIControlState.normal)
-                        
-                        self.commentTableview.reloadData()
-                        self.commentTableview.refreshControl?.endRefreshing()
+                        if !reachedLoadedPostsLimit {
+                            DispatchQueue.main.async{
+                                self.commentTableview.reloadData()
+                                self.commentTableview.refreshControl?.endRefreshing()
+                            }
+                        }
 
                         if self.postedNewComment {
-                            self.commentTableview.layoutIfNeeded()
-                            let lastRowIndexPath = IndexPath(row: self.commentTableview.numberOfRows(inSection: 0)-1, section: 0)
-                            self.commentTableview.scrollToRow(at: lastRowIndexPath, at: UITableViewScrollPosition.bottom, animated: true)
+                            let lastRowIndexPath = IndexPath(row: self.commentArray.count, section: 0)
+                            DispatchQueue.main.async{
+                                self.commentTableview.scrollToRow(at: lastRowIndexPath, at: UITableViewScrollPosition.bottom, animated: true)
+                            }
                             self.postedNewComment = false
+                            
+                            self.postCell?.post?.commentCount = (self.postCell?.post?.commentCount)!+1
+                            self.postCell?.commentButton.setTitle(String(describing: (self.postCell?.post?.commentCount!)), for: UIControlState.normal)
+                            self.parentVC?.selectedPostCell?.commentButton.setTitle(String(describing: (self.postCell?.post?.commentCount!)!), for: UIControlState.normal)
+                            self.commentTableview.layoutIfNeeded()
                         }
+                        
+                        self.retrievingComments = false
                         
                     case .failure(let error):
                         print("Request failed with error: \(error)")
@@ -193,7 +202,7 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
                         }else{
                             self.composeCommentTextField.text = ""
                             self.postedNewComment = true
-                            self.attemptRetrieveComments(offset: self.offset!, token: token, postId: postId)
+                            self.attemptRetrieveComments(offset: self.commentArray.count, token: token, postId: postId)
                             Answers.logCustomEvent(withName: "Comment", customAttributes: [:])
                         }
                         
@@ -247,11 +256,19 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
             cell.configureCellWithPost(post: (postCell?.post!)!, section: indexPath.row)
             postCell = cell
             return cell
-        }else{
+        }else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell", for: indexPath) as! CommentTableViewCell
-            cell.postCell = postCell
-            cell.configureWithComment(comment: commentArray[indexPath.row-1])
-            
+            if (commentArray.count > 0){
+                cell.postCell = postCell
+                cell.configureWithComment(comment: commentArray[indexPath.row-1])
+            }
+            if indexPath.row > commentArray.count-2{
+                let defaults = UserDefaults.standard
+                print(self.commentArray.count)
+                if retrievingComments == false {
+                    attemptRetrieveComments(offset: self.commentArray.count, token: defaults.string(forKey: "token")!, postId: self.postId!)
+                }
+            }
             return cell
         }
     }
@@ -318,10 +335,9 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     @IBAction func pressedSendComment(_ sender: AnyObject) {
         let defaults = UserDefaults.standard
-        self.attemptRetrieveComments(offset: self.offset!, token: defaults.string(forKey: "token")!, postId: (self.postCell?.post?.id)!)
+       // self.attemptRetrieveComments(offset: self.commentArray.count, token: defaults.string(forKey: "token")!, postId: (self.postCell?.post?.id)!)
 
         attemptPostComment(token: defaults.string(forKey: "token")!, message: composeCommentTextField.text!, postId: postId!)
-        
     }
 
     /*    CGSize keyboardSize = [sender.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
@@ -374,7 +390,7 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
             Answers.logContentView(
                 withName: "Image View",
                 contentType: "Image",
-                contentId: String(describing: self.postCell?.post?.id),
+                contentId: String(describing: self.postCell?.post?.id!),
                 customAttributes: [:])
         }
     }
