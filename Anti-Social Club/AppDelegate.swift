@@ -9,25 +9,23 @@
 import UIKit
 import Fabric
 import Crashlytics
+import Firebase
 import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, FIRMessagingDelegate {
 
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        // Initialize Fabric
         Fabric.with([Crashlytics.self])
         
-        let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options:[.badge, .alert, .sound]) {
-            (granted, error) in
-            
-            // Enable or disable features based on authorization.
-            // Not really necessary right now.
-        }
-        
-        application.registerForRemoteNotifications()
+        // Initialize Firebase (For FCM Push Notifications)
+        FIRApp.configure()
+        FIRAnalyticsConfiguration.sharedInstance().setAnalyticsCollectionEnabled(false)
+        registerForFCM(application: application);
         
         return true
     }
@@ -38,8 +36,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        FIRMessaging.messaging().disconnect()
+        print("Disconnected from FCM.")
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -58,6 +56,67 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         print("Device failed to register for remote notifications! \(error)")
     }
 
+    func registerForFCM(application : UIApplication) {
+        if #available(iOS 10.0, *) {
+          let authOptions : UNAuthorizationOptions = [.alert, .badge, .sound]
+          UNUserNotificationCenter.current().requestAuthorization(options: authOptions, completionHandler: {_,_ in })
 
+          // For iOS 10 display notification (sent via APNS)
+          UNUserNotificationCenter.current().delegate = self
+          
+          // For iOS 10 data message (sent via FCM)
+          FIRMessaging.messaging().remoteMessageDelegate = self
+
+        } else {
+          let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+          application.registerUserNotificationSettings(settings)
+        }
+
+        application.registerForRemoteNotifications()
+        
+        let token = FIRInstanceID.instanceID().token()!
+        print("Got FCM token \(token)")
+    }
+    
+    func tokenRefreshNotification(_ notification: Notification) {
+        if let refreshedToken = FIRInstanceID.instanceID().token() {
+            print("Got new FCM InstanceID token: \(refreshedToken)")
+        }
+
+        // Connect to FCM since connection may have failed when attempted before having a token.
+        connectToFCM()
+    }
+    
+    func connectToFCM() {
+        FIRMessaging.messaging().connect {
+            (error) in
+            
+            if (error != nil) {
+                print("Unable to connect with FCM. \(error)")
+            } else {
+                print("Connected to FCM.")
+            }
+        }
+    }
+    
+    // Receive data messages on iOS 10 devices.
+    func applicationReceivedRemoteMessage(_ remoteMessage: FIRMessagingRemoteMessage) {
+        print("%@", remoteMessage.appData)
+    }
+    
 }
+
+@available(iOS 10, *)
+extension AppDelegate {
+
+    // Receive displayed notifications for iOS 10 devices.
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        let userInfo = notification.request.content.userInfo
+        
+        print("Message ID: \(userInfo["gcm.message_id"]!)")
+        print("%@", userInfo)
+    }
+    
+}
+
 
