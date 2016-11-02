@@ -12,7 +12,7 @@
 		143F5C771DB32E6600605158 /* ConfirmEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143F5C761DB32E6600605158 /* ConfirmEmailViewController.swift */; };
 		143F5C791DB32E8300605158 /* ConfirmKeyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143F5C781DB32E8300605158 /* ConfirmKeyViewController.swift */; };
 		143F5C7B1DB32ECF00605158 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143F5C7A1DB32ECF00605158 /* LoginViewController.swift */; };
-		14AAE5011DCA682B002B011A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 14AAE5001DCA682B002B011A /* GoogleService-Info.plist */; };
+		14AAE5031DCA6BC3002B011A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 14AAE5021DCA6BC3002B011A /* GoogleService-Info.plist */; };
 		14DEF9AD1DAC0F8300BF8B58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DEF9AC1DAC0F8300BF8B58 /* AppDelegate.swift */; };
 		14DEF9B21DAC0F8300BF8B58 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14DEF9B01DAC0F8300BF8B58 /* Main.storyboard */; };
 		14DEF9B41DAC0F8300BF8B58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14DEF9B31DAC0F8300BF8B58 /* Assets.xcassets */; };
@@ -45,7 +45,7 @@
 		143F5C781DB32E8300605158 /* ConfirmKeyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmKeyViewController.swift; sourceTree = "<group>"; };
 		143F5C7A1DB32ECF00605158 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		14891B5D1DCA39660033EC39 /* Anti-Social Club.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Anti-Social Club.entitlements"; sourceTree = "<group>"; };
-		14AAE5001DCA682B002B011A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		14AAE5021DCA6BC3002B011A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		14DEF9A91DAC0F8300BF8B58 /* Anti-Social Club.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Anti-Social Club.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		14DEF9AC1DAC0F8300BF8B58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		14DEF9B11DAC0F8300BF8B58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -116,7 +116,7 @@
 		14DEF9AB1DAC0F8300BF8B58 /* Anti-Social Club */ = {
 			isa = PBXGroup;
 			children = (
-				14AAE5001DCA682B002B011A /* GoogleService-Info.plist */,
+				14AAE5021DCA6BC3002B011A /* GoogleService-Info.plist */,
 				14891B5D1DCA39660033EC39 /* Anti-Social Club.entitlements */,
 				14DEF9AC1DAC0F8300BF8B58 /* AppDelegate.swift */,
 				CA4143B41DAC7BF60072B27C /* View Controllers */,
@@ -262,9 +262,9 @@
 			files = (
 				14DEF9B71DAC0F8300BF8B58 /* LaunchScreen.storyboard in Resources */,
 				14DEF9B41DAC0F8300BF8B58 /* Assets.xcassets in Resources */,
+				14AAE5031DCA6BC3002B011A /* GoogleService-Info.plist in Resources */,
 				14DEF9B21DAC0F8300BF8B58 /* Main.storyboard in Resources */,
 				CAEE040B1DAD938B00012F14 /* ComposePost.xib in Resources */,
-				14AAE5011DCA682B002B011A /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
