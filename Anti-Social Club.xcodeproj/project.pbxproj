@@ -224,7 +224,7 @@
 				TargetAttributes = {
 					14DEF9A81DAC0F8300BF8B58 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = P46Z87GYN3;
+						DevelopmentTeam = 72H7NZKH7W;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
@@ -483,11 +483,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Anti-Social Club/Anti-Social Club.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = P46Z87GYN3;
+				DEVELOPMENT_TEAM = 72H7NZKH7W;
 				INFOPLIST_FILE = "Anti-Social Club/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "club.ub-anti-social";
+				PRODUCT_BUNDLE_IDENTIFIER = "anti-social.club";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -503,11 +503,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Anti-Social Club/Anti-Social Club.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = P46Z87GYN3;
+				DEVELOPMENT_TEAM = 72H7NZKH7W;
 				INFOPLIST_FILE = "Anti-Social Club/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "club.ub-anti-social";
+				PRODUCT_BUNDLE_IDENTIFIER = "anti-social.club";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
