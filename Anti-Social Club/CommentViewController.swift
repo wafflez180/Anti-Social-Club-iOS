@@ -128,7 +128,7 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
                                 self.commentTableview.refreshControl?.endRefreshing()
                             }
                         }
-
+                        
                         if self.postedNewComment {
                             let lastRowIndexPath = IndexPath(row: self.commentArray.count, section: 0)
                             DispatchQueue.main.async{
