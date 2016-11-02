@@ -12,6 +12,7 @@ import SwiftyJSON
 import Onboard
 import Fabric
 import Crashlytics
+import Firebase
 
 class LoginViewController: UIViewController
 {
@@ -149,7 +150,8 @@ class LoginViewController: UIViewController
         }
         Answers.logLogin(withMethod: "Token", success: true, customAttributes: [:])
         
-        //Just leave the first parameter as "Token". This is the login method.
+        // We need to register the FCM token with the server every time the user starts the app.
+        registerFCMToken()
     }
     
     func launchTutorial(){
@@ -248,6 +250,41 @@ class LoginViewController: UIViewController
             destination.userToken = userToken!
         }
 
+    }
+    
+    func registerFCMToken()
+    {
+        let token = "\(userToken!)"
+        let fcmToken = "\(FIRInstanceID.instanceID().token()!)"
+    
+        let parameters = ["token" : token, "fcm_token" : fcmToken]
+
+        Alamofire.request(Constants.API.ADDRESS + Constants.API.CALL_REGISTER_FCM_TOKEN, method: .post, parameters: parameters)
+        .responseJSON()
+        {
+            response in
+            
+            switch response.result
+            {
+                case .success(let responseData):
+                    let json = JSON(responseData)
+
+                    // Handle any errors
+                    if json["error"].bool == true
+                    {
+                        print("ERROR: \(json["error_message"].stringValue)")
+                        
+                        return
+                    }
+                    
+                    print("FCM token registered with server!")
+                    
+                case .failure(let error):
+                    print("Request failed with error: \(error)")
+                    
+                    return
+            }
+        }
     }
 
 }

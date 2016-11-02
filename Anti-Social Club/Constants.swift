@@ -27,6 +27,7 @@ class Constants
         static let CALL_CONFIRM_EMAIL = "ConfirmEmail.php"
         static let CALL_LOGIN = "Login.php"
         static let CALL_RETRIEVE_POSTS = "RetrievePosts.php"
+        static let CALL_RETRIEVE_POST = "RetrievePost.php"
         static let CALL_RETRIEVE_COMMENTS = "RetrieveComments.php"
         static let CALL_RETRIEVE_USER_INFO = "RetrieveUserInfo.php"
         static let CALL_RETRIEVE_USER_KEYS = "RetrieveUserKeys.php"
@@ -35,5 +36,8 @@ class Constants
         static let CALL_VOTE = "Vote.php"
         static let CALL_REPORT = "ReportPost.php"
         static let CALL_COMMENT = "Comment.php"
+        static let CALL_REGISTER_FCM_TOKEN = "RegisterFCMToken.php"
+        static let CALL_FOLLOW_POST = "FollowPost.php"
+        static let CALL_UNFOLLOW_POST = "UnfollowPost.php"
     }
 }
