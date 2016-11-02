@@ -16,4 +16,6 @@ target 'Anti-Social Club' do
   pod 'Fabric'
   pod 'Crashlytics'
   pod 'Onboard'
+  pod 'Firebase/Core'
+  pod 'Firebase/Messaging'
 end
