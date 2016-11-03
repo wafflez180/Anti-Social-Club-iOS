@@ -338,7 +338,13 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
         let defaults = UserDefaults.standard
        // self.attemptRetrieveComments(offset: self.commentArray.count, token: defaults.string(forKey: "token")!, postId: (self.postCell?.post?.id)!)
 
-        attemptPostComment(token: defaults.string(forKey: "token")!, message: composeCommentTextField.text!, postId: postId!)
+        let message = composeCommentTextField.text!
+        if message.isEmptyOrWhitespace() {
+            print("Comment was blank!")
+            return
+        }
+
+        attemptPostComment(token: defaults.string(forKey: "token")!, message: message, postId: postId!)
     }
 
     /*    CGSize keyboardSize = [sender.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].size;

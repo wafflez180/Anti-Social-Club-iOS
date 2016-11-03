@@ -254,7 +254,7 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
     func sendPost()
     {
         // Make A spinner in the send button and then make a check mark or something then:
-        if (messageTextView.text?.isEmpty)!
+        if (messageTextView.text?.isEmptyOrWhitespace())!
         {
             flashMessageBox()
         }else
