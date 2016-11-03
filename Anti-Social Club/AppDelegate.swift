@@ -73,9 +73,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
 
         application.registerForRemoteNotifications()
-        
-        //let token = FIRInstanceID.instanceID().token()!
-        //print("Got FCM token \(token)")
+
+        if let token = FIRInstanceID.instanceID().token()
+        {
+            print("Got FCM token \(token)")
+        }
     }
     
     func tokenRefreshNotification(_ notification: Notification) {

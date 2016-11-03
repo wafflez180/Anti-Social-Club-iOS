@@ -263,8 +263,8 @@ class LoginViewController: UIViewController
             return
         }
         
-        let fcmTokenString = "\(fcmToken)"
-    
+        let fcmTokenString = "\(fcmToken!)"
+
         let parameters = ["token" : token, "fcm_token" : fcmTokenString]
 
         Alamofire.request(Constants.API.ADDRESS + Constants.API.CALL_REGISTER_FCM_TOKEN, method: .post, parameters: parameters)
