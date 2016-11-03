@@ -109,7 +109,7 @@ class HomepageTableViewController: UITableViewController {
     func createTestPost(){
         //let testPost = Post(message: "Hey fam! It’s ya boi If anybody would like to come tonight at Davis Hall we are hosting an iOS workshop. We will be teaching swift! Invite your friends.", laughingBadgeCount: 2, notAmusedBadgeCount: 6, heartBadgeCount: 1, likeBadgeCount: 1, dislikeBadgeCount: 1, timestamp: "2h", imageUrl: nil)
         let testMessage = "Hey fam! It’s ya boi If anybody would like to come tonight at Davis Hall we are hosting an iOS workshop. We will be teaching swift! Invite your friends."
-        let testPost = Post(id: 0, posterId: 0, message: testMessage, imageSource: "", timestamp: "", voted: false, votedBadge: nil, reported: false, reportCount: 5, commentCount: 3, badgeFunnyCount: 7, badgeDumbCount: 6, badgeLoveCount: 4, badgeAgreeCount: 2, badgeDisagreeCount: 1)
+        let testPost = Post(id: 0, posterId: 0, message: testMessage, imageSource: "", timestamp: "", voted: false, votedBadge: nil, reported: false, reportCount: 5, commentCount: 3, badgeFunnyCount: 7, badgeDumbCount: 6, badgeLoveCount: 4, badgeAgreeCount: 2, badgeDisagreeCount: 1, isFollowing: true)
         postsArray+=[testPost!]
         tableView.reloadData()
     }

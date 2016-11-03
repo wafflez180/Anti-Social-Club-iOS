@@ -86,8 +86,6 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
         activityView.startAnimating()
         self.view.addSubview(activityView)
         
-        attemptUnfollowPost(token: token, postId: postId)
-        
         Alamofire.request(Constants.API.ADDRESS + Constants.API.CALL_RETRIEVE_COMMENTS, method: .post, parameters: parameters)
             .responseJSON()
                 {
@@ -177,6 +175,8 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
                 {
                     response in
                     
+                    print(response)
+                    
                     activityView.stopAnimating()
                     activityView.removeFromSuperview()
                     
@@ -205,7 +205,6 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
                             self.composeCommentTextField.text = ""
                             self.postedNewComment = true
                             self.attemptRetrieveComments(offset: self.commentArray.count, token: token, postId: postId)
-                            self.attemptFollowPost(token: token, postId: postId)
                             Answers.logCustomEvent(withName: "Comment", customAttributes: [:])
                         }
                         
@@ -217,70 +216,6 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
                         
                         return
                     }
-        }
-    }
-
-    func attemptFollowPost(token : String, postId : Int)
-    {
-        let parameters = ["token" : token, "post_id" : String(postId)]
-
-        Alamofire.request(Constants.API.ADDRESS + Constants.API.CALL_FOLLOW_POST, method: .post, parameters: parameters)
-        .responseJSON()
-        {
-            response in
-            
-            switch response.result
-            {
-                case .success(let responseData):
-                    let json = JSON(responseData)
-
-                    // Handle any errors
-                    if json["error"].bool == true
-                    {
-                        print("ERROR: \(json["error_message"].stringValue)")
-                        
-                        return
-                    }
-                    
-                    print("Followed post \(postId)!")
-                    
-                case .failure(let error):
-                    print("Request failed with error: \(error)")
-                    
-                    return
-            }
-        }
-    }
-
-    func attemptUnfollowPost(token : String, postId : Int)
-    {
-        let parameters = ["token" : token, "post_id" : String(postId)]
-
-        Alamofire.request(Constants.API.ADDRESS + Constants.API.CALL_UNFOLLOW_POST, method: .post, parameters: parameters)
-        .responseJSON()
-        {
-            response in
-            
-            switch response.result
-            {
-                case .success(let responseData):
-                    let json = JSON(responseData)
-
-                    // Handle any errors
-                    if json["error"].bool == true
-                    {
-                        print("ERROR: \(json["error_message"].stringValue)")
-                        
-                        return
-                    }
-                    
-                    print("Unfollowed post \(postId)!")
-                    
-                case .failure(let error):
-                    print("Request failed with error: \(error)")
-                    
-                    return
-            }
         }
     }
 

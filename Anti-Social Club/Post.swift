@@ -27,6 +27,7 @@ class Post{
     var badgeDisagreeCount : Int?
     var downloadedImage : UIImage?
     var revealedPost : Bool = false
+    var isFollowing : Bool?
     
     init?(id : Int?,
           posterId : Int?,
@@ -42,7 +43,8 @@ class Post{
           badgeDumbCount : Int?,
           badgeLoveCount : Int?,
           badgeAgreeCount : Int?,
-          badgeDisagreeCount : Int?) {
+          badgeDisagreeCount : Int?,
+          isFollowing : Bool?) {
     
         self.id = id
         self.posterId = posterId
@@ -59,6 +61,7 @@ class Post{
         self.badgeLoveCount = badgeLoveCount
         self.badgeAgreeCount = badgeAgreeCount
         self.badgeDisagreeCount = badgeDisagreeCount
+        self.isFollowing = isFollowing
         
         //print("Created Post:\n\tMessage: \"\(message!)\"\n\tImageURL: \(imageSource)")
     }
@@ -80,7 +83,8 @@ class Post{
         let newLoveBadgeCount = json["badge_love_count"].int
         let newAgreeBadgeCount = json["badge_agree_count"].int
         let newDisagreeBadgeCount = json["badge_disagree_count"].int
+        let isFollowing = json["followed"].bool
         
-        self.init(id: newId, posterId: newPosterId, message: newMessage, imageSource: newImageSource, timestamp: newTimestamp, voted: newVoted, votedBadge: newVotedBadge, reported: newReported, reportCount: newReportCount, commentCount: newCommentCount, badgeFunnyCount: newFunnyBadgeCount, badgeDumbCount: newDumbBadgeCount, badgeLoveCount: newLoveBadgeCount, badgeAgreeCount: newAgreeBadgeCount, badgeDisagreeCount: newDisagreeBadgeCount)
+        self.init(id: newId, posterId: newPosterId, message: newMessage, imageSource: newImageSource, timestamp: newTimestamp, voted: newVoted, votedBadge: newVotedBadge, reported: newReported, reportCount: newReportCount, commentCount: newCommentCount, badgeFunnyCount: newFunnyBadgeCount, badgeDumbCount: newDumbBadgeCount, badgeLoveCount: newLoveBadgeCount, badgeAgreeCount: newAgreeBadgeCount, badgeDisagreeCount: newDisagreeBadgeCount, isFollowing: isFollowing)
     }
 }

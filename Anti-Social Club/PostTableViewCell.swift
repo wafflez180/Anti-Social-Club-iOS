@@ -37,6 +37,8 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var disklikeTopConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var censorCoverView: UIView!
+    @IBOutlet weak var followingIndicator: UIView!
+    @IBOutlet weak var followingIndicatorWidthConstraint: NSLayoutConstraint!
     
     var userVoted : Bool?
     var userVotedBadge : Int?
@@ -49,6 +51,8 @@ class PostTableViewCell: UITableViewCell {
     var voteButtonArray : [UIButton] = []
     var voteButtonLeftConstraintArray : [NSLayoutConstraint] = []
     var voteButtonTopConstraintArray : [NSLayoutConstraint] = []
+    var isFollowingPost : Bool?
+    var longPressGestureRecognizer : UILongPressGestureRecognizer?
 
     func configureCellWithPost(post: Post, section: Int) {
         loadedContent = true
@@ -58,7 +62,11 @@ class PostTableViewCell: UITableViewCell {
         userVotedBadge = post.votedBadge
         self.post = post
         self.section = section
+        self.isFollowingPost = post.isFollowing
         
+        configureFollowIndicator()
+        
+        // Configure Vote buttons
         voteButtonArray = [laughingBadgeButton,notAmusedBadgeButton,heartBadgeButton,likeBadgeButton,dislikeBadgeButton]
         voteButtonLeftConstraintArray = [laughingLeftConstraint,notAmusedLeftConstraint,heartLeftConstraint,likeLeftConstraint,dislikeLeftConstraint]
         voteButtonTopConstraintArray = [laughingTopConstraint,notAmusedTopConstraint,heartTopConstraint,likeTopConstraint,disklikeTopConstraint]
@@ -133,6 +141,55 @@ class PostTableViewCell: UITableViewCell {
         }
     }
     
+    func configureFollowIndicator(){
+        if followingIndicator != nil && self.isFollowingPost!{
+            self.followingIndicatorWidthConstraint.constant = 6.0
+            UIView.animate(withDuration: 0.3, delay: 0.0, options: .transitionCurlDown, animations: {
+                self.layoutIfNeeded()
+            })
+        }else if followingIndicator != nil{
+            self.followingIndicatorWidthConstraint.constant = 0.0
+            UIView.animate(withDuration: 0.3, delay: 0.0, options: .transitionCurlDown, animations: {
+                self.layoutIfNeeded()
+            })
+        }
+        if longPressGestureRecognizer == nil {
+            longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressedPost))
+            self.addGestureRecognizer(longPressGestureRecognizer!)
+        }
+    }
+    
+    func longPressedPost(){
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        if isFollowingPost! {
+            let unfollowAction = UIAlertAction(title: "Unfollow", style: .default, handler: { (_) in
+                self.attemptUnfollowPost(token: self.parentVC.userToken!, postId: (self.post?.id)!)
+            })
+            alertController.addAction(unfollowAction)
+        }else{
+            let followAction = UIAlertAction(title: "Follow", style: .default, handler: { (_) in
+                self.attemptFollowPost(token: self.parentVC.userToken!, postId: (self.post?.id)!)
+            })
+            alertController.addAction(followAction)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
+
+        })
+        alertController.addAction(cancelAction)
+        
+        self.getParentVC().present(alertController, animated: true, completion: nil)
+    }
+    
+    func getParentVC()->UIViewController{
+        if parentVC != nil {
+            return parentVC
+        }else{
+            return commentViewCont!
+        }
+    }
+    
     func removeCensorCover(){
         self.post?.revealedPost = true
         UIView.animate(withDuration: 0.2, delay: 0.0, options: .transitionCurlDown, animations: {
@@ -159,6 +216,77 @@ class PostTableViewCell: UITableViewCell {
             self.timestampLabel.text = "\(currentDate.minutes(from: withDateCreated))m"
         }else if(currentDate.seconds(from: withDateCreated) > 0){
             self.timestampLabel.text = "\(currentDate.seconds(from: withDateCreated))s"
+        }
+    }
+    
+    func attemptFollowPost(token : String, postId : Int)
+    {
+        let parameters = ["token" : token, "post_id" : String(postId)]
+        
+        Alamofire.request(Constants.API.ADDRESS + Constants.API.CALL_FOLLOW_POST, method: .post, parameters: parameters)
+            .responseJSON()
+                {
+                    response in
+                    
+                    switch response.result
+                    {
+                    case .success(let responseData):
+                        let json = JSON(responseData)
+                        
+                        // Handle any errors
+                        if json["error"].bool == true
+                        {
+                            print("ERROR: \(json["error_message"].stringValue)")
+                            
+                            return
+                        }else{
+                            self.isFollowingPost = true
+                            self.post?.isFollowing = true
+                            self.configureFollowIndicator()
+                        }
+                        
+                        print("Followed post \(postId)!")
+                        
+                    case .failure(let error):
+                        print("Request failed with error: \(error)")
+                        
+                        return
+                    }
+        }
+    }
+    
+    func attemptUnfollowPost(token : String, postId : Int)
+    {
+        let parameters = ["token" : token, "post_id" : String(postId)]
+        
+        Alamofire.request(Constants.API.ADDRESS + Constants.API.CALL_UNFOLLOW_POST, method: .post, parameters: parameters)
+            .responseJSON()
+                {
+                    response in
+                    
+                    switch response.result
+                    {
+                    case .success(let responseData):
+                        let json = JSON(responseData)
+                        
+                        // Handle any errors
+                        if json["error"].bool == true {
+                            print("ERROR: \(json["error_message"].stringValue)")
+                            
+                            return
+                        }else{
+                            self.isFollowingPost = false
+                            self.post?.isFollowing = false
+                            self.configureFollowIndicator()
+                        }
+                        
+                        print("Unfollowed post \(postId)!")
+                        
+                    case .failure(let error):
+                        print("Request failed with error: \(error)")
+                        
+                        return
+                    }
         }
     }
     
