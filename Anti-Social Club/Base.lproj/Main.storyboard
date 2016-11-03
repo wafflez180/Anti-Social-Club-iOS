@@ -198,7 +198,7 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                                             </connections>
                                         </button>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vwT-E3-Dip">
-                                            <rect key="frame" x="0.0" y="211" width="6" height="164"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="6" height="375"/>
                                             <color key="backgroundColor" red="0.0" green="0.73725490196078436" blue="0.83137254901960778" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="6" id="dgC-KA-WCH"/>
@@ -256,7 +256,6 @@ for breaching the rules.</string>
                                         <constraint firstAttribute="trailing" secondItem="bFk-TF-WJ4" secondAttribute="trailing" id="AJJ-1y-p20"/>
                                         <constraint firstItem="moi-tp-vo4" firstAttribute="top" secondItem="UcQ-Yb-rG4" secondAttribute="bottom" constant="6" id="DIf-AR-Mbn"/>
                                         <constraint firstItem="IEc-52-veA" firstAttribute="top" secondItem="UcQ-Yb-rG4" secondAttribute="bottom" constant="5" id="ESR-Ny-tcA"/>
-                                        <constraint firstItem="vwT-E3-Dip" firstAttribute="top" secondItem="bFk-TF-WJ4" secondAttribute="bottom" id="EgG-eQ-4rA"/>
                                         <constraint firstItem="ITW-94-Xwi" firstAttribute="top" secondItem="UcQ-Yb-rG4" secondAttribute="bottom" constant="9" id="Gw1-UT-iLX"/>
                                         <constraint firstItem="bRs-GE-rY2" firstAttribute="top" secondItem="UcQ-Yb-rG4" secondAttribute="bottom" constant="6" id="Khz-tS-vCe"/>
                                         <constraint firstItem="UcQ-Yb-rG4" firstAttribute="top" secondItem="lpe-iq-e1s" secondAttribute="bottom" constant="5" id="XGM-CB-bbn"/>
@@ -270,6 +269,7 @@ for breaching the rules.</string>
                                         <constraint firstItem="y9m-HO-yAN" firstAttribute="leading" secondItem="IEc-52-veA" secondAttribute="trailing" constant="18" id="psR-tg-SOV"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="UcQ-Yb-rG4" secondAttribute="trailing" id="sf5-MC-Niz"/>
                                         <constraint firstItem="KWU-9X-Agd" firstAttribute="leading" secondItem="mdd-Sd-GIX" secondAttribute="leadingMargin" constant="165" id="shu-vw-emW"/>
+                                        <constraint firstItem="vwT-E3-Dip" firstAttribute="top" secondItem="mdd-Sd-GIX" secondAttribute="top" id="uf6-0M-MUo"/>
                                         <constraint firstItem="bFk-TF-WJ4" firstAttribute="top" secondItem="mdd-Sd-GIX" secondAttribute="top" id="vtM-E7-Wtq"/>
                                         <constraint firstItem="KWU-9X-Agd" firstAttribute="top" secondItem="UcQ-Yb-rG4" secondAttribute="bottom" constant="9" id="wCF-Dq-HrZ"/>
                                         <constraint firstItem="2LE-vN-njD" firstAttribute="top" secondItem="UcQ-Yb-rG4" secondAttribute="bottom" constant="10" id="wdM-KP-Yo1"/>
@@ -1667,9 +1667,9 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
         <image name="StraightFaceSelected" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="zIT-1V-UjM"/>
         <segue reference="q9w-i3-shG"/>
         <segue reference="gfM-be-KWJ"/>
         <segue reference="M22-xo-Fcy"/>
-        <segue reference="zIT-1V-UjM"/>
     </inferredMetricsTieBreakers>
 </document>
