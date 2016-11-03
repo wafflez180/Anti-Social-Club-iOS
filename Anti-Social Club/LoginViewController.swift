@@ -255,9 +255,17 @@ class LoginViewController: UIViewController
     func registerFCMToken()
     {
         let token = "\(userToken!)"
-        let fcmToken = "\(FIRInstanceID.instanceID().token()!)"
+        let fcmToken = FIRInstanceID.instanceID().token()
+        
+        if fcmToken == nil
+        {
+            print("fcmToken was nil!")
+            return
+        }
+        
+        let fcmTokenString = "\(fcmToken)"
     
-        let parameters = ["token" : token, "fcm_token" : fcmToken]
+        let parameters = ["token" : token, "fcm_token" : fcmTokenString]
 
         Alamofire.request(Constants.API.ADDRESS + Constants.API.CALL_REGISTER_FCM_TOKEN, method: .post, parameters: parameters)
         .responseJSON()
