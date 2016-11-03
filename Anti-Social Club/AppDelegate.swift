@@ -23,9 +23,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         Fabric.with([Crashlytics.self])
         
         // Initialize Firebase (For FCM Push Notifications)
+        LOG("Initializing FCM...")
+        
         FIRApp.configure()
         FIRAnalyticsConfiguration.sharedInstance().setAnalyticsCollectionEnabled(false)
         registerForFCM(application: application);
+        
+        LOG("Initialized FCM!")
         
         return true
     }
@@ -37,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func applicationDidEnterBackground(_ application: UIApplication) {
         FIRMessaging.messaging().disconnect()
-        print("Disconnected from FCM.")
+        LOG("Disconnected from FCM.")
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -53,7 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("Device failed to register for remote notifications! \(error)")
+        LOG("Device failed to register for remote notifications! \(error)")
     }
 
     func registerForFCM(application : UIApplication) {
@@ -76,27 +80,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         if let token = FIRInstanceID.instanceID().token()
         {
-            print("Got FCM token \(token)")
+            LOG("Got FCM token \(token)")
         }
+        else
+        {
+            LOG("No FCM token found!")
+        }
+        
+        //connectToFCM()
     }
     
     func tokenRefreshNotification(_ notification: Notification) {
         if let refreshedToken = FIRInstanceID.instanceID().token() {
-            print("Got new FCM InstanceID token: \(refreshedToken)")
+            LOG("Got new FCM InstanceID token: \(refreshedToken)")
         }
 
         // Connect to FCM since connection may have failed when attempted before having a token.
-        connectToFCM()
+        //connectToFCM()
     }
     
     func connectToFCM() {
+        LOG("Connecting to FCM..");
+    
         FIRMessaging.messaging().connect {
             (error) in
             
             if (error != nil) {
-                print("Unable to connect with FCM. \(error)")
+                LOG("Failed to connect to FCM! \(error)")
             } else {
-                print("Connected to FCM.")
+                LOG("Connected to FCM.")
+                if let token = FIRInstanceID.instanceID().token()
+                {
+                    LOG("Got FCM token \(token)")
+                }
             }
         }
     }
@@ -117,6 +133,16 @@ extension AppDelegate {
         
         print("Message ID: \(userInfo["gcm.message_id"]!)")
         print("%@", userInfo)
+        
+        // Display a local notification if the user is inside the app when the push notification arrives
+        
+        /*
+        var notification = UILocalNotification()
+        notification.timeZone = NSTimeZone.defaultTimeZone()
+        notification.fireDate = NSDate()
+        notification.alertBody = "Test"
+        UIApplication.sharedApplication().scheduleLocalNotification(notification)
+        */
     }
     
 }

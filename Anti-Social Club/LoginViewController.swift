@@ -151,7 +151,7 @@ class LoginViewController: UIViewController
         Answers.logLogin(withMethod: "Token", success: true, customAttributes: [:])
         
         // We need to register the FCM token with the server every time the user starts the app.
-        registerFCMToken()
+        connectToFCM()
     }
     
     func launchTutorial(){
@@ -252,20 +252,33 @@ class LoginViewController: UIViewController
 
     }
     
-    func registerFCMToken()
+    func connectToFCM() {
+        LOG("Connecting to FCM..");
+    
+        FIRMessaging.messaging().connect {
+            (error) in
+            
+            if (error != nil) {
+                LOG("Failed to connect to FCM! \(error)")
+            } else {
+                LOG("Connected to FCM.")
+                if let fcmToken = FIRInstanceID.instanceID().token()
+                {
+                    LOG("Got FCM token \(fcmToken) at login")
+                    self.registerFCMToken(fcmToken : "\(fcmToken)")
+                }
+                else
+                {
+                    LOG("Didn't get an FCM token at login!")
+                }
+            }
+        }
+    }
+    
+    func registerFCMToken(fcmToken : String)
     {
         let token = "\(userToken!)"
-        let fcmToken = FIRInstanceID.instanceID().token()
-        
-        if fcmToken == nil
-        {
-            print("fcmToken was nil!")
-            return
-        }
-        
-        let fcmTokenString = "\(fcmToken!)"
-
-        let parameters = ["token" : token, "fcm_token" : fcmTokenString]
+        let parameters = ["token" : token, "fcm_token" : fcmToken]
 
         Alamofire.request(Constants.API.ADDRESS + Constants.API.CALL_REGISTER_FCM_TOKEN, method: .post, parameters: parameters)
         .responseJSON()
@@ -285,7 +298,7 @@ class LoginViewController: UIViewController
                         return
                     }
                     
-                    print("FCM token registered with server!")
+                    LOG("FCM token registered with server!")
                     
                 case .failure(let error):
                     print("Request failed with error: \(error)")

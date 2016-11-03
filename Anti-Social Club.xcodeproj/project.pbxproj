@@ -18,6 +18,7 @@
 		14DEF9B41DAC0F8300BF8B58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14DEF9B31DAC0F8300BF8B58 /* Assets.xcassets */; };
 		14DEF9B71DAC0F8300BF8B58 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14DEF9B51DAC0F8300BF8B58 /* LaunchScreen.storyboard */; };
 		14EF3A5B1DCB915900456D5F /* String+ASC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF3A5A1DCB915900456D5F /* String+ASC.swift */; };
+		14EF3A5D1DCBA24B00456D5F /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF3A5C1DCBA24B00456D5F /* Debug.swift */; };
 		B26D96381476127475E7C7A1 /* Pods_Anti_Social_Club.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5BF9903FBC092D198F19798 /* Pods_Anti_Social_Club.framework */; };
 		CA3B5BFC1DBA9ADD00190440 /* Date+ASC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3B5BFB1DBA9ADD00190440 /* Date+ASC.swift */; };
 		CA4143B81DAC7C5F0072B27C /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4143B71DAC7C5F0072B27C /* PostTableViewCell.swift */; };
@@ -54,6 +55,7 @@
 		14DEF9B61DAC0F8300BF8B58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		14DEF9B81DAC0F8300BF8B58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14EF3A5A1DCB915900456D5F /* String+ASC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+ASC.swift"; sourceTree = "<group>"; };
+		14EF3A5C1DCBA24B00456D5F /* Debug.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
 		3F86BD46629946975D286D89 /* Pods-Anti-Social Club.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Anti-Social Club.release.xcconfig"; path = "Pods/Target Support Files/Pods-Anti-Social Club/Pods-Anti-Social Club.release.xcconfig"; sourceTree = "<group>"; };
 		A5BF9903FBC092D198F19798 /* Pods_Anti_Social_Club.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Anti_Social_Club.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAAD275C5327CCFA9DA6CBAF /* Pods-Anti-Social Club.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Anti-Social Club.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Anti-Social Club/Pods-Anti-Social Club.debug.xcconfig"; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				14DEF9B31DAC0F8300BF8B58 /* Assets.xcassets */,
 				14DEF9B81DAC0F8300BF8B58 /* Info.plist */,
 				CADEBDA91DAC9AB7004D3282 /* Constants.swift */,
+				14EF3A5C1DCBA24B00456D5F /* Debug.swift */,
 			);
 			path = "Anti-Social Club";
 			sourceTree = "<group>";
@@ -363,6 +366,7 @@
 				CADEBDA81DAC9A17004D3282 /* Post.swift in Sources */,
 				CAACD6601DB3068D001F7C20 /* SettingsViewController.swift in Sources */,
 				CAA3A3DF1DC05E08003BAFCA /* ViewImageViewController.swift in Sources */,
+				14EF3A5D1DCBA24B00456D5F /* Debug.swift in Sources */,
 				143F5C751DB32E0400605158 /* ConfirmNameViewController.swift in Sources */,
 				143F5C791DB32E8300605158 /* ConfirmKeyViewController.swift in Sources */,
 				143F5C731DB32CD500605158 /* EntryViewController.swift in Sources */,
