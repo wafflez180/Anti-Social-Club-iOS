@@ -197,8 +197,15 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                                                 <action selector="selectedDislikeBadge:" destination="scT-ac-05R" eventType="touchUpInside" id="8dy-5F-BMQ"/>
                                             </connections>
                                         </button>
-                                        <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xlR-Mo-7hq">
-                                            <rect key="frame" x="400" y="0.0" width="375" height="375"/>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vwT-E3-Dip">
+                                            <rect key="frame" x="0.0" y="211" width="6" height="164"/>
+                                            <color key="backgroundColor" red="0.0" green="0.73725490196078436" blue="0.83137254901960778" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="6" id="dgC-KA-WCH"/>
+                                            </constraints>
+                                        </view>
+                                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xlR-Mo-7hq">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
                                             <subviews>
                                                 <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DPf-Ze-Xek">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
@@ -233,13 +240,6 @@ for breaching the rules.</string>
                                                 <constraint firstItem="c8z-kN-gVi" firstAttribute="centerX" secondItem="xlR-Mo-7hq" secondAttribute="centerX" id="qCA-cA-ghm"/>
                                                 <constraint firstItem="bVn-v4-6lc" firstAttribute="centerX" secondItem="xlR-Mo-7hq" secondAttribute="centerX" id="sfx-eD-FIe"/>
                                                 <constraint firstAttribute="bottom" secondItem="DPf-Ze-Xek" secondAttribute="bottom" id="tdN-eF-CKQ"/>
-                                            </constraints>
-                                        </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vwT-E3-Dip">
-                                            <rect key="frame" x="0.0" y="211" width="6" height="164"/>
-                                            <color key="backgroundColor" red="0.0" green="0.73725490196078436" blue="0.83137254901960778" alpha="1" colorSpace="calibratedRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="6" id="dgC-KA-WCH"/>
                                             </constraints>
                                         </view>
                                     </subviews>
@@ -809,7 +809,7 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
 
 2. Do not post personal information (including names)
 
-3. Do post OVERLY offensive material
+3. Do not post OVERLY offensive material
 
 4. Do not abuse the report feature</string>
                                                 <color key="textColor" red="0.30588235294117649" green="0.30588235294117649" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>

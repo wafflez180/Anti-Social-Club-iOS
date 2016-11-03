@@ -255,7 +255,7 @@ class LoginViewController: UIViewController
     func registerFCMToken()
     {
         let token = "\(userToken!)"
-        let fcmToken = "\(FIRInstanceID.instanceID().token()!)"
+        let fcmToken = "\(FIRInstanceID.instanceID().token())"
     
         let parameters = ["token" : token, "fcm_token" : fcmToken]
 
