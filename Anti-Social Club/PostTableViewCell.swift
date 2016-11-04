@@ -577,17 +577,19 @@ class PostTableViewCell: UITableViewCell {
     }
     
     func selectBadge(badgeId: Int, animate: Bool){
-        voteButtonArray[badgeId].isSelected = true
-        voteButtonArray[badgeId].titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFontWeightMedium)
+        if badgeId >= 0 {
+            voteButtonArray[badgeId].isSelected = true
+            voteButtonArray[badgeId].titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFontWeightMedium)
+        }
         
-        let leftPadding = 5
+        let leftPadding = 10
         let horizontalPadding = 40
         
         var buttonsToMove : [UIButton] = []
         var buttonsToDisappear : [UIButton] = []
         
         for button in voteButtonArray{
-            if Int((button.titleLabel?.text)!)! == 0 && button.isSelected == false {
+            if Int((button.titleLabel?.text)!)! == 0 && button.isSelected == false && badgeId >= 0 {
                 buttonsToDisappear+=[button]
             }else{
                 buttonsToMove+=[button]
@@ -598,7 +600,9 @@ class PostTableViewCell: UITableViewCell {
             animationTime = 0.0
         }else{
             animationTime = 0.5
-            self.badgeExplodeAnimation(button: self.voteButtonArray[badgeId])
+            if badgeId > 0 {
+                self.badgeExplodeAnimation(button: self.voteButtonArray[badgeId])
+            }
         }
         
         let topPadding : CGFloat = 6.0
