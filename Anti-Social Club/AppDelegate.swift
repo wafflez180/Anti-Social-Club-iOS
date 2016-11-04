@@ -118,9 +118,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
     }
     
-    // Receive data messages on iOS 10 devices.
+    // iOS 7+
+    // Called when the app receives a data message
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void)
+    {
+        LOG("application didReceiveRemoteNotification")
+    }
+    
+    // iOS 10+
+    // Called when the app receives a data message
     func applicationReceivedRemoteMessage(_ remoteMessage: FIRMessagingRemoteMessage) {
-        print("%@", remoteMessage.appData)
+        LOG("applicationReceivedRemoteMessage")
     }
     
 }
@@ -128,7 +136,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 @available(iOS 10, *)
 extension AppDelegate {
 
-    // Receive displayed notifications for iOS 10 devices.
+    // iOS 10+
+    // Called when a notification message is delivered to the foreground app
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         let userInfo = notification.request.content.userInfo
         
@@ -136,6 +145,7 @@ extension AppDelegate {
         {
             return;
         }
+        LOG("Got foreground notification!")
         
         let apsJSON = JSON(userInfo["aps"]!)
         if let messageBody = apsJSON["alert"].string {
