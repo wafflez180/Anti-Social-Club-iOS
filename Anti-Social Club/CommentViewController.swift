@@ -51,11 +51,13 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.parentVC?.selectedPostCell?.commentButton.isSelected = true
         showingFullScreenImage = false
         self.navigationController?.setToolbarHidden(true, animated: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        self.parentVC?.selectedPostCell?.commentButton.isSelected = false
         if showingFullScreenImage == false {
             postCell?.commentViewCont = nil
         }
