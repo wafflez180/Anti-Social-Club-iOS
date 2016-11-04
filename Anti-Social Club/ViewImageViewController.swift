@@ -14,16 +14,40 @@ class ViewImageViewController: UIViewController {
     
     var fullSizeImage : UIImage?
     
+    var touchStart : CGPoint?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         fullImageView.image = fullSizeImage!
         // Do any additional setup after loading the view.
     }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }  
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let touch = touches.first {
+            self.touchStart = touch.location(in: self.view)
+        }
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let touch = touches.first {
+            let touchMovePoint = touch.location(in: self.view)
+            
+            let moveAmt = (touchMovePoint.y - (touchStart?.y)!) + (touchMovePoint.x - (touchStart?.x)!)
+            
+            if moveAmt > 10 {
+                dismiss(animated: true)
+            }
+        }
     }
     
     @IBAction func tappedView(_ sender: Any) {

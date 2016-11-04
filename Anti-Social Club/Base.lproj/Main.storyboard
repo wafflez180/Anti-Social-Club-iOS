@@ -766,6 +766,8 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="fullImageView" destination="7yG-Eu-WV0" id="OgB-fs-eAn"/>
                     </connections>
