@@ -28,6 +28,7 @@ class Post{
     var downloadedImage : UIImage?
     var revealedPost : Bool = false
     var isFollowing : Bool?
+    var isPinned : Bool?
     
     init?(id : Int?,
           posterId : Int?,
@@ -44,7 +45,8 @@ class Post{
           badgeLoveCount : Int?,
           badgeAgreeCount : Int?,
           badgeDisagreeCount : Int?,
-          isFollowing : Bool?) {
+          isFollowing : Bool?,
+          isPinned : Bool?) {
     
         self.id = id
         self.posterId = posterId
@@ -62,6 +64,7 @@ class Post{
         self.badgeAgreeCount = badgeAgreeCount
         self.badgeDisagreeCount = badgeDisagreeCount
         self.isFollowing = isFollowing
+        self.isPinned = isPinned
         
         //print("Created Post:\n\tMessage: \"\(message!)\"\n\tImageURL: \(imageSource)")
     }
@@ -84,7 +87,17 @@ class Post{
         let newAgreeBadgeCount = json["badge_agree_count"].int
         let newDisagreeBadgeCount = json["badge_disagree_count"].int
         let isFollowing = json["followed"].bool
+        let isPinned = Bool(json["is_pinned"].intValue)
         
-        self.init(id: newId, posterId: newPosterId, message: newMessage, imageSource: newImageSource, timestamp: newTimestamp, voted: newVoted, votedBadge: newVotedBadge, reported: newReported, reportCount: newReportCount, commentCount: newCommentCount, badgeFunnyCount: newFunnyBadgeCount, badgeDumbCount: newDumbBadgeCount, badgeLoveCount: newLoveBadgeCount, badgeAgreeCount: newAgreeBadgeCount, badgeDisagreeCount: newDisagreeBadgeCount, isFollowing: isFollowing)
+        //print("\(json["is_pinned"])")
+        
+        self.init(id: newId, posterId: newPosterId, message: newMessage, imageSource: newImageSource, timestamp: newTimestamp, voted: newVoted, votedBadge: newVotedBadge, reported: newReported, reportCount: newReportCount, commentCount: newCommentCount, badgeFunnyCount: newFunnyBadgeCount, badgeDumbCount: newDumbBadgeCount, badgeLoveCount: newLoveBadgeCount, badgeAgreeCount: newAgreeBadgeCount, badgeDisagreeCount: newDisagreeBadgeCount, isFollowing: isFollowing, isPinned: isPinned)
+    }
+    
+}
+
+extension Bool {
+    init<T : Integer>(_ integer: T){
+        self.init(integer != 0)
     }
 }

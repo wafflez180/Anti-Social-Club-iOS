@@ -11,6 +11,7 @@ import Fabric
 import Crashlytics
 import Firebase
 import UserNotifications
+import SwiftyJSON
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, FIRMessagingDelegate {
@@ -131,22 +132,23 @@ extension AppDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         let userInfo = notification.request.content.userInfo
         
-        print("Message ID: \(userInfo["gcm.message_id"]!)")
-        print("%@", userInfo)
+        if (userInfo["aps"] == nil)
+        {
+            return;
+        }
         
-        
-        
-        // Display a local notification if the user is inside the app when the push notification arrives
-        
-        /*
-        var notification = UILocalNotification()
-        notification.timeZone = NSTimeZone.defaultTimeZone()
-        notification.fireDate = NSDate()
-        notification.alertBody = "Test"
-        UIApplication.sharedApplication().scheduleLocalNotification(notification)
-        */
+        let apsJSON = JSON(userInfo["aps"]!)
+        if let messageBody = apsJSON["alert"].string {
+            // Display a local notification if the user is inside the app when the push notification arrives
+            print("GOT MESSAGE FROM NOTIFICATION: \(messageBody)")
+            let notification = UILocalNotification()
+            notification.timeZone = NSTimeZone.default
+            notification
+                .fireDate = NSDate() as Date
+            notification.alertBody = messageBody
+            UIApplication.shared.scheduleLocalNotification(notification)
+        }
     }
-    
 }
 
 

@@ -37,8 +37,8 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var disklikeTopConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var censorCoverView: UIView!
-    @IBOutlet weak var followingIndicator: UIView!
-    @IBOutlet weak var followingIndicatorWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var typeIndicator: UIView!
+    @IBOutlet weak var typeIndicatorWidthConstraint: NSLayoutConstraint!
     
     var userVoted : Bool?
     var userVotedBadge : Int?
@@ -65,7 +65,7 @@ class PostTableViewCell: UITableViewCell {
         self.section = section
         self.isFollowingPost = post.isFollowing
         
-        configureFollowIndicator()
+        configureTypeIndicator()
         
         // Configure Vote buttons
         voteButtonArray = [laughingBadgeButton,notAmusedBadgeButton,heartBadgeButton,likeBadgeButton,dislikeBadgeButton]
@@ -119,11 +119,6 @@ class PostTableViewCell: UITableViewCell {
             }else{
                 self.postImageView.image = cropTo16by9Center(image: post.downloadedImage!)
             }
-            //self.layoutIfNeeded()
-            //self.setNeedsLayout()
-            // TODO:
-            // Download the image. This should be done with AlamofireImage library, as it handles
-            // proper caching and is very performant.
         }
         if userVoted! {
             resetBadges()
@@ -150,17 +145,22 @@ class PostTableViewCell: UITableViewCell {
         reportButton.setTitle(String(describing: post.reportCount!), for: UIControlState.normal)
     }
     
-    func configureFollowIndicator(){
-        if followingIndicator != nil && self.isFollowingPost!{
-            self.followingIndicatorWidthConstraint.constant = 6.0
+    func configureTypeIndicator(){
+        if (typeIndicator != nil && self.isFollowingPost!) || (self.post?.isPinned)!{
+            if (self.post?.isPinned)! {
+                self.typeIndicator.backgroundColor = UIColor.hexStringToUIColor(hex: "FF9600")
+            }else{
+                self.typeIndicator.backgroundColor = UIColor.hexStringToUIColor(hex: "00BCD4")
+            }
+            self.typeIndicatorWidthConstraint.constant = 6.0
             UIView.animate(withDuration: 0.3, delay: 0.0, options: .transitionCurlDown, animations: {
                 self.layoutIfNeeded()
                 if self.commentViewCont != nil {
                     self.commentViewCont?.view.layoutIfNeeded()
                 }
             })
-        }else if followingIndicator != nil{
-            self.followingIndicatorWidthConstraint.constant = 0.0
+        }else if typeIndicator != nil {
+            self.typeIndicatorWidthConstraint.constant = 0.0
             UIView.animate(withDuration: 0.3, delay: 0.0, options: .transitionCurlDown, animations: {
                 self.layoutIfNeeded()
                 if self.commentViewCont != nil {
@@ -172,10 +172,10 @@ class PostTableViewCell: UITableViewCell {
         // Update Post In Mainpage
         if commentViewCont != nil {
             self.commentViewCont?.parentVC?.selectedPostCell?.isFollowingPost = self.isFollowingPost
-            self.commentViewCont?.parentVC?.selectedPostCell?.configureFollowIndicator()
+            self.commentViewCont?.parentVC?.selectedPostCell?.configureTypeIndicator()
         }
         
-        if longPressGestureRecognizer == nil {
+        if longPressGestureRecognizer == nil && post?.isPinned == false {
             longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressedPost))
             self.addGestureRecognizer(longPressGestureRecognizer!)
         }
@@ -264,7 +264,7 @@ class PostTableViewCell: UITableViewCell {
                         }else{
                             self.isFollowingPost = true
                             self.post?.isFollowing = true
-                            self.configureFollowIndicator()
+                            self.configureTypeIndicator()
                         }
                         
                         print("Followed post \(postId)!")
@@ -299,7 +299,7 @@ class PostTableViewCell: UITableViewCell {
                         }else{
                             self.isFollowingPost = false
                             self.post?.isFollowing = false
-                            self.configureFollowIndicator()
+                            self.configureTypeIndicator()
                         }
                         
                         print("Unfollowed post \(postId)!")
