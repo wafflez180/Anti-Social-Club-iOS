@@ -53,6 +53,7 @@ class PostTableViewCell: UITableViewCell {
     var voteButtonTopConstraintArray : [NSLayoutConstraint] = []
     var isFollowingPost : Bool?
     var longPressGestureRecognizer : UILongPressGestureRecognizer?
+    let userToken = UserDefaults.standard.string(forKey: "token")!
 
     func configureCellWithPost(post: Post, section: Int) {
         loadedContent = true
@@ -83,13 +84,7 @@ class PostTableViewCell: UITableViewCell {
         let creationDate = tempDateFormatter.date(from: post.timestamp!)
         setTimestamp(withDateCreated: creationDate!)
         
-        laughingBadgeButton.setTitle(String(describing: post.badgeFunnyCount!), for: UIControlState.normal)
-        notAmusedBadgeButton.setTitle(String(describing: post.badgeDumbCount!), for: UIControlState.normal)
-        heartBadgeButton.setTitle(String(describing: post.badgeLoveCount!), for: UIControlState.normal)
-        likeBadgeButton.setTitle(String(describing: post.badgeAgreeCount!), for: UIControlState.normal)
-        dislikeBadgeButton.setTitle(String(describing: post.badgeDisagreeCount!), for: UIControlState.normal)
-        commentButton.setTitle(String(describing: post.commentCount!), for: UIControlState.normal)
-        reportButton.setTitle(String(describing: post.reportCount!), for: UIControlState.normal)
+        configureLabelsWithPost(post: post)
         
         if userReported!{
             reportButton.isSelected = true
@@ -141,18 +136,48 @@ class PostTableViewCell: UITableViewCell {
         }
     }
     
+    func configureLabelsWithPost(post: Post){
+        self.post?.badgeFunnyCount = post.badgeFunnyCount
+        self.post?.badgeDumbCount = post.badgeDumbCount
+        self.post?.badgeLoveCount = post.badgeLoveCount
+        self.post?.badgeAgreeCount = post.badgeAgreeCount
+        self.post?.badgeDisagreeCount = post.badgeDisagreeCount
+        self.post?.commentCount = post.commentCount
+        self.post?.reportCount = post.reportCount
+        laughingBadgeButton.setTitle(String(describing: post.badgeFunnyCount!), for: UIControlState.normal)
+        notAmusedBadgeButton.setTitle(String(describing: post.badgeDumbCount!), for: UIControlState.normal)
+        heartBadgeButton.setTitle(String(describing: post.badgeLoveCount!), for: UIControlState.normal)
+        likeBadgeButton.setTitle(String(describing: post.badgeAgreeCount!), for: UIControlState.normal)
+        dislikeBadgeButton.setTitle(String(describing: post.badgeDisagreeCount!), for: UIControlState.normal)
+        commentButton.setTitle(String(describing: post.commentCount!), for: UIControlState.normal)
+        reportButton.setTitle(String(describing: post.reportCount!), for: UIControlState.normal)
+    }
+    
     func configureFollowIndicator(){
         if followingIndicator != nil && self.isFollowingPost!{
             self.followingIndicatorWidthConstraint.constant = 6.0
             UIView.animate(withDuration: 0.3, delay: 0.0, options: .transitionCurlDown, animations: {
                 self.layoutIfNeeded()
+                if self.commentViewCont != nil {
+                    self.commentViewCont?.view.layoutIfNeeded()
+                }
             })
         }else if followingIndicator != nil{
             self.followingIndicatorWidthConstraint.constant = 0.0
             UIView.animate(withDuration: 0.3, delay: 0.0, options: .transitionCurlDown, animations: {
                 self.layoutIfNeeded()
+                if self.commentViewCont != nil {
+                    self.commentViewCont?.view.layoutIfNeeded()
+                }
             })
         }
+        
+        // Update Post In Mainpage
+        if commentViewCont != nil {
+            self.commentViewCont?.parentVC?.selectedPostCell?.isFollowingPost = self.isFollowingPost
+            self.commentViewCont?.parentVC?.selectedPostCell?.configureFollowIndicator()
+        }
+        
         if longPressGestureRecognizer == nil {
             longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressedPost))
             self.addGestureRecognizer(longPressGestureRecognizer!)
@@ -164,12 +189,12 @@ class PostTableViewCell: UITableViewCell {
         
         if isFollowingPost! {
             let unfollowAction = UIAlertAction(title: "Unfollow", style: .default, handler: { (_) in
-                self.attemptUnfollowPost(token: self.parentVC.userToken!, postId: (self.post?.id)!)
+                self.attemptUnfollowPost(token: self.userToken, postId: (self.post?.id)!)
             })
             alertController.addAction(unfollowAction)
         }else{
             let followAction = UIAlertAction(title: "Follow", style: .default, handler: { (_) in
-                self.attemptFollowPost(token: self.parentVC.userToken!, postId: (self.post?.id)!)
+                self.attemptFollowPost(token: self.userToken, postId: (self.post?.id)!)
             })
             alertController.addAction(followAction)
         }

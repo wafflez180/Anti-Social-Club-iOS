@@ -134,6 +134,8 @@ extension AppDelegate {
         print("Message ID: \(userInfo["gcm.message_id"]!)")
         print("%@", userInfo)
         
+        
+        
         // Display a local notification if the user is inside the app when the push notification arrives
         
         /*

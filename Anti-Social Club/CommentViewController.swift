@@ -19,6 +19,7 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
     var tapGestureRec : UITapGestureRecognizer?
     var postId : Int?
     var retrievingComments: Bool = false
+    var retrievingPost : Bool = false
 
     @IBOutlet weak var commentTableview: UITableView!
     @IBOutlet weak var composeCommentViewBotConstraint: NSLayoutConstraint!
@@ -73,6 +74,59 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
         attemptRetrieveComments(offset: 0, token: defaults.string(forKey: "token")!, postId: postId!)
     }
     
+    func attemptRetrievePost(postId: Int) {
+        retrievingPost = true
+        
+        print("Attempting to retrieve post \(postId) with token \(self.parentVC?.userToken!)")
+        
+        let parameters : Parameters = ["token": (self.parentVC?.userToken)!, "offset": 0, "post_id": postId]
+        
+        Alamofire.request(Constants.API.ADDRESS + Constants.API.CALL_RETRIEVE_POSTS, method: .post, parameters: parameters)
+            .responseJSON()
+                {
+                    response in
+                    
+                    switch response.result
+                    {
+                    case .success(let responseData):
+                        let json = JSON(responseData)
+                        
+                        // Handle any errors
+                        if json["error"].bool == true
+                        {
+                            print("ERROR: \(json["error_message"].stringValue)")
+                            
+                            return
+                        }
+                        
+                        
+                        if let postsJSONArray = json["posts"].array
+                        {
+                            for postJSON in postsJSONArray
+                            {
+                                if let newPost : Post = Post(json: postJSON)
+                                {
+                                    //Should be only 1 element
+                                    
+                                    self.postCell?.configureLabelsWithPost(post: newPost)
+                                    self.parentVC?.selectedPostCell?.configureLabelsWithPost(post: newPost)
+                                }
+                            }
+                        }
+                        
+                        self.retrievingPost = false
+                        
+                        return
+                        
+                    case .failure(let error):
+                        print("Request failed with error: \(error)")
+                        return
+                    }
+        }
+        
+    }
+
+    
     func attemptRetrieveComments(offset: Int, token: String, postId: Int)
     {
         retrievingComments = true
@@ -122,6 +176,10 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
                         }
                         reachedLoadedPostsLimit = jsonArray?.count == 0
                         
+                        if self.retrievingPost == false {
+                            self.attemptRetrievePost(postId: postId)
+                        }
+                        
                         if !reachedLoadedPostsLimit {
                             DispatchQueue.main.async{
                                 self.commentTableview.reloadData()
@@ -135,11 +193,6 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
                                 self.commentTableview.scrollToRow(at: lastRowIndexPath, at: UITableViewScrollPosition.bottom, animated: true)
                             }
                             self.postedNewComment = false
-                            
-                            self.postCell?.post?.commentCount = (self.postCell?.post?.commentCount)!+1
-                            self.postCell?.commentButton.setTitle(String(describing: (self.postCell?.post?.commentCount!)), for: UIControlState.normal)
-                            self.parentVC?.selectedPostCell?.commentButton.setTitle(String(describing: (self.postCell?.post?.commentCount!)!), for: UIControlState.normal)
-                            self.commentTableview.layoutIfNeeded()
                         }
                         
                         self.retrievingComments = false
@@ -266,7 +319,7 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
             if indexPath.row > commentArray.count-2{
                 let defaults = UserDefaults.standard
                 print(self.commentArray.count)
-                if retrievingComments == false {
+                if retrievingComments == false && retrievingPost == false {
                     attemptRetrieveComments(offset: self.commentArray.count, token: defaults.string(forKey: "token")!, postId: self.postId!)
                 }
             }
@@ -343,7 +396,6 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
             print("Comment was blank!")
             return
         }
-
         attemptPostComment(token: defaults.string(forKey: "token")!, message: message, postId: postId!)
     }
 
