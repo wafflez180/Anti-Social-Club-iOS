@@ -20,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        LOG("application didFinishLaunchingWithOptions")
+
         // Initialize Fabric
         Fabric.with([Crashlytics.self])
         

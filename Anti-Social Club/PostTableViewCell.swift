@@ -88,6 +88,10 @@ class PostTableViewCell: UITableViewCell {
         }else{
             reportButton.isSelected = false
         }
+        
+        if post.isPinned! {
+            reportButton.isHidden = true
+        }
         //print(post.imageSource)
         //print(post.message)
         
