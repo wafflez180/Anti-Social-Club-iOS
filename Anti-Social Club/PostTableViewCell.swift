@@ -72,9 +72,6 @@ class PostTableViewCell: UITableViewCell {
         voteButtonLeftConstraintArray = [laughingLeftConstraint,notAmusedLeftConstraint,heartLeftConstraint,likeLeftConstraint,dislikeLeftConstraint]
         voteButtonTopConstraintArray = [laughingTopConstraint,notAmusedTopConstraint,heartTopConstraint,likeTopConstraint,disklikeTopConstraint]
         
-        self.layer.borderWidth = 0.5
-        self.layer.borderColor = UIColor.hexStringToUIColor(hex: "BDBDBD").cgColor
-        
         let tempDateFormatter = DateFormatter()
         tempDateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         tempDateFormatter.timeZone = TimeZone(identifier: "GMT")

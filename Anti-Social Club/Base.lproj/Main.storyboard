@@ -280,11 +280,6 @@ for breaching the rules.</string>
                                         <constraint firstAttribute="trailing" secondItem="xlR-Mo-7hq" secondAttribute="trailing" id="zjq-1i-tNp"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="8"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="censorCoverView" destination="xlR-Mo-7hq" id="V5t-D9-dt1"/>
                                     <outlet property="commentButton" destination="y9m-HO-yAN" id="pUD-2I-gdG"/>
@@ -579,11 +574,6 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                                                 <constraint firstItem="XAW-FQ-Ndg" firstAttribute="top" secondItem="lsD-vB-vgP" secondAttribute="bottom" constant="6" id="zbM-Ak-Msa"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="8"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <outlet property="commentButton" destination="uqc-cC-vNT" id="Dvs-EI-hVi"/>
                                             <outlet property="disklikeTopConstraint" destination="MZp-Pc-88W" id="7uE-WI-nYm"/>
