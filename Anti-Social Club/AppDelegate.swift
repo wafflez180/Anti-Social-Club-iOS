@@ -153,12 +153,6 @@ extension AppDelegate {
         if let messageBody = apsJSON["alert"].string {
             // Display a local notification if the user is inside the app when the push notification arrives
             print("GOT MESSAGE FROM NOTIFICATION: \(messageBody)")
-            let notification = UILocalNotification()
-            notification.timeZone = NSTimeZone.default
-            notification
-                .fireDate = NSDate() as Date
-            notification.alertBody = messageBody
-            UIApplication.shared.scheduleLocalNotification(notification)
         }
     }
 }
