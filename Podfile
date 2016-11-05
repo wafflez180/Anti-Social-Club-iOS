@@ -1,6 +1,7 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
+project 'Anti-Social Club.xcodeproj'
 target 'Anti-Social Club' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
@@ -18,4 +19,5 @@ target 'Anti-Social Club' do
   pod 'Onboard'
   pod 'Firebase/Core'
   pod 'Firebase/Messaging'
+  pod 'Whisper'
 end

@@ -12,6 +12,7 @@ import Crashlytics
 import Firebase
 import UserNotifications
 import SwiftyJSON
+import Whisper
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, FIRMessagingDelegate {
@@ -31,6 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         FIRApp.configure()
         FIRAnalyticsConfiguration.sharedInstance().setAnalyticsCollectionEnabled(false)
         registerForFCM(application: application);
+        
+        let message = Message(title: "Fuck", backgroundColor: UIColor.red)
         
         LOG("Initialized FCM!")
         

@@ -38,6 +38,7 @@ PODS:
     - GoogleToolboxForMac/Defines (= 2.1.0)
   - Onboard (2.3.1)
   - SwiftyJSON (3.1.1)
+  - Whisper (4.0.0)
 
 DEPENDENCIES:
   - Alamofire (from `https://github.com/Alamofire/Alamofire.git`)
@@ -49,6 +50,7 @@ DEPENDENCIES:
   - Fusuma (from `https://github.com/ytakzk/Fusuma.git`)
   - Onboard
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
+  - Whisper
 
 EXTERNAL SOURCES:
   Alamofire:
@@ -85,7 +87,8 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 2b2596cbb7186865e98cadf2b1e262d851c2b168
   Onboard: b6871f25ac753175b2ab9a362fb2feb26a81a311
   SwiftyJSON: f0be2e604f83e8405a624e9f891898bf6ed4e019
+  Whisper: 08be92623311f8e53201e62e17f6d7b9599a4714
 
-PODFILE CHECKSUM: ba44b06b65e0c7cc7ccd48d59ecac571ee07ae30
+PODFILE CHECKSUM: af1e99b8edcb98cc8de9ad7db1dcf672769f4f82
 
 COCOAPODS: 1.1.1
