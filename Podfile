@@ -20,4 +20,5 @@ target 'Anti-Social Club' do
   pod 'Firebase/Core'
   pod 'Firebase/Messaging'
   pod 'Whisper'
+  pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift3'
 end
