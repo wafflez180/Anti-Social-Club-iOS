@@ -41,4 +41,9 @@ class Constants
         static let CALL_UNFOLLOW_POST = "UnfollowPost.php"
         static let CALL_DEACTIVATE_USER = "DeactivateUser.php"
     }
+    
+    class Products
+    {
+        static let PRODUCT_ACCESS_KEY = "access_key"
+    }
 }

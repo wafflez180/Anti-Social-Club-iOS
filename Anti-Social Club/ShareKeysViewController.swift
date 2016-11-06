@@ -10,8 +10,9 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import Crashlytics
+import StoreKit
 
-class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SKProductsRequestDelegate {
 
     var keyArray : [AccessKey] = []
     var recipientTextField: UITextField!
@@ -37,6 +38,8 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
             contentType: "View",
             contentId: "Key",
             customAttributes: [:])
+        
+        requestProducts()
     }
 
     override func didReceiveMemoryWarning() {
@@ -156,12 +159,34 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
 
+    func requestProducts() {
+        let productIds : Set<String> = [Constants.Products.PRODUCT_ACCESS_KEY];
+        let productsRequest : SKProductsRequest = SKProductsRequest(productIdentifiers: productIds);
+        productsRequest.delegate = self;
+        productsRequest.start();
+    }
     
     // MARK: - Actions
     
     @IBAction func pressedPurchaseMoreKeys(_ sender: AnyObject) {
         print("Pressed On Purchase More Keys")
         //TODO Purchase more keys popup
+    }
+    
+    // MARK: - SKProductsRequestDelegate
+    
+    func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
+        LOG("productsRequest didReceiveResponse")
+        
+        let products = response.products
+        for p in products {
+            LOG("Got product: \(p.productIdentifier) \(p.localizedTitle) \(p.localizedDescription) \(p.price.floatValue)")
+        }
+    }
+    
+    public func request(_ request: SKRequest, didFailWithError error: Error) {
+        LOG("Failed to load list of products!")
+        LOG("Error: \(error.localizedDescription)")
     }
     
     // MARK: - UITableViewDataSource
