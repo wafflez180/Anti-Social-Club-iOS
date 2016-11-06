@@ -181,12 +181,21 @@ class LoginViewController: UIViewController
         }
         
         onboardingVC = OnboardingViewController(backgroundImage: UIImage(named: "backgroundTutorialImage"), contents: [firstPage!,secondPage!,thirdPage!,fourthPage!,fifthPage!])
+
+        onboardingVC?.fadePageControlOnLastPage = true
+        onboardingVC?.shouldFadeTransitions = true
         
         let contentControllers = (onboardingVC?.viewControllers as! [OnboardingContentViewController])
         
         let titleTopPadding : CGFloat = 40
         for onboardVC : OnboardingContentViewController in contentControllers {
-            onboardVC.topPadding = self.view.frame.size.height-firstPage!.iconHeight;
+            let modelName = UIDevice.current.modelName
+            
+            if modelName == "iPhone 4s" || modelName == "iPhone 5s Plus" || modelName == "iPhone SE"{
+                onboardVC.topPadding = self.view.frame.size.height-firstPage!.iconHeight+125;
+            }else{
+                onboardVC.topPadding = self.view.frame.size.height-firstPage!.iconHeight;
+            }
             onboardVC.underIconPadding = -firstPage!.topPadding + -firstPage!.iconHeight + titleTopPadding;
             onboardVC.underTitlePadding = 10;
             onboardVC.bottomPadding = 0
