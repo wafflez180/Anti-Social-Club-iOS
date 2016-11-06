@@ -91,6 +91,8 @@ class PostTableViewCell: UITableViewCell {
         
         if post.isPinned! {
             reportButton.isHidden = true
+        }else{
+            reportButton.isHidden = false
         }
         //print(post.imageSource)
         //print(post.message)
