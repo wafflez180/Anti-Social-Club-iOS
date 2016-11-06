@@ -184,33 +184,72 @@ class PostTableViewCell: UITableViewCell {
             self.commentViewCont?.parentVC?.selectedPostCell?.configureTypeIndicator()
         }
         
-        if longPressGestureRecognizer == nil && post?.isPinned == false {
+        if longPressGestureRecognizer == nil {
             longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressedPost))
             self.addGestureRecognizer(longPressGestureRecognizer!)
         }
     }
     
     func longPressedPost(){
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        
-        if isFollowingPost! {
-            let unfollowAction = UIAlertAction(title: "Unfollow", style: .default, handler: { (_) in
-                self.attemptUnfollowPost(token: self.userToken, postId: (self.post?.id)!)
+        let rankId = (self.getParentVC().navigationController as! CustomNavigationController).rankId
+        if (post?.isPinned == false || rankId! == Constants.Ranks.ADMIN){
+            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            
+            if isFollowingPost! {
+                let unfollowAction = UIAlertAction(title: "Unfollow", style: .default, handler: { (_) in
+                    self.attemptUnfollowPost(token: self.userToken, postId: (self.post?.id)!)
+                })
+                alertController.addAction(unfollowAction)
+            }else{
+                let followAction = UIAlertAction(title: "Follow", style: .default, handler: { (_) in
+                    self.attemptFollowPost(token: self.userToken, postId: (self.post?.id)!)
+                })
+                alertController.addAction(followAction)
+            }
+            
+            // Moderator Tools
+            if rankId! >= Constants.Ranks.MODERATOR {
+                alertController.title = "Moderator Tools"
+                let banAction = UIAlertAction(title: "Ban User", style: .destructive, handler: { (_) in
+                    self.attemptBanUser(token : self.userToken, userId : (self.post?.posterId)!, type : "HARD", isPerma : false)
+                })
+                alertController.addAction(banAction)
+                let silenceAction = UIAlertAction(title: "Silence User", style: .destructive, handler: { (_) in
+                    self.attemptBanUser(token : self.userToken, userId : (self.post?.posterId)!, type : "SOFT", isPerma : false)
+                })
+                alertController.addAction(silenceAction)
+            }
+            // Administator Tools
+            if rankId! == Constants.Ranks.ADMIN{
+                alertController.title = "Administator Tools"
+                let permaBanAction = UIAlertAction(title: "Perma-Ban User", style: .destructive, handler: { (_) in
+                    self.attemptBanUser(token : self.userToken, userId : (self.post?.posterId)!, type : "HARD", isPerma : true)
+                })
+                alertController.addAction(permaBanAction)
+                let permaSilenceAction = UIAlertAction(title: "Perma-Silence User", style: .destructive, handler: { (_) in
+                    self.attemptBanUser(token : self.userToken, userId : (self.post?.posterId)!, type : "SOFT", isPerma : true)
+                })
+                alertController.addAction(permaSilenceAction)
+                let pinPostAction = UIAlertAction(title: "Pin Post", style: .default, handler: { (_) in
+                    self.attemptPinPost(token: self.userToken, postId: (self.post?.id)!)
+                })
+                alertController.addAction(pinPostAction)
+                let unpinPostAction = UIAlertAction(title: "Unpin Post", style: .default, handler: { (_) in
+                    self.attemptUnpinPost(token: self.userToken, postId: (self.post?.id)!)
+                })
+                alertController.addAction(unpinPostAction)
+                let deletePostAction = UIAlertAction(title: "Delete Post", style: .destructive, handler: { (_) in
+                    self.attemptDeletePost(token: self.userToken, postId: (self.post?.id)!)
+                })
+                alertController.addAction(deletePostAction)
+            }
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
+                
             })
-            alertController.addAction(unfollowAction)
-        }else{
-            let followAction = UIAlertAction(title: "Follow", style: .default, handler: { (_) in
-                self.attemptFollowPost(token: self.userToken, postId: (self.post?.id)!)
-            })
-            alertController.addAction(followAction)
+            alertController.addAction(cancelAction)
+            
+            self.getParentVC().present(alertController, animated: true, completion: nil)
         }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
-
-        })
-        alertController.addAction(cancelAction)
-        
-        self.getParentVC().present(alertController, animated: true, completion: nil)
     }
     
     func getParentVC()->UIViewController{
@@ -247,6 +286,178 @@ class PostTableViewCell: UITableViewCell {
             self.timestampLabel.text = "\(currentDate.minutes(from: withDateCreated))m"
         }else if(currentDate.seconds(from: withDateCreated) > 0){
             self.timestampLabel.text = "\(currentDate.seconds(from: withDateCreated))s"
+        }
+    }
+    
+    func refreshParentVC(){
+        if commentViewCont != nil {
+            commentViewCont?.refresh(sender: self)
+        }else{
+            parentVC.refresh()
+        }
+    }
+    
+    func attemptBanUser(token : String, userId : Int, type : String, isPerma : Bool){
+        let parameters = ["token" : token, "user_id" : userId, "type" : type, "is_perma" : isPerma] as [String : Any]
+        
+        Alamofire.request(Constants.API.ADDRESS + Constants.API.CALL_BAN_USER, method: .post, parameters: parameters)
+            .responseJSON()
+                {
+                    response in
+                    
+                    switch response.result
+                    {
+                    case .success(let responseData):
+                        let json = JSON(responseData)
+                        
+                        // Handle any errors
+                        if json["error"].bool == true
+                        {
+                            print("ERROR: \(json["error_message"].stringValue)")
+                            
+                            return
+                        }
+                        
+                        if type == "HARD" && isPerma == false{
+                            let alert = UIAlertController(title: "Success", message: "You have banned user with userId \(userId)", preferredStyle: UIAlertControllerStyle.alert)
+                            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                            self.getParentVC().present(alert, animated: true, completion: nil)
+                        }else if type == "SOFT" && isPerma == false{
+                            let alert = UIAlertController(title: "Success", message: "You have silenced  user with userId \(userId)", preferredStyle: UIAlertControllerStyle.alert)
+                            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                            self.getParentVC().present(alert, animated: true, completion: nil)
+                        }else if type == "HARD" && isPerma == true{
+                            let alert = UIAlertController(title: "Success", message: "You have perma banned user with userId \(userId)", preferredStyle: UIAlertControllerStyle.alert)
+                            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                            self.getParentVC().present(alert, animated: true, completion: nil)
+                        }else if type == "SOFT" && isPerma == true{
+                            let alert = UIAlertController(title: "Success", message: "You have perma silenced user with userId \(userId)", preferredStyle: UIAlertControllerStyle.alert)
+                            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                            self.getParentVC().present(alert, animated: true, completion: nil)
+                        }
+                        
+                        print("Banned/Silenced user with userId: \(self.post?.posterId!)")
+                        
+                    case .failure(let error):
+                        (self.getParentVC().navigationController as! CustomNavigationController).networkError()
+                        print("Request failed with error: \(error)")
+                        
+                        return
+                    }
+        }
+    }
+    
+    func attemptPinPost(token : String, postId : Int){
+        let parameters = ["token" : token, "post_id" : String(postId)]
+        
+        Alamofire.request(Constants.API.ADDRESS + Constants.API.CALL_PIN_POST, method: .post, parameters: parameters)
+            .responseJSON()
+                {
+                    response in
+                    
+                    switch response.result
+                    {
+                    case .success(let responseData):
+                        let json = JSON(responseData)
+                        
+                        // Handle any errors
+                        if json["error"].bool == true
+                        {
+                            print("ERROR: \(json["error_message"].stringValue)")
+                            
+                            return
+                        }
+                        
+                        let alert = UIAlertController(title: "Success", message: "You have pinned post with postId \(postId)", preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                        self.getParentVC().present(alert, animated: true, completion: nil)
+                        
+                        print("Pinned post \(postId)!")
+                        
+                        self.refreshParentVC()
+                        
+                    case .failure(let error):
+                        (self.getParentVC().navigationController as! CustomNavigationController).networkError()
+                        print("Request failed with error: \(error)")
+                        
+                        return
+                    }
+        }
+    }
+
+    func attemptUnpinPost(token : String, postId : Int){
+        let parameters = ["token" : token, "post_id" : String(postId)]
+        
+        Alamofire.request(Constants.API.ADDRESS + Constants.API.CALL_UNPIN_POST, method: .post, parameters: parameters)
+            .responseJSON()
+                {
+                    response in
+                    
+                    switch response.result
+                    {
+                    case .success(let responseData):
+                        let json = JSON(responseData)
+                        
+                        // Handle any errors
+                        if json["error"].bool == true
+                        {
+                            print("ERROR: \(json["error_message"].stringValue)")
+                            
+                            return
+                        }
+                        
+                        let alert = UIAlertController(title: "Success", message: "You have unpinned post with postId \(postId)", preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                        self.getParentVC().present(alert, animated: true, completion: nil)
+                        
+                        print("Unpinned post \(postId)!")
+                        
+                        self.refreshParentVC()
+                        
+                    case .failure(let error):
+                        (self.getParentVC().navigationController as! CustomNavigationController).networkError()
+                        print("Request failed with error: \(error)")
+                        
+                        return
+                    }
+        }
+    }
+    
+    func attemptDeletePost(token : String, postId : Int){
+        let parameters = ["token" : token, "post_id" : String(postId)]
+        
+        Alamofire.request(Constants.API.ADDRESS + Constants.API.CALL_DELETE_POST, method: .post, parameters: parameters)
+            .responseJSON()
+                {
+                    response in
+                    
+                    switch response.result
+                    {
+                    case .success(let responseData):
+                        let json = JSON(responseData)
+                        
+                        // Handle any errors
+                        if json["error"].bool == true
+                        {
+                            print("ERROR: \(json["error_message"].stringValue)")
+                            
+                            return
+                        }
+                        
+                        let alert = UIAlertController(title: "Success", message: "You have deleted post with postId \(postId)", preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                        self.getParentVC().present(alert, animated: true, completion: nil)
+                        
+                        print("Deleted post \(postId)!")
+                        
+                        self.refreshParentVC()
+                        
+                    case .failure(let error):
+                        (self.getParentVC().navigationController as! CustomNavigationController).networkError()
+                        print("Request failed with error: \(error)")
+                        
+                        return
+                    }
         }
     }
     

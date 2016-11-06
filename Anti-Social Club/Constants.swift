@@ -41,10 +41,23 @@ class Constants
         static let CALL_UNFOLLOW_POST = "UnfollowPost.php"
         static let CALL_DEACTIVATE_USER = "DeactivateUser.php"
         static let CALL_CONFIRM_PURCHASE = "ConfirmApplePurchase.php"
+        static let CALL_BAN_USER = "BanUser.php"
+        static let CALL_PIN_POST = "PinPost.php"
+        static let CALL_UNPIN_POST = "UnpinPost.php"
+        static let CALL_DELETE_POST = "DeletePost.php"
     }
     
     class Products
     {
         static let PRODUCT_ACCESS_KEY = "access_key"
     }
+    
+    class Ranks
+    {
+        static let MEMBER = 0
+        static let PIONEER = 1
+        static let MODERATOR = 2
+        static let ADMIN = 3
+    }
+
 }

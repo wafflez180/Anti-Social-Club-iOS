@@ -19,6 +19,7 @@ class CustomNavigationController: UINavigationController {
     var tempNotificationPost : Post?
     var checkNotification : Bool?
     var notificationType : String?
+    var rankId : Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,11 +34,56 @@ class CustomNavigationController: UINavigationController {
             selector: #selector(receivedRemoteNotification),
             name: NSNotification.Name(rawValue: "remoteNotification"),
             object: nil)
+        retrieveUserInfo()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func retrieveUserInfo()
+    {
+        let token = UserDefaults.standard.string(forKey: "token")!
+        let parameters = ["token" : token]
+        
+        Alamofire.request(Constants.API.ADDRESS + Constants.API.CALL_RETRIEVE_USER_INFO, method: .post, parameters: parameters)
+            .responseJSON()
+                {
+                    response in
+                    
+                    switch response.result
+                    {
+                    case .success(let responseData):
+                        let json = JSON(responseData)
+                        
+                        // Handle any errors
+                        if json["error"].bool == true
+                        {
+                            print("ERROR: \(json["error_message"].stringValue)")
+                            return
+                        }
+                        
+                        // Parse returned user info
+                        if (json["user_info"].dictionary != nil)
+                        {
+                            let userInfoJSON = json["user_info"].dictionary!
+                            
+                            self.rankId = userInfoJSON["rank"]!.intValue
+                            
+                            print("Got user info! Rank id is \(self.rankId)")
+                            
+                            return
+                        }
+                        
+                        print("Test")
+                        
+                    case .failure(let error):
+                        (self.navigationController as! CustomNavigationController).networkError()
+                        print("Request failed with error: \(error)")
+                        return
+                    }
+        }
     }
     
     func receivedLocalNotification(notification: NSNotification){

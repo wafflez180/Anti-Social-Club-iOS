@@ -158,7 +158,7 @@ class LoginViewController: UIViewController
             launchTutorial()
         }
     }
-    
+        
     func launchTutorial(){
         firstPage = OnboardingContentViewController(title: "POST", body: "Post images and/or text with\nfull anonymity", image: UIImage(named: "firstTutorialImage"), buttonText: "") { () -> Void in
             // do something here when users press the button, like ask for location services permissions, register for push notifications, connect to social media, or finish the onboarding process
