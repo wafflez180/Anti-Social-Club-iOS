@@ -124,6 +124,7 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
                                 {
                                     //Should be only 1 element
                                     
+                                    //self.postCell?.post = newPost
                                     self.postCell?.configureLabelsWithPost(post: newPost)
                                     self.parentVC?.selectedPostCell?.configureLabelsWithPost(post: newPost)
                                 }

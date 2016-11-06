@@ -142,6 +142,8 @@ class PostTableViewCell: UITableViewCell {
         self.post?.badgeDisagreeCount = post.badgeDisagreeCount
         self.post?.commentCount = post.commentCount
         self.post?.reportCount = post.reportCount
+        self.post?.isFollowing = post.isFollowing
+        self.isFollowingPost = post.isFollowing
         laughingBadgeButton.setTitle(String(describing: post.badgeFunnyCount!), for: UIControlState.normal)
         notAmusedBadgeButton.setTitle(String(describing: post.badgeDumbCount!), for: UIControlState.normal)
         heartBadgeButton.setTitle(String(describing: post.badgeLoveCount!), for: UIControlState.normal)
@@ -149,6 +151,7 @@ class PostTableViewCell: UITableViewCell {
         dislikeBadgeButton.setTitle(String(describing: post.badgeDisagreeCount!), for: UIControlState.normal)
         commentButton.setTitle(String(describing: post.commentCount!), for: UIControlState.normal)
         reportButton.setTitle(String(describing: post.reportCount!), for: UIControlState.normal)
+        configureTypeIndicator()
     }
     
     func configureTypeIndicator(){
@@ -162,7 +165,7 @@ class PostTableViewCell: UITableViewCell {
             UIView.animate(withDuration: 0.3, delay: 0.0, options: .transitionCurlDown, animations: {
                 self.layoutIfNeeded()
                 if self.commentViewCont != nil {
-                    self.commentViewCont?.view.layoutIfNeeded()
+                    //self.commentViewCont?.view.layoutIfNeeded()
                 }
             })
         }else if typeIndicator != nil {
@@ -170,7 +173,7 @@ class PostTableViewCell: UITableViewCell {
             UIView.animate(withDuration: 0.3, delay: 0.0, options: .transitionCurlDown, animations: {
                 self.layoutIfNeeded()
                 if self.commentViewCont != nil {
-                    self.commentViewCont?.view.layoutIfNeeded()
+                    //self.commentViewCont?.view.layoutIfNeeded()
                 }
             })
         }
