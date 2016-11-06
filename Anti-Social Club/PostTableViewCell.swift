@@ -609,7 +609,7 @@ class PostTableViewCell: UITableViewCell {
             animationTime = 0.0
         }else{
             animationTime = 0.5
-            if badgeId > 0 {
+            if badgeId >= 0 {
                 self.badgeExplodeAnimation(button: self.voteButtonArray[badgeId])
             }
         }
