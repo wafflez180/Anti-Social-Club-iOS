@@ -37,6 +37,7 @@ PODS:
   - GoogleToolboxForMac/NSData+zlib (2.1.0):
     - GoogleToolboxForMac/Defines (= 2.1.0)
   - Onboard (2.3.1)
+  - Spring (1.0.3)
   - SwiftyJSON (3.1.1)
   - Whisper (4.0.0)
 
@@ -49,6 +50,7 @@ DEPENDENCIES:
   - Firebase/Messaging
   - Fusuma (from `https://github.com/ytakzk/Fusuma.git`)
   - Onboard
+  - Spring (from `https://github.com/MengTo/Spring.git`, branch `swift3`)
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
   - Whisper
 
@@ -57,6 +59,9 @@ EXTERNAL SOURCES:
     :git: https://github.com/Alamofire/Alamofire.git
   Fusuma:
     :git: https://github.com/ytakzk/Fusuma.git
+  Spring:
+    :branch: swift3
+    :git: https://github.com/MengTo/Spring.git
   SwiftyJSON:
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
 
@@ -67,6 +72,9 @@ CHECKOUT OPTIONS:
   Fusuma:
     :commit: a5d1d45ba3de62c0904bcfedc0b241229c9908c8
     :git: https://github.com/ytakzk/Fusuma.git
+  Spring:
+    :commit: 3a9227c6e9157e7b47f5ac1ee5abab2a56b50002
+    :git: https://github.com/MengTo/Spring.git
   SwiftyJSON:
     :commit: 6a0c3a82e2b4a07723b4958146315c7928220189
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
@@ -86,9 +94,10 @@ SPEC CHECKSUMS:
   GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
   GoogleToolboxForMac: 2b2596cbb7186865e98cadf2b1e262d851c2b168
   Onboard: b6871f25ac753175b2ab9a362fb2feb26a81a311
+  Spring: 3f02b5dc3308572ef177b3cad0fa7bbc4b0706f7
   SwiftyJSON: f0be2e604f83e8405a624e9f891898bf6ed4e019
   Whisper: 08be92623311f8e53201e62e17f6d7b9599a4714
 
-PODFILE CHECKSUM: af1e99b8edcb98cc8de9ad7db1dcf672769f4f82
+PODFILE CHECKSUM: 86c986b144d95e291ddcfcd3dd2f8cc35c69b1e3
 
 COCOAPODS: 1.1.1

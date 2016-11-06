@@ -530,6 +530,7 @@
 				PROVISIONING_PROFILE = "b3eb6ac1-1328-405d-a425-1011b372154e";
 				PROVISIONING_PROFILE_SPECIFIER = "Declan Anti-Social Club Development";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -551,6 +552,7 @@
 				PROVISIONING_PROFILE = "43b9c2c1-84a0-4e5c-bb8d-1cd957810035";
 				PROVISIONING_PROFILE_SPECIFIER = "Anti-Social Club Ad Hoc Distribution";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
