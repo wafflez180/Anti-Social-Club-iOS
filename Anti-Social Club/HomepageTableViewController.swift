@@ -108,6 +108,7 @@ class HomepageTableViewController: UITableViewController {
                 
                 case .failure(let error):
                     print("Request failed with error: \(error)")
+                    (self.navigationController as! CustomNavigationController).networkError()
                     return
             }
         }

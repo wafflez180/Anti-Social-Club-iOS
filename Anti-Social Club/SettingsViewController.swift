@@ -138,6 +138,7 @@ class SettingsViewController: UIViewController {
                         print("Test")
                         
                     case .failure(let error):
+                        (self.navigationController as! CustomNavigationController).networkError()
                         print("Request failed with error: \(error)")
                         return
                     }
@@ -172,6 +173,7 @@ class SettingsViewController: UIViewController {
                         LOG("FCM token registered with server!")
                         
                     case .failure(let error):
+                        (self.navigationController as! CustomNavigationController).networkError()
                         print("Request failed with error: \(error)")
                         
                         return
@@ -266,6 +268,7 @@ class SettingsViewController: UIViewController {
                         }
                         
                     case .failure(let error):
+                        (self.navigationController as! CustomNavigationController).networkError()
                         print("Request failed with error: \(error)")
                         
                         return

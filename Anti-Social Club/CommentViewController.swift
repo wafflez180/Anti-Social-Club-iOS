@@ -136,6 +136,7 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
                         
                     case .failure(let error):
                         print("Request failed with error: \(error)")
+                        (self.navigationController as! CustomNavigationController).networkError()
                         return
                     }
         }
@@ -215,10 +216,7 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
                         self.retrievingComments = false
                         
                     case .failure(let error):
-                        print("Request failed with error: \(error)")
-                        let alert = UIAlertController(title: "Error", message: "Network Error! Please try again later", preferredStyle: UIAlertControllerStyle.alert)
-                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
-                        self.present(alert, animated: true, completion: nil)
+                        (self.navigationController as! CustomNavigationController).networkError()
                         
                         return
                     }
@@ -279,10 +277,7 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
                         }
                         
                     case .failure(let error):
-                        print("Request failed with error: \(error)")
-                        let alert = UIAlertController(title: "Error", message: "Network Error! Please try again later", preferredStyle: UIAlertControllerStyle.alert)
-                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
-                        self.present(alert, animated: true, completion: nil)
+                        (self.navigationController as! CustomNavigationController).networkError()
                         
                         return
                     }

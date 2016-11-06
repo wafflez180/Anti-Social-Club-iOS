@@ -357,11 +357,11 @@ for breaching the rules.</string>
                         <viewControllerLayoutGuide type="bottom" id="9u7-8v-4Eb"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="bNl-sp-IID">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="380" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="W83-e6-0Ws">
-                                <rect key="frame" x="0.0" y="-44" width="375" height="661"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="573"/>
                                 <color key="backgroundColor" red="0.9137254901960784" green="0.91764705882352937" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PostCell" id="VaE-j2-I9D" customClass="PostTableViewCell" customModule="Anti_Social_Club" customModuleProvider="target">
@@ -659,7 +659,7 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JAR-tY-FO4" userLabel="NewCommentView">
-                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="573" width="375" height="50"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Write a comment..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uqB-dv-E52">
                                         <rect key="frame" x="10" y="10" width="315" height="30"/>
@@ -801,7 +801,7 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T1H-Lj-ugm">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gUu-J0-kg9" userLabel="RulesView">
                                         <rect key="frame" x="0.0" y="-55" width="375" height="250"/>
@@ -1222,7 +1222,7 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="85" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="llK-vR-XCu">
-                                <rect key="frame" x="0.0" y="-44" width="375" height="711"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                                 <color key="backgroundColor" red="0.9137254901960784" green="0.91764705882352937" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="keyCell" rowHeight="85" id="8tr-tc-vZm" customClass="ShareKeyTableViewCell" customModule="Anti_Social_Club" customModuleProvider="target">
@@ -1259,7 +1259,7 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vx0-aZ-Q8O">
-                                <rect key="frame" x="15" y="602" width="345" height="50"/>
+                                <rect key="frame" x="15" y="558" width="345" height="50"/>
                                 <color key="backgroundColor" red="0.0" green="0.73673111200332642" blue="0.83815163373947144" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="jrP-Wl-WOe"/>
@@ -1325,7 +1325,7 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                         </constraints>
                     </view>
                     <connections>
-                        <segue destination="jzd-1k-m03" kind="presentation" identifier="loginSegue" modalTransitionStyle="crossDissolve" id="TEf-BN-cVn"/>
+                        <segue destination="jzd-1k-m03" kind="presentation" identifier="loginSegue" animates="NO" modalTransitionStyle="crossDissolve" id="TEf-BN-cVn"/>
                         <segue destination="E64-iG-bKQ" kind="presentation" identifier="confirmNameSegue" modalTransitionStyle="crossDissolve" id="G0r-dT-B0T"/>
                     </connections>
                 </viewController>
@@ -1414,6 +1414,7 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                         <outlet property="ubitNameTextField" destination="Ipy-Pt-iYm" id="azp-FP-k7R"/>
                         <segue destination="QEa-Jz-qgv" kind="presentation" identifier="confirmKeySegue" modalTransitionStyle="crossDissolve" id="MIm-rZ-peW"/>
                         <segue destination="Mlh-uL-p5L" kind="presentation" identifier="confirmEmailSegue" modalTransitionStyle="crossDissolve" id="gfM-be-KWJ"/>
+                        <segue destination="cOn-Ya-mcc" kind="show" identifier="networkErrorSegue" id="NKY-5o-zvd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MWY-KW-oFf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1501,6 +1502,7 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                         <outlet property="errorTextView" destination="yC6-cx-WW3" id="35I-SL-qt7"/>
                         <outlet property="submitButton" destination="wXa-l7-iBA" id="Bsc-IF-l2s"/>
                         <segue destination="Mlh-uL-p5L" kind="presentation" identifier="confirmEmailSegue" modalTransitionStyle="crossDissolve" id="M7m-9T-xc7"/>
+                        <segue destination="cOn-Ya-mcc" kind="show" identifier="networkErrorSegue" id="pGY-zy-BNF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OEL-qZ-UJc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1589,6 +1591,7 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                         <outlet property="errorTextView" destination="syZ-Is-zsC" id="EYP-tF-tbk"/>
                         <outlet property="submitButton" destination="rsX-zV-av0" id="t85-ga-2es"/>
                         <segue destination="jzd-1k-m03" kind="presentation" identifier="loginSegue" modalTransitionStyle="crossDissolve" id="q9w-i3-shG"/>
+                        <segue destination="cOn-Ya-mcc" kind="show" identifier="networkErrorSegue" id="cdI-a6-7f7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X8B-l7-eZQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1637,11 +1640,86 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                         <segue destination="KXz-gg-J0T" kind="presentation" identifier="loginSuccessSegue" modalTransitionStyle="crossDissolve" id="i0I-aV-SUe"/>
                         <segue destination="Mlh-uL-p5L" kind="show" identifier="confirmEmailSegue" action="showDetailViewController:sender:" id="Cql-j7-kwn"/>
                         <segue destination="E64-iG-bKQ" kind="show" identifier="confirmNameSegue" action="showDetailViewController:sender:" id="vcn-VJ-Z9f"/>
+                        <segue destination="cOn-Ya-mcc" kind="presentation" identifier="networkErrorSegue" modalTransitionStyle="crossDissolve" id="TjQ-Re-YY1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="thx-fD-bg8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1578.4000000000001" y="-640.02998500749629"/>
+        </scene>
+        <!--Network Error View Controller-->
+        <scene sceneID="JLX-Mr-qwW">
+            <objects>
+                <viewController id="cOn-Ya-mcc" customClass="networkErrorViewController" customModule="Anti_Social_Club" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="EaL-Kh-3LD"/>
+                        <viewControllerLayoutGuide type="bottom" id="YlK-uD-vbl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tfi-1Q-kQg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Buffalo" translatesAutoresizingMaskIntoConstraints="NO" id="1SI-Oo-28O">
+                                <rect key="frame" x="100" y="266" width="175" height="136"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="175" id="9R6-Hs-unQ"/>
+                                    <constraint firstAttribute="width" secondItem="1SI-Oo-28O" secondAttribute="height" multiplier="150:116.6" id="qhf-Hc-Rcn"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NETWORK ERROR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="atU-8S-seG">
+                                <rect key="frame" x="25" y="412" width="325" height="34"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <color key="textColor" red="0.69803921570000005" green="0.92156862750000001" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There was a problem connecting to the Anti-Social Club. Please try again later." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bts-ig-IW9">
+                                <rect key="frame" x="25" y="456" width="325" height="42.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <color key="textColor" red="0.69803921570000005" green="0.92156862750000001" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mLJ-Mo-O4d">
+                                <rect key="frame" x="69" y="589" width="237" height="53"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                <inset key="contentEdgeInsets" minX="50" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <inset key="titleEdgeInsets" minX="-185" minY="0.0" maxX="0.0" maxY="5"/>
+                                <state key="normal" title="RETRY" image="defaultButton">
+                                    <color key="titleColor" red="0.0" green="0.73725490199999999" blue="0.83137254900000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="pressedRetry:" destination="cOn-Ya-mcc" eventType="touchUpInside" id="K32-y2-xb7"/>
+                                    <action selector="pressedRetryButton:" destination="jzd-1k-m03" eventType="touchUpInside" id="43g-nz-HVB"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.73725490196078436" blue="0.83137254901960778" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="1SI-Oo-28O" firstAttribute="width" secondItem="1SI-Oo-28O" secondAttribute="height" multiplier="150:116.6" id="7Ip-NV-aLU"/>
+                            <constraint firstItem="1SI-Oo-28O" firstAttribute="centerX" secondItem="tfi-1Q-kQg" secondAttribute="centerX" id="7xd-W5-F4N"/>
+                            <constraint firstItem="YlK-uD-vbl" firstAttribute="top" secondItem="mLJ-Mo-O4d" secondAttribute="bottom" constant="25" id="B5w-wl-RCI"/>
+                            <constraint firstItem="atU-8S-seG" firstAttribute="top" secondItem="1SI-Oo-28O" secondAttribute="bottom" constant="10" id="CoX-4x-QMv"/>
+                            <constraint firstItem="bts-ig-IW9" firstAttribute="top" secondItem="atU-8S-seG" secondAttribute="bottom" constant="10" id="FIh-DX-OyT"/>
+                            <constraint firstAttribute="trailing" secondItem="atU-8S-seG" secondAttribute="trailing" constant="25" id="Gnw-UN-KmO"/>
+                            <constraint firstItem="atU-8S-seG" firstAttribute="top" secondItem="1SI-Oo-28O" secondAttribute="bottom" constant="10" id="GyA-zf-a13"/>
+                            <constraint firstItem="mLJ-Mo-O4d" firstAttribute="centerX" secondItem="tfi-1Q-kQg" secondAttribute="centerX" id="LFT-CQ-UGs"/>
+                            <constraint firstAttribute="trailing" secondItem="bts-ig-IW9" secondAttribute="trailing" constant="25" id="QAp-mD-FU5"/>
+                            <constraint firstItem="atU-8S-seG" firstAttribute="leading" secondItem="tfi-1Q-kQg" secondAttribute="leading" constant="25" id="Thj-Uj-8el"/>
+                            <constraint firstItem="1SI-Oo-28O" firstAttribute="centerY" secondItem="tfi-1Q-kQg" secondAttribute="centerY" id="XPt-VO-vqx"/>
+                            <constraint firstItem="bts-ig-IW9" firstAttribute="leading" secondItem="tfi-1Q-kQg" secondAttribute="leading" constant="25" id="aF0-Cm-pQg"/>
+                            <constraint firstItem="1SI-Oo-28O" firstAttribute="width" secondItem="1SI-Oo-28O" secondAttribute="height" multiplier="150:116.6" id="tWt-Nt-dIs"/>
+                            <constraint firstItem="bts-ig-IW9" firstAttribute="top" secondItem="atU-8S-seG" secondAttribute="bottom" constant="10" id="uZv-SV-gaL"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="networkErrorBodyLabel" destination="bts-ig-IW9" id="hpW-r1-l4O"/>
+                        <outlet property="networkErrorTitle" destination="atU-8S-seG" id="Mqa-is-1Hc"/>
+                        <outlet property="retryButton" destination="mLJ-Mo-O4d" id="cTv-SR-p9w"/>
+                        <segue destination="cR1-GB-Scr" kind="presentation" identifier="toEntryViewSegue" animates="NO" modalTransitionStyle="crossDissolve" id="lNN-Fb-Txv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6UJ-rj-IIS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1217" y="-1497"/>
         </scene>
         <!--Custom Navigation Controller-->
         <scene sceneID="Aet-rV-jlG">
@@ -1664,6 +1742,7 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                     <connections>
                         <segue destination="GTJ-cc-M7H" kind="relationship" relationship="rootViewController" id="Dlw-Sk-XAN"/>
                         <segue destination="ncg-38-1rU" kind="show" identifier="showPostSegue" id="73f-4f-03y"/>
+                        <segue destination="cOn-Ya-mcc" kind="show" identifier="networkErrorSegue" id="ec2-0q-YQr"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z5s-RE-5yO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1691,12 +1770,14 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
         <image name="ShareIcon" width="26" height="21"/>
         <image name="StraightFaceOutline" width="27" height="27"/>
         <image name="StraightFaceSelected" width="25" height="25"/>
+        <image name="defaultButton" width="130" height="53"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="TEf-BN-cVn"/>
+        <segue reference="cdI-a6-7f7"/>
+        <segue reference="gfM-be-KWJ"/>
+        <segue reference="G0r-dT-B0T"/>
+        <segue reference="73f-4f-03y"/>
         <segue reference="zIT-1V-UjM"/>
-        <segue reference="q9w-i3-shG"/>
-        <segue reference="Cql-j7-kwn"/>
-        <segue reference="vcn-VJ-Z9f"/>
-        <segue reference="jbv-Rh-nZU"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -22,6 +22,7 @@
 		14EF3A5D1DCBA24B00456D5F /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF3A5C1DCBA24B00456D5F /* Debug.swift */; };
 		B26D96381476127475E7C7A1 /* Pods_Anti_Social_Club.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5BF9903FBC092D198F19798 /* Pods_Anti_Social_Club.framework */; };
 		CA19835A1DCBBDDD009C515F /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA1983591DCBBDDD009C515F /* AdSupport.framework */; };
+		CA3248901DCF1858002834C6 /* networkErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA32488F1DCF1858002834C6 /* networkErrorViewController.swift */; };
 		CA3B5BFC1DBA9ADD00190440 /* Date+ASC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3B5BFB1DBA9ADD00190440 /* Date+ASC.swift */; };
 		CA4143B81DAC7C5F0072B27C /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4143B71DAC7C5F0072B27C /* PostTableViewCell.swift */; };
 		CA4143BA1DAC7D220072B27C /* HomepageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4143B91DAC7D220072B27C /* HomepageTableViewController.swift */; };
@@ -63,6 +64,7 @@
 		A5BF9903FBC092D198F19798 /* Pods_Anti_Social_Club.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Anti_Social_Club.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAAD275C5327CCFA9DA6CBAF /* Pods-Anti-Social Club.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Anti-Social Club.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Anti-Social Club/Pods-Anti-Social Club.debug.xcconfig"; sourceTree = "<group>"; };
 		CA1983591DCBBDDD009C515F /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		CA32488F1DCF1858002834C6 /* networkErrorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = networkErrorViewController.swift; sourceTree = "<group>"; };
 		CA3B5BFB1DBA9ADD00190440 /* Date+ASC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+ASC.swift"; sourceTree = "<group>"; };
 		CA4143B71DAC7C5F0072B27C /* PostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		CA4143B91DAC7D220072B27C /* HomepageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomepageTableViewController.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 				CAF104E71DB70279005B7F6F /* ShareKeysViewController.swift */,
 				CAF104E91DB70451005B7F6F /* ShareKeyTableViewCell.swift */,
 				CAA3A3DE1DC05E08003BAFCA /* ViewImageViewController.swift */,
+				CA32488F1DCF1858002834C6 /* networkErrorViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA3248901DCF1858002834C6 /* networkErrorViewController.swift in Sources */,
 				143F5C7B1DB32ECF00605158 /* LoginViewController.swift in Sources */,
 				143F5C771DB32E6600605158 /* ConfirmEmailViewController.swift in Sources */,
 				CADEBDAA1DAC9AB7004D3282 /* Constants.swift in Sources */,

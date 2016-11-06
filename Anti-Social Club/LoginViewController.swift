@@ -118,6 +118,7 @@ class LoginViewController: UIViewController
                         
                     case .failure(let error):
                         print("Request failed with error: \(error)")
+                        self.performSegue(withIdentifier: "networkErrorSegue", sender: self)
                         self.onLoginFailure()
                         
                         return
@@ -284,10 +285,10 @@ class LoginViewController: UIViewController
                         
                     case .failure(let error):
                         print("Request failed with error: \(error)")
+                        self.performSegue(withIdentifier: "networkErrorSegue", sender: self)
                         
                         return
                     }
         }
     }
-    
 }

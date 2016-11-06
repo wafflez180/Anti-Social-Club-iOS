@@ -116,10 +116,15 @@ class CustomNavigationController: UINavigationController {
                         
                     case .failure(let error):
                         print("Request failed with error: \(error)")
+                        
                         return
                     }
         }
         
+    }
+    
+    func networkError(){
+        performSegue(withIdentifier: "networkErrorSegue", sender: self)
     }
 
     // MARK: - Navigation

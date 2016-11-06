@@ -94,6 +94,7 @@ class ConfirmNameViewController: UIViewController, UITextFieldDelegate
                     case .failure(let error):
                         print("Request failed with error: \(error)")
                         self.onConfirmFailure()
+                        self.performSegue(withIdentifier: "networkErrorSegue", sender: self)
                         
                         return
                     }

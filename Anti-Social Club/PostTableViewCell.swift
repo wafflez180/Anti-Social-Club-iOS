@@ -274,6 +274,7 @@ class PostTableViewCell: UITableViewCell {
                         print("Followed post \(postId)!")
                         
                     case .failure(let error):
+                        (self.getParentVC().navigationController as! CustomNavigationController).networkError()
                         print("Request failed with error: \(error)")
                         
                         return
@@ -309,6 +310,7 @@ class PostTableViewCell: UITableViewCell {
                         print("Unfollowed post \(postId)!")
                         
                     case .failure(let error):
+                        (self.getParentVC().navigationController as! CustomNavigationController).networkError()
                         print("Request failed with error: \(error)")
                         
                         return
@@ -436,6 +438,7 @@ class PostTableViewCell: UITableViewCell {
                         }
 
                     case .failure(let error):
+                        (self.getParentVC().navigationController as! CustomNavigationController).networkError()
                         print("Request failed with error: \(error)")
                         
                         return
@@ -493,6 +496,7 @@ class PostTableViewCell: UITableViewCell {
                         }
                         
                     case .failure(let error):
+                        (self.getParentVC().navigationController as! CustomNavigationController).networkError()
                         print("Request failed with error: \(error)")
                         
                         return

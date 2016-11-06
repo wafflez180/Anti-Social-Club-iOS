@@ -322,6 +322,8 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
                                     break
                                 
                                 case .failure(let error):
+                                    (self.parentVC.navigationController as! CustomNavigationController).networkError()
+
                                     print("Request failed with error: \(error)")
                             }
                         }
