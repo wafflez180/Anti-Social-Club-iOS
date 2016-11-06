@@ -325,8 +325,9 @@ class PostTableViewCell: UITableViewCell {
     
     func retrieveImage() {
         let activityView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
-        activityView.center=self.center
-        activityView.frame = self.frame
+        
+        activityView.center = CGPoint(x: self.frame.width/2, y: self.frame.height/4)
+        activityView.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: 200)
         activityView.startAnimating()
         self.addSubview(activityView)
         
