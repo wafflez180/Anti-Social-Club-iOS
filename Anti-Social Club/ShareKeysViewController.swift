@@ -80,6 +80,8 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
                     activityView.stopAnimating()
                     activityView.removeFromSuperview()
                     
+                    self.keyArray.removeAll()
+                    
                     switch response.result
                     {
                     case .success(let responseData):
@@ -170,12 +172,12 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
         SKPaymentQueue.default().add(payment)
     }
     
-    func onPurchaseSuccess(productId: String) {
+    func onPurchaseSuccess(productId: String, transaction : SKPaymentTransaction) {
         LOG("Purchase Success \(productId)")
         
         if let receiptURL = Bundle.main.appStoreReceiptURL,
            let receipt = NSData(contentsOf: receiptURL) {
-            attemptConfirmPurchase(productId: productId, receipt: receipt)
+            attemptConfirmPurchase(productId: productId, receipt: receipt, transaction: transaction)
         }
     }
     
@@ -197,11 +199,11 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
         return SKPaymentQueue.canMakePayments()
     }
     
-    func attemptConfirmPurchase(productId: String, receipt: NSData)
+    func attemptConfirmPurchase(productId: String, receipt: NSData, transaction : SKPaymentTransaction)
     {
         print("Attempting to confirm purchase for \(productId)")
         
-        let parameters = ["token" : UserDefaults.standard.string(forKey: "token"), "product_id" : productId, "app_receipt" : receipt.base64EncodedString()]
+        let parameters = ["token" : UserDefaults.standard.string(forKey: "token")!, "product_id" : productId, "app_receipt" : receipt.base64EncodedString()]
     
         Alamofire.request(Constants.API.ADDRESS + Constants.API.CALL_CONFIRM_PURCHASE, method: .post, parameters: parameters)
         .responseJSON()
@@ -221,7 +223,7 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
                         return
                     }
                 
-                    self.onConfirmPurchaseSuccess()
+                    self.onConfirmPurchaseSuccess(transaction: transaction)
                     return
 
                 case .failure(let error):
@@ -233,11 +235,13 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
-    func onConfirmPurchaseSuccess()
+    func onConfirmPurchaseSuccess(transaction : SKPaymentTransaction)
     {
         print("ConfirmPurchase succeded.")
         
         attemptRetrieveUserKeys(token: UserDefaults.standard.string(forKey: "token")!)
+        
+        SKPaymentQueue.default().finishTransaction(transaction)
     }
     
     func onConfirmPurchaseFailed()
@@ -313,9 +317,7 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
     private func complete(transaction: SKPaymentTransaction) {
         print("complete...")
         
-        onPurchaseSuccess(productId: transaction.payment.productIdentifier)
-        
-        SKPaymentQueue.default().finishTransaction(transaction)
+        onPurchaseSuccess(productId: transaction.payment.productIdentifier, transaction: transaction)
     }
 
     private func restore(transaction: SKPaymentTransaction) {
@@ -323,9 +325,7 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
 
         print("restore... \(productIdentifier)")
         
-        onPurchaseSuccess(productId: productIdentifier)
-        
-        SKPaymentQueue.default().finishTransaction(transaction)
+        onPurchaseSuccess(productId: productIdentifier, transaction: transaction)
     }
 
     private func fail(transaction: SKPaymentTransaction) {
@@ -338,8 +338,6 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
         }
 
         onPurchaseFailed(productId: transaction.payment.productIdentifier)
-
-        SKPaymentQueue.default().finishTransaction(transaction)
     }
     
     // MARK: - UITableViewDataSource
