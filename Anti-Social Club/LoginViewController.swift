@@ -22,21 +22,22 @@ class LoginViewController: UIViewController
     var secondPage : OnboardingContentViewController?
     var thirdPage : OnboardingContentViewController?
     var fourthPage : OnboardingContentViewController?
+    var fifthPage : OnboardingContentViewController?
     var onboardingVC : OnboardingViewController?
-
+    
     @IBOutlet weak var errorLabel: UILabel!
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-
+        
         userToken = UserDefaults.standard.string(forKey: "token")
         if userToken != nil
         {
             attemptLogin(token: userToken!)
         }
     }
-
+    
     override func didReceiveMemoryWarning()
     {
         super.didReceiveMemoryWarning()
@@ -47,84 +48,84 @@ class LoginViewController: UIViewController
         print("Attempting to login with token \(token)")
         
         let parameters = ["token" : token]
-
+        
         Alamofire.request(Constants.API.ADDRESS + Constants.API.CALL_LOGIN, method: .post, parameters: parameters)
-        .responseJSON()
-        {
-            response in
-            
-            switch response.result
-            {
-                case .success(let responseData):
-                    let json = JSON(responseData)
-
-                    // Handle any errors
-                    if json["error"].bool == true
-                    {
-                        print("ERROR: \(json["error_message"].stringValue)")
-                        self.onLoginFailure()
-
-                        return
-                    }
-                
-                    // User doesn't exist
-                    if json["exists"].bool == false
-                    {
-                        self.onUserDoesNotExist()
-                        
-                        return
-                    }
-                
-                    // Grab the user name
-                    self.userName = json["name"].string
-                
-                    // User email isn't confirmed
-                    if json["confirmed"].bool == false
-                    {
-                        self.onUserNotConfirmed()
-                        
-                        return
-                    }
+            .responseJSON()
+                {
+                    response in
                     
-                    // Authentication failed for one reason or another
-                    // This would happen if you were banned or something
-                    if json["authenticated"].bool == false
+                    switch response.result
                     {
-                        if json["ban_type"].string == "HARD"
+                    case .success(let responseData):
+                        let json = JSON(responseData)
+                        
+                        // Handle any errors
+                        if json["error"].bool == true
                         {
-                            print("User has a hard ban")
+                            print("ERROR: \(json["error_message"].stringValue)")
+                            self.onLoginFailure()
                             
-                            self.onUserHardBan()
-                        }else if json["ban_type"].string == "SOFT"
-                        {
-                            print("User has a soft ban")
-                            
-                            self.onLoginSuccess()
-                        }else{
-                            print("authentication failed, deleting token")
-                            
-                            // Now, we need to delete the local user token because it is obviously not valid.
-                            UserDefaults.standard.removeObject(forKey: "token")
+                            return
                         }
                         
+                        // User doesn't exist
+                        if json["exists"].bool == false
+                        {
+                            self.onUserDoesNotExist()
+                            
+                            return
+                        }
+                        
+                        // Grab the user name
+                        self.userName = json["name"].string
+                        
+                        // User email isn't confirmed
+                        if json["confirmed"].bool == false
+                        {
+                            self.onUserNotConfirmed()
+                            
+                            return
+                        }
+                        
+                        // Authentication failed for one reason or another
+                        // This would happen if you were banned or something
+                        if json["authenticated"].bool == false
+                        {
+                            if json["ban_type"].string == "HARD"
+                            {
+                                print("User has a hard ban")
+                                
+                                self.onUserHardBan()
+                            }else if json["ban_type"].string == "SOFT"
+                            {
+                                print("User has a soft ban")
+                                
+                                self.onLoginSuccess()
+                            }else{
+                                print("authentication failed, deleting token")
+                                
+                                // Now, we need to delete the local user token because it is obviously not valid.
+                                UserDefaults.standard.removeObject(forKey: "token")
+                            }
+                            
+                            self.onLoginFailure()
+                            
+                            return
+                        }else{
+                            self.onLoginSuccess()
+                            return
+                        }
+                        
+                    case .failure(let error):
+                        print("Request failed with error: \(error)")
                         self.onLoginFailure()
                         
                         return
-                    }else{
-                        self.onLoginSuccess()
-                        return
                     }
-
-                case .failure(let error):
-                    print("Request failed with error: \(error)")
-                    self.onLoginFailure()
-                    
-                    return
-            }
         }
-   
+        
     }
-
+    
     func onUserDoesNotExist()
     {
         print("User does not exist! We need to register!")
@@ -168,14 +169,17 @@ class LoginViewController: UIViewController
         thirdPage = OnboardingContentViewController(title: "VOTE", body: "Vote your opinion on posts to\nreveal how many voted", image: UIImage(named: "thirdTutorialImage"), buttonText: "") { () -> Void in
             // do something here when users press the button, like ask for location services permissions, register for push notifications, connect to social media, or finish the onboarding process
         }
-        fourthPage = OnboardingContentViewController(title: "INVITE", body: "Go to the settings page to share\nthe few keys you have", image: UIImage(named: "fourthTutorialImage"), buttonText: "Enter") { () -> Void in
+        fourthPage = OnboardingContentViewController(title: "FOLLOW", body: "Long press on posts to\nfollow and stay in the loop", image: UIImage(named: "fourthTutorialImage"), buttonText: "") { () -> Void in
+            // do something here when users press the button, like ask for location services permissions, register for push notifications, connect to social media, or finish the onboarding process
+        }
+        fifthPage = OnboardingContentViewController(title: "INVITE", body: "Go to the settings page to share\nthe few keys you have", image: UIImage(named: "fourthTutorialImage"), buttonText: "Enter") { () -> Void in
             self.dismiss(animated: true, completion: {
                 
             })
             self.performSegue(withIdentifier: "loginSuccessSegue", sender: nil)
         }
         
-        onboardingVC = OnboardingViewController(backgroundImage: UIImage(named: "backgroundTutorialImage"), contents: [firstPage!,secondPage!,thirdPage!,fourthPage!])
+        onboardingVC = OnboardingViewController(backgroundImage: UIImage(named: "backgroundTutorialImage"), contents: [firstPage!,secondPage!,thirdPage!,fourthPage!,fifthPage!])
         
         let contentControllers = (onboardingVC?.viewControllers as! [OnboardingContentViewController])
         
@@ -196,32 +200,7 @@ class LoginViewController: UIViewController
         
         onboardingVC?.shouldMaskBackground = false
         
-        present(onboardingVC!, animated: true)    }
-    
-    func transitionToNextVC(index : Int){
-        onboardingVC?.moveNextPage()
-        if index == 0 {
-            firstPage?.view.alpha = 1.0
-            secondPage?.view.alpha = 0.0
-            UIView.animate(withDuration: 0.3, animations: {
-                self.firstPage?.view.alpha = 0.0
-                self.secondPage?.view.alpha = 1.0
-            })
-        }else if index == 1{
-            secondPage?.view.alpha = 1.0
-            thirdPage?.view.alpha = 0.0
-            UIView.animate(withDuration: 0.3, animations: {
-                self.secondPage?.view.alpha = 0.0
-                self.thirdPage?.view.alpha = 1.0
-            })
-        }else if index == 2{
-            thirdPage?.view.alpha = 1.0
-            fourthPage?.view.alpha = 0.0
-            UIView.animate(withDuration: 0.3, animations: {
-                self.thirdPage?.view.alpha = 0.0
-                self.fourthPage?.view.alpha = 1.0
-            })
-        }
+        present(onboardingVC!, animated: true)
     }
     
     func onUserHardBan(){
@@ -237,9 +216,9 @@ class LoginViewController: UIViewController
         // or if it can't connect. On the Android version, it just makes a "NETWORK ERROR" show up in red text,
         // with a retry button.
     }
-
+    
     // MARK: - Navigation
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         if (segue.identifier == "confirmEmailSegue")
@@ -252,12 +231,12 @@ class LoginViewController: UIViewController
             destination.username = userName!
             destination.userToken = userToken!
         }
-
+        
     }
     
     func connectToFCM() {
         LOG("Connecting to FCM..");
-    
+        
         FIRMessaging.messaging().connect {
             (error) in
             
@@ -282,33 +261,33 @@ class LoginViewController: UIViewController
     {
         let token = "\(userToken!)"
         let parameters = ["token" : token, "fcm_token" : fcmToken, "fcm_platform" : "iOS"]
-
+        
         Alamofire.request(Constants.API.ADDRESS + Constants.API.CALL_REGISTER_FCM_TOKEN, method: .post, parameters: parameters)
-        .responseJSON()
-        {
-            response in
-            
-            switch response.result
-            {
-                case .success(let responseData):
-                    let json = JSON(responseData)
-
-                    // Handle any errors
-                    if json["error"].bool == true
+            .responseJSON()
+                {
+                    response in
+                    
+                    switch response.result
                     {
-                        print("ERROR: \(json["error_message"].stringValue)")
+                    case .success(let responseData):
+                        let json = JSON(responseData)
+                        
+                        // Handle any errors
+                        if json["error"].bool == true
+                        {
+                            print("ERROR: \(json["error_message"].stringValue)")
+                            
+                            return
+                        }
+                        
+                        LOG("FCM token registered with server!")
+                        
+                    case .failure(let error):
+                        print("Request failed with error: \(error)")
                         
                         return
                     }
-                    
-                    LOG("FCM token registered with server!")
-                    
-                case .failure(let error):
-                    print("Request failed with error: \(error)")
-                    
-                    return
-            }
         }
     }
-
+    
 }
