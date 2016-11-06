@@ -177,6 +177,11 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func onPurchaseSuccess(productId: String) {
         LOG("Purchase Success \(productId)")
+        
+        if let receiptURL = Bundle.main.appStoreReceiptURL,
+           let receipt = NSData(contentsOf: receiptURL) {
+            attemptConfirm
+        }
     }
     
     func onPurchaseFailed(productId: String) {
@@ -207,7 +212,7 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
             
             return
         }
-        
+
         if let accessKeyProduct = getProduct(productId: Constants.Products.PRODUCT_ACCESS_KEY) {
             purchaseProduct(accessKeyProduct)
         }
