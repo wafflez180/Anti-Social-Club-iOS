@@ -10,6 +10,8 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import Crashlytics
+import FirebaseMessaging
+import Firebase
 
 class SettingsViewController: UIViewController {
 
@@ -22,6 +24,9 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var rankLabel: UILabel!
     @IBOutlet weak var dateJoinedLabel: UILabel!
     
+    @IBOutlet weak var enableNotificationsLabel: UILabel!
+    @IBOutlet weak var enableNotificationSwitch: UISwitch!
+    
     var segueingToDeactivate : Bool = false
     var userToken : String?
     
@@ -33,6 +38,15 @@ class SettingsViewController: UIViewController {
         retrieveUserInfo()
         
         userToken = (self.navigationController as! CustomNavigationController).userToken
+        
+        let disabledNotifications = UserDefaults.standard.bool(forKey: "disabledNotifications")
+        if disabledNotifications {
+            enableNotificationSwitch.isOn = false
+            enableNotificationsLabel.isHighlighted = false
+        }else{
+            enableNotificationSwitch.isOn = true
+            enableNotificationsLabel.isHighlighted = true
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -130,7 +144,81 @@ class SettingsViewController: UIViewController {
         }
     }
     
+    func registerFCMToken(fcmToken : String)
+    {
+        let token = "\(userToken!)"
+        let parameters = ["token" : token, "fcm_token" : fcmToken, "fcm_platform" : "iOS"]
+        
+        Alamofire.request(Constants.API.ADDRESS + Constants.API.CALL_REGISTER_FCM_TOKEN, method: .post, parameters: parameters)
+            .responseJSON()
+                {
+                    response in
+                    
+                    self.enableNotificationSwitch.isEnabled = true
+                    
+                    switch response.result
+                    {
+                    case .success(let responseData):
+                        let json = JSON(responseData)
+                        
+                        // Handle any errors
+                        if json["error"].bool == true
+                        {
+                            print("ERROR: \(json["error_message"].stringValue)")
+                            
+                            return
+                        }
+                        
+                        LOG("FCM token registered with server!")
+                        
+                    case .failure(let error):
+                        print("Request failed with error: \(error)")
+                        
+                        return
+                    }
+        }
+    }
+    
+    func connectToFCM() {
+        LOG("Connecting to FCM..");
+        
+        FIRMessaging.messaging().connect {
+            (error) in
+            
+            if (error != nil) {
+                LOG("Failed to connect to FCM! \(error)")
+            } else {
+                LOG("Connected to FCM.")
+                if let fcmToken = FIRInstanceID.instanceID().token()
+                {
+                    LOG("Got FCM token \(fcmToken) at login")
+                    self.registerFCMToken(fcmToken : "\(fcmToken)")
+                }
+                else
+                {
+                    LOG("Didn't get an FCM token at login!")
+                }
+            }
+        }
+    }
+
     // MARK - Actions
+    
+    @IBAction func disableNotificationsSwitch(_ sender: Any) {
+        if enableNotificationSwitch.isOn{
+            enableNotificationsLabel.isHighlighted = true
+            connectToFCM()
+            enableNotificationSwitch.isEnabled = false
+            UserDefaults.standard.set(false, forKey: "disabledNotifcations")
+        }else{
+            enableNotificationsLabel.isHighlighted = false
+            enableNotificationSwitch.isEnabled = false
+            registerFCMToken(fcmToken: "")
+            FIRMessaging.messaging().disconnect()
+            LOG("Disconnected from FCM.")
+            UserDefaults.standard.set(true, forKey: "disabledNotifcations")
+        }
+    }
 
     @IBAction func pressedOnDeactivateDevice(_ sender: AnyObject) {
         let deactivateAlert = UIAlertController(title: "Deactivate Device", message: "Are you sure you want to deactivate your device? To activate another device you’ll need to confirm your email again", preferredStyle: UIAlertControllerStyle.alert)

@@ -141,8 +141,11 @@ class LoginViewController: UIViewController
     {
         Answers.logLogin(withMethod: "Token", success: true, customAttributes: [:])
         // We need to register the FCM token with the server every time the user starts the app.
-        connectToFCM()
-
+        let disabledNotifications = UserDefaults.standard.bool(forKey: "disabledNotifications")
+        if disabledNotifications == false  {
+            connectToFCM()
+        }
+        
         let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
         if launchedBefore  {
             print("Not first launch.")
