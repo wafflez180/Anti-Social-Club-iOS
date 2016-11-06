@@ -12,6 +12,7 @@
 		143F5C771DB32E6600605158 /* ConfirmEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143F5C761DB32E6600605158 /* ConfirmEmailViewController.swift */; };
 		143F5C791DB32E8300605158 /* ConfirmKeyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143F5C781DB32E8300605158 /* ConfirmKeyViewController.swift */; };
 		143F5C7B1DB32ECF00605158 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143F5C7A1DB32ECF00605158 /* LoginViewController.swift */; };
+		14A8A3411DCEFB7F00DBE51C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A8A3401DCEFB7F00DBE51C /* StoreKit.framework */; };
 		14AAE5031DCA6BC3002B011A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 14AAE5021DCA6BC3002B011A /* GoogleService-Info.plist */; };
 		14DEF9AD1DAC0F8300BF8B58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DEF9AC1DAC0F8300BF8B58 /* AppDelegate.swift */; };
 		14DEF9B21DAC0F8300BF8B58 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14DEF9B01DAC0F8300BF8B58 /* Main.storyboard */; };
@@ -48,6 +49,7 @@
 		143F5C781DB32E8300605158 /* ConfirmKeyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmKeyViewController.swift; sourceTree = "<group>"; };
 		143F5C7A1DB32ECF00605158 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		14891B5D1DCA39660033EC39 /* Anti-Social Club.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Anti-Social Club.entitlements"; sourceTree = "<group>"; };
+		14A8A3401DCEFB7F00DBE51C /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		14AAE5021DCA6BC3002B011A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		14DEF9A91DAC0F8300BF8B58 /* Anti-Social Club.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Anti-Social Club.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		14DEF9AC1DAC0F8300BF8B58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14A8A3411DCEFB7F00DBE51C /* StoreKit.framework in Frameworks */,
 				CA19835A1DCBBDDD009C515F /* AdSupport.framework in Frameworks */,
 				B26D96381476127475E7C7A1 /* Pods_Anti_Social_Club.framework in Frameworks */,
 			);
@@ -97,6 +100,7 @@
 		00BA728768E9A3EDE28DB38B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				14A8A3401DCEFB7F00DBE51C /* StoreKit.framework */,
 				CA1983591DCBBDDD009C515F /* AdSupport.framework */,
 				A5BF9903FBC092D198F19798 /* Pods_Anti_Social_Club.framework */,
 			);
@@ -240,7 +244,13 @@
 						DevelopmentTeam = P46Z87GYN3;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
+							com.apple.ApplePay = {
+								enabled = 1;
+							};
 							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.InAppPurchase = {
 								enabled = 1;
 							};
 							com.apple.Push = {
