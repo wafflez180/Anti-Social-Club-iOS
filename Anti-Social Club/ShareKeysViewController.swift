@@ -12,10 +12,11 @@ import SwiftyJSON
 import Crashlytics
 import StoreKit
 
-class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SKProductsRequestDelegate {
+class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SKProductsRequestDelegate, SKPaymentTransactionObserver {
 
     var keyArray : [AccessKey] = []
     var recipientTextField: UITextField!
+    var productArray : [SKProduct] = []
 
     @IBOutlet weak var keysTableView: UITableView!
     @IBOutlet weak var buyMoreKeysButton: UIButton!
@@ -39,6 +40,7 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
             contentId: "Key",
             customAttributes: [:])
         
+        SKPaymentQueue.default().add(self)
         requestProducts()
     }
 
@@ -166,27 +168,121 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
         productsRequest.start();
     }
     
+    func purchaseProduct(_ product: SKProduct) {
+        print ("Initiating purchase of \(product.productIdentifier)")
+        
+        let payment = SKPayment(product: product)
+        SKPaymentQueue.default().add(payment)
+    }
+    
+    func onPurchaseSuccess(productId: String) {
+        LOG("Purchase Success \(productId)")
+    }
+    
+    func onPurchaseFailed(productId: String) {
+        LOG("Purchase Failed! \(productId)")
+    }
+    
+    func getProduct(productId: String) -> SKProduct? {
+        for p in productArray {
+            if p.productIdentifier == productId {
+                return p
+            }
+        }
+        
+        return nil
+    }
+    
+    func isPurchasingAllowed() -> Bool {
+        return SKPaymentQueue.canMakePayments()
+    }
+    
     // MARK: - Actions
     
     @IBAction func pressedPurchaseMoreKeys(_ sender: AnyObject) {
         print("Pressed On Purchase More Keys")
-        //TODO Purchase more keys popup
-    }
-    
-    // MARK: - SKProductsRequestDelegate
-    
-    func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
-        LOG("productsRequest didReceiveResponse")
         
-        let products = response.products
-        for p in products {
-            LOG("Got product: \(p.productIdentifier) \(p.localizedTitle) \(p.localizedDescription) \(p.price.floatValue)")
+        if !isPurchasingAllowed() {
+            // TODO show a dialog saying that purchasing is not available
+            
+            return
+        }
+        
+        if let accessKeyProduct = getProduct(productId: Constants.Products.PRODUCT_ACCESS_KEY) {
+            purchaseProduct(accessKeyProduct)
         }
     }
     
+    // MARK: - SKProductsRequestDelegate
+
+    func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
+        LOG("productsRequest didReceiveResponse")
+
+        let products = response.products
+        for p in products {
+            LOG("Got product: \(p.productIdentifier) \(p.localizedTitle) \(p.localizedDescription) \(p.price.floatValue)")
+            
+            productArray += [p]
+        }
+    }
+
     public func request(_ request: SKRequest, didFailWithError error: Error) {
         LOG("Failed to load list of products!")
         LOG("Error: \(error.localizedDescription)")
+    }
+
+    // MARK: - SKPaymentTransactionObserver
+
+    public func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        for transaction in transactions {
+            switch (transaction.transactionState) {
+                case .purchased:
+                    complete(transaction: transaction)
+                    break
+                case .failed:
+                    fail(transaction: transaction)
+                    break
+                case .restored:
+                    restore(transaction: transaction)
+                    break
+                case .deferred:
+                    break
+                case .purchasing:
+                    break
+            }
+        }
+    }
+
+    private func complete(transaction: SKPaymentTransaction) {
+        print("complete...")
+        
+        onPurchaseSuccess(productId: transaction.payment.productIdentifier)
+        
+        SKPaymentQueue.default().finishTransaction(transaction)
+    }
+
+    private func restore(transaction: SKPaymentTransaction) {
+        guard let productIdentifier = transaction.original?.payment.productIdentifier else { return }
+
+        print("restore... \(productIdentifier)")
+        
+        onPurchaseSuccess(productId: productIdentifier)
+        
+        SKPaymentQueue.default().finishTransaction(transaction)
+    }
+
+    private func fail(transaction: SKPaymentTransaction) {
+        print("fail...")
+        
+        if let transactionError = transaction.error as? NSError {
+            if transactionError.code != SKError.paymentCancelled.rawValue {
+                print("Transaction Error: \(transaction.error?.localizedDescription)")
+            }
+        }
+
+        onPurchaseFailed(productId: transaction.payment.productIdentifier)
+
+        SKPaymentQueue.default().finishTransaction(transaction)
     }
     
     // MARK: - UITableViewDataSource
