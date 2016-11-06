@@ -179,7 +179,7 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
         
         if let receiptURL = Bundle.main.appStoreReceiptURL,
            let receipt = NSData(contentsOf: receiptURL) {
-            attemptConfirm
+            attemptConfirmPurchase(productId: productId, receipt: receipt)
         }
     }
     
@@ -199,6 +199,54 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func isPurchasingAllowed() -> Bool {
         return SKPaymentQueue.canMakePayments()
+    }
+    
+    func attemptConfirmPurchase(productId: String, receipt: NSData)
+    {
+        print("Attempting to confirm purchase for \(productId)")
+        
+        let parameters = ["token" : UserDefaults.standard.string(forKey: "token"), "product_id" : productId, "app_receipt" : receipt.base64EncodedString()]
+    
+        Alamofire.request(Constants.API.ADDRESS + Constants.API.CALL_CONFIRM_PURCHASE, method: .post, parameters: parameters)
+        .responseJSON()
+        {
+            response in
+            
+            switch response.result
+            {
+                case .success(let responseData):
+                    let json = JSON(responseData)
+
+                    // Handle any errors
+                    if json["error"].bool == true
+                    {
+                        print("ERROR: \(json["error_message"].stringValue)")
+
+                        return
+                    }
+                
+                    self.onConfirmPurchaseSuccess()
+                    return
+
+                case .failure(let error):
+                    print("Request failed with error: \(error)")
+                    
+                    self.onConfirmPurchaseFailed()
+                    return
+            }
+        }
+    }
+    
+    func onConfirmPurchaseSuccess()
+    {
+        print("ConfirmPurchase succeded.")
+        
+        attemptRetrieveUserKeys(token: UserDefaults.standard.string(forKey: "token")!)
+    }
+    
+    func onConfirmPurchaseFailed()
+    {
+        print("ConfirmPurchase failed!")
     }
     
     // MARK: - Actions

@@ -40,6 +40,7 @@ class Constants
         static let CALL_FOLLOW_POST = "FollowPost.php"
         static let CALL_UNFOLLOW_POST = "UnfollowPost.php"
         static let CALL_DEACTIVATE_USER = "DeactivateUser.php"
+        static let CALL_CONFIRM_PURCHASE = "ConfirmApplePurchase.php"
     }
     
     class Products
