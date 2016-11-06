@@ -30,8 +30,7 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
         let defaults = UserDefaults.standard
         attemptRetrieveUserKeys(token: defaults.string(forKey: "token")!)
         
-        //TODO Take off alpha when implemented functionality
-        buyMoreKeysButton.alpha = 0.3
+        buyMoreKeysButton.isHidden = true
 
         // Do any additional setup after loading the view.
         Answers.logContentView(
@@ -207,8 +206,13 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBAction func pressedPurchaseMoreKeys(_ sender: AnyObject) {
         print("Pressed On Purchase More Keys")
         
+        buyMoreKeysButton.isHidden = true
+
         if !isPurchasingAllowed() {
             // TODO show a dialog saying that purchasing is not available
+            let alert = UIAlertController(title: "Sorry!", message: "Purchasing is currently not avaliable for your device", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
             
             return
         }
@@ -229,6 +233,7 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
             
             productArray += [p]
         }
+        buyMoreKeysButton.isHidden = false
     }
 
     public func request(_ request: SKRequest, didFailWithError error: Error) {
@@ -243,12 +248,15 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
             switch (transaction.transactionState) {
                 case .purchased:
                     complete(transaction: transaction)
+                    buyMoreKeysButton.isHidden = false
                     break
                 case .failed:
                     fail(transaction: transaction)
+                    buyMoreKeysButton.isHidden = false
                     break
                 case .restored:
                     restore(transaction: transaction)
+                    buyMoreKeysButton.isHidden = false
                     break
                 case .deferred:
                     break
