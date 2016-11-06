@@ -59,6 +59,7 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
         if  (self.navigationController?.toolbar.isHidden)! {
             self.navigationController?.setToolbarHidden(false, animated: true)
         }
+        SKPaymentQueue.default().remove(self)
     }
     
     func attemptRetrieveUserKeys(token : String)

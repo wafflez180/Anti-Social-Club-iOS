@@ -1277,6 +1277,7 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                                     <userDefinedRuntimeAttribute type="number" keyPath="force">
                                         <real key="value" value="1"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="autohide" value="NO"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="pressedPurchaseMoreKeys:" destination="eBM-Sr-u7n" eventType="touchUpInside" id="lzX-n0-c3K"/>
