@@ -173,7 +173,7 @@ class LoginViewController: UIViewController
         fourthPage = OnboardingContentViewController(title: "FOLLOW", body: "Long press on posts to\nfollow and stay in the loop", image: UIImage(named: "fourthTutorialImage"), buttonText: "") { () -> Void in
             // do something here when users press the button, like ask for location services permissions, register for push notifications, connect to social media, or finish the onboarding process
         }
-        fifthPage = OnboardingContentViewController(title: "INVITE", body: "Go to the settings page to share\nthe few keys you have", image: UIImage(named: "fourthTutorialImage"), buttonText: "Enter") { () -> Void in
+        fifthPage = OnboardingContentViewController(title: "INVITE", body: "Go to the settings page to share\nthe few keys you have", image: UIImage(named: "fifthTutorialImage"), buttonText: "Enter") { () -> Void in
             self.dismiss(animated: true, completion: {
                 
             })
@@ -194,7 +194,7 @@ class LoginViewController: UIViewController
             onboardVC.titleLabel.textColor = UIColor.hexStringToUIColor(hex: "B2EBF2")
             onboardVC.titleLabel.font = UIFont.systemFont(ofSize: 40, weight: UIFontWeightRegular)
             onboardVC.bodyLabel.font = UIFont.systemFont(ofSize: 20, weight: UIFontWeightMedium)
-            onboardVC.actionButton.setTitleColor(UIColor.white, for: UIControlState.normal)
+            onboardVC.actionButton.setTitleColor(UIColor.hexStringToUIColor(hex: "0097A7"), for: UIControlState.normal)
         }
         
         onboardingVC?.pageControl.isHidden = false
