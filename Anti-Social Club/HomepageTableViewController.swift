@@ -41,6 +41,14 @@ class HomepageTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        // Check if it receieved a remote notification
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if appDelegate.notificationData != nil {
+            appDelegate.sendNotificationData(userInfo: appDelegate.notificationData!)
+        }
+    }
+    
     // MARK: - HomepageTableViewController
     
     func refresh(){

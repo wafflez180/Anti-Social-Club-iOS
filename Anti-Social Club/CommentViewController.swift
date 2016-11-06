@@ -20,6 +20,8 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
     var postId : Int?
     var retrievingComments: Bool = false
     var retrievingPost : Bool = false
+    var notificationPost : Post?
+    var scrollToNotificationComment : Bool?
 
     @IBOutlet weak var commentTableview: UITableView!
     @IBOutlet weak var composeCommentViewBotConstraint: NSLayoutConstraint!
@@ -29,6 +31,8 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     var postedNewComment : Bool = false
     var showingFullScreenImage : Bool = false
+    var fromNotification : Bool = false
+    var userToken : String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,17 +41,27 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
         commentTableview.dataSource = self
         composeCommentTextField.delegate = self
         
+        userToken = (self.navigationController as! CustomNavigationController).userToken!
+        
         composeCommentView.layer.borderWidth = 1
         composeCommentView.layer.borderColor = UIColor.hexStringToUIColor(hex: "C7C7CD").cgColor
         
         addNotifications()
 
         let defaults = UserDefaults.standard
-        postId = (postCell?.post?.id)!
+        if fromNotification == false {
+            postId = (postCell?.post?.id)!
+        }
         attemptRetrieveComments(offset: 0, token: defaults.string(forKey: "token")!, postId: postId!)
         
         self.commentTableview.refreshControl = UIRefreshControl()
         self.commentTableview.refreshControl?.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
+        
+        // Make sure the notification is deleted
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if appDelegate.notificationData != nil {
+            appDelegate.notificationData = nil
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -79,9 +93,9 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
     func attemptRetrievePost(postId: Int) {
         retrievingPost = true
         
-        print("Attempting to retrieve post \(postId) with token \(self.parentVC?.userToken!)")
+        print("Attempting to retrieve post \(postId) with token \(userToken!)")
         
-        let parameters : Parameters = ["token": (self.parentVC?.userToken)!, "offset": 0, "post_id": postId]
+        let parameters : Parameters = ["token": userToken!, "offset": 0, "post_id": postId]
         
         Alamofire.request(Constants.API.ADDRESS + Constants.API.CALL_RETRIEVE_POSTS, method: .post, parameters: parameters)
             .responseJSON()
@@ -189,12 +203,13 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
                             }
                         }
                         
-                        if self.postedNewComment {
+                        if self.postedNewComment || self.scrollToNotificationComment! {
                             let lastRowIndexPath = IndexPath(row: self.commentArray.count, section: 0)
                             DispatchQueue.main.async{
                                 self.commentTableview.scrollToRow(at: lastRowIndexPath, at: UITableViewScrollPosition.bottom, animated: true)
                             }
                             self.postedNewComment = false
+                            self.scrollToNotificationComment = false
                         }
                         
                         self.retrievingComments = false
@@ -309,7 +324,11 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! PostTableViewCell
             cell.commentViewCont = self
-            cell.configureCellWithPost(post: (postCell?.post!)!, section: indexPath.row)
+            if notificationPost == nil{
+                cell.configureCellWithPost(post: (postCell?.post!)!, section: indexPath.row)
+            }else{
+                cell.configureCellWithPost(post: notificationPost!, section: indexPath.row)
+            }
             postCell = cell
             return cell
         }else {

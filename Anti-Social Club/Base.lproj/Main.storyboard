@@ -350,7 +350,7 @@ for breaching the rules.</string>
                         <viewControllerLayoutGuide type="bottom" id="9u7-8v-4Eb"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="bNl-sp-IID">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="380" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="W83-e6-0Ws">
@@ -1645,11 +1645,12 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                     </toolbar>
                     <connections>
                         <segue destination="GTJ-cc-M7H" kind="relationship" relationship="rootViewController" id="Dlw-Sk-XAN"/>
+                        <segue destination="ncg-38-1rU" kind="show" identifier="showPostSegue" id="73f-4f-03y"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z5s-RE-5yO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-615" y="-640"/>
+            <point key="canvasLocation" x="-615" y="-728"/>
         </scene>
     </scenes>
     <resources>
@@ -1673,9 +1674,10 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
         <image name="StraightFaceSelected" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="zIT-1V-UjM"/>
         <segue reference="q9w-i3-shG"/>
         <segue reference="M7m-9T-xc7"/>
         <segue reference="M22-xo-Fcy"/>
-        <segue reference="zIT-1V-UjM"/>
+        <segue reference="73f-4f-03y"/>
     </inferredMetricsTieBreakers>
 </document>

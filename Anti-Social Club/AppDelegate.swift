@@ -12,12 +12,13 @@ import Crashlytics
 import Firebase
 import UserNotifications
 import SwiftyJSON
-import Whisper
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, FIRMessagingDelegate {
 
     var window: UIWindow?
+    var notificationData: [AnyHashable : Any]?
+    var inAppNotification : Bool?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
@@ -33,9 +34,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         FIRAnalyticsConfiguration.sharedInstance().setAnalyticsCollectionEnabled(false)
         registerForFCM(application: application);
         
-        let message = Message(title: "Fuck", backgroundColor: UIColor.red)
-        
         LOG("Initialized FCM!")
+        
+        inAppNotification = false
         
         return true
     }
@@ -56,6 +57,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        if notificationData != nil {
+            sendNotificationData(userInfo: notificationData!)
+        }
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
@@ -128,12 +132,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void)
     {
         LOG("application didReceiveRemoteNotification")
+        let dataJSON = JSON(userInfo)
+        
+        print(dataJSON)
+        
+        inAppNotification = false
+        notificationData = userInfo
+        
+        print("test")
     }
     
     // iOS 10+
     // Called when the app receives a data message
     func applicationReceivedRemoteMessage(_ remoteMessage: FIRMessagingRemoteMessage) {
         LOG("applicationReceivedRemoteMessage")
+    }
+    
+    func sendNotificationData(userInfo: [AnyHashable : Any]){
+        if (userInfo["aps"] == nil)
+        {
+            return;
+        }
+        
+        let apsJSON = JSON(userInfo["aps"]!)
+        if let messageBody = apsJSON["alert"].string {
+            // Display a local notification if the user is inside the app when the push notification arrives
+            let notificationJSON = JSON(userInfo)
+            let notificationJSONDictionary = notificationJSON.dictionary!
+            
+            print("got \(notificationJSONDictionary["notification_type"]!)")
+            
+            let notificationType = notificationJSON["notification_type"].string // comment or badge
+            let postId : Int = Int(notificationJSON["post_id"].string!)!
+            
+            let notificationInfoDict : NSDictionary = ["body" : messageBody, "post_id" : postId, "notification_type" : notificationType!]
+            
+            if inAppNotification!{
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "localNotification"), object: nil, userInfo: notificationInfoDict as? [AnyHashable : Any])
+            }else{
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "remoteNotification"), object: nil, userInfo: notificationInfoDict as? [AnyHashable : Any])
+            }
+        }
     }
     
 }
@@ -144,19 +183,9 @@ extension AppDelegate {
     // iOS 10+
     // Called when a notification message is delivered to the foreground app
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        let userInfo = notification.request.content.userInfo
-        
-        if (userInfo["aps"] == nil)
-        {
-            return;
-        }
         LOG("Got foreground notification!")
-        
-        let apsJSON = JSON(userInfo["aps"]!)
-        if let messageBody = apsJSON["alert"].string {
-            // Display a local notification if the user is inside the app when the push notification arrives
-            print("GOT MESSAGE FROM NOTIFICATION: \(messageBody)")
-        }
+        inAppNotification = true
+        sendNotificationData(userInfo: self.notificationData!)
     }
 }
 
