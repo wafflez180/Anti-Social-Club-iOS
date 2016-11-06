@@ -1258,7 +1258,7 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vx0-aZ-Q8O">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vx0-aZ-Q8O" customClass="SpringButton" customModule="Spring">
                                 <rect key="frame" x="15" y="558" width="345" height="50"/>
                                 <color key="backgroundColor" red="0.0" green="0.73673111200332642" blue="0.83815163373947144" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -1271,6 +1271,11 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="animation" value="fadeInUp"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="autostart" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="force">
+                                        <real key="value" value="1"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -1290,7 +1295,7 @@ YWggYmxhaCBibGFoIGJsYWggYmxhaA
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="buyMoreKeysButton" destination="Vx0-aZ-Q8O" id="rhD-pB-S8d"/>
+                        <outlet property="buyMoreKeysButton" destination="Vx0-aZ-Q8O" id="xmM-7Z-HDd"/>
                         <outlet property="keysTableView" destination="llK-vR-XCu" id="08b-Jm-OcI"/>
                     </connections>
                 </viewController>

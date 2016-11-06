@@ -11,15 +11,16 @@ import Alamofire
 import SwiftyJSON
 import Crashlytics
 import StoreKit
+import Spring
 
 class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SKProductsRequestDelegate, SKPaymentTransactionObserver {
-
+    
     var keyArray : [AccessKey] = []
     var recipientTextField: UITextField!
     var productArray : [SKProduct] = []
-
+    
     @IBOutlet weak var keysTableView: UITableView!
-    @IBOutlet weak var buyMoreKeysButton: UIButton!
+    @IBOutlet weak var buyMoreKeysButton: SpringButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +32,7 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
         attemptRetrieveUserKeys(token: defaults.string(forKey: "token")!)
         
         buyMoreKeysButton.isHidden = true
-
+        
         // Do any additional setup after loading the view.
         Answers.logContentView(
             withName: "Key View",
@@ -42,7 +43,7 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
         SKPaymentQueue.default().add(self)
         requestProducts()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -112,7 +113,7 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
                     case .failure(let error):
                         print("Request failed with error: \(error)")
                         (self.navigationController as! CustomNavigationController).networkError()
-
+                        
                         return
                     }
         }
@@ -157,7 +158,22 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
                     }
         }
     }
-
+    
+    func animatePurchaseButton(hidden: Bool){
+        if hidden == false{
+            buyMoreKeysButton.isHidden = false
+            self.buyMoreKeysButton.animate()
+        }else{
+            self.buyMoreKeysButton.animate()
+            buyMoreKeysButton.alpha = 1.0
+            UIView.animate(withDuration: 0.3, animations: {
+                self.buyMoreKeysButton.alpha = 0.0
+            }, completion: { error in
+                self.buyMoreKeysButton.isHidden = true
+            })
+        }
+    }
+    
     func requestProducts() {
         let productIds : Set<String> = [Constants.Products.PRODUCT_ACCESS_KEY];
         let productsRequest : SKProductsRequest = SKProductsRequest(productIdentifiers: productIds);
@@ -176,7 +192,7 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
         LOG("Purchase Success \(productId)")
         
         if let receiptURL = Bundle.main.appStoreReceiptURL,
-           let receipt = NSData(contentsOf: receiptURL) {
+            let receipt = NSData(contentsOf: receiptURL) {
             attemptConfirmPurchase(productId: productId, receipt: receipt, transaction: transaction)
         }
     }
@@ -204,34 +220,34 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
         print("Attempting to confirm purchase for \(productId)")
         
         let parameters = ["token" : UserDefaults.standard.string(forKey: "token")!, "product_id" : productId, "app_receipt" : receipt.base64EncodedString()]
-    
+        
         Alamofire.request(Constants.API.ADDRESS + Constants.API.CALL_CONFIRM_PURCHASE, method: .post, parameters: parameters)
-        .responseJSON()
-        {
-            response in
-            
-            switch response.result
-            {
-                case .success(let responseData):
-                    let json = JSON(responseData)
-
-                    // Handle any errors
-                    if json["error"].bool == true
+            .responseJSON()
+                {
+                    response in
+                    
+                    switch response.result
                     {
-                        print("ERROR: \(json["error_message"].stringValue)")
-
+                    case .success(let responseData):
+                        let json = JSON(responseData)
+                        
+                        // Handle any errors
+                        if json["error"].bool == true
+                        {
+                            print("ERROR: \(json["error_message"].stringValue)")
+                            
+                            return
+                        }
+                        
+                        self.onConfirmPurchaseSuccess(transaction: transaction)
+                        return
+                        
+                    case .failure(let error):
+                        print("Request failed with error: \(error)")
+                        
+                        self.onConfirmPurchaseFailed()
                         return
                     }
-                
-                    self.onConfirmPurchaseSuccess(transaction: transaction)
-                    return
-
-                case .failure(let error):
-                    print("Request failed with error: \(error)")
-                    
-                    self.onConfirmPurchaseFailed()
-                    return
-            }
         }
     }
     
@@ -254,8 +270,8 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBAction func pressedPurchaseMoreKeys(_ sender: AnyObject) {
         print("Pressed On Purchase More Keys")
         
-        buyMoreKeysButton.isHidden = true
-
+        animatePurchaseButton(hidden: true)
+        
         if !isPurchasingAllowed() {
             // TODO show a dialog saying that purchasing is not available
             let alert = UIAlertController(title: "Sorry!", message: "Purchasing is currently not avaliable for your device", preferredStyle: UIAlertControllerStyle.alert)
@@ -264,70 +280,70 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
             
             return
         }
-
+        
         if let accessKeyProduct = getProduct(productId: Constants.Products.PRODUCT_ACCESS_KEY) {
             purchaseProduct(accessKeyProduct)
         }
     }
     
     // MARK: - SKProductsRequestDelegate
-
+    
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
         LOG("productsRequest didReceiveResponse")
-
+        
         let products = response.products
         for p in products {
             LOG("Got product: \(p.productIdentifier) \(p.localizedTitle) \(p.localizedDescription) \(p.price.floatValue)")
             
             productArray += [p]
         }
-        buyMoreKeysButton.isHidden = false
+        animatePurchaseButton(hidden: false)
     }
-
+    
     public func request(_ request: SKRequest, didFailWithError error: Error) {
         LOG("Failed to load list of products!")
         LOG("Error: \(error.localizedDescription)")
     }
-
+    
     // MARK: - SKPaymentTransactionObserver
-
+    
     public func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         for transaction in transactions {
             switch (transaction.transactionState) {
-                case .purchased:
-                    complete(transaction: transaction)
-                    buyMoreKeysButton.isHidden = false
-                    break
-                case .failed:
-                    fail(transaction: transaction)
-                    buyMoreKeysButton.isHidden = false
-                    break
-                case .restored:
-                    restore(transaction: transaction)
-                    buyMoreKeysButton.isHidden = false
-                    break
-                case .deferred:
-                    break
-                case .purchasing:
-                    break
+            case .purchased:
+                complete(transaction: transaction)
+                animatePurchaseButton(hidden: false)
+                break
+            case .failed:
+                fail(transaction: transaction)
+                animatePurchaseButton(hidden: false)
+                break
+            case .restored:
+                restore(transaction: transaction)
+                animatePurchaseButton(hidden: false)
+                break
+            case .deferred:
+                break
+            case .purchasing:
+                break
             }
         }
     }
-
+    
     private func complete(transaction: SKPaymentTransaction) {
         print("complete...")
         
         onPurchaseSuccess(productId: transaction.payment.productIdentifier, transaction: transaction)
     }
-
+    
     private func restore(transaction: SKPaymentTransaction) {
         guard let productIdentifier = transaction.original?.payment.productIdentifier else { return }
-
+        
         print("restore... \(productIdentifier)")
         
         onPurchaseSuccess(productId: productIdentifier, transaction: transaction)
     }
-
+    
     private func fail(transaction: SKPaymentTransaction) {
         print("fail...")
         
@@ -336,7 +352,7 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
                 print("Transaction Error: \(transaction.error?.localizedDescription)")
             }
         }
-
+        
         onPurchaseFailed(productId: transaction.payment.productIdentifier)
     }
     
@@ -400,20 +416,20 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
         print("Cancelled")
     }
     
-   /* -(void)handleKeyboardWillShow:(NSNotification *)sender{
-    CGSize keyboardSize = [sender.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
-    
-    self.bottomBar.transform = CGAffineTransformMakeTranslation(0, -keyboardSize.height);
-*/
+    /* -(void)handleKeyboardWillShow:(NSNotification *)sender{
+     CGSize keyboardSize = [sender.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+     
+     self.bottomBar.transform = CGAffineTransformMakeTranslation(0, -keyboardSize.height);
+     */
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
