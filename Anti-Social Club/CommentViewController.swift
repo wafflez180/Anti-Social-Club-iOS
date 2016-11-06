@@ -203,7 +203,7 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
                             }
                         }
                         
-                        if self.postedNewComment || self.scrollToNotificationComment! {
+                        if self.postedNewComment || (self.scrollToNotificationComment != nil && self.scrollToNotificationComment!) {
                             let lastRowIndexPath = IndexPath(row: self.commentArray.count, section: 0)
                             DispatchQueue.main.async{
                                 self.commentTableview.scrollToRow(at: lastRowIndexPath, at: UITableViewScrollPosition.bottom, animated: true)

@@ -44,6 +44,18 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        if !(self.navigationController?.toolbar.isHidden)! {
+            self.navigationController?.setToolbarHidden(true, animated: true)
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        if  (self.navigationController?.toolbar.isHidden)! {
+            self.navigationController?.setToolbarHidden(false, animated: true)
+        }
+    }
+    
     func attemptRetrieveUserKeys(token : String)
     {
         print("Attempting to retrieve keys from token: \(token)")

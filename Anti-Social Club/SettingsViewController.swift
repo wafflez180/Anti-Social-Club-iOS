@@ -22,8 +22,8 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var rankLabel: UILabel!
     @IBOutlet weak var dateJoinedLabel: UILabel!
     
-    var segueingToShareKeyVC : Bool = false
     var segueingToDeactivate : Bool = false
+    var userToken : String?
     
     // MARK - SettingsViewController
     
@@ -31,17 +31,18 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
         
         retrieveUserInfo()
+        
+        userToken = (self.navigationController as! CustomNavigationController).userToken
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        segueingToShareKeyVC = false
         if !(self.navigationController?.toolbar.isHidden)! {
             self.navigationController?.setToolbarHidden(true, animated: true)
         }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        if  !segueingToDeactivate && (self.navigationController?.toolbar.isHidden)! && !segueingToShareKeyVC {
+        if  !segueingToDeactivate && (self.navigationController?.toolbar.isHidden)! {
             self.navigationController?.setToolbarHidden(false, animated: true)
         }
     }
@@ -138,6 +139,7 @@ class SettingsViewController: UIViewController {
             print("User Deactivated Account")
             self.segueingToDeactivate = true
             Answers.logCustomEvent(withName: "Deactivate", customAttributes: [:])
+            self.attemptToDeactivate()
             let defaults = UserDefaults.standard
             defaults.removeObject(forKey: "token")
             self.navigationController?.popViewController(animated: false)
@@ -151,6 +153,37 @@ class SettingsViewController: UIViewController {
         present(deactivateAlert, animated: true, completion: nil)
     }
     
+    func attemptToDeactivate()
+    {
+        print("Attempting to deactivate user with token: \(userToken!)")
+        
+        let parameters = ["token" : userToken!]
+        
+        Alamofire.request(Constants.API.ADDRESS + Constants.API.CALL_DEACTIVATE_USER, method: .post, parameters: parameters)
+            .responseJSON()
+                {
+                    response in
+                    
+                    switch response.result
+                    {
+                    case .success(let responseData):
+                        let json = JSON(responseData)
+                        
+                        // Handle any errors
+                        if json["error"].bool == true
+                        {
+                            print("ERROR: \(json["error_message"].stringValue)")
+                            
+                            return
+                        }
+                        
+                    case .failure(let error):
+                        print("Request failed with error: \(error)")
+                        
+                        return
+                    }
+        }
+    }
     
     // MARK: - Navigation
 
@@ -158,11 +191,11 @@ class SettingsViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        if (segue.identifier == "shareKeySegue")
+        /*if (segue.identifier == "shareKeySegue")
         {
             let destination = segue.destination as! ShareKeysViewController
             segueingToShareKeyVC = true
-        }
+        }*/
     }
     
 

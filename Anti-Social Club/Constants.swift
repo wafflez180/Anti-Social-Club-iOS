@@ -39,5 +39,6 @@ class Constants
         static let CALL_REGISTER_FCM_TOKEN = "RegisterFCMToken.php"
         static let CALL_FOLLOW_POST = "FollowPost.php"
         static let CALL_UNFOLLOW_POST = "UnfollowPost.php"
+        static let CALL_DEACTIVATE_USER = "DeactivateUser.php"
     }
 }
