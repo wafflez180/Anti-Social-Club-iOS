@@ -172,6 +172,11 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func onPurchaseSuccess(productId: String) {
         LOG("Purchase Success \(productId)")
+        
+        if let receiptURL = Bundle.main.appStoreReceiptURL,
+           let receipt = NSData(contentsOf: receiptURL) {
+            attemptConfirmPurchase(productId: productId, receipt: receipt)
+        }
     }
     
     func onPurchaseFailed(productId: String) {
@@ -192,6 +197,54 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
         return SKPaymentQueue.canMakePayments()
     }
     
+    func attemptConfirmPurchase(productId: String, receipt: NSData)
+    {
+        print("Attempting to confirm purchase for \(productId)")
+        
+        let parameters = ["token" : UserDefaults.standard.string(forKey: "token"), "product_id" : productId, "app_receipt" : receipt.base64EncodedString()]
+    
+        Alamofire.request(Constants.API.ADDRESS + Constants.API.CALL_CONFIRM_PURCHASE, method: .post, parameters: parameters)
+        .responseJSON()
+        {
+            response in
+            
+            switch response.result
+            {
+                case .success(let responseData):
+                    let json = JSON(responseData)
+
+                    // Handle any errors
+                    if json["error"].bool == true
+                    {
+                        print("ERROR: \(json["error_message"].stringValue)")
+
+                        return
+                    }
+                
+                    self.onConfirmPurchaseSuccess()
+                    return
+
+                case .failure(let error):
+                    print("Request failed with error: \(error)")
+                    
+                    self.onConfirmPurchaseFailed()
+                    return
+            }
+        }
+    }
+    
+    func onConfirmPurchaseSuccess()
+    {
+        print("ConfirmPurchase succeded.")
+        
+        attemptRetrieveUserKeys(token: UserDefaults.standard.string(forKey: "token")!)
+    }
+    
+    func onConfirmPurchaseFailed()
+    {
+        print("ConfirmPurchase failed!")
+    }
+    
     // MARK: - Actions
     
     @IBAction func pressedPurchaseMoreKeys(_ sender: AnyObject) {
@@ -207,7 +260,7 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
             
             return
         }
-        
+
         if let accessKeyProduct = getProduct(productId: Constants.Products.PRODUCT_ACCESS_KEY) {
             purchaseProduct(accessKeyProduct)
         }
