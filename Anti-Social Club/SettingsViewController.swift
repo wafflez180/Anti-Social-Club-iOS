@@ -13,7 +13,7 @@ import Crashlytics
 import FirebaseMessaging
 import Firebase
 
-class SettingsViewController: UIViewController {
+class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var funnyBadgeLabel: UILabel!
     @IBOutlet weak var notamusedBadgeLabel: UILabel!
@@ -27,13 +27,21 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var enableNotificationsLabel: UILabel!
     @IBOutlet weak var enableNotificationSwitch: UISwitch!
     
+    @IBOutlet weak var miscellaneousTableView: UITableView!
+    
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     var segueingToDeactivate : Bool = false
     var userToken : String?
-    
+    var recipientTextField: UITextField!
+
     // MARK - SettingsViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        miscellaneousTableView.delegate = self
+        miscellaneousTableView.dataSource = self
         
         retrieveUserInfo()
         
@@ -47,6 +55,10 @@ class SettingsViewController: UIViewController {
             enableNotificationSwitch.isOn = true
             enableNotificationsLabel.isHighlighted = true
         }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.size.height + (self.navigationController?.navigationBar.frame.height)! + 38)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -274,6 +286,66 @@ class SettingsViewController: UIViewController {
                         return
                     }
         }
+    }
+    
+    func configurationTextField(textField: UITextField!)
+    {
+        print("Generating TextField")
+        textField.placeholder = "message"
+        recipientTextField = textField
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
+        cell?.isSelected = false
+        
+        if indexPath.row == 0 {
+            //"Privacy Policy"
+            UIApplication.shared.openURL(NSURL(string: "https://ub-anti-social.club/privacypolicy")! as URL)
+        } else if indexPath.row == 1 {
+            //"Terms and Conditions"
+            UIApplication.shared.openURL(NSURL(string: "https://ub-anti-social.club/termsandconditions")! as URL)
+        } else if indexPath.row == 2 {
+            //"Contact Us"
+            let alert = UIAlertController(title: "Contact Us", message: "Please enter your message for us.", preferredStyle: .alert)
+            
+            alert.addTextField(configurationHandler: configurationTextField)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+            alert.addAction(UIAlertAction(title: "Send", style: .default, handler:{ (UIAlertAction) in
+                print("User sent message: \(self.recipientTextField.text!) to us")
+                let defaults = UserDefaults.standard
+                //self.attemptSendKey(token: defaults.string(forKey: "token")!, key: cell.accessKey!, recipientEmail: self.recipientTextField.text!)
+            }))
+            self.present(alert, animated: true, completion: {
+                print("completion block")
+            })
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        
+        if indexPath.row == 0 {
+            cell.textLabel?.text = "Privacy Policy"
+        } else if indexPath.row == 1 {
+            cell.textLabel?.text = "Terms and Conditions"
+        } else if indexPath.row == 2 {
+            cell.textLabel?.text = "Contact Us"
+        }
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
     }
     
     // MARK: - Navigation
