@@ -311,7 +311,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             UIApplication.shared.openURL(NSURL(string: "https://ub-anti-social.club/tos")! as URL)
         } else if indexPath.row == 2 {
             //"Contact Us"
-            let alert = UIAlertController(title: "Contact Us", message: "Please enter your message for us.", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Contact Us", message: "Having an issue with the app, or just have some feedback to give us? Send us a message and we'll get back to you!", preferredStyle: .alert)
             
             alert.addTextField(configurationHandler: configurationTextField)
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
@@ -347,7 +347,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                             return
                         }
                         
-                        let alert = UIAlertController(title: "Success", message: "Your message has been sent to us!", preferredStyle: UIAlertControllerStyle.alert)
+                        let alert = UIAlertController(title: "Success", message: "We've received your message, and will get back to you shortly.", preferredStyle: UIAlertControllerStyle.alert)
                         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
                         self.present(alert, animated: true, completion: nil)
                         
@@ -375,7 +375,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         if indexPath.row == 0 {
             cell.textLabel?.text = "Privacy Policy"
         } else if indexPath.row == 1 {
-            cell.textLabel?.text = "Terms and Conditions"
+            cell.textLabel?.text = "Terms of Service"
         } else if indexPath.row == 2 {
             cell.textLabel?.text = "Contact Us"
         }

@@ -324,7 +324,7 @@ class PostTableViewCell: UITableViewCell {
                             return
                         }
                         
-                        let alert = UIAlertController(title: "Success", message: "You have muted the user.", preferredStyle: UIAlertControllerStyle.alert)
+                        let alert = UIAlertController(title: "Success", message: "You have muted this user.", preferredStyle: UIAlertControllerStyle.alert)
                         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
                         self.getParentVC().present(alert, animated: true, completion: nil)
                         
