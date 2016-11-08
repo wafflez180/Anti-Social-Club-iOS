@@ -195,6 +195,7 @@ class PostTableViewCell: UITableViewCell {
         if (post?.isPinned == false || rankId! == Constants.Ranks.ADMIN){
             let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             
+            // Every User's Tools
             if isFollowingPost! {
                 let unfollowAction = UIAlertAction(title: "Unfollow", style: .default, handler: { (_) in
                     self.attemptUnfollowPost(token: self.userToken, postId: (self.post?.id)!)
@@ -206,6 +207,11 @@ class PostTableViewCell: UITableViewCell {
                 })
                 alertController.addAction(followAction)
             }
+            
+            let muteUserAction = UIAlertAction(title: "Mute User", style: .default, handler: { (_) in
+                self.attemptMuteUser(token: self.userToken, userIdToMute : (self.post?.posterId)!)
+            })
+            alertController.addAction(muteUserAction)
             
             // Moderator Tools
             if rankId! >= Constants.Ranks.MODERATOR {
@@ -294,6 +300,44 @@ class PostTableViewCell: UITableViewCell {
             commentViewCont?.refresh(sender: self)
         }else{
             parentVC.refresh()
+        }
+    }
+    
+    func attemptMuteUser(token : String, userIdToMute : Int){
+        let parameters = ["token" : token, "target_id" : userIdToMute] as [String : Any]
+        
+        Alamofire.request(Constants.API.ADDRESS + Constants.API.CALL_MUTE_USER, method: .post, parameters: parameters)
+            .responseJSON()
+                {
+                    response in
+                    
+                    switch response.result
+                    {
+                    case .success(let responseData):
+                        let json = JSON(responseData)
+                        
+                        // Handle any errors
+                        if json["error"].bool == true
+                        {
+                            print("ERROR: \(json["error_message"].stringValue)")
+                            
+                            return
+                        }
+                        
+                        let alert = UIAlertController(title: "Success", message: "You have muted the user.", preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                        self.getParentVC().present(alert, animated: true, completion: nil)
+                        
+                        print("User muted user with ID: \(userIdToMute)")
+                        
+                        self.refreshParentVC()
+                        
+                    case .failure(let error):
+                        (self.getParentVC().navigationController as! CustomNavigationController).networkError()
+                        print("Request failed with error: \(error)")
+                        
+                        return
+                    }
         }
     }
     
@@ -448,7 +492,7 @@ class PostTableViewCell: UITableViewCell {
                         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
                         self.getParentVC().present(alert, animated: true, completion: nil)
                         
-                        print("Deleted post \(postId)!")
+                        print("Deleted post \(postId)")
                         
                         self.refreshParentVC()
                         
@@ -487,7 +531,7 @@ class PostTableViewCell: UITableViewCell {
                             self.configureTypeIndicator()
                         }
                         
-                        print("Followed post \(postId)!")
+                        print("Followed post \(postId)")
                         
                     case .failure(let error):
                         (self.getParentVC().navigationController as! CustomNavigationController).networkError()
@@ -523,7 +567,7 @@ class PostTableViewCell: UITableViewCell {
                             self.configureTypeIndicator()
                         }
                         
-                        print("Unfollowed post \(postId)!")
+                        print("Unfollowed post \(postId)")
                         
                     case .failure(let error):
                         (self.getParentVC().navigationController as! CustomNavigationController).networkError()

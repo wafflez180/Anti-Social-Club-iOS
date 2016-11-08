@@ -45,6 +45,8 @@ class Constants
         static let CALL_PIN_POST = "PinPost.php"
         static let CALL_UNPIN_POST = "UnpinPost.php"
         static let CALL_DELETE_POST = "DeletePost.php"
+        static let CALL_CONTACT_US_REQUEST = "SendContactRequest.php"
+        static let CALL_MUTE_USER = "MuteUser.php"
     }
     
     class Products

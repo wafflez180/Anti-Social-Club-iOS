@@ -308,7 +308,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             UIApplication.shared.openURL(NSURL(string: "https://ub-anti-social.club/privacypolicy")! as URL)
         } else if indexPath.row == 1 {
             //"Terms and Conditions"
-            UIApplication.shared.openURL(NSURL(string: "https://ub-anti-social.club/termsandconditions")! as URL)
+            UIApplication.shared.openURL(NSURL(string: "https://ub-anti-social.club/tos")! as URL)
         } else if indexPath.row == 2 {
             //"Contact Us"
             let alert = UIAlertController(title: "Contact Us", message: "Please enter your message for us.", preferredStyle: .alert)
@@ -318,13 +318,52 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             alert.addAction(UIAlertAction(title: "Send", style: .default, handler:{ (UIAlertAction) in
                 print("User sent message: \(self.recipientTextField.text!) to us")
                 let defaults = UserDefaults.standard
-                //self.attemptSendKey(token: defaults.string(forKey: "token")!, key: cell.accessKey!, recipientEmail: self.recipientTextField.text!)
+                self.attemptContactUs(token: defaults.string(forKey: "token")!, message: self.recipientTextField.text!)
             }))
             self.present(alert, animated: true, completion: {
                 print("completion block")
             })
         }
     }
+    
+    func attemptContactUs(token : String, message : String){
+        let parameters = ["token" : token, "message" : message]
+        
+        Alamofire.request(Constants.API.ADDRESS + Constants.API.CALL_CONTACT_US_REQUEST, method: .post, parameters: parameters)
+            .responseJSON()
+                {
+                    response in
+                    
+                    switch response.result
+                    {
+                    case .success(let responseData):
+                        let json = JSON(responseData)
+                        
+                        // Handle any errors
+                        if json["error"].bool == true
+                        {
+                            print("ERROR: \(json["error_message"].stringValue)")
+                            
+                            return
+                        }
+                        
+                        let alert = UIAlertController(title: "Success", message: "Your message has been sent to us!", preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                        
+                        print("Sent message to us: \(message)")
+                        
+                        
+                    case .failure(let error):
+                        (self.navigationController as! CustomNavigationController).networkError()
+                        print("Request failed with error: \(error)")
+                        
+                        return
+                    }
+        }
+    }
+
+    //MARK - TableViewDelegate
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
