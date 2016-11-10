@@ -51,7 +51,7 @@ class Constants
     
     class Products
     {
-        static let PRODUCT_ACCESS_KEY = "access_key"
+        static let PRODUCT_ACCESS_KEY = "club.ub_anti_social.key"
     }
     
     class Ranks
