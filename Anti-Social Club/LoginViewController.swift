@@ -148,17 +148,26 @@ class LoginViewController: UIViewController
             connectToFCM()
         }
         
-        let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
-        if launchedBefore  {
-            print("Not first launch.")
-            self.performSegue(withIdentifier: "loginSuccessSegue", sender: nil)
+        let acceptedTos = UserDefaults.standard.bool(forKey: "acceptedTos")
+        if acceptedTos == false {
+            print("Presenting the terms of service")
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let controller = storyboard.instantiateViewController(withIdentifier: "ToSViewController") as! ToSViewController
+            controller.loginParentVC = self
+            present(controller, animated: true, completion: {})
         } else {
-            print("First launch, setting UserDefault.")
-            UserDefaults.standard.set(true, forKey: "launchedBefore")
-            launchTutorial()
+            let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
+            if launchedBefore  {
+                print("Not first launch.")
+                self.performSegue(withIdentifier: "loginSuccessSegue", sender: nil)
+            } else {
+                print("First launch, setting UserDefault.")
+                UserDefaults.standard.set(true, forKey: "launchedBefore")
+                launchTutorial()
+            }
         }
     }
-        
+    
     func launchTutorial(){
         firstPage = OnboardingContentViewController(title: "POST", body: "Post images and/or text with\nfull anonymity", image: UIImage(named: "firstTutorialImage"), buttonText: "") { () -> Void in
             // do something here when users press the button, like ask for location services permissions, register for push notifications, connect to social media, or finish the onboarding process

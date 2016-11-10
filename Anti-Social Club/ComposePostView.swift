@@ -268,6 +268,7 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
             activityView.startAnimating()
             sendPostButton.superview?.addSubview(activityView)
             sendPostButton.isHidden = true
+            addPhotoButton.isEnabled = false
         
             Alamofire.upload(
             multipartFormData:
@@ -290,9 +291,9 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
             {
                 encodingResult in
                 
-                activityView.stopAnimating()
-                activityView.removeFromSuperview()
-                self.sendPostButton.isHidden = false
+                //activityView.stopAnimating()
+                //activityView.removeFromSuperview()
+                //self.sendPostButton.isHidden = false
                 
                 switch encodingResult
                 {
@@ -310,6 +311,9 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
                                     if json["error"].bool == true
                                     {
                                         print("ERROR: \(json["error_message"].stringValue)")
+                                        activityView.stopAnimating()
+                                        activityView.removeFromSuperview()
+                                        self.sendPostButton.isHidden = false
                                         return
                                     }else if json["silenced"].bool == true{
                                         let alert = UIAlertController(title: "Silenced", message: "You are silenced, and are not allowed to post or comment.", preferredStyle: UIAlertControllerStyle.alert)
@@ -319,6 +323,7 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
                                         self.sendPopupAnimation()
                                         Answers.logCustomEvent(withName: "Post", customAttributes: [:])
                                     }
+                                    
                                     break
                                 
                                 case .failure(let error):
