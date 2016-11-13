@@ -41,7 +41,7 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
         fusuma.delegate = self
         fusuma.hasVideo = false // If you want to let the users allow to use video.
         fusumaTintColor = UIColor.getASCMediumColor()
-        fusumaCropImage = true
+        fusumaCropImage = false
         //fusumaBackgroundColor = UIColor.getASCMediumColor()
         applyPlainShadow(view: self)
         createGaussianBlur()
@@ -269,6 +269,7 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
             sendPostButton.superview?.addSubview(activityView)
             sendPostButton.isHidden = true
             addPhotoButton.isEnabled = false
+            self.endEditing(true)
         
             Alamofire.upload(
             multipartFormData:
@@ -474,7 +475,7 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
     func fusumaImageSelected(_ image: UIImage)
     {
         print("Image selected")
-        postPhotoImageView.contentMode = .scaleAspectFill
+        resetImageView(animate: false)
         postPhotoImageView.image = cropTo16by9Center(image: image)
         imageToUpload = image
         presentPhotoButtonContainer(animate: true)
@@ -487,7 +488,6 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
     // Return the image but called after is dismissed.
     func fusumaDismissedWithImage(_ image: UIImage)
     {
-        
         print("Called just after FusumaViewController is dismissed.")
     }
     
