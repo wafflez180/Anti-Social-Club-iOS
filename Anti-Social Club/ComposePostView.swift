@@ -12,6 +12,7 @@ import Fusuma
 import Alamofire
 import SwiftyJSON
 import Crashlytics
+import Whisper
 
 class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, UITextViewDelegate {
     
@@ -323,7 +324,9 @@ class ComposePostView: UIView, FusumaDelegate, UINavigationControllerDelegate, U
                                     }else{
                                         self.sendPopupAnimation()
                                         Answers.logCustomEvent(withName: "Post", customAttributes: [:])
+                                        self.parentVC.refresh()
                                     }
+                                    
                                     
                                     break
                                 

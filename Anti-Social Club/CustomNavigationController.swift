@@ -125,6 +125,12 @@ class CustomNavigationController: UINavigationController {
         
         let parameters : Parameters = ["token": self.userToken!, "offset": 0, "post_id": postId]
         
+        let activityView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+        activityView.center = (self.visibleViewController?.view.center)!
+        activityView.frame = (self.visibleViewController?.view.frame)!
+        activityView.startAnimating()
+        self.visibleViewController?.view.addSubview(activityView)
+        
         Alamofire.request(Constants.API.ADDRESS + Constants.API.CALL_RETRIEVE_POSTS, method: .post, parameters: parameters)
             .responseJSON()
                 {
@@ -150,6 +156,9 @@ class CustomNavigationController: UINavigationController {
                                 if let newPost : Post = Post(json: postJSON)
                                 {
                                     //Should be only 1 element
+                                    
+                                    activityView.stopAnimating()
+                                    activityView.removeFromSuperview()
                                     
                                     self.tempNotificationPost = newPost
                                     
