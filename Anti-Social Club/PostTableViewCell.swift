@@ -320,7 +320,9 @@ class PostTableViewCell: UITableViewCell {
                         if json["error"].bool == true
                         {
                             print("ERROR: \(json["error_message"].stringValue)")
-                            
+                            let alert = UIAlertController(title: "Eror", message: json["error_message"].stringValue, preferredStyle: UIAlertControllerStyle.alert)
+                            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+
                             return
                         }
                         
@@ -358,7 +360,9 @@ class PostTableViewCell: UITableViewCell {
                         if json["error"].bool == true
                         {
                             print("ERROR: \(json["error_message"].stringValue)")
-                            
+                            let alert = UIAlertController(title: "Eror", message: json["error_message"].stringValue, preferredStyle: UIAlertControllerStyle.alert)
+                            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+
                             return
                         }
                         
@@ -408,7 +412,9 @@ class PostTableViewCell: UITableViewCell {
                         if json["error"].bool == true
                         {
                             print("ERROR: \(json["error_message"].stringValue)")
-                            
+                            let alert = UIAlertController(title: "Eror", message: json["error_message"].stringValue, preferredStyle: UIAlertControllerStyle.alert)
+                            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+
                             return
                         }
                         
@@ -446,7 +452,9 @@ class PostTableViewCell: UITableViewCell {
                         if json["error"].bool == true
                         {
                             print("ERROR: \(json["error_message"].stringValue)")
-                            
+                            let alert = UIAlertController(title: "Eror", message: json["error_message"].stringValue, preferredStyle: UIAlertControllerStyle.alert)
+                            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+
                             return
                         }
                         
@@ -484,7 +492,9 @@ class PostTableViewCell: UITableViewCell {
                         if json["error"].bool == true
                         {
                             print("ERROR: \(json["error_message"].stringValue)")
-                            
+                            let alert = UIAlertController(title: "Eror", message: json["error_message"].stringValue, preferredStyle: UIAlertControllerStyle.alert)
+                            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+
                             return
                         }
                         
@@ -523,7 +533,9 @@ class PostTableViewCell: UITableViewCell {
                         if json["error"].bool == true
                         {
                             print("ERROR: \(json["error_message"].stringValue)")
-                            
+                            let alert = UIAlertController(title: "Eror", message: json["error_message"].stringValue, preferredStyle: UIAlertControllerStyle.alert)
+                            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+
                             return
                         }else{
                             self.isFollowingPost = true
@@ -559,7 +571,9 @@ class PostTableViewCell: UITableViewCell {
                         // Handle any errors
                         if json["error"].bool == true {
                             print("ERROR: \(json["error_message"].stringValue)")
-                            
+                            let alert = UIAlertController(title: "Eror", message: json["error_message"].stringValue, preferredStyle: UIAlertControllerStyle.alert)
+                            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+
                             return
                         }else{
                             self.isFollowingPost = false
