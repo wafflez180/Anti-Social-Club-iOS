@@ -18,6 +18,7 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
     var keyArray : [AccessKey] = []
     var recipientTextField: UITextField!
     var productArray : [SKProduct] = []
+    var activityView : UIActivityIndicatorView?
     
     @IBOutlet weak var keysTableView: UITableView!
     @IBOutlet weak var buyMoreKeysButton: SpringButton!
@@ -68,19 +69,19 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
         
         let parameters = ["token" : token]
         
-        let activityView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
-        activityView.center=self.view.center;
-        activityView.frame = self.view.frame
-        activityView.startAnimating()
-        self.view.addSubview(activityView)
+        activityView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+        activityView!.center=self.view.center;
+        activityView!.frame = self.view.frame
+        activityView!.startAnimating()
+        self.view.addSubview(activityView!)
         
         Alamofire.request(Constants.API.ADDRESS + Constants.API.CALL_RETRIEVE_USER_KEYS, method: .post, parameters: parameters)
             .responseJSON()
                 {
                     response in
                     
-                    activityView.stopAnimating()
-                    activityView.removeFromSuperview()
+                    self.activityView?.stopAnimating()
+                    self.activityView?.removeFromSuperview()
                     
                     self.keyArray.removeAll()
                     
@@ -184,7 +185,10 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func purchaseProduct(_ product: SKProduct) {
         print ("Initiating purchase of \(product.productIdentifier)")
-        
+        let activityView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+        activityView.center=self.view.center
+        activityView.frame = self.view.frame
+        activityView.startAnimating()
         let payment = SKPayment(product: product)
         SKPaymentQueue.default().add(payment)
     }
@@ -314,18 +318,22 @@ class ShareKeysViewController: UIViewController, UITableViewDelegate, UITableVie
             case .purchased:
                 complete(transaction: transaction)
                 animatePurchaseButton(hidden: false)
+                activityView?.stopAnimating()
                 break
             case .failed:
                 fail(transaction: transaction)
                 animatePurchaseButton(hidden: false)
+                activityView?.stopAnimating()
                 break
             case .restored:
                 restore(transaction: transaction)
                 animatePurchaseButton(hidden: false)
+                activityView?.stopAnimating()
                 break
             case .deferred:
                 break
             case .purchasing:
+                activityView?.stopAnimating()
                 break
             }
         }

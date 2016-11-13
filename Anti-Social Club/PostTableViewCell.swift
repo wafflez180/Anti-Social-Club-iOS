@@ -711,6 +711,8 @@ class PostTableViewCell: UITableViewCell {
     {
         let parameters = ["token" : token, "post_id" : postId, "badge_id" : badgeId] as [String : Any]
         
+        self.selectBadge(badgeId: badgeId, animate: true)
+
         Alamofire.request(Constants.API.ADDRESS + Constants.API.CALL_VOTE, method: .post, parameters: parameters)
             .responseJSON()
                 {
@@ -743,8 +745,6 @@ class PostTableViewCell: UITableViewCell {
                         }
                         
                         self.logAnswerVoteEvent(badgeId: badgeId)
-                        
-                        self.selectBadge(badgeId: badgeId, animate: true)
                         
                         self.post?.voted = true
                         self.userVoted = true
