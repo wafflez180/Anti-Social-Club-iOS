@@ -712,6 +712,26 @@ class PostTableViewCell: UITableViewCell {
         let parameters = ["token" : token, "post_id" : postId, "badge_id" : badgeId] as [String : Any]
         
         self.selectBadge(badgeId: badgeId, animate: true)
+        
+        switch badgeId {
+        case 0 :
+            self.post?.badgeFunnyCount = (self.post?.badgeFunnyCount)! + 1
+            self.laughingBadgeButton.setTitle(String(describing: (self.post?.badgeFunnyCount!)!), for: UIControlState.normal)
+        case 1:
+            self.post?.badgeDumbCount = (self.post?.badgeDumbCount)! + 1
+            self.notAmusedBadgeButton.setTitle(String(describing: (self.post?.badgeDumbCount!)!), for: UIControlState.normal)
+        case 2:
+            self.post?.badgeLoveCount = (self.post?.badgeLoveCount)! + 1
+            self.heartBadgeButton.setTitle(String(describing: (self.post?.badgeLoveCount!)!), for: UIControlState.normal)
+        case 3:
+            self.post?.badgeAgreeCount = (self.post?.badgeAgreeCount)! + 1
+            self.likeBadgeButton.setTitle(String(describing: (self.post?.badgeAgreeCount!)!), for: UIControlState.normal)
+        case 4:
+            self.post?.badgeDisagreeCount = (self.post?.badgeDisagreeCount)! + 1
+            self.dislikeBadgeButton.setTitle(String(describing: (self.post?.badgeDisagreeCount!)!), for: UIControlState.normal)
+        default :
+            print("Error")
+        }
 
         Alamofire.request(Constants.API.ADDRESS + Constants.API.CALL_VOTE, method: .post, parameters: parameters)
             .responseJSON()
@@ -724,26 +744,6 @@ class PostTableViewCell: UITableViewCell {
                         //let json = JSON(responseData)
                         
                         //Increment the button title
-                        switch badgeId {
-                        case 0 :
-                            self.post?.badgeFunnyCount = (self.post?.badgeFunnyCount)! + 1
-                            self.laughingBadgeButton.setTitle(String(describing: (self.post?.badgeFunnyCount!)!), for: UIControlState.normal)
-                        case 1:
-                            self.post?.badgeDumbCount = (self.post?.badgeDumbCount)! + 1
-                            self.notAmusedBadgeButton.setTitle(String(describing: (self.post?.badgeDumbCount!)!), for: UIControlState.normal)
-                        case 2:
-                            self.post?.badgeLoveCount = (self.post?.badgeLoveCount)! + 1
-                            self.heartBadgeButton.setTitle(String(describing: (self.post?.badgeLoveCount!)!), for: UIControlState.normal)
-                        case 3:
-                            self.post?.badgeAgreeCount = (self.post?.badgeAgreeCount)! + 1
-                            self.likeBadgeButton.setTitle(String(describing: (self.post?.badgeAgreeCount!)!), for: UIControlState.normal)
-                        case 4:
-                            self.post?.badgeDisagreeCount = (self.post?.badgeDisagreeCount)! + 1
-                            self.dislikeBadgeButton.setTitle(String(describing: (self.post?.badgeDisagreeCount!)!), for: UIControlState.normal)
-                        default :
-                            print("Error")
-                        }
-                        
                         self.logAnswerVoteEvent(badgeId: badgeId)
                         
                         self.post?.voted = true
