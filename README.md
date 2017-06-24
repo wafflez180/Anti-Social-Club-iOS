@@ -26,18 +26,20 @@ The Anti-Social Club is in no way, shape, or form affiliated with, or run by, th
 * Composing Posts
   - Users may include a picture if they choose
 * Reporting
-  - Once a post has a certain amount of reports, the user will be required to tap to reveal that post
+  - Once a post has a certain amount of reports, the user will be warned about the content and required to tap to reveal that post
 * Voting on Posts
   - Users can only vote once on a post
 * Following Posts / Notifications
   - Users may long press on a post to follow it, displaying a colored bar on the left side
-  - Users will receive notifications whenever someone comments or votes on that post
+  - Users will receive notifications whenever someone comments or votes on that followed post
   - Users automagically follow the posts they compose
 * Anonymous Commenting
-  - Different users will have a different color unique to that post
+  - Different users will have a different randomly generated color unique to that post
   - The owner of the post will have a comment with a bolded font and the app's teal color
 * Access Keys
-  - Needed to create an account. Each member invited by another student receives one access key, allowing them to invite one friend into the club. Students who sign up with Pioneer access keys shown on the flyers will receive two access keys.
+  - Needed to create an account. 
+  - Each member invited by another student receives one access key, allowing them to invite one friend into the club.
+  - Students who sign up with Pioneer access keys shown on the flyers will receive two access keys.
 * Ranks
   - Admin: able to permanently ban and silence
   - Moderator: able to temporarily ban and silence
