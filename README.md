@@ -55,7 +55,7 @@ The Anti-Social Club is in no way, shape, or form affiliated with, or run by, th
 * [Fabric](https://www.fabric.io) - Used for analytics
 * [Whisper](https://github.com/hyperoslo/Whisper) - Used for in-app notifications
 * [Spring](https://github.com/MengTo/Spring) - Used for animations
-* [Firebase Core Messaging](https://github.com/MengTo/Spring) - Used for cross-platform messaging
+* [Firebase Core Messaging](https://firebase.google.com/docs/cloud-messaging/) - Used for cross-platform messaging
 
 
 ## <a name="contributors">Developers
