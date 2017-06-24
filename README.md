@@ -18,8 +18,8 @@ The Anti-Social Club is in no way, shape, or form affiliated with, or run by, th
 ## <a name="key-features"></a>Key Features
 
 * Email Verification
-  - Checked with SUNY Buffalo's student directory to confirm
-  - Emailed verification to email after student confirmation
+  - Checked with SUNY Buffalo's student directory to confirm the user is a student at UB
+  - Emailed a verification code after UB student confirmation
   <img src="http://arthurdearaujo.com/ub-anti-socialclub-register-method.png" alt="UB Anti-Social Club Screenshot 1" width="750" />
 * Infinity Scrolling
   - As the user scrolls down, more posts load
