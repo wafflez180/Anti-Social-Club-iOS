@@ -13,7 +13,7 @@ The Anti-Social Club is in no way, shape, or form affiliated with, or run by, th
 
 * [Key Features](#key-features)
 * [Built With](#built-with)
-* [Contributors](#contributors)
+* [Developers](#developers)
 
 ## <a name="key-features"></a>Key Features
 
@@ -58,7 +58,7 @@ The Anti-Social Club is in no way, shape, or form affiliated with, or run by, th
 * [Firebase Core Messaging](https://firebase.google.com/docs/cloud-messaging/) - Used for cross-platform messaging
 
 
-## <a name="contributors">Developers
+## <a name="developers">Developers
 
 * Arthur De Araujo (iOS app & Designs) · [GitHub](https://github.com/wafflez180) · [Website](http://www.arthurdearaujo.com/)
 * Declan Hopkins (Android app & Backend) · [GitHub](https://github.com/Dooskington) · [Website](http://www.declanhopkins.com/)
